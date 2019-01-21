@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/MainPage.dart';
+import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MainPageWidget(),
+      home: Scaffold(
+        body: SafeArea(child: SearchTextFieldWidget(hintText: '上学时收到印象最深的小纸条',)),
+      ),
     );
   }
 }
