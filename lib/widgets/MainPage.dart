@@ -5,16 +5,16 @@ import 'package:douban_app/pages/MoviePage.dart';
 import 'package:douban_app/pages/PersonPage.dart';
 import 'package:douban_app/pages/ShopPage.dart';
 
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+class MainPageWidget extends StatefulWidget {
+  MainPageWidget({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _MyAppState();
+    return _MainPageWidgetState();
   }
 }
 
-class _MyAppState extends State<MyApp> {
+class _MainPageWidgetState extends State<MainPageWidget> {
   final List<Widget> pages = [
     HomePage(),
     MoviePage(),
