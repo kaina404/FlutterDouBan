@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
-        body: SafeArea(child: SearchTextFieldWidget(hintText: '上学时收到印象最深的小纸条',)),
+        body: SafeArea(child: MainPageWidget()),
       ),
     );
   }
