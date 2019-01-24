@@ -222,9 +222,8 @@ class DescWidget extends StatelessWidget {
 }
 
 class RatingBar extends StatelessWidget {
-  double stars;
-
-  RatingBar(this.stars);
+  final stars;
+  RatingBar(this.stars, {Key key}):super(key : key);
 
   @override
   Widget build(BuildContext context) {

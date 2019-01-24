@@ -65,12 +65,12 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
 
   Widget getCacheImg(String imgNetUrl) {
     var defaultImg =
-        Image.asset('assets/images/ic_default_img_subject_movie.9.png');
-    return CachedNetworkImage(
+    Image.asset('assets/images/ic_default_img_subject_movie.9.png');
+    return ClipRRect(child: CachedNetworkImage(
       imageUrl: imgNetUrl,
       placeholder: defaultImg,
       fadeInDuration: const Duration(milliseconds: 80),
       fadeOutDuration: const Duration(milliseconds: 80),
-    );
+    ), borderRadius: BorderRadius.all(Radius.circular(10.0)),);
   }
 }
