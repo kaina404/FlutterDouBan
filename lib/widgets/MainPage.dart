@@ -14,6 +14,14 @@ class MainPageWidget extends StatefulWidget {
   }
 }
 
+class Item {
+  String name;
+
+  IconData icon;
+
+  Item(this.name, this.icon);
+}
+
 class _MainPageWidgetState extends State<MainPageWidget> {
   final List<Widget> pages = [
     HomePage(),
@@ -23,7 +31,32 @@ class _MainPageWidgetState extends State<MainPageWidget> {
     PersonPage()
   ];
 
+
+  final defaultItemColor = Color.fromARGB(255, 125, 125, 125);
+
+  final itemNames = [
+    Item('首页', Icons.home),
+    Item('书影音', Icons.movie),
+    Item('小组', Icons.group),
+    Item('市集', Icons.receipt),
+    Item('我的', Icons.person)
+  ];
+
+  List<BottomNavigationBarItem> itemList;
+
+
+  @override
+  void initState() {
+    super.initState();
+    itemList = itemNames
+        .map((item) => BottomNavigationBarItem(
+        icon: Icon(item.icon, color: defaultItemColor,), title: Text(item.name), activeIcon: Icon(item.icon)))
+        .toList();
+  }
+
+
   int _selectIndex = 0;
+
 //Stack（层叠布局）+Offstage组合,解决状态被重置的问题
   Widget getWidget(int index) {
     return Offstage(
@@ -37,6 +70,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+//    Scaffold({
 //    Key key,
 //    this.appBar,
 //    this.body,
@@ -51,6 +85,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
 //    this.backgroundColor,
 //    this.resizeToAvoidBottomPadding = true,
 //    this.primary = true,
+//    })
     return Scaffold(
       body: new Stack(
         children: [
@@ -68,62 +103,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
 //    this.backgroundColor,
       backgroundColor: Color.fromARGB(255, 248, 248, 248),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-//        BottomNavigationBarItem({
-          //默认图标样式
-//        @required this.icon,
-//        this.title,
-          //选中的图标样式
-//        Widget activeIcon,
-          //背景色
-//        this.backgroundColor,
-//        })
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 125, 125, 125),
-              ),
-              title: Text('首页'),
-              activeIcon: Icon(
-                Icons.home,
-              )),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.movie,
-                color: Color.fromARGB(255, 125, 125, 125),
-              ),
-              title: Text('书影音'),
-              activeIcon: Icon(
-                Icons.movie,
-              )),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.group,
-                color: Color.fromARGB(255, 125, 125, 125),
-              ),
-              title: Text('小组'),
-              activeIcon: Icon(
-                Icons.group,
-              )),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.receipt,
-                color: Color.fromARGB(255, 125, 125, 125),
-              ),
-              title: Text('市集'),
-              activeIcon: Icon(
-                Icons.receipt,
-              )),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: Color.fromARGB(255, 125, 125, 125),
-              ),
-              title: Text('我的'),
-              activeIcon: Icon(
-                Icons.person,
-              )),
-        ],
+        items: itemList,
         onTap: (int index) {
           setState(() {
             _selectIndex = index;
