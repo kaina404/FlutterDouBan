@@ -43,12 +43,12 @@ class _HomePageState extends State<HomePage>
     return Container(
       child: SafeArea(
           child: DefaultTabController(
-              length: titleList.length, child: getNestedScrollView(tabBar))),
+              length: titleList.length, child: _getNestedScrollView(tabBar))),
     );
   }
 }
 
-Widget getNestedScrollView(Widget tabBar) {
+Widget _getNestedScrollView(Widget tabBar) {
   return NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
@@ -120,43 +120,6 @@ class FlutterTabBar extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _FlutterTabBarState();
   }
-}
-
-Widget _buildSearch() {
-  return Card(
-    margin: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-    elevation: 1.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-    ),
-    child: Container(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0),
-      height: 45.0,
-      child: Center(
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.search,
-                color: Colors.black26,
-                size: 20.0,
-              ),
-            ),
-            Expanded(
-                child: TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Search category',
-                  hintStyle: TextStyle(color: Colors.black26)),
-              cursorColor: Colors.pink,
-            ))
-          ],
-        ),
-      ),
-    ),
-  );
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {

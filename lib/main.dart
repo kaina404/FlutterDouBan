@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: SafeArea(child: MainPageWidget()),
       ),
     );
