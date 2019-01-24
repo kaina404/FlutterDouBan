@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'package:douban_app/widgets/image/cached_network_image.dart';
 //import 'package:connectivity/connectivity.dart';
 
 typedef BoolCallback = void Function(bool markAdded);
 //test http://img1.doubanio.com/view/photo/s_ratio_poster/public/p457760035.webp
 
 class SubjectMarkImageWidget extends StatefulWidget {
-  final imgLocalPath, imgNetUrl;
+  final imgNetUrl;
   final BoolCallback markAdd;
 
   SubjectMarkImageWidget({
     Key key,
-    this.imgLocalPath,
     this.imgNetUrl,
     this.markAdd,
   }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _SubjectMarkImageState(imgLocalPath, imgNetUrl, markAdd);
+    return _SubjectMarkImageState(imgNetUrl, markAdd);
   }
 }
 
@@ -27,50 +26,51 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
   String imgLocalPath, imgNetUrl;
   final BoolCallback markAdd;
 
-  Image markAddedIcon, defaultMarkIcon, loadingIcon, needShowImg;
+  Image markAddedIcon, defaultMarkIcon;
 
-  _SubjectMarkImageState(this.imgLocalPath, this.imgNetUrl, this.markAdd);
+  var loadImg;
+
+  _SubjectMarkImageState(this.imgNetUrl, this.markAdd);
 
   @override
   void initState() {
     super.initState();
-    loadingIcon =
-        Image.asset('assets/images/ic_default_img_subject_movie.9.png');
     markAddedIcon =
         Image(image: AssetImage('assets/images/ic_subject_mark_added.png'));
     defaultMarkIcon = Image(
         image: AssetImage('assets/images/ic_subject_rating_mark_wish.png'));
-  }
-
-  Image getShowImg() {
-    if (imgLocalPath != null && imgLocalPath.isNotEmpty) {
-      needShowImg = Image.file(File(imgLocalPath));
-    } else if (imgNetUrl != null && imgNetUrl.isNotEmpty) {
-      needShowImg = Image.network(imgNetUrl);
-    }
-    if(needShowImg == null){
-      needShowImg = loadingIcon;
-    }
-    return needShowImg;
+    loadImg = getCacheImg(imgNetUrl);
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        loadingIcon,
-        getShowImg(),
+        loadImg,
         IconButton(
             iconSize: 30,
             padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
             icon: markAdded ? markAddedIcon : defaultMarkIcon,
             onPressed: () {
-              markAdd(markAdded);
+              if (markAdd != null) {
+                markAdd(markAdded);
+              }
               setState(() {
                 markAdded = !markAdded;
               });
             })
       ],
+    );
+  }
+
+  Widget getCacheImg(String imgNetUrl) {
+    var defaultImg =
+        Image.asset('assets/images/ic_default_img_subject_movie.9.png');
+    return CachedNetworkImage(
+      imageUrl: imgNetUrl,
+      placeholder: defaultImg,
+      fadeInDuration: const Duration(milliseconds: 80),
+      fadeOutDuration: const Duration(milliseconds: 80),
     );
   }
 }
