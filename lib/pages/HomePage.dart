@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    tabBar = FlutterTabBar();
+    tabBar = HomePageTabBar();
     tabList = getTabList();
     _tabController = TabController(vsync: this, length: tabList.length);
   }
@@ -113,12 +113,12 @@ Widget _getNestedScrollView(Widget tabBar) {
 //  );
 //}
 
-class FlutterTabBar extends StatefulWidget {
-  FlutterTabBar({Key key}) : super(key: key);
+class HomePageTabBar extends StatefulWidget {
+  HomePageTabBar({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _FlutterTabBarState();
+    return _HomePageTabBarState();
   }
 }
 
@@ -162,7 +162,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class _FlutterTabBarState extends State<FlutterTabBar> {
+class _HomePageTabBarState extends State<HomePageTabBar> {
   Color selectColor, unselectedColor;
   TextStyle selectStyle, unselectedStyle;
 
