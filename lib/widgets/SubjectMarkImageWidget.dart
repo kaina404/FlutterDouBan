@@ -4,7 +4,7 @@ import 'package:douban_app/widgets/image/cached_network_image.dart';
 
 typedef BoolCallback = void Function(bool markAdded);
 //test http://img1.doubanio.com/view/photo/s_ratio_poster/public/p457760035.webp
-
+///点击图片变成订阅状态的缓存图片控件
 class SubjectMarkImageWidget extends StatefulWidget {
   final imgNetUrl;
   final BoolCallback markAdd;

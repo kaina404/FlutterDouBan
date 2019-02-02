@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/MainPage.dart';
 import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
+import 'package:douban_app/widgets/TitleWidget.dart';
 import 'package:douban_app/widgets/image/NetworkImgWidget.dart';
 
 void main() => runApp(MyApp());
@@ -16,10 +17,7 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             child:
-            SubjectMarkImageWidget(
-              imgNetUrl:
-              'http://img1.doubanio.com/view/photo/s_ratio_poster/public/p457760035.webp',
-            )
+            TitleWidget()
         ),
       ),
     );
