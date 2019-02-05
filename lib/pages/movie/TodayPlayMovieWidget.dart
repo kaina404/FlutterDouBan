@@ -3,6 +3,10 @@ import 'package:douban_app/widgets/image/LaminatedImage.dart';
 
 ///今日可播放电影已更新 Widget
 class TodayPlayMovieWidget extends StatelessWidget {
+  final urls;
+
+  TodayPlayMovieWidget(this.urls, {Key key}):super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,11 +25,20 @@ class TodayPlayMovieWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 13.0, bottom: 14.0),
           child: Row(
             children: <Widget>[
-              LaminatedImage(urls: [
-                'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp',
-                'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1150103377.webp',
-                'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp'
-              ], w: 90.0),
+              Stack(
+                alignment: Alignment.centerLeft,
+                children: <Widget>[
+                  LaminatedImage(urls: urls, w: 90.0),
+                  Positioned(
+                    left: 90.0 / 3,
+                    child: Image.asset(
+                      'assets/images/ic_action_playable_video_s.png',
+                      width: 20.0,
+                      height: 20.0,
+                    ),
+                  )
+                ],
+              ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(top: 40.0, left: 20.0),

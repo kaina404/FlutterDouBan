@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             child:
-            TodayPlayMovieWidget()
+            TodayPlayMovieWidget([
+              'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp',
+              'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1150103377.webp',
+              'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp'
+            ])
         ),
       ),
     );
