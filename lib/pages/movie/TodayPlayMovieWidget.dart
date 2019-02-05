@@ -18,7 +18,7 @@ class TodayPlayMovieWidget extends StatelessWidget {
         ),
         Container(
           height: 140.0,
-          margin: EdgeInsets.only(left: 15.0, bottom: 14.0),
+          margin: EdgeInsets.only(left: 13.0, bottom: 14.0),
           child: Row(
             children: <Widget>[
               LaminatedImage(urls: [
