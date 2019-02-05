@@ -6,6 +6,7 @@ class TodayPlayMovieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: AlignmentDirectional.bottomStart,
       children: <Widget>[
         Container(
           height: 120.0,
@@ -13,9 +14,11 @@ class TodayPlayMovieWidget extends StatelessWidget {
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 47, 22, 74),
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              borderRadius: BorderRadius.all(Radius.circular(6.0))),
         ),
-        Row(
+        Container(
+          margin: EdgeInsets.only(left: 15.0, bottom: 17.0),
+          child: Row(
           children: <Widget>[
             LaminatedImage(urls: [
               'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp',
@@ -23,7 +26,7 @@ class TodayPlayMovieWidget extends StatelessWidget {
               'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp'
             ], w: 90.0)
           ],
-        )
+        ),)
       ],
     );
   }
