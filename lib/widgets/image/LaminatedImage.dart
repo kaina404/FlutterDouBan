@@ -11,8 +11,11 @@ class LaminatedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = w * 1.5;
     double dif = w * 0.14;
+    double secondLeftPadding = w * 0.42;
+    double thirdLeftPadding = w * 0.78;
     return Container(
       height: h,
+      width: w + thirdLeftPadding,
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: <Widget>[
@@ -31,7 +34,7 @@ class LaminatedImage extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: w * 0.42,
+            left: secondLeftPadding,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
               child: Image.network(
