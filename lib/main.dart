@@ -4,6 +4,8 @@ import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/widgets/TitleWidget.dart';
 import 'package:douban_app/widgets/image/NetworkImgWidget.dart';
+import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             child:
-            TitleWidget()
+            TodayPlayMovieWidget()
         ),
       ),
     );
