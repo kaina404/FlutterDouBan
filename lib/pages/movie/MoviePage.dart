@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
+import 'package:douban_app/http/API.dart';
+
+var _api = API();
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -24,6 +27,9 @@ class _MoviePageState extends State<MoviePage> {
       'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp',
       'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p917846733.webp',
     ]);
+    _api.getIntheaters((data){
+
+    });
   }
 
   @override
