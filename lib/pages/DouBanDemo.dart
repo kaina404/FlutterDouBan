@@ -2,6 +2,8 @@ import 'dart:convert' as Convert;
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:douban_app/http/HttpRequest.dart';
+import 'package:douban_app/constant/Constant.dart';
 
 class DouBanListView extends StatefulWidget {
   @override
@@ -15,24 +17,14 @@ class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMix
 
   var itemHeight = 150.0;
 
-  requestMovieTop() async {
-    var httpClient = new HttpClient();
-    //http://api.douban.com/v2/movie/top250?start=25&count=10
-    var uri = new Uri.http(
-        'api.douban.com', '/v2/movie/top250', {'start': '0', 'count': '150'});
-    var request = await httpClient.getUrl(uri);
-    var response = await request.close();
-    var responseBody = await response.transform(Convert.utf8.decoder).join();
-    Map data = Convert.jsonDecode(responseBody);
-    setState(() {
-      subjects = data['subjects'];
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    requestMovieTop();
+    HttpRequest.requestGET(Constant.BASE_URL, Constant.TOP_250, (data){
+      setState(() {
+        subjects = data['subjects'];
+      });
+    }, {'start': '0', 'count': '150'});
   }
 
   @override

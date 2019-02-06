@@ -16,6 +16,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   Color selectColor, unselectedColor;
   TextStyle selectStyle, unselectedStyle;
   Widget tabBar;
+  double childAspectRatio = 355.0 / 506.0;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     selectStyle = TextStyle(
         fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
     unselectedStyle = TextStyle(fontSize: 20, color: unselectedColor);
+    _tabController = TabController(vsync: this, length: 2);
     tabBar = TabBar(
       tabs: [Text('影院热映'), Text('即将上映')],
       indicatorColor: selectColor,
@@ -45,22 +47,37 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
         });
       },
     );
-    _tabController = TabController(vsync: this, length: 2);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: <Widget>[
-        Expanded(
-          child: tabBar,
-          flex: 1,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: tabBar,
+              flex: 1,
+            ),
+            Text(
+              '全部 $movieCount > ',
+              style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
         ),
-        Text(
-          '全部 $movieCount > ',
-          style: TextStyle(
-              fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
-        )
+//        GridView.builder(
+//            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                crossAxisCount: 3,
+//                crossAxisSpacing: 10.0,
+//                mainAxisSpacing: 10.0,
+//                childAspectRatio: childAspectRatio),
+//            //Widget Function(BuildContext context, int index);
+//            itemBuilder: (BuildContext context, int index) {
+//
+//            })
       ],
     );
   }
