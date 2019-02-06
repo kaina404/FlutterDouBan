@@ -12,7 +12,8 @@ class DouBanListView extends StatefulWidget {
   }
 }
 
-class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMixin{
+class DouBanState extends State<DouBanListView>
+    with AutomaticKeepAliveClientMixin {
   var subjects = [];
 
   var itemHeight = 150.0;
@@ -20,7 +21,7 @@ class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMix
   @override
   void initState() {
     super.initState();
-    HttpRequest.requestGET(API.BASE_URL, API.TOP_250, (data){
+    HttpRequest.requestGET(API.BASE_URL, API.TOP_250, (data) {
       setState(() {
         subjects = data['subjects'];
       });
@@ -174,7 +175,6 @@ class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMix
 //  原文：https://blog.csdn.net/tgbus18990140382/article/details/81181879
 //  版权声明：本文为博主原创文章，转载请附上博文链接！
 
-
   @override
   bool get wantKeepAlive => true;
 }
@@ -215,7 +215,8 @@ class DescWidget extends StatelessWidget {
 
 class RatingBar extends StatelessWidget {
   final stars;
-  RatingBar(this.stars, {Key key}):super(key : key);
+
+  RatingBar(this.stars, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
