@@ -77,8 +77,8 @@ class TodayPlayMovieWidget extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 10.0),
               child: Image.asset(
                 'assets/images/sofa.png',
-                width: 14.0,
-                height: 14.0,
+                width: 15.0,
+                height: 15.0,
               ),
             ),
             Padding(
