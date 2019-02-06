@@ -4,6 +4,7 @@ import 'dart:io';
 typedef RequestCallBack = void Function(Map data);
 
 class HttpRequest {
+
   static requestGET(
       String authority, String unencodedPath, RequestCallBack callBack,
       [Map<String, String> queryParameters]) async {
@@ -17,4 +18,10 @@ class HttpRequest {
     Map data = Convert.jsonDecode(responseBody);
     callBack(data);
   }
+}
+
+
+class API {
+  static String BASE_URL = 'api.douban.com';
+  static String TOP_250 = '/v2/movie/top250';
 }

@@ -20,7 +20,7 @@ class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMix
   @override
   void initState() {
     super.initState();
-    HttpRequest.requestGET(Constant.BASE_URL, Constant.TOP_250, (data){
+    HttpRequest.requestGET(API.BASE_URL, API.TOP_250, (data){
       setState(() {
         subjects = data['subjects'];
       });
