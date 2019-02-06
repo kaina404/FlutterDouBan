@@ -8,16 +8,17 @@ var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
 List<Widget> tabList;
 
-class HomePage extends StatefulWidget {
+///书影音
+class MoviePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _HomePageState();
+    return _MoviePageState();
   }
 }
 
 TabController _tabController;
 
-class _HomePageState extends State<HomePage>
+class _MoviePageState extends State<MoviePage>
     with SingleTickerProviderStateMixin {
   var tabBar;
 
