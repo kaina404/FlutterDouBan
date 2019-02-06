@@ -78,41 +78,6 @@ Widget _getNestedScrollView(Widget tabBar) {
         tabController: _tabController,
       ));
 }
-//
-//Widget getCustomScrollView(Widget tabBar) {
-//  var children = <Widget>[
-//    ListView.builder(
-//      itemBuilder: (BuildContext context, int index) {
-//        return Text(
-//          "fjwoijefoi$index",
-//          style: TextStyle(fontSize: 18.0),
-//        );
-//      },
-//      itemCount: 100,
-//    )
-//  ];
-//  return CustomScrollView(
-//    slivers: <Widget>[
-//      SliverToBoxAdapter(
-//        child: _buildSearch(),
-//      ),
-//      SliverPersistentHeader(
-//          floating: true,
-//          pinned: true,
-//          delegate: _SliverAppBarDelegate(
-//              maxHeight: 49.0,
-//              minHeight: 49.0,
-//              child: Container(
-//                color: Colors.white,
-//                child: tabBar,
-//              ))),
-//      SliverFixedExtentList(
-//        itemExtent: 1200.0,
-//        delegate: SliverChildListDelegate(children),
-//      )
-//    ],
-//  );
-//}
 
 class HomePageTabBar extends StatefulWidget {
   HomePageTabBar({Key key}) : super(key: key);
@@ -143,15 +108,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//    final double visibleMainHeight = maxExtent - shrinkOffset;
-//    final double toolbarOpacity = 1.0;
-//    final Widget widget = FlexibleSpaceBar.createSettings(
-//        minExtent: minExtent,
-//        maxExtent: maxExtent,
-//        currentExtent: math.max(minExtent, maxExtent - shrinkOffset),
-//        toolbarOpacity: toolbarOpacity,
-//        child: child);
-
     return child;
   }
 
