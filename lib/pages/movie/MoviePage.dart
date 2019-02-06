@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
+import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
 
 class MoviePage extends StatefulWidget {
   @override
@@ -39,7 +40,8 @@ class _MoviePageState extends State<MoviePage> {
             Padding(
               child: todayPlayMovieWidget,
               padding: EdgeInsets.only(top: 25.0),
-            )
+            ),
+            HotSoonMovieWidget()
           ]))
         ],
       ),

@@ -144,7 +144,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
 //    List<Widget>  @required this.tabs,
     //组件选中以及动画的状态
 //   TabController this.controller,
-    //Tab是否可滑动
+    //Tab是否可滑动(false->整个tab会把宽度填满，true-> tab包裹)
 //  bool  this.isScrollable = false,
     //选项卡下方的导航条的颜色
 //   Color this.indicatorColor,
@@ -164,7 +164,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: TabBar(
         tabs: tabList,
-        isScrollable: true,
+        isScrollable: false,
         controller: _tabController,
         indicatorColor: selectColor,
         labelColor: selectColor,
