@@ -23,7 +23,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     selectStyle = TextStyle(
         fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
     unselectedStyle = TextStyle(
-        fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
+        fontSize: 20, color: unselectedColor);
     _tabController = TabController(vsync: this, length: 2);
   }
 
