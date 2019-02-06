@@ -19,9 +19,11 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   void initState() {
     super.initState();
     selectColor = Color.fromARGB(255, 45, 45, 45);
-    unselectedColor = Color.fromARGB(255, 117, 117, 117);
-    selectStyle = TextStyle(fontSize: 18, color: selectColor);
-    unselectedStyle = TextStyle(fontSize: 18, color: selectColor);
+    unselectedColor = Color.fromARGB(255, 135, 135, 135);
+    selectStyle = TextStyle(
+        fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
+    unselectedStyle = TextStyle(
+        fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
     _tabController = TabController(vsync: this, length: 2);
   }
 
@@ -29,16 +31,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   Widget build(BuildContext context) {
     return Container(
       child: TabBar(
-        tabs: [
-          Text(
-            '影院热映',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            '即将上映',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          )
-        ],
+        tabs: [Text('影院热映'), Text('即将上映')],
         indicatorColor: selectColor,
         labelColor: selectColor,
         labelStyle: selectStyle,
