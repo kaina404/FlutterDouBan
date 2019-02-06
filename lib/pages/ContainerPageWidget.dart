@@ -22,8 +22,8 @@ class Item {
 
 class _ContainerPageWidgetState extends State<ContainerPageWidget> {
   final List<Widget> pages = [
-    HomePage(),
     BookAudioVideoPage(),
+    HomePage(),
     GroupPage(),
     ShopPage(),
     PersonPage()
