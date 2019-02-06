@@ -39,9 +39,12 @@ class _MoviePageState extends State<MoviePage> {
             ),
             Padding(
               child: todayPlayMovieWidget,
+              padding: EdgeInsets.only(top: 22.0),
+            ),
+            Padding(
+              child: HotSoonMovieWidget(),
               padding: EdgeInsets.only(top: 25.0),
             ),
-            HotSoonMovieWidget()
           ]))
         ],
       ),

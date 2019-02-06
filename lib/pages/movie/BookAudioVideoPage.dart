@@ -126,7 +126,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
   @override
   void initState() {
     super.initState();
-    selectColor = Color.fromARGB(255, 45, 45, 45);
+    selectColor = Colors.black;
     unselectedColor = Color.fromARGB(255, 117, 117, 117);
     selectStyle = TextStyle(fontSize: 18, color: selectColor);
     unselectedStyle = TextStyle(fontSize: 18, color: selectColor);

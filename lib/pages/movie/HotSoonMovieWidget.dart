@@ -9,11 +9,13 @@ class HotSoonMovieWidget extends StatefulWidget {
 }
 
 TabController _tabController;
+var movieCount = 16;
 
 class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     with SingleTickerProviderStateMixin {
   Color selectColor, unselectedColor;
   TextStyle selectStyle, unselectedStyle;
+  Widget tabBar;
 
   @override
   void initState() {
@@ -22,25 +24,44 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     unselectedColor = Color.fromARGB(255, 135, 135, 135);
     selectStyle = TextStyle(
         fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
-    unselectedStyle = TextStyle(
-        fontSize: 20, color: unselectedColor);
+    unselectedStyle = TextStyle(fontSize: 20, color: unselectedColor);
+    tabBar = TabBar(
+      tabs: [Text('影院热映'), Text('即将上映')],
+      indicatorColor: selectColor,
+      labelColor: selectColor,
+      labelStyle: selectStyle,
+      unselectedLabelColor: unselectedColor,
+      unselectedLabelStyle: unselectedStyle,
+      indicatorSize: TabBarIndicatorSize.label,
+      controller: _tabController,
+      isScrollable: true,
+      onTap: (index) {
+        setState(() {
+          if (index == 0) {
+            movieCount = 16;
+          } else {
+            movieCount = 20;
+          }
+        });
+      },
+    );
     _tabController = TabController(vsync: this, length: 2);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TabBar(
-        tabs: [Text('影院热映'), Text('即将上映')],
-        indicatorColor: selectColor,
-        labelColor: selectColor,
-        labelStyle: selectStyle,
-        unselectedLabelColor: unselectedColor,
-        unselectedLabelStyle: unselectedStyle,
-        indicatorSize: TabBarIndicatorSize.label,
-        controller: _tabController,
-        isScrollable: true,
-      ),
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: tabBar,
+          flex: 1,
+        ),
+        Text(
+          '全部 $movieCount > ',
+          style: TextStyle(
+              fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
+        )
+      ],
     );
   }
 
