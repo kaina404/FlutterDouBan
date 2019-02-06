@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/HttpRequest.dart';
 import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/http/API.dart';
 
 class DouBanListView extends StatefulWidget {
   @override
@@ -15,18 +16,20 @@ class DouBanListView extends StatefulWidget {
 class DouBanState extends State<DouBanListView>
     with AutomaticKeepAliveClientMixin {
   var subjects = [];
-
+  var api = API();
   var itemHeight = 150.0;
 
   @override
   void initState() {
     super.initState();
-    HttpRequest.requestGET(API.BASE_URL, API.TOP_250, (data) {
+    api.getTop250((data){
       setState(() {
         subjects = data['subjects'];
       });
-    }, {'start': '0', 'count': '150'});
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
