@@ -62,13 +62,13 @@ class _TextImgWidget extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             imgAsset,
-            width: 55,
-            height: 55,
+            width: 45,
+            height: 45,
           ),
           Text(
             text,
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 13,
                 color: Color.fromARGB(
                   255,
                   128,

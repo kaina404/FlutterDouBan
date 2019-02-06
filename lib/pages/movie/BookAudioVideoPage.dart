@@ -34,7 +34,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
     return titleList
         .map((item) => Text(
               '$item',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 15),
             ))
         .toList();
   }
