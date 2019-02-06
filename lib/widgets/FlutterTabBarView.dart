@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/pages/DouBanDemo.dart';
+import 'package:douban_app/pages/movie/MoviePage.dart';
 
 class FlutterTabBarView extends StatefulWidget {
   final TabController tabController;
@@ -23,7 +24,7 @@ class _FlutterTabBarViewState extends State<FlutterTabBarView> {
   void initState() {
     super.initState();
     viewList = [
-      Page1(),
+      MoviePage(),
       Page2(),
       DouBanListView(),
       Page4(),

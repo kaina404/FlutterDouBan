@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/ContainerPageWidget.dart';
-import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
-import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
-import 'package:douban_app/widgets/TitleWidget.dart';
-import 'package:douban_app/widgets/image/NetworkImgWidget.dart';
-import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
+import 'package:douban_app/pages/ContainerPageWidget.dart';
 
 void main() => runApp(MyApp());
 

@@ -5,7 +5,7 @@ import 'package:douban_app/widgets/image/LaminatedImage.dart';
 class TodayPlayMovieWidget extends StatelessWidget {
   final urls;
 
-  TodayPlayMovieWidget(this.urls, {Key key}):super(key: key);
+  TodayPlayMovieWidget(this.urls, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,8 @@ class TodayPlayMovieWidget extends StatelessWidget {
                     left: 90.0 / 3,
                     child: Image.asset(
                       'assets/images/ic_action_playable_video_s.png',
-                      width: 20.0,
-                      height: 20.0,
+                      width: 30.0,
+                      height: 30.0,
                     ),
                   )
                 ],
@@ -50,9 +50,12 @@ class TodayPlayMovieWidget extends StatelessWidget {
                         '今日可播放电影已更新',
                         style: TextStyle(fontSize: 15, color: Colors.white),
                       ),
-                      Text(
-                        '全部 30 > ',
-                        style: TextStyle(fontSize: 13, color: Colors.white),
+                      Padding(
+                        padding: EdgeInsets.only(top: 6.0),
+                        child: Text(
+                          '全部 30 > ',
+                          style: TextStyle(fontSize: 13, color: Colors.white),
+                        ),
                       )
                     ],
                   ),

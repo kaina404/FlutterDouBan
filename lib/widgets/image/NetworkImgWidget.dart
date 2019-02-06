@@ -26,7 +26,7 @@ class _NetworkImgWidgetState extends State<NetworkImgWidget> {
     try{
       netImg = Image.network(imgUrl);
     }on Exception catch(e){
-
+      print(e);
     }
   }
 

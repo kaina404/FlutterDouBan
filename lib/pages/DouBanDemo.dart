@@ -189,7 +189,7 @@ class DouBanState extends State<DouBanListView> with AutomaticKeepAliveClientMix
 
 //类别、演员介绍
 class DescWidget extends StatelessWidget {
-  var subject;
+  final subject;
 
   DescWidget(this.subject);
 
