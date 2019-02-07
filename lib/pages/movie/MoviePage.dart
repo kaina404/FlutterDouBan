@@ -110,7 +110,7 @@ class _MoviePageState extends State<MoviePage> {
                           ),
                         ),
                       ),
-                      RatingBar(hotMovieBean.rating.average, size: 14.0,)
+                      RatingBar(hotMovieBean.rating.average, size: 12.0,)
                     ],
                   ),
                 );
