@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:douban_app/bean/MovieBean.dart';
 
 ///影院热映、即将上映
 class HotSoonMovieWidget extends StatefulWidget {
@@ -6,6 +7,11 @@ class HotSoonMovieWidget extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _HotSoonMovieWidgetState();
   }
+
+  void setMovieBeanList(List<MovieBean> list){
+
+  }
+
 }
 
 TabController _tabController;

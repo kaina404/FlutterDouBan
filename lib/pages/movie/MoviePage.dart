@@ -14,8 +14,11 @@ class MoviePage extends StatefulWidget {
   }
 }
 
+
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, todayPlayMovieWidget, hotSoonMovieWidget;
+  Widget titleWidget, todayPlayMovieWidget;
+  HotSoonMovieWidget hotSoonMovieWidget;
+  var total = 0;//正在热映
 
   @override
   void initState() {
@@ -27,8 +30,8 @@ class _MoviePageState extends State<MoviePage> {
       'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp',
       'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p917846733.webp',
     ]);
-    _api.getIntheaters((data){
-
+    _api.getIntheaters((movieBeanList){  //List<MovieBean>
+      hotSoonMovieWidget.setMovieBeanList(movieBeanList);
     });
   }
 
