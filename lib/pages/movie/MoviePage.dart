@@ -69,6 +69,8 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
+    var itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
+    childAspectRatio = itemW / childAspectRatio;
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: CustomScrollView(
@@ -90,7 +92,7 @@ class _MoviePageState extends State<MoviePage> {
                 return Container(
                   child: Column(
                     children: <Widget>[
-                      SubjectMarkImageWidget(hotMovieBean.images.large),
+                      SubjectMarkImageWidget(hotMovieBean.images.large, width: itemW,),
                       Padding(
                         padding: EdgeInsets.only(top: 5.0),
                         child: Container(
@@ -116,7 +118,7 @@ class _MoviePageState extends State<MoviePage> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
+                  mainAxisSpacing: 5.0,
                   childAspectRatio: childAspectRatio))
         ],
       ),

@@ -9,16 +9,17 @@ typedef BoolCallback = void Function(bool markAdded);
 class SubjectMarkImageWidget extends StatefulWidget {
   final imgNetUrl;
   final BoolCallback markAdd;
-  final height;
+  var height;
   final width;
   ///360 x 513
 
   SubjectMarkImageWidget(this.imgNetUrl,
-      {Key key, this.markAdd, this.width = 150.0, this.height = 170.0})
+      {Key key, this.markAdd, this.width = 150.0})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
+    height = this.width / 150.0 * 210.0;
     return _SubjectMarkImageState(imgNetUrl, markAdd, width, height);
   }
 }
