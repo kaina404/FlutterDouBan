@@ -121,7 +121,7 @@ class _MoviePageState extends State<MoviePage> {
                             hotMovieBeans.length > 0))
                   ],
                 );
-              }, childCount: math.min(getChildCount(), 9)),
+              }, childCount: math.min(getChildCount(), 6)),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
