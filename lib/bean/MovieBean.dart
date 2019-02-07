@@ -1,5 +1,5 @@
 class MovieBean {
-  var rating;
+  Rating rating;
   var genres;
   var title;
   var casts;
@@ -13,7 +13,8 @@ class MovieBean {
   var id;
 
   MovieBean.fromMap(Map<String, dynamic> map) {
-    rating = map['rating'];
+    var rating = map['rating'];
+    this.rating = Rating(rating['average'], rating['max']);
     genres = map['genres'];
     title = map['title'];
     casts = map['casts'];
@@ -29,10 +30,16 @@ class MovieBean {
   }
 }
 
-class Images{
+class Images {
   var small;
   var large;
   var medium;
 
   Images(this.small, this.large, this.medium);
+}
+
+class Rating {
+  var average;
+  var max;
+  Rating(this.average, this.max);
 }

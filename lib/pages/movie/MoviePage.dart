@@ -5,6 +5,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
+import 'package:douban_app/widgets/RatingBar.dart';
 
 var _api = API();
 
@@ -17,7 +18,7 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, todayPlayMovieWidget, hotSoonMovieWidgetPadding;
+  Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
   var total = 0; //正在热映
   double childAspectRatio = 355.0 / 610.0;
@@ -48,6 +49,11 @@ class _MoviePageState extends State<MoviePage> {
       },
     );
 
+    hotSoonTabBarPadding = Padding(
+      padding: EdgeInsets.only(top: 35.0, bottom: 15.0),
+      child: hotSoonTabBar,
+    );
+
     _api.getIntheaters((movieBeanList) {
       hotSoonTabBar.setCount(movieBeanList);
       setState(() {
@@ -65,34 +71,45 @@ class _MoviePageState extends State<MoviePage> {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: CustomScrollView(
-      shrinkWrap: true,
-      slivers: <Widget>[
-        SliverToBoxAdapter(
-          child: titleWidget,
-        ),
-        SliverToBoxAdapter(
-          child: todayPlayMovieWidget,
-        ),
-        SliverToBoxAdapter(
-          child: hotSoonTabBar,
-        ),
-        SliverGrid(
-            delegate:
-            SliverChildBuilderDelegate((BuildContext context, int index) {
-              var hotMovieBean = hotMovieBeans[index];
-              return Column(
-                children: <Widget>[
-                  SubjectMarkImageWidget(hotMovieBean.images.large),
-                  Text(hotMovieBean.title, style: TextStyle(color: Colors.black, fontSize: 15),)
-                ],
-              );
-            }, childCount: hotMovieBeans.length),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: childAspectRatio))
-      ],
-    ),);
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: titleWidget,
+          ),
+          SliverToBoxAdapter(
+            child: todayPlayMovieWidget,
+          ),
+          SliverToBoxAdapter(
+            child: hotSoonTabBarPadding,
+          ),
+          SliverGr
+          SliverGrid(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                var hotMovieBean = hotMovieBeans[index];
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      SubjectMarkImageWidget(hotMovieBean.images.large),
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          hotMovieBean.title,
+                          style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      RatingBar(hotMovieBean.rating.average)
+                    ],
+                  ),
+                );
+              }, childCount: hotMovieBeans.length),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: childAspectRatio))
+        ],
+      ),
+    );
   }
 }
