@@ -27,19 +27,29 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
   String imgLocalPath, imgNetUrl;
   final BoolCallback markAdd;
 
-  Image markAddedIcon, defaultMarkIcon;
+  var markAddedIcon, defaultMarkIcon;
 
   var loadImg;
+  var imgWH = 28.0;
 
   _SubjectMarkImageState(this.imgNetUrl, this.markAdd);
 
   @override
   void initState() {
     super.initState();
-    markAddedIcon =
-        Image(image: AssetImage('assets/images/ic_subject_mark_added.png'));
-    defaultMarkIcon = Image(
-        image: AssetImage('assets/images/ic_subject_rating_mark_wish.png'));
+    markAddedIcon = Image(
+      image: AssetImage('assets/images/ic_subject_mark_added.png'),
+      width: imgWH,
+      height: imgWH,
+    );
+    defaultMarkIcon = ClipRRect(
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0)),
+      child: Image(
+        image: AssetImage('assets/images/ic_subject_rating_mark_wish.png'),
+        width: imgWH,
+        height: imgWH,
+      ),
+    );
     loadImg = getCacheImg(imgNetUrl);
   }
 
@@ -48,18 +58,17 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
     return Stack(
       children: <Widget>[
         loadImg,
-        IconButton(
-            iconSize: 30,
-            padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
-            icon: markAdded ? markAddedIcon : defaultMarkIcon,
-            onPressed: () {
-              if (markAdd != null) {
-                markAdd(markAdded);
-              }
-              setState(() {
-                markAdded = !markAdded;
-              });
-            })
+        GestureDetector(
+          child: markAdded ? markAddedIcon : defaultMarkIcon,
+          onTap: () {
+            if (markAdd != null) {
+              markAdd(markAdded);
+            }
+            setState(() {
+              markAdded = !markAdded;
+            });
+          },
+        ),
       ],
     );
   }
@@ -74,7 +83,7 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
         fadeInDuration: const Duration(milliseconds: 80),
         fadeOutDuration: const Duration(milliseconds: 80),
       ),
-      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
     );
   }
 }

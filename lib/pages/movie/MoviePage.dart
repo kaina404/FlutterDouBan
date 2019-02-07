@@ -20,9 +20,9 @@ class _MoviePageState extends State<MoviePage> {
   Widget titleWidget, todayPlayMovieWidget, hotSoonMovieWidgetPadding;
   HotSoonTabBar hotSoonTabBar;
   var total = 0; //正在热映
-  double childAspectRatio = 355.0 / 506.0;
+  double childAspectRatio = 355.0 / 610.0;
   List<MovieBean> hotMovieBeans = List();
-  int selectIndex = 0;//选中的是热映、即将上映
+  int selectIndex = 0; //选中的是热映、即将上映
 
   @override
   void initState() {
@@ -55,14 +55,16 @@ class _MoviePageState extends State<MoviePage> {
       });
     });
 
-    _api.commingSoon((comingSoonList){
+    _api.commingSoon((comingSoonList) {
       hotSoonTabBar.setComingSoon(comingSoonList);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return Padding(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      child: CustomScrollView(
       shrinkWrap: true,
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -76,8 +78,14 @@ class _MoviePageState extends State<MoviePage> {
         ),
         SliverGrid(
             delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return SubjectMarkImageWidget(hotMovieBeans[index].images.large);
+            SliverChildBuilderDelegate((BuildContext context, int index) {
+              var hotMovieBean = hotMovieBeans[index];
+              return Column(
+                children: <Widget>[
+                  SubjectMarkImageWidget(hotMovieBean.images.large),
+                  Text(hotMovieBean.title, style: TextStyle(color: Colors.black, fontSize: 15),)
+                ],
+              );
             }, childCount: hotMovieBeans.length),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -85,6 +93,6 @@ class _MoviePageState extends State<MoviePage> {
                 mainAxisSpacing: 10.0,
                 childAspectRatio: childAspectRatio))
       ],
-    );
+    ),);
   }
 }
