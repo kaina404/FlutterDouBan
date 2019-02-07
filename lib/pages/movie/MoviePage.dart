@@ -6,6 +6,7 @@ import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/widgets/RatingBar.dart';
+import 'dart:math' as math;
 
 var _api = API();
 
@@ -21,7 +22,7 @@ class _MoviePageState extends State<MoviePage> {
   Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
   var total = 0; //正在热映
-  double childAspectRatio = 364.0 / 641.0;
+  double childAspectRatio = 393.0 / 714.0;
   List<MovieBean> hotMovieBeans = List();
   int selectIndex = 0; //选中的是热映、即将上映
 
@@ -90,24 +91,28 @@ class _MoviePageState extends State<MoviePage> {
                   child: Column(
                     children: <Widget>[
                       SubjectMarkImageWidget(hotMovieBean.images.large),
-//                      Padding(
-//                        padding: EdgeInsets.only(top: 5.0),
-//                        child: Container(
-//                          width: double.infinity,
-//                          child: Text(
-//                            hotMovieBean.title,
-//                            style: TextStyle(
-//                                color: Colors.black,
-//                                fontSize: 13,
-//                                fontWeight: FontWeight.bold),
-//                          ),
-//                        ),
-//                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.0),
+                        child: Container(
+                          width: double.infinity,
+                          child: Text(
+                            hotMovieBean.title,
+                            ///文本只显示一行
+                            softWrap:false,
+                            ///多出的文本渐隐方式
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                       RatingBar(hotMovieBean.rating.average, size: 14.0,)
                     ],
                   ),
                 );
-              }, childCount: hotMovieBeans.length),
+              }, childCount: math.min(hotMovieBeans.length, 6)),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,

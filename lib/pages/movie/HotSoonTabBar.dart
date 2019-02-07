@@ -32,8 +32,8 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   TabController _tabController;
   var hotCount, soonCount; //热映数量、即将上映数量、
   TabCallBack onTabCallBack;
-
-  int comingSoonCount;
+  int comingSoonCount = 0;
+  int selectIndex = 0;
 
   @override
   void initState() {
@@ -55,6 +55,7 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
       controller: _tabController,
       isScrollable: true,
       onTap: (index) {
+        selectIndex = index;
         setState(() {
           if (index == 0) {
             movieCount = hotCount;
@@ -86,15 +87,27 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
     );
   }
 
+  ///影院热映数量
   void setCount(int count) {
     setState(() {
       this.hotCount = count;
+      if(selectIndex == 0){
+        setState(() {
+          movieCount = hotCount;
+        });
+      }
     });
   }
 
+  ///即将上映数量
   void setComingSoonCount(int length) {
     setState(() {
       this.comingSoonCount = length;
+      if(selectIndex == 1){
+        setState(() {
+          movieCount = comingSoonCount;
+        });
+      }
     });
   }
 

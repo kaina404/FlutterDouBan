@@ -6,7 +6,7 @@ class RatingBar extends StatelessWidget {
   final fontSize;
   final color = Color.fromARGB(255, 255, 170, 71);
 
-  RatingBar(this.stars, {Key key, this.size = 18.0, this.fontSize = 10.0})
+  RatingBar(this.stars, {Key key, this.size = 18.0, this.fontSize = 13.0})
       : super(key: key);
 
   @override
@@ -52,7 +52,6 @@ class RatingBar extends StatelessWidget {
     ));
     return Container(
       alignment: Alignment.topLeft,
-      padding: const EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 5),
       child: Row(
         children: startList,
       ),

@@ -9,16 +9,17 @@ typedef BoolCallback = void Function(bool markAdded);
 class SubjectMarkImageWidget extends StatefulWidget {
   final imgNetUrl;
   final BoolCallback markAdd;
+  final height;
+  final width;
+  ///360 x 513
 
-  SubjectMarkImageWidget(
-    this.imgNetUrl, {
-    Key key,
-    this.markAdd,
-  }) : super(key: key);
+  SubjectMarkImageWidget(this.imgNetUrl,
+      {Key key, this.markAdd, this.width = 150.0, this.height = 170.0})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _SubjectMarkImageState(imgNetUrl, markAdd);
+    return _SubjectMarkImageState(imgNetUrl, markAdd, width, height);
   }
 }
 
@@ -26,13 +27,13 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
   var markAdded = false;
   String imgLocalPath, imgNetUrl;
   final BoolCallback markAdd;
-
   var markAddedIcon, defaultMarkIcon;
-
   var loadImg;
   var imgWH = 28.0;
+  var height;
+  var width;
 
-  _SubjectMarkImageState(this.imgNetUrl, this.markAdd);
+  _SubjectMarkImageState(this.imgNetUrl, this.markAdd, this.width, this.height);
 
   @override
   void initState() {
@@ -43,14 +44,27 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
       height: imgWH,
     );
     defaultMarkIcon = ClipRRect(
-      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0)),
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), bottomRight: Radius.circular(5.0)),
       child: Image(
         image: AssetImage('assets/images/ic_subject_rating_mark_wish.png'),
         width: imgWH,
         height: imgWH,
       ),
     );
-    loadImg = getCacheImg(imgNetUrl);
+    var defaultImg = Image.asset('assets/images/ic_default_img_subject_movie.9.png');
+
+    loadImg = ClipRRect(
+      child: CachedNetworkImage(
+        imageUrl: imgNetUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.fill,
+        placeholder: defaultImg,
+        fadeInDuration: const Duration(milliseconds: 80),
+        fadeOutDuration: const Duration(milliseconds: 80),
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    );
   }
 
   @override
@@ -73,17 +87,4 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
     );
   }
 
-  Widget getCacheImg(String imgNetUrl) {
-    var defaultImg =
-        Image.asset('assets/images/ic_default_img_subject_movie.9.png');
-    return ClipRRect(
-      child: CachedNetworkImage(
-        imageUrl: imgNetUrl,
-        placeholder: defaultImg,
-        fadeInDuration: const Duration(milliseconds: 80),
-        fadeOutDuration: const Duration(milliseconds: 80),
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-    );
-  }
 }
