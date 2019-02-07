@@ -21,7 +21,7 @@ class _MoviePageState extends State<MoviePage> {
   Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
   var total = 0; //正在热映
-  double childAspectRatio = 355.0 / 610.0;
+  double childAspectRatio = 364.0 / 641.0;
   List<MovieBean> hotMovieBeans = List();
   int selectIndex = 0; //选中的是热映、即将上映
 
@@ -82,7 +82,6 @@ class _MoviePageState extends State<MoviePage> {
           SliverToBoxAdapter(
             child: hotSoonTabBarPadding,
           ),
-          SliverGr
           SliverGrid(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
@@ -91,14 +90,20 @@ class _MoviePageState extends State<MoviePage> {
                   child: Column(
                     children: <Widget>[
                       SubjectMarkImageWidget(hotMovieBean.images.large),
-                      Container(
-                        width: double.infinity,
-                        child: Text(
-                          hotMovieBean.title,
-                          style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      RatingBar(hotMovieBean.rating.average)
+//                      Padding(
+//                        padding: EdgeInsets.only(top: 5.0),
+//                        child: Container(
+//                          width: double.infinity,
+//                          child: Text(
+//                            hotMovieBean.title,
+//                            style: TextStyle(
+//                                color: Colors.black,
+//                                fontSize: 13,
+//                                fontWeight: FontWeight.bold),
+//                          ),
+//                        ),
+//                      ),
+                      RatingBar(hotMovieBean.rating.average, size: 14.0,)
                     ],
                   ),
                 );

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class RatingBar extends StatelessWidget {
   final stars;
+  final size;
+  final fontSize;
+  final color = Color.fromARGB(255, 255, 170, 71);
 
-  RatingBar(this.stars, {Key key}) : super(key: key);
+  RatingBar(this.stars, {Key key, this.size = 18.0, this.fontSize = 10.0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,29 +28,27 @@ class RatingBar extends StatelessWidget {
     for (var i = 0; i < startNumber; i++) {
       startList.add(Icon(
         Icons.star,
-        color: Colors.amberAccent,
-        size: 18,
+        color: color,
+        size: size,
       ));
     }
     if (startHalf > 0) {
       startList.add(Icon(
         Icons.star_half,
-        color: Colors.amberAccent,
-        size: 18,
+        color: color,
+        size: size,
       ));
     }
     for (var i = 0; i < startEmpty; i++) {
       startList.add(Icon(
         Icons.star_border,
         color: Colors.grey,
-        size: 18,
+        size: size,
       ));
     }
     startList.add(Text(
       '$stars',
-      style: TextStyle(
-        color: Colors.grey,
-      ),
+      style: TextStyle(color: Colors.grey, fontSize: fontSize),
     ));
     return Container(
       alignment: Alignment.topLeft,

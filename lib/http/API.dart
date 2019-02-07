@@ -37,8 +37,9 @@ class API {
     final Map result = await _request.get(COMING_SOON,
         headers: {"apikey": "0b2bdeda43b5688921839c8ecb20399b"});
     var resultList = result['subjects'];
-    List<ComingSoonBean> list =
-        resultList.map<ComingSoonBean>((item) => ComingSoonBean.fromMap(item)).toList();
+    List<ComingSoonBean> list = resultList
+        .map<ComingSoonBean>((item) => ComingSoonBean.fromMap(item))
+        .toList();
     requestCallBack(list);
   }
 }
