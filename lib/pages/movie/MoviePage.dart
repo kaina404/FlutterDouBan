@@ -118,7 +118,7 @@ class _MoviePageState extends State<MoviePage> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 5.0,
+                  mainAxisSpacing: 0.0,
                   childAspectRatio: childAspectRatio))
         ],
       ),
