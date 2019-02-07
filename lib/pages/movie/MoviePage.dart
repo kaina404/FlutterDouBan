@@ -23,11 +23,12 @@ class MoviePage extends StatefulWidget {
 class _MoviePageState extends State<MoviePage> {
   Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
-  var total = 0; //正在热映
-  double childAspectRatio = 393.0 / 914.0;
   List<MovieBean> hotMovieBeans = List();
   List<ComingSoonBean> comingSoonBeans = List();
+  var hotChildAspectRatio;
+  var comingSoonChildAspectRatio;
   int selectIndex = 0; //选中的是热映、即将上映
+  var itemW;
 
   @override
   void initState() {
@@ -75,8 +76,11 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
-    var itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
-    childAspectRatio = itemW / childAspectRatio;
+    if (itemW == null) {
+      itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
+      hotChildAspectRatio = itemW / 121.0 * (377.0 / 674.0);
+      comingSoonChildAspectRatio = itemW / 121.0 * (377.0 / 712.0);
+    }
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: CustomScrollView(
@@ -102,20 +106,19 @@ class _MoviePageState extends State<MoviePage> {
                 if (comingSoonBeans.length > 0) {
                   comingSoonBean = comingSoonBeans[index];
                 }
-                print('nfeowj');
                 return Stack(
                   children: <Widget>[
                     Offstage(
                       child: getComingSoonItem(comingSoonBean, itemW),
-                      offstage: selectIndex == 1 &&
+                      offstage: !(selectIndex == 1 &&
                           comingSoonBeans != null &&
-                          comingSoonBeans.length > 0,
+                          comingSoonBeans.length > 0),
                     ),
                     Offstage(
                         child: getHotMovieItem(hotMovieBean, itemW),
-                        offstage: selectIndex == 0 &&
+                        offstage: !(selectIndex == 0 &&
                             hotMovieBeans != null &&
-                            hotMovieBeans.length > 0)
+                            hotMovieBeans.length > 0))
                   ],
                 );
               }, childCount: math.min(getChildCount(), 9)),
@@ -123,7 +126,7 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
-                  childAspectRatio: childAspectRatio))
+                  childAspectRatio: getRadio()))
         ],
       ),
     );
@@ -133,6 +136,7 @@ class _MoviePageState extends State<MoviePage> {
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SubjectMarkImageWidget(
             comingSoonBean.images.large,
@@ -219,6 +223,14 @@ class _MoviePageState extends State<MoviePage> {
       return hotMovieBeans.length;
     } else {
       return comingSoonBeans.length;
+    }
+  }
+
+  double getRadio() {
+    if (selectIndex == 0) {
+      return hotChildAspectRatio;
+    } else {
+      return comingSoonChildAspectRatio;
     }
   }
 }
