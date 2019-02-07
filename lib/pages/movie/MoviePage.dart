@@ -14,11 +14,11 @@ class MoviePage extends StatefulWidget {
   }
 }
 
-
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, todayPlayMovieWidget;
+  Widget titleWidget, todayPlayMovieWidget, hotSoonMovieWidgetPadding;
   HotSoonMovieWidget hotSoonMovieWidget;
-  var total = 0;//正在热映
+  var total = 0; //正在热映
+  List<Widget> children;
 
   @override
   void initState() {
@@ -30,8 +30,30 @@ class _MoviePageState extends State<MoviePage> {
       'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp',
       'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p917846733.webp',
     ]);
-    _api.getIntheaters((movieBeanList){  //List<MovieBean>
-      hotSoonMovieWidget.setMovieBeanList(movieBeanList);
+
+    hotSoonMovieWidgetPadding = Padding(
+      child: hotSoonMovieWidget,
+      padding: EdgeInsets.only(top: 25.0),
+    );
+    children = [
+      Padding(
+        padding: EdgeInsets.only(top: 10.0),
+        child: titleWidget,
+      ),
+      Padding(
+        child: todayPlayMovieWidget,
+        padding: EdgeInsets.only(top: 22.0),
+      ),
+      hotSoonMovieWidgetPadding
+    ];
+
+    _api.getIntheaters((movieBeanList) {
+      //List<MovieBean>
+      hotSoonMovieWidget.setHotMovieBeanList(movieBeanList);
+//      if (!children.contains(hotSoonMovieWidgetPadding)) {
+//        children.add(hotSoonMovieWidgetPadding);
+//        setState(() {});
+//      }
     });
   }
 
@@ -42,21 +64,7 @@ class _MoviePageState extends State<MoviePage> {
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: titleWidget,
-            ),
-            Padding(
-              child: todayPlayMovieWidget,
-              padding: EdgeInsets.only(top: 22.0),
-            ),
-            Padding(
-              child: hotSoonMovieWidget,
-              padding: EdgeInsets.only(top: 25.0),
-            ),
-          ]))
+          SliverList(delegate: SliverChildListDelegate(children))
         ],
       ),
     );

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/bean/MovieBean.dart';
+import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 
 ///影院热映、即将上映
 class HotSoonMovieWidget extends StatefulWidget {
+
+  final state = _HotSoonMovieWidgetState();
+
   @override
   State<StatefulWidget> createState() {
-    return _HotSoonMovieWidgetState();
+    return state;
   }
 
-  void setMovieBeanList(List<MovieBean> list){
-
+  ///设置影院热映数据
+  void setHotMovieBeanList(List<MovieBean> list){
+    state.setHotMovieBeanList(list);
   }
 
 }
@@ -23,6 +28,8 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   TextStyle selectStyle, unselectedStyle;
   Widget tabBar;
   double childAspectRatio = 355.0 / 506.0;
+  var hotCount, soonCount;//热映数量、即将上映数量、
+  List<MovieBean> hotMovieBeans, soonMovieBeans;
 
   @override
   void initState() {
@@ -46,7 +53,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
       onTap: (index) {
         setState(() {
           if (index == 0) {
-            movieCount = 16;
+            movieCount = hotCount;
           } else {
             movieCount = 20;
           }
@@ -82,7 +89,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
 //                childAspectRatio: childAspectRatio),
 //            //Widget Function(BuildContext context, int index);
 //            itemBuilder: (BuildContext context, int index) {
-//
+//              return SubjectMarkImageWidget(hotMovieBeans[index].images.large);
 //            })
       ],
     );
@@ -92,5 +99,14 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  void setHotMovieBeanList(List<MovieBean> list) {
+      if(list != null){
+        setState(() {
+          hotMovieBeans = list;
+          hotCount = hotMovieBeans.length;
+        });
+      }
   }
 }
