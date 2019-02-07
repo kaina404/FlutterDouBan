@@ -34,8 +34,7 @@ class API {
   ///https://api.douban.com/v2/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b
   ///即将上映
   void commingSoon(RequestCallBack requestCallBack) async {
-    final Map result = await _request.get(COMING_SOON,
-        headers: {"apikey": "0b2bdeda43b5688921839c8ecb20399b"});
+    final Map result = await _request.get(COMING_SOON +'?apikey=0b2bdeda43b5688921839c8ecb20399b');
     var resultList = result['subjects'];
     List<ComingSoonBean> list = resultList
         .map<ComingSoonBean>((item) => ComingSoonBean.fromMap(item))
