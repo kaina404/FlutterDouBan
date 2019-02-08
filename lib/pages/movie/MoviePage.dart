@@ -151,12 +151,12 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
                   childAspectRatio: getRadio())),
-          getCommonImg(Constant.IMG_TMP1),
+          getCommonImg(Constant.IMG_TMP1, null),
           SliverToBoxAdapter(
             child: hotTitlePadding,
           ),
           getCommonSliverGrid(hotBeans),
-          getCommonImg(Constant.IMG_TMP2),
+          getCommonImg(Constant.IMG_TMP2, null),
         ],
       ),
     );
@@ -292,15 +292,23 @@ class _MoviePageState extends State<MoviePage> {
             childAspectRatio: hotChildAspectRatio));
   }
 
-  getCommonImg(String url) {
+
+  getCommonImg(String url, OnTab onTab) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.only(top: 15.0),
         child: CacheImgRadius(
           imgUrl: url,
           radius: 5.0,
+          onTab: (){
+            if(onTab != null){
+              onTab();
+            }
+          },
         ),
       ),
     );
   }
 }
+
+typedef OnTab = void Function();
