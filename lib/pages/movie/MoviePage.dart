@@ -136,6 +136,9 @@ class _MoviePageState extends State<MoviePage> {
 
   ///即将上映item
   Widget getComingSoonItem(ComingSoonBean comingSoonBean, var itemW) {
+    if(comingSoonBean == null){
+      return Container();
+    }
     ///将2019-02-14转成02月14日
     String mainland_pubdate = comingSoonBean.mainland_pubdate;
     mainland_pubdate = mainland_pubdate.substring(5, mainland_pubdate.length);
@@ -177,7 +180,7 @@ class _MoviePageState extends State<MoviePage> {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: 5.0, right: 5.0, top: 2.0, bottom: 2.0),
+                    left: 5.0, right: 5.0, ),
                 child: Text(
                   mainland_pubdate,
                   style: TextStyle(
@@ -191,6 +194,9 @@ class _MoviePageState extends State<MoviePage> {
 
   ///影院热映item
   Widget getHotMovieItem(MovieBean hotMovieBean, var itemW) {
+    if(hotMovieBean == null){
+      return Container();
+    }
     return Container(
       child: Column(
         children: <Widget>[
