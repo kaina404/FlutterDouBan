@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
-import 'package:douban_app/bean/WeeklyBean.dart';
+import 'package:douban_app/bean/TopItemBean.dart';
 
-List<WeeklyBean> _beans;
+TopItemBean _bean;
 
 ///豆瓣榜单Item
 class TopItemWidget extends StatefulWidget {
@@ -13,38 +13,36 @@ class TopItemWidget extends StatefulWidget {
     return state;
   }
 
-  setData(List<WeeklyBean> list) {
-    state.setData(list);
+  setData(TopItemBean bean) {
+    state.setData(bean);
   }
 }
 
-var imgW;
+var _imgSize;
 
 class _TopItemWidgetState extends State<TopItemWidget> {
   @override
   Widget build(BuildContext context) {
-    if (_beans == null || _beans.isEmpty) {
+    if (_bean == null) {
       return Container();
     }
-    if (imgW == null) {
-      imgW = MediaQuery.of(context).size.width / 5 * 3;
+    if (_imgSize == null) {
+      _imgSize = MediaQuery.of(context).size.width / 5 * 3;
     }
-    var firstBean = _beans[0];
-    var castImgUrl = firstBean.subject.images.large;
 
     return Container(
       color: Colors.red,
-      width: imgW,
-      height: imgW,
+      width: _imgSize,
+      height: _imgSize,
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         child: Stack(
           children: <Widget>[
             CachedNetworkImage(
-              width: imgW,
-              height: imgW,
-              fit: BoxFit.fill,
-              imageUrl: castImgUrl,
+              width: _imgSize,
+              height: _imgSize,
+              fit: BoxFit.cover,
+              imageUrl: _bean.imgUrl,
             )
           ],
         ),
@@ -52,9 +50,9 @@ class _TopItemWidgetState extends State<TopItemWidget> {
     );
   }
 
-  void setData(List<WeeklyBean> list) {
+  void setData(TopItemBean bean) {
     setState(() {
-      _beans = list;
+      _bean = bean;
     });
   }
 }

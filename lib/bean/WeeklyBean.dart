@@ -16,8 +16,28 @@ class WeeklyBean {
   }
 }
 
+//rating":{
+//"max":10,
+//"average":8.6,
+//"details":{
+//"1":125,
+//"2":308,
+//"3":3740,
+//"4":15985,
+//"5":16031
+//},
+//"stars":"45",
+//"min":0
+//},
+
+class Rating {
+  var max;
+  var average;
+  Rating(this.max, this.average);
+}
+
 class Subject {
-  var rating;
+  Rating rating;
   var genres;
   var title;
   List<Cast> casts;
@@ -35,7 +55,8 @@ class Subject {
   var id;
 
   Subject.fromMap(Map<String, dynamic> map) {
-    rating = map['rating'];
+    var ratingMap = map['rating'];
+    rating = Rating(ratingMap['max'], ratingMap['average']);
     genres = map['genres'];
     title = map['title'];
     var castMap = map['casts'];
