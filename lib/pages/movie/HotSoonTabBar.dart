@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:douban_app/constant/TextSizeConstant.dart';
+import 'package:douban_app/constant/ColorConstant.dart';
 
 typedef TabCallBack = void Function(int index);
 
@@ -38,11 +40,14 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   @override
   void initState() {
     super.initState();
-    selectColor = Color.fromARGB(255, 45, 45, 45);
+    selectColor = ColorConstant.colorDefaultTitle;
     unselectedColor = Color.fromARGB(255, 135, 135, 135);
     selectStyle = TextStyle(
-        fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
-    unselectedStyle = TextStyle(fontSize: 20, color: unselectedColor);
+        fontSize: TextSizeConstant.BookAudioPartTabBar,
+        color: selectColor,
+        fontWeight: FontWeight.bold);
+    unselectedStyle = TextStyle(
+        fontSize: TextSizeConstant.BookAudioPartTabBar, color: unselectedColor);
     _tabController = TabController(vsync: this, length: 2);
     tabBar = TabBar(
       tabs: [Text('影院热映'), Text('即将上映')],
@@ -91,7 +96,7 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   void setCount(int count) {
     setState(() {
       this.hotCount = count;
-      if(selectIndex == 0){
+      if (selectIndex == 0) {
         setState(() {
           movieCount = hotCount;
         });
@@ -103,7 +108,7 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   void setComingSoonCount(int length) {
     setState(() {
       this.comingSoonCount = length;
-      if(selectIndex == 1){
+      if (selectIndex == 1) {
         setState(() {
           movieCount = comingSoonCount;
         });
@@ -114,6 +119,4 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   void setTabCallBack(TabCallBack onTabCallBack) {
     this.onTabCallBack = onTabCallBack;
   }
-
-
 }

@@ -3,6 +3,7 @@ import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
+import 'package:douban_app/pages/movie/ItemCountTitle.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
@@ -21,10 +22,12 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding;
+  Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding, hotTitlePadding;
   HotSoonTabBar hotSoonTabBar;
-  List<MovieBean> hotMovieBeans = List();
-  List<ComingSoonBean> comingSoonBeans = List();
+  ItemCountTitle hotTitle;//豆瓣热门
+  List<MovieBean> hotShowBeans = List();//影院热映
+  List<ComingSoonBean> comingSoonBeans = List();//即将上映
+  List<MovieBean> hotBeans = List();//豆瓣热门
   var hotChildAspectRatio;
   var comingSoonChildAspectRatio;
   int selectIndex = 0; //选中的是热映、即将上映
@@ -59,10 +62,15 @@ class _MoviePageState extends State<MoviePage> {
       child: hotSoonTabBar,
     );
 
+    hotTitle = ItemCountTitle('豆瓣热门');
+
+    hotTitlePadding = Padding(padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+    child: hotTitle,);
+
     _api.getIntheaters((movieBeanList) {
       hotSoonTabBar.setCount(movieBeanList);
       setState(() {
-        hotMovieBeans = movieBeanList;
+        hotShowBeans = movieBeanList;
       });
     });
 
@@ -70,6 +78,13 @@ class _MoviePageState extends State<MoviePage> {
       hotSoonTabBar.setComingSoon(comingSoonList);
       setState(() {
         comingSoonBeans = comingSoonList;
+      });
+    });
+
+    _api.getHot((hotBeanList){
+      setState(() {
+        hotBeans = hotBeanList;
+        hotTitle.setCount(hotBeans.length);
       });
     });
   }
@@ -102,8 +117,8 @@ class _MoviePageState extends State<MoviePage> {
                   SliverChildBuilderDelegate((BuildContext context, int index) {
                 var hotMovieBean;
                 var comingSoonBean;
-                if (hotMovieBeans.length > 0) {
-                  hotMovieBean = hotMovieBeans[index];
+                if (hotShowBeans.length > 0) {
+                  hotMovieBean = hotShowBeans[index];
                 }
                 if (comingSoonBeans.length > 0) {
                   comingSoonBean = comingSoonBeans[index];
@@ -119,8 +134,8 @@ class _MoviePageState extends State<MoviePage> {
                     Offstage(
                         child: getHotMovieItem(hotMovieBean, itemW),
                         offstage: !(selectIndex == 0 &&
-                            hotMovieBeans != null &&
-                            hotMovieBeans.length > 0))
+                            hotShowBeans != null &&
+                            hotShowBeans.length > 0))
                   ],
                 );
               }, childCount: math.min(getChildCount(), 6)),
@@ -128,7 +143,8 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
-                  childAspectRatio: getRadio()))
+                  childAspectRatio: getRadio())),
+          SliverToBoxAdapter(child: hotTitle,)
         ],
       ),
     );
@@ -234,7 +250,7 @@ class _MoviePageState extends State<MoviePage> {
 
   int getChildCount() {
     if (selectIndex == 0) {
-      return hotMovieBeans.length;
+      return hotShowBeans.length;
     } else {
       return comingSoonBeans.length;
     }
