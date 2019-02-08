@@ -30,14 +30,17 @@ class _MoviePageState extends State<MoviePage> {
   Widget titleWidget,
       todayPlayMovieWidget,
       hotSoonTabBarPadding,
-      hotTitlePadding;
+      hotTitlePadding,
+      topPadding;
   HotSoonTabBar hotSoonTabBar;
   ItemCountTitle hotTitle; //豆瓣热门
+  ItemCountTitle topTitle; //豆瓣榜单
   TopItemWidget weeklyTop, weeklyHot, weeklyTop250; //周口碑榜单、周热门榜单、top250
   List<MovieBean> hotShowBeans = List(); //影院热映
   List<ComingSoonBean> comingSoonBeans = List(); //即将上映
   List<MovieBean> hotBeans = List(); //豆瓣热门
   List<WeeklyBean> weeklyBeans = List(); //一周口碑电影榜
+  List<MovieBean> top250Beans = List(); //Top250
   var hotChildAspectRatio;
   var comingSoonChildAspectRatio;
   int selectIndex = 0; //选中的是热映、即将上映
@@ -80,9 +83,14 @@ class _MoviePageState extends State<MoviePage> {
       child: hotTitle,
     );
 
-    weeklyTop = TopItemWidget();
-    weeklyHot = TopItemWidget();
-    weeklyTop250 = TopItemWidget();
+    topTitle = ItemCountTitle('豆瓣榜单');
+    topPadding = Padding(
+      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+      child: topTitle,
+    );
+    weeklyTop = TopItemWidget('一周口碑电影榜',);
+    weeklyHot = TopItemWidget( '一周热门电影榜',);
+    weeklyTop250 = TopItemWidget('豆瓣电影 Top250',);
 
     requestAPI();
   }
@@ -149,7 +157,10 @@ class _MoviePageState extends State<MoviePage> {
           ),
           getCommonSliverGrid(hotBeans),
           getCommonImg(Constant.IMG_TMP2, null),
-//          topSliverList(),
+          SliverToBoxAdapter(
+            child: topPadding,
+          ),
+          topSliverList(),
         ],
       ),
     );
@@ -321,14 +332,19 @@ class _MoviePageState extends State<MoviePage> {
     _api.getHot((hotBeanList) {
       hotBeans = hotBeanList;
       hotTitle.setCount(hotBeans.length);
+      weeklyHot.setData(TopItemBean.convertHotBeans(hotBeans));
     });
 
     _api.getWeekly((weeklyBeanList) {
       weeklyBeans = weeklyBeanList;
       weeklyTop.setData(TopItemBean.convertWeeklyBeans(weeklyBeans));
+      topTitle.setCount(weeklyBeans.length);
     });
 
-
+    _api.top250((beanList) {
+      top250Beans = beanList;
+      weeklyTop250.setData(TopItemBean.convertTopBeans(top250Beans));
+    }, count: 5);
   }
 
   ///豆瓣榜单

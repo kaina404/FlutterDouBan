@@ -27,7 +27,7 @@ class HotSoonTabBar extends StatefulWidget {
 
 class _HotSoonTabBarState extends State<HotSoonTabBar>
     with SingleTickerProviderStateMixin {
-  int movieCount;
+  int movieCount = 0;
   Color selectColor, unselectedColor;
   TextStyle selectStyle, unselectedStyle;
   Widget tabBar;

@@ -28,6 +28,14 @@ class API {
     requestCallBack(result);
   }
 
+  void top250(RequestCallBack requestCallBack, {count = 250}) async {
+    final Map result = await _request.get(TOP_250 + '?start=0&count=$count');
+    var resultList = result['subjects'];
+    List<MovieBean> list =
+        resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+    requestCallBack(list);
+  }
+
   void getIntheaters(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(IN_THEATERS);
     var resultList = result['subjects'];
@@ -51,21 +59,19 @@ class API {
   ///豆瓣热门
   void getHot(RequestCallBack requestCallBack) async {
     ///随机生成热门
-    int start = math.Random().nextInt(224);
-    final Map result = await _request.get(TOP_250 +'?start=$start&count=7');
+    int start = math.Random().nextInt(220);
+    final Map result = await _request.get(TOP_250 + '?start=$start&count=7');
     var resultList = result['subjects'];
     List<MovieBean> list =
-    resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+        resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
     requestCallBack(list);
   }
 
   void getWeekly(RequestCallBack requestCallBack) async {
-    final Map result = await _request
-        .get(WEEKLY);
+    final Map result = await _request.get(WEEKLY);
     var resultList = result['subjects'];
-    List<WeeklyBean> list = resultList
-        .map<WeeklyBean>((item) => WeeklyBean.fromMap(item))
-        .toList();
+    List<WeeklyBean> list =
+        resultList.map<WeeklyBean>((item) => WeeklyBean.fromMap(item)).toList();
     requestCallBack(list);
   }
 }

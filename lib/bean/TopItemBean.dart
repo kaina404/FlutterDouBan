@@ -1,3 +1,4 @@
+import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
 import 'dart:math' as math;
 
@@ -9,13 +10,38 @@ class TopItemBean {
 
   ///将周口碑榜数据转换成榜单item对应的数据类型
   static TopItemBean convertWeeklyBeans(List<WeeklyBean> weeklyBeans){
-    var count = weeklyBeans.length;
+    var count = '每周五更新 · 共${math.min(weeklyBeans.length, 10)}部';
     var imgUrl = weeklyBeans[0].subject.images.large;
     int itemCount = math.min(4, weeklyBeans.length);
     weeklyBeans = weeklyBeans.sublist(0, itemCount);
     List<Item> items = [];
     for(WeeklyBean bean in weeklyBeans){
       items.add(Item(bean.subject.title, bean.subject.rating.average, bean.delta > 0));
+    }
+    return TopItemBean(count, imgUrl, items);
+  }
+
+  ///将周热门数据转换成榜单item对应的数据类型
+  static TopItemBean convertHotBeans(List<MovieBean> hotBeans) {
+    var count = '每周五更新 · 共${math.min(10, hotBeans.length)}部';
+    var imgUrl = hotBeans[0].images.large;
+    int itemCount = math.min(4, hotBeans.length);
+    hotBeans = hotBeans.sublist(0, itemCount);
+    List<Item> items = [];
+    for(MovieBean bean in hotBeans){
+      items.add(Item(bean.title, bean.rating.average, true));
+    }
+    return TopItemBean(count, imgUrl, items);
+  }
+  ///将Top250数据转换成榜单item对应的数据类型
+  static TopItemBean convertTopBeans(List<MovieBean> hotBeans) {
+    var count = '豆瓣榜单 · 共250部';
+    var imgUrl = hotBeans[0].images.large;
+    int itemCount = math.min(4, hotBeans.length);
+    hotBeans = hotBeans.sublist(0, itemCount);
+    List<Item> items = [];
+    for(MovieBean bean in hotBeans){
+      items.add(Item(bean.title, bean.rating.average, true));
     }
     return TopItemBean(count, imgUrl, items);
   }
