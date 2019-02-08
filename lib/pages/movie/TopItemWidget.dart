@@ -118,7 +118,7 @@ class _TopItemWidgetState extends State<TopItemWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(right: 5.0),
+          padding: EdgeInsets.only(right: 5.0, bottom: 5.0),
           child: Text(
             '$i. ${item.title}',
             style: TextStyle(fontSize: 13.0, color: Colors.white),
