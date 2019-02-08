@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
 import 'package:douban_app/widgets/image/PickImgMainColor.dart';
+import 'package:douban_app/constant/ColorConstant.dart';
+import 'dart:math' as math;
 
 ///豆瓣榜单Item
 ///
@@ -56,19 +58,19 @@ class _TopItemWidgetState extends State<TopItemWidget> {
               imageUrl: _bean.imgUrl,
             ),
             Positioned(
-              top: 8.0,
-              right: 15.0,
+                top: 8.0,
+                right: 15.0,
                 child: Text(
-              _bean.count,
-              style: TextStyle(fontSize: 12.0, color: Colors.white),
-            )),
+                  _bean.count,
+                  style: TextStyle(fontSize: 12.0, color: Colors.white),
+                )),
             Positioned(
               top: _imgSize / 2 - 40.0,
               left: 30.0,
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 21.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -81,7 +83,17 @@ class _TopItemWidgetState extends State<TopItemWidget> {
                 width: _imgSize,
                 color: partColor,
               ),
-            )
+            ),
+            Positioned(
+                top: _imgSize / 2,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10.0, left: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: getChildren(_bean.items),
+                  ),
+                ))
           ],
         ),
       ),
@@ -89,7 +101,7 @@ class _TopItemWidgetState extends State<TopItemWidget> {
   }
 
   void setData(TopItemBean bean) {
-    PickImgMainColor.pick(NetworkImage(bean.imgUrl), (Color color){
+    PickImgMainColor.pick(NetworkImage(bean.imgUrl), (Color color) {
       setState(() {
         partColor = color;
       });
@@ -97,5 +109,34 @@ class _TopItemWidgetState extends State<TopItemWidget> {
     setState(() {
       _bean = bean;
     });
+  }
+
+  ///电影列表
+  Widget getItem(Item item, int i) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(right: 5.0),
+          child: Text(
+            '$i. ${item.title}',
+            style: TextStyle(fontSize: 13.0, color: Colors.white),
+          ),
+        ),
+        Text(
+          '${item.average}',
+          style: TextStyle(fontSize: 11.0, color: ColorConstant.colorOrigin),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> getChildren(List<Item> items) {
+    List<Widget> list = [];
+    for (int i = 0; i < items.length; i++) {
+      list.add(getItem(items[i], i + 1));
+    }
+    return list;
   }
 }
