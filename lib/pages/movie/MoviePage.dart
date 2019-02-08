@@ -78,8 +78,10 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     if (itemW == null) {
       itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
-      hotChildAspectRatio = itemW / 121.0 * (377.0 / 674.0);
-      comingSoonChildAspectRatio = itemW / 121.0 * (377.0 / 712.0);
+//      hotChildAspectRatio = itemW / 121.0 * (377.0 / 674.0);
+      hotChildAspectRatio = (377.0 / 674.0);
+//      comingSoonChildAspectRatio = itemW / 121.0 * (377.0 / 712.0);
+      comingSoonChildAspectRatio = (377.0 / 742.0);
     }
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
@@ -132,7 +134,12 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
+  ///即将上映item
   Widget getComingSoonItem(ComingSoonBean comingSoonBean, var itemW) {
+    ///将2019-02-14转成02月14日
+    String mainland_pubdate = comingSoonBean.mainland_pubdate;
+    mainland_pubdate = mainland_pubdate.substring(5, mainland_pubdate.length);
+    mainland_pubdate = mainland_pubdate.replaceFirst(RegExp(r'-'), '月') +'日';
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
@@ -143,7 +150,7 @@ class _MoviePageState extends State<MoviePage> {
             width: itemW,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 5.0),
+            padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
             child: Container(
               width: double.infinity,
               child: Text(
@@ -172,9 +179,9 @@ class _MoviePageState extends State<MoviePage> {
                 padding: EdgeInsets.only(
                     left: 5.0, right: 5.0, top: 2.0, bottom: 2.0),
                 child: Text(
-                  comingSoonBean.mainland_pubdate,
+                  mainland_pubdate,
                   style: TextStyle(
-                      fontSize: 12.0, color: ColorConstant.colorRed277),
+                      fontSize: 8.0, color: ColorConstant.colorRed277),
                 ),
               ))
         ],
@@ -182,6 +189,7 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
+  ///影院热映item
   Widget getHotMovieItem(MovieBean hotMovieBean, var itemW) {
     return Container(
       child: Column(
