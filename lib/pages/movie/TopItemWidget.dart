@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
+import 'package:douban_app/widgets/image/PickImgMainColor.dart';
 
 ///豆瓣榜单Item
 ///
@@ -27,6 +28,7 @@ var _imgSize;
 class _TopItemWidgetState extends State<TopItemWidget> {
   var title;
   TopItemBean _bean;
+  Color partColor = Colors.brown;
 
   _TopItemWidgetState(this.title);
 
@@ -77,7 +79,7 @@ class _TopItemWidgetState extends State<TopItemWidget> {
               child: Container(
                 height: _imgSize / 2,
                 width: _imgSize,
-                color: Colors.brown,
+                color: partColor,
               ),
             )
           ],
@@ -87,6 +89,11 @@ class _TopItemWidgetState extends State<TopItemWidget> {
   }
 
   void setData(TopItemBean bean) {
+    PickImgMainColor.pick(NetworkImage(bean.imgUrl), (Color color){
+      setState(() {
+        partColor = color;
+      });
+    });
     setState(() {
       _bean = bean;
     });
