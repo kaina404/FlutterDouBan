@@ -22,12 +22,15 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, todayPlayMovieWidget, hotSoonTabBarPadding, hotTitlePadding;
+  Widget titleWidget,
+      todayPlayMovieWidget,
+      hotSoonTabBarPadding,
+      hotTitlePadding;
   HotSoonTabBar hotSoonTabBar;
-  ItemCountTitle hotTitle;//豆瓣热门
-  List<MovieBean> hotShowBeans = List();//影院热映
-  List<ComingSoonBean> comingSoonBeans = List();//即将上映
-  List<MovieBean> hotBeans = List();//豆瓣热门
+  ItemCountTitle hotTitle; //豆瓣热门
+  List<MovieBean> hotShowBeans = List(); //影院热映
+  List<ComingSoonBean> comingSoonBeans = List(); //即将上映
+  List<MovieBean> hotBeans = List(); //豆瓣热门
   var hotChildAspectRatio;
   var comingSoonChildAspectRatio;
   int selectIndex = 0; //选中的是热映、即将上映
@@ -64,8 +67,10 @@ class _MoviePageState extends State<MoviePage> {
 
     hotTitle = ItemCountTitle('豆瓣热门');
 
-    hotTitlePadding = Padding(padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-    child: hotTitle,);
+    hotTitlePadding = Padding(
+      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+      child: hotTitle,
+    );
 
     _api.getIntheaters((movieBeanList) {
       hotSoonTabBar.setCount(movieBeanList);
@@ -81,7 +86,7 @@ class _MoviePageState extends State<MoviePage> {
       });
     });
 
-    _api.getHot((hotBeanList){
+    _api.getHot((hotBeanList) {
       setState(() {
         hotBeans = hotBeanList;
         hotTitle.setCount(hotBeans.length);
@@ -144,7 +149,10 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
                   childAspectRatio: getRadio())),
-          SliverToBoxAdapter(child: hotTitle,)
+          SliverToBoxAdapter(
+            child: hotTitlePadding,
+          ),
+          getCommonSliverGrid(hotBeans)
         ],
       ),
     );
@@ -152,13 +160,13 @@ class _MoviePageState extends State<MoviePage> {
 
   ///即将上映item
   Widget getComingSoonItem(ComingSoonBean comingSoonBean, var itemW) {
-    if(comingSoonBean == null){
+    if (comingSoonBean == null) {
       return Container();
     }
     ///将2019-02-14转成02月14日
     String mainland_pubdate = comingSoonBean.mainland_pubdate;
     mainland_pubdate = mainland_pubdate.substring(5, mainland_pubdate.length);
-    mainland_pubdate = mainland_pubdate.replaceFirst(RegExp(r'-'), '月') +'日';
+    mainland_pubdate = mainland_pubdate.replaceFirst(RegExp(r'-'), '月') + '日';
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
@@ -196,7 +204,9 @@ class _MoviePageState extends State<MoviePage> {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: 5.0, right: 5.0, ),
+                  left: 5.0,
+                  right: 5.0,
+                ),
                 child: Text(
                   mainland_pubdate,
                   style: TextStyle(
@@ -210,7 +220,7 @@ class _MoviePageState extends State<MoviePage> {
 
   ///影院热映item
   Widget getHotMovieItem(MovieBean hotMovieBean, var itemW) {
-    if(hotMovieBean == null){
+    if (hotMovieBean == null) {
       return Container();
     }
     return Container(
@@ -262,5 +272,18 @@ class _MoviePageState extends State<MoviePage> {
     } else {
       return comingSoonChildAspectRatio;
     }
+  }
+
+  ///图片+订阅+名称+星标
+  SliverGrid getCommonSliverGrid(List<MovieBean> hotBeans) {
+    return SliverGrid(
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return getHotMovieItem(hotBeans[index], itemW);
+        }, childCount: math.min(hotBeans.length, 6)),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 10.0,
+            mainAxisSpacing: 0.0,
+            childAspectRatio: hotChildAspectRatio));
   }
 }
