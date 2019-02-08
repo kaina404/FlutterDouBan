@@ -1,6 +1,7 @@
 import 'package:douban_app/http/HttpRequest.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
+import 'package:douban_app/bean/WeeklyBean.dart';
 import 'dart:math' as math;
 
 typedef RequestCallBack<T> = void Function(T value);
@@ -16,6 +17,9 @@ class API {
 
   ///即将上映
   String COMING_SOON = '/v2/movie/coming_soon';
+
+  ///一周口碑榜
+  String WEEKLY = '/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b';
 
   var _request = HttpRequest(API.BASE_URL);
 
@@ -52,6 +56,16 @@ class API {
     var resultList = result['subjects'];
     List<MovieBean> list =
     resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+    requestCallBack(list);
+  }
+
+  void getWeekly(RequestCallBack requestCallBack) async {
+    final Map result = await _request
+        .get(WEEKLY);
+    var resultList = result['subjects'];
+    List<WeeklyBean> list = resultList
+        .map<WeeklyBean>((item) => WeeklyBean.fromMap(item))
+        .toList();
     requestCallBack(list);
   }
 }

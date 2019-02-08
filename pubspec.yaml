@@ -22,6 +22,8 @@ dependencies:
 
   flutter_cache_manager: ^0.2.0+1
 
+  palette_generator: ^0.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
