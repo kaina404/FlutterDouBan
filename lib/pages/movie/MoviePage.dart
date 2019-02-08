@@ -10,6 +10,8 @@ import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/widgets/RatingBar.dart';
 import 'package:douban_app/constant/ColorConstant.dart';
 import 'dart:math' as math;
+import 'package:douban_app/widgets/image/CacheImgRadius.dart';
+import 'package:douban_app/constant/Constant.dart';
 
 var _api = API();
 
@@ -149,10 +151,12 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
                   childAspectRatio: getRadio())),
+          getCommonImg(Constant.IMG_TMP1),
           SliverToBoxAdapter(
             child: hotTitlePadding,
           ),
-          getCommonSliverGrid(hotBeans)
+          getCommonSliverGrid(hotBeans),
+          getCommonImg(Constant.IMG_TMP2),
         ],
       ),
     );
@@ -163,6 +167,7 @@ class _MoviePageState extends State<MoviePage> {
     if (comingSoonBean == null) {
       return Container();
     }
+
     ///将2019-02-14转成02月14日
     String mainland_pubdate = comingSoonBean.mainland_pubdate;
     mainland_pubdate = mainland_pubdate.substring(5, mainland_pubdate.length);
@@ -285,5 +290,17 @@ class _MoviePageState extends State<MoviePage> {
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 0.0,
             childAspectRatio: hotChildAspectRatio));
+  }
+
+  getCommonImg(String url) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsets.only(top: 15.0),
+        child: CacheImgRadius(
+          imgUrl: url,
+          radius: 5.0,
+        ),
+      ),
+    );
   }
 }
