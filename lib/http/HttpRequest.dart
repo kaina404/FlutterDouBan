@@ -41,6 +41,20 @@ class HttpRequest {
     }
   }
 
+  Future<dynamic> getResponseBody(String uri, {Map<String, String> headers}) async {
+    try {
+      http.Response response = await http.get(baseUrl + uri, headers: headers);
+      final statusCode = response.statusCode;
+      final body = response.body;
+//      var result = Convert.jsonDecode(body);
+      print('[uri=$uri][statusCode=$statusCode][response=$body]');
+      return body;
+    } on Exception catch (e) {
+      print('[uri=$uri]exception e=${e.toString()}');
+      return null;
+    }
+  }
+
   Future<dynamic> post(String uri, dynamic body, {Map<String, String> headers}) async {
     try {
       http.Response response = await http.post(baseUrl + uri, body: body, headers: headers);

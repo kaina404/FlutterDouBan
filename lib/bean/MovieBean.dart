@@ -12,6 +12,7 @@ class MovieBean {
   var alt;
   var id;
 
+  ///构造函数
   MovieBean.fromMap(Map<String, dynamic> map) {
     var rating = map['rating'];
     this.rating = Rating(rating['average'], rating['max']);

@@ -2,6 +2,7 @@ import 'package:douban_app/http/HttpRequest.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
+import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'dart:math' as math;
 
 typedef RequestCallBack<T> = void Function(T value);
@@ -73,5 +74,13 @@ class API {
     List<WeeklyBean> list =
         resultList.map<WeeklyBean>((item) => WeeklyBean.fromMap(item)).toList();
     requestCallBack(list);
+  }
+
+  ///26266893 电影条目信息
+  void getMovieDetail(subjectId, RequestCallBack requestCallBack) async {
+    final result = await _request.get(
+        '/v2/movie/subject/$subjectId?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    MovieDetailBean bean = MovieDetailBean.fromJson(result);
+    requestCallBack(bean);
   }
 }
