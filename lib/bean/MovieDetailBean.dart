@@ -51,7 +51,7 @@ class MovieDetailBean {
   List<Trailer> trailers;
   List<dynamic> videos;
   List<Writer> writers;
-  Image images;
+  _Image images;
   Rating rating;
 
   MovieDetailBean.fromParams({this.collection, this.current_season, this.do_count, this.episodes_count, this.seasons_count, this.collect_count, this.comments_count, this.photos_count, this.ratings_count, this.reviews_count, this.wish_count, this.has_schedule, this.has_ticket, this.has_video, this.alt, this.douban_site, this.id, this.mainland_pubdate, this.mobile_url, this.original_title, this.pubdate, this.schedule_url, this.share_url, this.subtype, this.summary, this.title, this.website, this.year, this.aka, this.blooper_urls, this.bloopers, this.casts, this.clip_urls, this.clips, this.countries, this.directors, this.durations, this.genres, this.languages, this.photos, this.popular_comments, this.popular_reviews, this.pubdates, this.tags, this.trailer_urls, this.trailers, this.videos, this.writers, this.images, this.rating});
@@ -207,7 +207,7 @@ class MovieDetailBean {
       writers.add(writersItem == null ? null : new Writer.fromJson(writersItem));
     }
 
-    images = jsonRes['images'] == null ? null : new Image.fromJson(jsonRes['images']);
+    images = jsonRes['images'] == null ? null : new _Image.fromJson(jsonRes['images']);
     rating = jsonRes['rating'] == null ? null : new Rating.fromJson(jsonRes['rating']);
   }
 
@@ -265,15 +265,15 @@ class RatingDetails {
   }
 }
 
-class Image {
+class _Image {
 
   String large;
   String medium;
   String small;
 
-  Image.fromParams({this.large, this.medium, this.small});
+  _Image.fromParams({this.large, this.medium, this.small});
 
-  Image.fromJson(jsonRes) {
+  _Image.fromJson(jsonRes) {
     large = jsonRes['large'];
     medium = jsonRes['medium'];
     small = jsonRes['small'];
