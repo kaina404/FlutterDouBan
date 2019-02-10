@@ -5,6 +5,7 @@ import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/pages/detail/DetailTitleWidget.dart';
 import 'package:douban_app/util/pick_img_main_color.dart';
 import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/pages/detail/look_confirm_button.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -55,13 +56,15 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       backgroundColor: pickColor,
       body: Container(
-        margin: EdgeInsets.only(left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
+        margin: EdgeInsets.only(
+            left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
         child: SafeArea(
             child: CustomScrollView(
           slivers: <Widget>[
             SliverToBoxAdapter(
               child: DetailTitleWidget(_movieDetailBean, pickColor),
-            )
+            ),
+
           ],
         )),
       ),
