@@ -7,6 +7,8 @@ import 'package:douban_app/util/pick_img_main_color.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/pages/detail/score_start.dart';
 import 'package:douban_app/pages/detail/look_confirm_button.dart';
+import 'dart:math' as math;
+import 'package:douban_app/widgets/image/cached_network_image.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -180,8 +182,51 @@ class _DetailPageState extends State<DetailPage> {
               ],
             ),
           ),
+          Container(
+            height: 150.0,
+            child: ListView.builder(
+              itemBuilder: ((BuildContext context, int index) {
+                if (index == 0 && _movieDetailBean.directors.isNotEmpty) {
+                  //第一个显示导演
+                  Director director = _movieDetailBean.directors[0];
+                  return getCast(
+                      director.id, director.avatars.large, director.name);
+                } else {
+                  Cast cast = _movieDetailBean.casts[index - 1];
+                  return getCast(cast.id, cast.avatars.large, cast.name);
+                }
+              }),
+              itemCount: math.min(9, _movieDetailBean.casts.length + 1), //最多显示9个演员
+              scrollDirection: Axis.horizontal,
+            ),
+          )
         ],
       ),
+    );
+  }
+
+  ///演职表图片
+  Column getCast(String id, String imgUrl, String name) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            child: CachedNetworkImage(
+              imageUrl: imgUrl,
+              height: 120.0,
+              width: 80.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Text(
+          name,
+          style: TextStyle(fontSize: 13.0, color: Colors.white),
+        ),
+      ],
     );
   }
 }
