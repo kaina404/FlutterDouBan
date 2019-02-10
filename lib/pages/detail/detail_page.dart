@@ -86,6 +86,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
             sliverTags(),
             sliverSummary(),
+            sliverCasts(),
           ],
         )),
       ),
@@ -151,6 +152,33 @@ class _DetailPageState extends State<DetailPage> {
           Text(
             _movieDetailBean.summary,
             style: TextStyle(fontSize: 15.0, color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///演职员
+  SliverToBoxAdapter sliverCasts() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Text('演职员',
+                        style: TextStyle(
+                            fontSize: 17.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold))),
+                Text(
+                  '全部 ${_movieDetailBean.casts.length} >',
+                  style: TextStyle(fontSize: 12.0, color: Colors.white70),
+                )
+              ],
+            ),
           ),
         ],
       ),
