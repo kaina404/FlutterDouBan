@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/pages/detail/DetailTitleWidget.dart';
+import 'package:douban_app/util/pick_img_main_color.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   final subjectId;
+  Color pickColor = Color(0xffffffff); //默认主题色
 
   _DetailPageState(this.subjectId);
 
@@ -28,8 +30,16 @@ class _DetailPageState extends State<DetailPage> {
   void initState() {
     super.initState();
     _api.getMovieDetail(subjectId, (movieDetailBean) {
-      setState(() {
-        _movieDetailBean = movieDetailBean;
+      _movieDetailBean = movieDetailBean;
+      setState(() {});
+      //提取海报主题色 https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541901817.jpg
+      PickImgMainColor.pick(NetworkImage(_movieDetailBean.images.large),
+          (color) {
+        if (color != null) {
+          setState(() {
+            pickColor = color;
+          });
+        }
       });
     });
   }
@@ -37,13 +47,17 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     if (_movieDetailBean == null) {
-      return Scaffold(body: CupertinoActivityIndicator(),);
+      return Scaffold(
+        body: CupertinoActivityIndicator(),
+      );
     }
     return Scaffold(
-      body: SafeArea(child: CustomScrollView(
+      backgroundColor: pickColor,
+      body: SafeArea(
+          child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
-            child: DetailTitleWidget(_movieDetailBean, Colors.deepPurple),
+            child: DetailTitleWidget(_movieDetailBean, pickColor),
           )
         ],
       )),

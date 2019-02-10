@@ -245,38 +245,43 @@ class _MoviePageState extends State<MoviePage> {
     if (hotMovieBean == null) {
       return Container();
     }
-    return Container(
-      child: Column(
-        children: <Widget>[
-          SubjectMarkImageWidget(
-            hotMovieBean.images.large,
-            width: itemW,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 5.0),
-            child: Container(
-              width: double.infinity,
-              child: Text(
-                hotMovieBean.title,
+    return GestureDetector(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            SubjectMarkImageWidget(
+              hotMovieBean.images.large,
+              width: itemW,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 5.0),
+              child: Container(
+                width: double.infinity,
+                child: Text(
+                  hotMovieBean.title,
 
-                ///文本只显示一行
-                softWrap: false,
+                  ///文本只显示一行
+                  softWrap: false,
 
-                ///多出的文本渐隐方式
-                overflow: TextOverflow.fade,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                  ///多出的文本渐隐方式
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-          RatingBar(
-            hotMovieBean.rating.average,
-            size: 12.0,
-          )
-        ],
+            RatingBar(
+              hotMovieBean.rating.average,
+              size: 12.0,
+            )
+          ],
+        ),
       ),
+      onTap: () {
+        _router.push(context, Router.detailPage, hotMovieBean.id);
+      },
     );
   }
 

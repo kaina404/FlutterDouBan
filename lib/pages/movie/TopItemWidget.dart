@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
-import 'package:douban_app/widgets/image/PickImgMainColor.dart';
+import 'package:douban_app/util/pick_img_main_color.dart';
 import 'package:douban_app/constant/ColorConstant.dart';
 import 'dart:math' as math;
 

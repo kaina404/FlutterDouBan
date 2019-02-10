@@ -7,6 +7,7 @@ import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
+import 'package:douban_app/demo/ImageColors.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +26,12 @@ class MyApp extends StatelessWidget {
   }
 }
 //http://img1.doubanio.com/view/photo/s_ratio_poster/public/p457760035.webp
+//
+//const ImageColors(
+//title: 'Image Colors',
+//image: NetworkImage('https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541901817.jpg'),
+//imageSize: Size(256.0, 170.0),
+//)
 
 class DemoApp extends StatefulWidget {
   @override

@@ -221,7 +221,7 @@ class Rating {
 
   int max;
   int min;
-  double average;
+  var average;
   String stars;
   RatingDetails details;
 
@@ -243,11 +243,11 @@ class Rating {
 
 class RatingDetails {
 
-  double d1;
-  double d2;
-  double d3;
-  double d4;
-  double d5;
+  var d1;
+  var d2;
+  var d3;
+  var d4;
+  var d5;
 
   RatingDetails.fromParams({this.d1, this.d2, this.d3, this.d4, this.d5});
 
@@ -389,7 +389,7 @@ class PopularReviewRating {
 
   int max;
   int min;
-  double value;
+  var value;
 
   PopularReviewRating.fromParams({this.max, this.min, this.value});
 
@@ -463,7 +463,7 @@ class PopularCommentRating {
 
   int max;
   int min;
-  double value;
+  var value;
 
   PopularCommentRating.fromParams({this.max, this.min, this.value});
 
