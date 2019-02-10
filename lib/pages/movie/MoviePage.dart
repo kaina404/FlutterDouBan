@@ -9,7 +9,7 @@ import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
-import 'package:douban_app/widgets/RatingBar.dart';
+import 'package:douban_app/widgets/rating_bar.dart';
 import 'package:douban_app/constant/ColorConstant.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/image/CacheImgRadius.dart';

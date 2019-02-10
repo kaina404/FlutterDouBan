@@ -36,7 +36,7 @@ class API {
         resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
     requestCallBack(list);
   }
-
+///https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b
   void getIntheaters(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(IN_THEATERS);
     var resultList = result['subjects'];

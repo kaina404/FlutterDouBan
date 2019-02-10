@@ -5,6 +5,7 @@ import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/pages/detail/DetailTitleWidget.dart';
 import 'package:douban_app/util/pick_img_main_color.dart';
 import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/pages/detail/score_start.dart';
 import 'package:douban_app/pages/detail/look_confirm_button.dart';
 
 ///影片、电视详情页面
@@ -53,6 +54,12 @@ class _DetailPageState extends State<DetailPage> {
         body: CupertinoActivityIndicator(),
       );
     }
+    var allCount = _movieDetailBean.rating.details.d1 +
+        _movieDetailBean.rating.details.d2 +
+        _movieDetailBean.rating.details.d3 +
+        _movieDetailBean.rating.details.d4 +
+        _movieDetailBean.rating.details.d5;
+
     return Scaffold(
       backgroundColor: pickColor,
       body: Container(
@@ -64,7 +71,19 @@ class _DetailPageState extends State<DetailPage> {
             SliverToBoxAdapter(
               child: DetailTitleWidget(_movieDetailBean, pickColor),
             ),
-
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+                child: ScoreStartWidget(
+                  score: _movieDetailBean.rating.average,
+                  p1: _movieDetailBean.rating.details.d1 / allCount,
+                  p2: _movieDetailBean.rating.details.d2 / allCount,
+                  p3: _movieDetailBean.rating.details.d3 / allCount,
+                  p4: _movieDetailBean.rating.details.d4 / allCount,
+                  p5: _movieDetailBean.rating.details.d5 / allCount,
+                ),
+              ),
+            )
           ],
         )),
       ),
