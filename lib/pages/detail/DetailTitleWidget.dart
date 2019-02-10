@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/constant/Constant.dart';
 
 class DetailTitleWidget extends StatelessWidget {
   final MovieDetailBean bean;
@@ -29,19 +30,26 @@ class DetailTitleWidget extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                bean.title,
-                style: TextStyle(fontSize: 20.0, color: Colors.white),
-              ),
-              Text(
-                '(${bean.year})',
-                style: TextStyle(fontSize: 13.0, color: Colors.white),
-              ),
-              Text('$countries/$genres/上映时间：$pubdates/片长：$durations'),
-            ],
+          child: Padding(
+            padding: EdgeInsets.only(left: Constant.MARGIN_LEFT),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  bean.title,
+                  style: TextStyle(fontSize: 20.0, color: Colors.white),
+                ),
+                Text(
+                  '(${bean.year})',
+                  style: TextStyle(fontSize: 13.0, color: Colors.white),
+                ),
+                Text(
+                  '$countries/$genres/上映时间：$pubdates/片长：$durations',
+                  style: TextStyle(fontSize: 12.0, color: Colors.white70),
+                ),
+              ],
+            ),
           ),
         )
       ],
@@ -50,7 +58,7 @@ class DetailTitleWidget extends StatelessWidget {
 
   String list2String(List<String> list) {
     var tmp = '';
-    for(String item in list){
+    for (String item in list) {
       tmp = tmp + item;
     }
     return tmp;
