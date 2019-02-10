@@ -15,8 +15,10 @@ import 'dart:math' as math;
 import 'package:douban_app/widgets/image/CacheImgRadius.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/pages/movie/TopItemWidget.dart';
+import 'package:douban_app/manager/router.dart';
 
 var _api = API();
+var _router = Router();
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -88,9 +90,15 @@ class _MoviePageState extends State<MoviePage> {
       padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
       child: topTitle,
     );
-    weeklyTop = TopItemWidget('一周口碑电影榜',);
-    weeklyHot = TopItemWidget( '一周热门电影榜',);
-    weeklyTop250 = TopItemWidget('豆瓣电影 Top250',);
+    weeklyTop = TopItemWidget(
+      '一周口碑电影榜',
+    );
+    weeklyHot = TopItemWidget(
+      '一周热门电影榜',
+    );
+    weeklyTop250 = TopItemWidget(
+      '豆瓣电影 Top250',
+    );
 
     requestAPI();
   }
@@ -176,54 +184,59 @@ class _MoviePageState extends State<MoviePage> {
     String mainland_pubdate = comingSoonBean.mainland_pubdate;
     mainland_pubdate = mainland_pubdate.substring(5, mainland_pubdate.length);
     mainland_pubdate = mainland_pubdate.replaceFirst(RegExp(r'-'), '月') + '日';
-    return Container(
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SubjectMarkImageWidget(
-            comingSoonBean.images.large,
-            width: itemW,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-            child: Container(
-              width: double.infinity,
-              child: Text(
-                comingSoonBean.title,
+    return GestureDetector(
+      child: Container(
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SubjectMarkImageWidget(
+              comingSoonBean.images.large,
+              width: itemW,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+              child: Container(
+                width: double.infinity,
+                child: Text(
+                  comingSoonBean.title,
 
-                ///文本只显示一行
-                softWrap: false,
+                  ///文本只显示一行
+                  softWrap: false,
 
-                ///多出的文本渐隐方式
-                overflow: TextOverflow.fade,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
+                  ///多出的文本渐隐方式
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-          Container(
-              decoration: const ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: ColorConstant.colorRed277),
-                    borderRadius: BorderRadius.all(Radius.circular(2.0))),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 5.0,
-                  right: 5.0,
+            Container(
+                decoration: const ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: ColorConstant.colorRed277),
+                      borderRadius: BorderRadius.all(Radius.circular(2.0))),
                 ),
-                child: Text(
-                  mainland_pubdate,
-                  style: TextStyle(
-                      fontSize: 8.0, color: ColorConstant.colorRed277),
-                ),
-              ))
-        ],
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 5.0,
+                    right: 5.0,
+                  ),
+                  child: Text(
+                    mainland_pubdate,
+                    style: TextStyle(
+                        fontSize: 8.0, color: ColorConstant.colorRed277),
+                  ),
+                ))
+          ],
+        ),
       ),
+      onTap: () {
+        _router.push(context, Router.detailPage, comingSoonBean.id);
+      },
     );
   }
 

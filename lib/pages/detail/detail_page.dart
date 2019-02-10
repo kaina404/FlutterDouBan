@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/pages/detail/DetailTitleWidget.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -36,12 +37,16 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     if (_movieDetailBean == null) {
-      return CupertinoActivityIndicator();
+      return Scaffold(body: CupertinoActivityIndicator(),);
     }
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverToBoxAdapter(child: ,)
-      ],
+    return Scaffold(
+      body: SafeArea(child: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: DetailTitleWidget(_movieDetailBean, Colors.deepPurple),
+          )
+        ],
+      )),
     );
   }
 }
