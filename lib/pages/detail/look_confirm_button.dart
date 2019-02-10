@@ -77,6 +77,11 @@ class _State extends State<LookConfirmButton> {
           _color = _defaultColor;
         });
       },
+      onTapCancel: ((){
+        setState(() {
+          _color = _defaultColor;
+        });
+      }),
     );
   }
 }
