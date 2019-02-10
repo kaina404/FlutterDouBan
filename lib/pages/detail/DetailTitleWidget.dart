@@ -19,12 +19,18 @@ class DetailTitleWidget extends StatelessWidget {
     var pubdates = list2String(bean.pubdates);
     var durations = list2String(bean.durations);
     //将按下的颜色设置较为浅色
-    var btnPressedColor = Color.fromARGB(100, shadowColor.red, shadowColor.red, shadowColor.red);
+    var btnPressedColor =
+        Color.fromARGB(100, shadowColor.red, shadowColor.red, shadowColor.red);
     return Row(
       children: <Widget>[
         Card(
           //影音海报
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.0)),
+          ),
           color: shadowColor,
+          clipBehavior: Clip.antiAlias,
+          elevation: 10.0,
           child: Image.network(
             bean.images.large,
             width: imgW,
