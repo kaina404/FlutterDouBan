@@ -38,11 +38,14 @@ class DetailTitleWidget extends StatelessWidget {
               children: <Widget>[
                 Text(
                   bean.title,
-                  style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  style: TextStyle(fontSize: 22.0, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  '(${bean.year})',
-                  style: TextStyle(fontSize: 13.0, color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.only(top: 5.0, bottom: 7.0),
+                  child: Text(
+                    '(${bean.year})',
+                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                  ),
                 ),
                 Text(
                   '$countries/$genres/上映时间：$pubdates/片长：$durations',
