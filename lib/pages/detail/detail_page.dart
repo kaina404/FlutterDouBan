@@ -83,6 +83,42 @@ class _DetailPageState extends State<DetailPage> {
                   p5: _movieDetailBean.rating.details.d5 / allCount,
                 ),
               ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                height: 30.0,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _movieDetailBean.tags.length + 1,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == 0) {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: Text(
+                              '所属频道',
+                              style: TextStyle(color: Colors.white70, fontSize: 13.0),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(left: 7.0, right: 7.0),
+                          margin: EdgeInsets.only(right: 10.0),
+                          decoration: BoxDecoration(
+                              color: Color(0x23000000),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(14.0))),
+                          child: Text(
+                            '${_movieDetailBean.tags[index - 1]} >',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }
+                    }),
+              ),
             )
           ],
         )),
