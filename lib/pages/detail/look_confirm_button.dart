@@ -40,7 +40,7 @@ class _State extends State<LookConfirmButton> {
     return GestureDetector(
       child: Container(
         alignment: Alignment.center,
-        height: 44.0,
+        height: 35.0,
         decoration: BoxDecoration(
             color: _color,
             borderRadius: BorderRadius.all(Radius.circular(5.0))),

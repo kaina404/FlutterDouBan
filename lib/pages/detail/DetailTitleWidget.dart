@@ -71,7 +71,7 @@ class DetailTitleWidget extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0),
+                      padding: EdgeInsets.only(left: 15.0),
                     ),
                     Expanded(
                       child: LookConfirmButton(
