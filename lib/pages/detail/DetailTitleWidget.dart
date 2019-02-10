@@ -18,6 +18,7 @@ class DetailTitleWidget extends StatelessWidget {
     var genres = list2String(bean.genres);
     var pubdates = list2String(bean.pubdates);
     var durations = list2String(bean.durations);
+    var btnPressedColor = Color(shadowColor.value - 7);
     return Row(
       children: <Widget>[
         Card(
@@ -65,7 +66,7 @@ class DetailTitleWidget extends StatelessWidget {
                         btnText: '想看',
                         iconAsset: 'assets/images/ic_info_wish.png',
                         defaultColor: Colors.white,
-                        pressedColor: Colors.pinkAccent,
+                        pressedColor: btnPressedColor,
                       ),
                     ),
                     Padding(
@@ -76,7 +77,7 @@ class DetailTitleWidget extends StatelessWidget {
                         btnText: '看过',
                         iconAsset: 'assets/images/ic_info_done.png',
                         defaultColor: Colors.white,
-                        pressedColor: Colors.pinkAccent,
+                        pressedColor: btnPressedColor,
                       ),
                     )
                   ],
