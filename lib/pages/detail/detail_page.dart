@@ -105,14 +105,14 @@ class _DetailPageState extends State<DetailPage> {
                       } else {
                         return Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: 7.0, right: 7.0),
+                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
                           margin: EdgeInsets.only(right: 10.0),
                           decoration: BoxDecoration(
                               color: Color(0x23000000),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(14.0))),
                           child: Text(
-                            '${_movieDetailBean.tags[index - 1]} >',
+                            '${_movieDetailBean.tags[index - 1]}',
                             style: TextStyle(color: Colors.white),
                           ),
                         );
