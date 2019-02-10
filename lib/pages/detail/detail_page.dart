@@ -84,44 +84,75 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: 30.0,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _movieDetailBean.tags.length + 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 0) {
-                        return Container(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              '所属频道',
-                              style: TextStyle(color: Colors.white70, fontSize: 13.0),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                          margin: EdgeInsets.only(right: 10.0),
-                          decoration: BoxDecoration(
-                              color: Color(0x23000000),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14.0))),
-                          child: Text(
-                            '${_movieDetailBean.tags[index - 1]}',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }
-                    }),
-              ),
-            )
+            sliverTags(),
+            sliverSummary(),
           ],
         )),
+      ),
+    );
+  }
+
+  ///所属频道
+  SliverToBoxAdapter sliverTags() {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 30.0,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: _movieDetailBean.tags.length + 1,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10.0),
+                    child: Text(
+                      '所属频道',
+                      style: TextStyle(color: Colors.white70, fontSize: 13.0),
+                    ),
+                  ),
+                );
+              } else {
+                return Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  margin: EdgeInsets.only(right: 10.0),
+                  decoration: BoxDecoration(
+                      color: Color(0x23000000),
+                      borderRadius: BorderRadius.all(Radius.circular(14.0))),
+                  child: Text(
+                    '${_movieDetailBean.tags[index - 1]}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }
+            }),
+      ),
+    );
+  }
+
+  ///剧情简介
+  SliverToBoxAdapter sliverSummary() {
+    return SliverToBoxAdapter(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+            child: Text(
+              '剧情简介',
+              style: TextStyle(
+                  fontSize: 17.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Text(
+            _movieDetailBean.summary,
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
+          ),
+        ],
       ),
     );
   }
