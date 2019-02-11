@@ -75,49 +75,51 @@ class _VideoWidgetState extends State<VideoWidget> {
 //          }
         },
       ),
-      Offstage(
-        offstage: !_showSeekBar,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  height: 13.0,
-                  margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: VideoProgressIndicator(
-                    _controller,
-                    allowScrubbing: true,
-                    colors: VideoProgressColors(
-                        playedColor: Colors.amberAccent,
-                        backgroundColor: Colors.grey),
-                  ),
+      Align(
+        child: IconButton(
+            iconSize: 55.0,
+            icon: Image.asset(Constant.ASSETS_IMG +
+                (_controller.value.isPlaying
+                    ? 'ic_pause.png'
+                    : 'ic_playing.png')),
+            onPressed: () {
+              if (_controller.value.isPlaying) {
+                _controller.pause();
+              } else {
+                _controller.play();
+              }
+            }),
+        alignment: Alignment.center,
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                height: 13.0,
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: VideoProgressIndicator(
+                  _controller,
+                  allowScrubbing: true,
+                  colors: VideoProgressColors(
+                      playedColor: Colors.amberAccent,
+                      backgroundColor: Colors.grey),
                 ),
               ),
-              getDurationText()
-            ],
-          ),
+            ),
+            getDurationText()
+          ],
         ),
       ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Center(
+            child: _controller.value.isBuffering
+                ? const CircularProgressIndicator()
+                : null),
+      ),
       Center(child: imageFadeAnim),
-      Center(
-          child: _controller.value.isBuffering
-              ? const CircularProgressIndicator()
-              : null),
-      Center(
-          child: IconButton(
-              iconSize: 55.0,
-              icon: Image.asset(Constant.ASSETS_IMG +
-                  (_controller.value.isPlaying
-                      ? 'ic_pause.png'
-                      : 'ic_playing.png')),
-              onPressed: () {
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  _controller.play();
-                }
-              }))
     ];
 
     return AspectRatio(
