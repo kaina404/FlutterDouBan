@@ -19,6 +19,7 @@ class VideoWidget extends StatefulWidget {
 class _VideoWidgetState extends State<VideoWidget> {
   VideoPlayerController _controller;
   VoidCallback listener;
+  bool _showSeekBar = true;
 
   _VideoWidgetState() {
     listener = () {
@@ -36,10 +37,9 @@ class _VideoWidgetState extends State<VideoWidget> {
       ..initialize().then((_) {
         //初始化完成后，更新状态
         setState(() {});
-        if(_controller.value.duration == _controller.value.position){
+        if (_controller.value.duration == _controller.value.position) {
           _controller.seekTo(Duration(seconds: 0));
-          setState(() {
-          });
+          setState(() {});
         }
       });
     _controller.addListener(listener);
@@ -51,7 +51,6 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.deactivate();
   }
 
-
   FadeAnimation imageFadeAnim =
       FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
 
@@ -61,37 +60,43 @@ class _VideoWidgetState extends State<VideoWidget> {
       GestureDetector(
         child: VideoPlayer(_controller),
         onTap: () {
-          if (!_controller.value.initialized) {
-            return;
-          }
-          if (_controller.value.isPlaying) {
-            imageFadeAnim =
-                FadeAnimation(child: const Icon(Icons.pause, size: 100.0));
-            _controller.pause();
-          } else {
-            imageFadeAnim =
-                FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
-            _controller.play();
-          }
+          _showSeekBar = !_showSeekBar;
+//          if (!_controller.value.initialized) {
+//            return;
+//          }
+//          if (_controller.value.isPlaying) {
+//            imageFadeAnim =
+//                FadeAnimation(child: const Icon(Icons.pause, size: 100.0));
+//            _controller.pause();
+//          } else {
+//            imageFadeAnim =
+//                FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
+//            _controller.play();
+//          }
         },
       ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                height: 13.0,
-                margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: VideoProgressIndicator(
-                  _controller,
-                  allowScrubbing: true,
-                  colors: VideoProgressColors(playedColor: Colors.amberAccent, backgroundColor: Colors.grey),
+      Offstage(
+        offstage: !_showSeekBar,
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  height: 13.0,
+                  margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: VideoProgressIndicator(
+                    _controller,
+                    allowScrubbing: true,
+                    colors: VideoProgressColors(
+                        playedColor: Colors.amberAccent,
+                        backgroundColor: Colors.grey),
+                  ),
                 ),
               ),
-            ),
-            getDurationText()
-          ],
+              getDurationText()
+            ],
+          ),
         ),
       ),
       Center(child: imageFadeAnim),
@@ -99,6 +104,20 @@ class _VideoWidgetState extends State<VideoWidget> {
           child: _controller.value.isBuffering
               ? const CircularProgressIndicator()
               : null),
+      Center(
+          child: IconButton(
+              iconSize: 55.0,
+              icon: Image.asset(Constant.ASSETS_IMG +
+                  (_controller.value.isPlaying
+                      ? 'ic_pause.png'
+                      : 'ic_playing.png')),
+              onPressed: () {
+                if (_controller.value.isPlaying) {
+                  _controller.pause();
+                } else {
+                  _controller.play();
+                }
+              }))
     ];
 
     return AspectRatio(
