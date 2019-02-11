@@ -11,4 +11,5 @@ class Constant {
 
   static const double MARGIN_LEFT = 13.0;
   static const double MARGIN_RIGHT = 13.0;
+  static const String ASSETS_IMG = 'assets/images/';
 }

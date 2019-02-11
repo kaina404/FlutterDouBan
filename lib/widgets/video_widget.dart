@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
+import 'package:douban_app/constant/Constant.dart';
 
 ///http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4
 class VideoWidget extends StatefulWidget {
@@ -17,7 +18,16 @@ class VideoWidget extends StatefulWidget {
 
 class _VideoWidgetState extends State<VideoWidget> {
   VideoPlayerController _controller;
-  String _playControllerAsset = 'assets/images/';
+  VoidCallback listener;
+
+  _VideoWidgetState() {
+    listener = () {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    };
+  }
 
   @override
   void initState() {
@@ -27,6 +37,13 @@ class _VideoWidgetState extends State<VideoWidget> {
         //初始化完成后，更新状态
         setState(() {});
       });
+    _controller.addListener(listener);
+  }
+
+  @override
+  void deactivate() {
+    _controller.removeListener(listener);
+    super.deactivate();
   }
 
   @override
@@ -50,30 +67,49 @@ class _VideoWidgetState extends State<VideoWidget> {
         Column(
           children: <Widget>[
             Icon(Icons.arrow_back_ios),
-            Expanded(
-              child: Center(
-                child: IconButton(
+            Center(
+              child: IconButton(
                   iconSize: 53.0,
-                    icon: Image.asset(
-                      _playControllerAsset +
-                          (_controller.value.isPlaying
-                              ? 'ic_pause.png'
-                              : 'ic_playing.png'),
-                      width: 62.0,
-                      height: 62.0,
-                      fit: BoxFit.fill,
-                    ),
-                    onPressed: () {
-                      if (!_controller.value.isPlaying) {
-                        _controller.play();
-                      } else {
-                        _controller.pause();
-                      }
-                      setState(() {});
-                    }),
-              ),
+                  icon: Image.asset(
+                    Constant.ASSETS_IMG +
+                        (_controller.value.isPlaying
+                            ? 'ic_pause.png'
+                            : 'ic_playing.png'),
+                    width: 62.0,
+                    height: 62.0,
+                    fit: BoxFit.fill,
+                  ),
+                  onPressed: () {
+                    if (!_controller.value.isPlaying) {
+                      _controller.play();
+                    } else {
+                      _controller.pause();
+                    }
+                    setState(() {});
+                  }),
             ),
-            Row()
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 10.0,
+                      child: VideoProgressIndicator(
+                        _controller,
+                        allowScrubbing: true,
+                        colors: VideoProgressColors(
+                            playedColor: Colors.amberAccent),
+                      ),
+                    ),
+                  ),
+                ),
+                getDurationText()
+              ],
+            )
           ],
         )
       ],
@@ -90,5 +126,41 @@ class _VideoWidgetState extends State<VideoWidget> {
     return widget.previewImgUrl.isNotEmpty
         ? CachedNetworkImage(imageUrl: widget.previewImgUrl)
         : null;
+  }
+
+  getMinuteSeconds(var inSeconds) {
+    if (inSeconds == null || inSeconds <= 0) {
+      return '00:00';
+    }
+    var tmp = inSeconds ~/ Duration.secondsPerMinute;
+    var minute;
+    if (tmp < 10) {
+      minute = '0$tmp';
+    } else {
+      minute = '$tmp';
+    }
+
+    var tmp1 = inSeconds % Duration.secondsPerMinute;
+    var seconds;
+    if (tmp1 < 10) {
+      seconds = '0$tmp1';
+    } else {
+      seconds = '$tmp1';
+    }
+    return '$minute:$seconds';
+  }
+
+  getDurationText() {
+    var txt;
+    if (_controller.value.position == null || _controller.value.duration == null ) {
+      txt = '00:00/00:00';
+    } else {
+      txt =
+          '${getMinuteSeconds(_controller.value.position.inSeconds)}/${getMinuteSeconds(_controller.value.duration.inSeconds)}';
+    }
+    return Text(
+      '$txt',
+      style: TextStyle(color: Colors.white, fontSize: 14.0),
+    );
   }
 }
