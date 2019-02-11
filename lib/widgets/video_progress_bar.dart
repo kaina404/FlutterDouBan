@@ -167,7 +167,7 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
     final Paint paint = Paint()
       ..color = backgroundColor
       ..style = PaintingStyle.fill;
-
+    //绘制背景长条
     canvas.drawRect(Offset(0 , 0.0 + size.height / 3) & Size(size.width, size.height / 3), paint);
 
     paint.color = valueColor;
@@ -207,14 +207,16 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
       drawBar(x2, width2 - bigCircleRadius);
     }
 
-    //绘制大圆圈
-    paint.color = Color.fromARGB(190, paint.color.red, paint.color.green, paint.color.blue);
-    canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius, size.height / 2), bigCircleRadius, paint);
-    //绘制白色圆圈
-    paint.color = Colors.white;
-    canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius, size.height / 2), smallCircleRadius, paint);
-    //重置颜色
-    paint.color = valueColor;
+   if(value != null && value > 0.0){
+     //绘制大圆圈
+     paint.color = Color.fromARGB(190, paint.color.red, paint.color.green, paint.color.blue);
+     canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius / 2, size.height / 2), bigCircleRadius, paint);
+     //绘制白色圆圈
+     paint.color = Colors.white;
+     canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius / 2, size.height / 2), smallCircleRadius, paint);
+     //重置颜色
+     paint.color = valueColor;
+   }
 
   }
 
