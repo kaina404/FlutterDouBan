@@ -14,12 +14,18 @@ class VideoPlayPage extends StatefulWidget {
 
 class _VideoPlayPageState extends State<VideoPlayPage> {
   double mediumW, mediumH; //309 X 177
+  int _showPlayIndex = 1;
+  VideoWidget playWidget;
 
   @override
   Widget build(BuildContext context) {
     if (mediumW == null) {
       mediumW = MediaQuery.of(context).size.width / 4;
       mediumH = mediumW / 309 * 177;
+      playWidget = VideoWidget(
+        widget.beans[0].resource_url,
+        previewImgUrl: widget.beans[0].medium,
+      );
     }
     return Scaffold(
       backgroundColor: Colors.black,
@@ -39,10 +45,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                VideoWidget(
-                  widget.beans[0].resource_url,
-                  previewImgUrl: widget.beans[0].medium,
-                )
+                playWidget
               ],
             ),
           ),
@@ -68,7 +71,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       ),
                     );
                   }
-                  return getItem(widget.beans[index - 1]);
+                  return getItem(widget.beans[index - 1], index - 1);
                 },
                 itemCount: widget.beans.length + 1,
               ),
@@ -79,32 +82,65 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
     );
   }
 
-  Widget getItem(Blooper bean) {
-    return Column(
-      children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: CachedNetworkImage(
-                imageUrl: bean.medium,
-                width: mediumW,
-                height: mediumH,
-                fit: BoxFit.cover,
+  Widget getItem(Blooper bean, int index) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: Column(
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Stack(
+                  children: <Widget>[
+                    CachedNetworkImage(
+                      imageUrl: bean.medium,
+                      width: mediumW,
+                      height: mediumH,
+                      fit: BoxFit.cover,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: getPlay(index),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: Text(
-                bean.title,
-                style: TextStyle(fontSize: 15.0),
+              Padding(
+                padding: EdgeInsets.only(top: 10.0),
+                child: Text(
+                  bean.title,
+                  style: TextStyle(fontSize: 15.0),
+                ),
               ),
-            ),
-          ],
-        ),
-        Divider()
-      ],
+            ],
+          ),
+          Divider()
+        ],
+      ),
+      onTap: () {
+        setState(() {
+          _showPlayIndex = index;
+        });
+        playWidget.updateUrl(bean.resource_url);
+      },
     );
+  }
+
+  getPlay(int index) {
+    if (index == _showPlayIndex) {
+      return Container(
+        width: mediumW,
+        height: mediumH,
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.play_circle_outline,
+          color: Colors.amber,
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }

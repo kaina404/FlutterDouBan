@@ -10,9 +10,16 @@ class VideoWidget extends StatefulWidget {
 
   VideoWidget(this.url, {Key key, this.previewImgUrl}) : super(key: key);
 
+  _VideoWidgetState state;
+
   @override
   State<StatefulWidget> createState() {
-    return _VideoWidgetState();
+    state = _VideoWidgetState();
+    return state;
+  }
+
+  updateUrl(String url) {
+    state.setUrl(url);
   }
 }
 
@@ -177,6 +184,24 @@ class _VideoWidgetState extends State<VideoWidget> {
         ],
       ),
     );
+  }
+
+  ///更新播放的URL
+  void setUrl(String url) {
+    if (_controller != null) {
+      _controller.removeListener(listener);
+      _controller.pause();
+    }
+    _controller = VideoPlayerController.network(url)
+      ..initialize().then((_) {
+        //初始化完成后，更新状态
+        setState(() {});
+        if (_controller.value.duration == _controller.value.position) {
+          _controller.seekTo(Duration(seconds: 0));
+          setState(() {});
+        }
+      });
+    _controller.addListener(listener);
   }
 }
 
