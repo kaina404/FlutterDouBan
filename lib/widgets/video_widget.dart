@@ -36,6 +36,11 @@ class _VideoWidgetState extends State<VideoWidget> {
       ..initialize().then((_) {
         //初始化完成后，更新状态
         setState(() {});
+        if(_controller.value.duration == _controller.value.position){
+          _controller.seekTo(Duration(seconds: 0));
+          setState(() {
+          });
+        }
       });
     _controller.addListener(listener);
   }
@@ -46,79 +51,6 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.deactivate();
   }
 
-//  @override
-//  Widget build(BuildContext context) {
-//    return Stack(
-//      fit: StackFit.passthrough,
-//      children: <Widget>[
-//        Container(
-//          child: _controller.value.initialized
-//              ? AspectRatio(
-//                  aspectRatio: _controller.value.aspectRatio,
-//                  child: VideoPlayer(_controller),
-//                )
-//              : Container(),
-//        ),
-//        Offstage(
-//          child: Container(
-//            child: getPreviewImg(),
-//          ),
-//          offstage: _controller.value.initialized,
-//        ),
-//        Column(
-//          children: <Widget>[
-//            Icon(Icons.arrow_back_ios),
-//            Center(
-//              child: IconButton(
-//                  iconSize: 53.0,
-//                  icon: Image.asset(
-//                    Constant.ASSETS_IMG +
-//                        (_controller.value.isPlaying
-//                            ? 'ic_pause.png'
-//                            : 'ic_playing.png'),
-//                    width: 62.0,
-//                    height: 62.0,
-//                    fit: BoxFit.fill,
-//                  ),
-//                  onPressed: () {
-//                    if (!_controller.value.isPlaying) {
-//                      _controller.play();
-//                    } else {
-//                      _controller.pause();
-//                    }
-//                    setState(() {});
-//                  }),
-//            ),
-//            Align(
-//              alignment: Alignment.bottomCenter,
-//              child: Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                crossAxisAlignment: CrossAxisAlignment.center,
-//                children: <Widget>[
-//                  Expanded(
-//                    child: Padding(
-//                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
-//                      child: Container(
-//                        alignment: Alignment.center,
-//                        height: 10.0,
-//                        child: VideoProgressIndicator(
-//                          _controller,
-//                          allowScrubbing: true,
-//                          colors: VideoProgressColors(
-//                              playedColor: Colors.amberAccent),
-//                        ),
-//                      ),
-//                    ),
-//                  ),
-//                  getDurationText()
-//                ],
-//              ),
-//            )
-//          ],
-//        )
-//      ],
-//    );
-//  }
 
   FadeAnimation imageFadeAnim =
       FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
@@ -149,11 +81,12 @@ class _VideoWidgetState extends State<VideoWidget> {
           children: <Widget>[
             Expanded(
               child: Container(
-                height: 8.0,
+                height: 13.0,
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: VideoProgressIndicator(
                   _controller,
                   allowScrubbing: true,
-                  colors: VideoProgressColors(playedColor: Colors.amberAccent),
+                  colors: VideoProgressColors(playedColor: Colors.amberAccent, backgroundColor: Colors.grey),
                 ),
               ),
             ),

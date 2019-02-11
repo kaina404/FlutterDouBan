@@ -168,7 +168,7 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
       ..color = backgroundColor
       ..style = PaintingStyle.fill;
 
-    canvas.drawRect(Offset.zero & size, paint);
+    canvas.drawRect(Offset(0 , 0.0 + size.height / 3) & Size(size.width, size.height / 3), paint);
 
     paint.color = valueColor;
 
@@ -186,21 +186,14 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
           left = x;
           break;
       }
-      canvas.drawRect(Offset(left, 0.0) & Size(width, size.height), paint);
+      canvas.drawRect(Offset(left , 0.0 + size.height / 3) & Size(width, size.height / 3), paint);
     }
 
+    double bigCircleRadius =  size.height;
+    double smallCircleRadius =  size.height / 2;
+
     if (value != null) {
-      drawBar(0.0, value.clamp(0.0, 1.0) * size.width);
-
-      //绘制大圆圈
-      paint.color = Color.fromARGB(190, paint.color.red, paint.color.green, paint.color.blue);
-      canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - (size.height * 3 /  2), 0.0), size.height * 3, paint);
-      //绘制白色圆圈
-      paint.color = Colors.white;
-      canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - (size.height * 3 / 2), 0.0), size.height * 1.5, paint);
-      //重置颜色
-      paint.color = valueColor;
-
+      drawBar(0.0, value.clamp(0.0, 1.0) * (size.width - bigCircleRadius));
     } else {
       final double x1 = size.width * line1Tail.transform(animationValue);
       final double width1 =
@@ -210,14 +203,19 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
       final double width2 =
           size.width * line2Head.transform(animationValue) - x2;
 
-      drawBar(x1, width1);
-      drawBar(x2, width2);
+      drawBar(x1, width1 - bigCircleRadius);
+      drawBar(x2, width2 - bigCircleRadius);
     }
 
-//    paint.color = Colors.red;
-//    canvas.drawRect(Offset.zero & size, paint);
-//
-//    paint.color = valueColor;
+    //绘制大圆圈
+    paint.color = Color.fromARGB(190, paint.color.red, paint.color.green, paint.color.blue);
+    canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius, size.height / 2), bigCircleRadius, paint);
+    //绘制白色圆圈
+    paint.color = Colors.white;
+    canvas.drawCircle(Offset(value.clamp(0.0, 1.0) * size.width - bigCircleRadius, size.height / 2), smallCircleRadius, paint);
+    //重置颜色
+    paint.color = valueColor;
+
   }
 
   @override
