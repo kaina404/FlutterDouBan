@@ -8,6 +8,7 @@ import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/demo/ImageColors.dart';
+import 'package:douban_app/widgets/video_widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +21,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: SafeArea(child: ContainerPageWidget()),
+        body: SafeArea(
+            child: VideoWidget(
+          'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4',
+          previewImgUrl:
+              'https://img3.doubanio.com/img/trailer/medium/2546089641.jpg?1548146239',
+        )),
       ),
     );
   }
@@ -51,9 +57,7 @@ class _DemoAppState extends State<DemoApp> {
     w = HotSoonMovieWidget();
     _api.getIntheaters((movieBeanList) {
       hotMovieBeans = movieBeanList;
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
