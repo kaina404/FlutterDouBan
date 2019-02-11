@@ -24,6 +24,8 @@ dependencies:
 
   palette_generator: ^0.1.0
 
+  video_player: ^0.10.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
