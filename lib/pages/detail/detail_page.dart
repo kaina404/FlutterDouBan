@@ -236,12 +236,12 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   trailers(BuildContext context) {
-    Trailer bean = _movieDetailBean.trailers[0];
-    Map map = {'playUrl': bean.resource_url, 'img': bean.medium};
+    Blooper bean = _movieDetailBean.trailers[0];
+    _movieDetailBean.trailers.addAll(_movieDetailBean.bloopers);
     return SliverToBoxAdapter(
       child: GestureDetector(
         child: CachedNetworkImage(imageUrl: bean.medium), onTap: () {
-        _router.push(context, Router.playListPage, map)
+        _router.push(context, Router.playListPage, _movieDetailBean.trailers);
       },),
     );
   }

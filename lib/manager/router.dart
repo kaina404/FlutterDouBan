@@ -28,7 +28,7 @@ class Router {
       case homePage:
         return ContainerPageWidget();
       case playListPage:
-        return VideoPlayPage(params['playUrl'], img: params['img'],);
+        return VideoPlayPage(params);
     }
     return null;
   }

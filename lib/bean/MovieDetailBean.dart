@@ -48,7 +48,7 @@ class MovieDetailBean {
   List<String> pubdates;
   List<String> tags;
   List<String> trailer_urls;
-  List<Trailer> trailers;
+  List<Blooper> trailers;
   List<dynamic> videos;
   List<Writer> writers;
   _Image images;
@@ -192,7 +192,7 @@ class MovieDetailBean {
     trailers = jsonRes['trailers'] == null ? null : [];
 
     for (var trailersItem in trailers == null ? [] : jsonRes['trailers']){
-      trailers.add(trailersItem == null ? null : new Trailer.fromJson(trailersItem));
+      trailers.add(trailersItem == null ? null : new Blooper.fromJson(trailersItem));
     }
 
     videos = jsonRes['videos'] == null ? null : [];
@@ -329,33 +329,33 @@ class WriterAvatars {
   }
 }
 
-class Trailer {
-
-  String alt;
-  String id;
-  String medium;
-  String resource_url;
-  String small;
-  String subject_id;
-  String title;
-
-  Trailer.fromParams({this.alt, this.id, this.medium, this.resource_url, this.small, this.subject_id, this.title});
-
-  Trailer.fromJson(jsonRes) {
-    alt = jsonRes['alt'];
-    id = jsonRes['id'];
-    medium = jsonRes['medium'];
-    resource_url = jsonRes['resource_url'];
-    small = jsonRes['small'];
-    subject_id = jsonRes['subject_id'];
-    title = jsonRes['title'];
-  }
-
-  @override
-  String toString() {
-    return '{"alt": ${alt != null?'${json.encode(alt)}':'null'},"id": ${id != null?'${json.encode(id)}':'null'},"medium": ${medium != null?'${json.encode(medium)}':'null'},"resource_url": ${resource_url != null?'${json.encode(resource_url)}':'null'},"small": ${small != null?'${json.encode(small)}':'null'},"subject_id": ${subject_id != null?'${json.encode(subject_id)}':'null'},"title": ${title != null?'${json.encode(title)}':'null'}}';
-  }
-}
+//class Trailer {
+//
+//  String alt;
+//  String id;
+//  String medium;
+//  String resource_url;
+//  String small;
+//  String subject_id;
+//  String title;
+//
+//  Trailer.fromParams({this.alt, this.id, this.medium, this.resource_url, this.small, this.subject_id, this.title});
+//
+//  Trailer.fromJson(jsonRes) {
+//    alt = jsonRes['alt'];
+//    id = jsonRes['id'];
+//    medium = jsonRes['medium'];
+//    resource_url = jsonRes['resource_url'];
+//    small = jsonRes['small'];
+//    subject_id = jsonRes['subject_id'];
+//    title = jsonRes['title'];
+//  }
+//
+//  @override
+//  String toString() {
+//    return '{"alt": ${alt != null?'${json.encode(alt)}':'null'},"id": ${id != null?'${json.encode(id)}':'null'},"medium": ${medium != null?'${json.encode(medium)}':'null'},"resource_url": ${resource_url != null?'${json.encode(resource_url)}':'null'},"small": ${small != null?'${json.encode(small)}':'null'},"subject_id": ${subject_id != null?'${json.encode(subject_id)}':'null'},"title": ${title != null?'${json.encode(title)}':'null'}}';
+//  }
+//}
 
 class PopularReview {
 
