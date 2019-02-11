@@ -3,6 +3,7 @@ import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/bean/comment_bean.dart';
 import 'dart:math' as math;
 
 typedef RequestCallBack<T> = void Function(T value);
@@ -88,8 +89,10 @@ class API {
 
   ///电影短评
   ///https://api.douban.com/v2/movie/subject/26266893/comments?apikey=0b2bdeda43b5688921839c8ecb20399b
-  void getComents(subjectId, RequestCallBack requestCallBack) async {
+  void getComments(subjectId, RequestCallBack requestCallBack) async {
     final result = await _request.get(
         '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    CommentBean bean = CommentBean.fromJson(result);
+    requestCallBack(bean);
   }
 }
