@@ -51,8 +51,7 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.deactivate();
   }
 
-  FadeAnimation imageFadeAnim =
-      FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
+  FadeAnimation imageFadeAnim;
 
   @override
   Widget build(BuildContext context) {
@@ -60,66 +59,12 @@ class _VideoWidgetState extends State<VideoWidget> {
       GestureDetector(
         child: VideoPlayer(_controller),
         onTap: () {
-          _showSeekBar = !_showSeekBar;
-//          if (!_controller.value.initialized) {
-//            return;
-//          }
-//          if (_controller.value.isPlaying) {
-//            imageFadeAnim =
-//                FadeAnimation(child: const Icon(Icons.pause, size: 100.0));
-//            _controller.pause();
-//          } else {
-//            imageFadeAnim =
-//                FadeAnimation(child: const Icon(Icons.play_arrow, size: 100.0));
-//            _controller.play();
-//          }
+          setState(() {
+            _showSeekBar = !_showSeekBar;
+          });
         },
       ),
-      Align(
-        child: IconButton(
-            iconSize: 55.0,
-            icon: Image.asset(Constant.ASSETS_IMG +
-                (_controller.value.isPlaying
-                    ? 'ic_pause.png'
-                    : 'ic_playing.png')),
-            onPressed: () {
-              if (_controller.value.isPlaying) {
-                _controller.pause();
-              } else {
-                _controller.play();
-              }
-            }),
-        alignment: Alignment.center,
-      ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                height: 13.0,
-                margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: VideoProgressIndicator(
-                  _controller,
-                  allowScrubbing: true,
-                  colors: VideoProgressColors(
-                      playedColor: Colors.amberAccent,
-                      backgroundColor: Colors.grey),
-                ),
-              ),
-            ),
-            getDurationText()
-          ],
-        ),
-      ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Center(
-            child: _controller.value.isBuffering
-                ? const CircularProgressIndicator()
-                : null),
-      ),
-      Center(child: imageFadeAnim),
+      getPlayController(),
     ];
 
     return AspectRatio(
@@ -179,11 +124,65 @@ class _VideoWidgetState extends State<VideoWidget> {
       style: TextStyle(color: Colors.white, fontSize: 14.0),
     );
   }
+
+  getPlayController() {
+    return Offstage(
+      offstage: !_showSeekBar,
+      child: Stack(
+        children: <Widget>[
+          Align(
+            child: IconButton(
+                iconSize: 55.0,
+                icon: Image.asset(Constant.ASSETS_IMG +
+                    (_controller.value.isPlaying
+                        ? 'ic_pause.png'
+                        : 'ic_playing.png')),
+                onPressed: () {
+                  if (_controller.value.isPlaying) {
+                    _controller.pause();
+                  } else {
+                    _controller.play();
+                  }
+                }),
+            alignment: Alignment.center,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 13.0,
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: VideoProgressIndicator(
+                      _controller,
+                      allowScrubbing: true,
+                      colors: VideoProgressColors(
+                          playedColor: Colors.amberAccent,
+                          backgroundColor: Colors.grey),
+                    ),
+                  ),
+                ),
+                getDurationText()
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Center(
+                child: _controller.value.isBuffering
+                    ? const CircularProgressIndicator()
+                    : null),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 class FadeAnimation extends StatefulWidget {
   FadeAnimation(
-      {this.child, this.duration = const Duration(milliseconds: 500)});
+      {this.child, this.duration = const Duration(milliseconds: 1500)});
 
   final Widget child;
   final Duration duration;
