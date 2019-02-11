@@ -68,7 +68,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       ),
                     );
                   }
-                  return getItem(widget.beans[index]);
+                  return getItem(widget.beans[index - 1]);
                 },
                 itemCount: widget.beans.length + 1,
               ),
