@@ -9,6 +9,7 @@ import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/demo/ImageColors.dart';
 import 'package:douban_app/widgets/video_widget.dart';
+import 'package:douban_app/widgets/video_progress_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,14 +24,21 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             child: VideoWidget(
-          'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4',
-          previewImgUrl:
+              'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4',
+              previewImgUrl:
               'https://img3.doubanio.com/img/trailer/medium/2546089641.jpg?1548146239',
-        )),
+            )),
       ),
     );
   }
 }
+
+//VideoWidget(
+//'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4',
+//previewImgUrl:
+//'https://img3.doubanio.com/img/trailer/medium/2546089641.jpg?1548146239',
+//)
+
 //http://img1.doubanio.com/view/photo/s_ratio_poster/public/p457760035.webp
 //const ImageColors(
 //title: 'Image Colors',
