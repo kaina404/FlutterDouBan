@@ -10,7 +10,7 @@ import 'package:douban_app/pages/detail/look_confirm_button.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/manager/router.dart';
-
+import 'package:douban_app/pages/movie/ItemCountTitle.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -42,13 +42,13 @@ class _DetailPageState extends State<DetailPage> {
       setState(() {});
       //提取海报主题色 https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541901817.jpg
       PickImgMainColor.pick(NetworkImage(_movieDetailBean.images.large),
-              (color) {
-            if (color != null) {
-              setState(() {
-                pickColor = color;
-              });
-            }
+          (color) {
+        if (color != null) {
+          setState(() {
+            pickColor = color;
           });
+        }
+      });
     });
   }
 
@@ -72,29 +72,29 @@ class _DetailPageState extends State<DetailPage> {
             left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
         child: SafeArea(
             child: CustomScrollView(
-              slivers: <Widget>[
-                SliverToBoxAdapter(
-                  child: DetailTitleWidget(_movieDetailBean, pickColor),
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: DetailTitleWidget(_movieDetailBean, pickColor),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+                child: ScoreStartWidget(
+                  score: _movieDetailBean.rating.average,
+                  p1: _movieDetailBean.rating.details.d1 / allCount,
+                  p2: _movieDetailBean.rating.details.d2 / allCount,
+                  p3: _movieDetailBean.rating.details.d3 / allCount,
+                  p4: _movieDetailBean.rating.details.d4 / allCount,
+                  p5: _movieDetailBean.rating.details.d5 / allCount,
                 ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
-                    child: ScoreStartWidget(
-                      score: _movieDetailBean.rating.average,
-                      p1: _movieDetailBean.rating.details.d1 / allCount,
-                      p2: _movieDetailBean.rating.details.d2 / allCount,
-                      p3: _movieDetailBean.rating.details.d3 / allCount,
-                      p4: _movieDetailBean.rating.details.d4 / allCount,
-                      p5: _movieDetailBean.rating.details.d5 / allCount,
-                    ),
-                  ),
-                ),
-                sliverTags(),
-                sliverSummary(),
-                sliverCasts(),
-                trailers(context)
-              ],
-            )),
+              ),
+            ),
+            sliverTags(),
+            sliverSummary(),
+            sliverCasts(),
+            trailers(context)
+          ],
+        )),
       ),
     );
   }
@@ -235,14 +235,106 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
+  ///预告片、剧照 727x488
   trailers(BuildContext context) {
-    Blooper bean = _movieDetailBean.trailers[0];
+    var w = MediaQuery.of(context).size.width / 5 * 3;
+    var h = w / 727 * 488;
     _movieDetailBean.trailers.addAll(_movieDetailBean.bloopers);
     return SliverToBoxAdapter(
-      child: GestureDetector(
-        child: CachedNetworkImage(imageUrl: bean.medium), onTap: () {
-        _router.push(context, Router.playListPage, _movieDetailBean.trailers);
-      },),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Text(
+                  '预告片 / 剧照',
+                  style: TextStyle(
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+                Text(
+                  '全部 ${_movieDetailBean.photos.length} >',
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      color: Color.fromARGB(255, 192, 193, 203)),
+                )
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            height: h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                if (index == 0) {
+                  return GestureDetector(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 2.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            child: CachedNetworkImage(
+                                width: w,
+                                height: h,
+                                fit: BoxFit.cover,
+                                imageUrl: _movieDetailBean.trailers[0].medium),
+                          ),
+                          Container(
+                            width: w,
+                            height: h,
+                            child: Icon(
+                              Icons.play_circle_outline,
+                              size: 40.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(4.0),
+                            padding: EdgeInsets.only(
+                                left: 4.0, right: 4.0, top: 2.0, bottom: 2.0),
+                            child: Text(
+                              '预告片',
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Colors.white),
+                            ),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 232, 145, 66),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(3.0)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      _router.push(context, Router.playListPage,
+                          _movieDetailBean.trailers);
+                    },
+                  );
+                } else {
+                  Photo bean = _movieDetailBean.photos[index - 1];
+                  return Padding(
+                    padding: EdgeInsets.only(right: 2.0),
+                    child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        width: w,
+                        height: h,
+                        imageUrl: bean.cover),
+                  );
+                }
+              },
+              itemCount: _movieDetailBean.photos.length + 1,
+            ),
+          )
+        ],
+      ),
     );
   }
+
+//
 }
