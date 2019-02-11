@@ -14,7 +14,7 @@ class VideoPlayPage extends StatefulWidget {
 
 class _VideoPlayPageState extends State<VideoPlayPage> {
   double mediumW, mediumH; //309 X 177
-  int _showPlayIndex = 1;
+  int _showPlayIndex = 0;
   VideoWidget playWidget;
 
   @override
@@ -107,11 +107,14 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Text(
-                  bean.title,
-                  style: TextStyle(fontSize: 15.0),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Text(
+                    bean.title,
+                    softWrap: true,
+                    style: TextStyle(fontSize: 15.0),
+                  ),
                 ),
               ),
             ],
