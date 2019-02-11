@@ -23,11 +23,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
-            child: VideoWidget(
-              'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4',
-              previewImgUrl:
-              'https://img3.doubanio.com/img/trailer/medium/2546089641.jpg?1548146239',
-            )),
+            child: ContainerPageWidget()),
       ),
     );
   }

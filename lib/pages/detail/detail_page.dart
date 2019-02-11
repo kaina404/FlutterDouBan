@@ -9,6 +9,8 @@ import 'package:douban_app/pages/detail/score_start.dart';
 import 'package:douban_app/pages/detail/look_confirm_button.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/image/cached_network_image.dart';
+import 'package:douban_app/manager/router.dart';
+
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -25,6 +27,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   final subjectId;
   Color pickColor = Color(0xffffffff); //默认主题色
+  Router _router = Router();
 
   _DetailPageState(this.subjectId);
 
@@ -39,13 +42,13 @@ class _DetailPageState extends State<DetailPage> {
       setState(() {});
       //提取海报主题色 https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541901817.jpg
       PickImgMainColor.pick(NetworkImage(_movieDetailBean.images.large),
-          (color) {
-        if (color != null) {
-          setState(() {
-            pickColor = color;
+              (color) {
+            if (color != null) {
+              setState(() {
+                pickColor = color;
+              });
+            }
           });
-        }
-      });
     });
   }
 
@@ -69,28 +72,29 @@ class _DetailPageState extends State<DetailPage> {
             left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
         child: SafeArea(
             child: CustomScrollView(
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: DetailTitleWidget(_movieDetailBean, pickColor),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
-                child: ScoreStartWidget(
-                  score: _movieDetailBean.rating.average,
-                  p1: _movieDetailBean.rating.details.d1 / allCount,
-                  p2: _movieDetailBean.rating.details.d2 / allCount,
-                  p3: _movieDetailBean.rating.details.d3 / allCount,
-                  p4: _movieDetailBean.rating.details.d4 / allCount,
-                  p5: _movieDetailBean.rating.details.d5 / allCount,
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: DetailTitleWidget(_movieDetailBean, pickColor),
                 ),
-              ),
-            ),
-            sliverTags(),
-            sliverSummary(),
-            sliverCasts(),
-          ],
-        )),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+                    child: ScoreStartWidget(
+                      score: _movieDetailBean.rating.average,
+                      p1: _movieDetailBean.rating.details.d1 / allCount,
+                      p2: _movieDetailBean.rating.details.d2 / allCount,
+                      p3: _movieDetailBean.rating.details.d3 / allCount,
+                      p4: _movieDetailBean.rating.details.d4 / allCount,
+                      p5: _movieDetailBean.rating.details.d5 / allCount,
+                    ),
+                  ),
+                ),
+                sliverTags(),
+                sliverSummary(),
+                sliverCasts(),
+                trailers(context)
+              ],
+            )),
       ),
     );
   }
@@ -196,7 +200,8 @@ class _DetailPageState extends State<DetailPage> {
                   return getCast(cast.id, cast.avatars.large, cast.name);
                 }
               }),
-              itemCount: math.min(9, _movieDetailBean.casts.length + 1), //最多显示9个演员
+              itemCount: math.min(9, _movieDetailBean.casts.length + 1),
+              //最多显示9个演员
               scrollDirection: Axis.horizontal,
             ),
           )
@@ -227,6 +232,17 @@ class _DetailPageState extends State<DetailPage> {
           style: TextStyle(fontSize: 13.0, color: Colors.white),
         ),
       ],
+    );
+  }
+
+  trailers(BuildContext context) {
+    Trailer bean = _movieDetailBean.trailers[0];
+    Map map = {'playUrl': bean.resource_url, 'img': bean.medium};
+    return SliverToBoxAdapter(
+      child: GestureDetector(
+        child: CachedNetworkImage(imageUrl: bean.medium), onTap: () {
+        _router.push(context, Router.playListPage, map)
+      },),
     );
   }
 }
