@@ -1,4 +1,4 @@
-# 使用Flutter豆瓣App
+# 使用Flutter开发一个豆瓣App
 
 A new Flutter project.
 
