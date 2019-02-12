@@ -150,12 +150,12 @@ class _DetailPageState extends State<DetailPage> {
   ///剧情简介
   SliverToBoxAdapter sliverSummary() {
     return SliverToBoxAdapter(
-      child: Column(
+      child: Container(child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+            padding: EdgeInsets.only(top: 5.0, bottom: 15.0),
             child: Text(
               '剧情简介',
               style: TextStyle(
@@ -169,7 +169,11 @@ class _DetailPageState extends State<DetailPage> {
             style: TextStyle(fontSize: 15.0, color: Colors.white),
           ),
         ],
+      ),decoration:  BoxDecoration(
+        color: Color(0x44000000),
+        borderRadius: BorderRadius.all(Radius.circular(10.0))
       ),
+        padding: EdgeInsets.all(12.0),margin: EdgeInsets.only(top: 15.0),),
     );
   }
 
