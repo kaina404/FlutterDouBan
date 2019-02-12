@@ -4,6 +4,7 @@ import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/bean/comments_entity.dart';
+import 'package:douban_app/bean/search_result_entity.dart';
 import 'dart:math' as math;
 
 typedef RequestCallBack<T> = void Function(T value);
@@ -95,4 +96,13 @@ class API {
     CommentsEntity bean = CommentsEntity.fromJson(result);
     requestCallBack(bean);
   }
+
+  ///根据关键字搜索电影
+///https://api.douban.com/v2/movie/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+ void searchMovie(String searchContent, RequestCallBack requestCallBack)async {
+   final result = await _request.get(
+       '/v2/movie/search?q=$searchContent&apikey=0b2bdeda43b5688921839c8ecb20399b');
+   SearchResultEntity bean = SearchResultEntity.fromJson(result);
+   requestCallBack(bean);
+ }
 }
