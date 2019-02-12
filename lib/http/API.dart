@@ -3,7 +3,7 @@ import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/WeeklyBean.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
-import 'package:douban_app/bean/comment_bean.dart';
+import 'package:douban_app/bean/comments_entity.dart';
 import 'dart:math' as math;
 
 typedef RequestCallBack<T> = void Function(T value);
@@ -92,7 +92,7 @@ class API {
   void getComments(subjectId, RequestCallBack requestCallBack) async {
     final result = await _request.get(
         '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
-    CommentBean bean = CommentBean.fromJson(result);
+    CommentsBeanEntity bean = CommentsBeanEntity.fromJson(result);
     requestCallBack(bean);
   }
 }
