@@ -287,18 +287,14 @@ class _DetailPageState extends State<DetailPage> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
+                if (index == 0 && _movieDetailBean.trailers.isNotEmpty) {
                   return GestureDetector(
                     child: Padding(
                       padding: EdgeInsets.only(right: 2.0),
                       child: Stack(
                         children: <Widget>[
                           Container(
-                            child: CachedNetworkImage(
-                                width: w,
-                                height: h,
-                                fit: BoxFit.cover,
-                                imageUrl: _movieDetailBean.trailers[0].medium),
+                            child: _getTrailers(w, h),
                           ),
                           Container(
                             width: w,
@@ -333,7 +329,7 @@ class _DetailPageState extends State<DetailPage> {
                     },
                   );
                 } else {
-                  Photo bean = _movieDetailBean.photos[index - 1];
+                  Photo bean = _movieDetailBean.photos[index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
                   return Padding(
                     padding: EdgeInsets.only(right: 2.0),
                     child: CachedNetworkImage(
@@ -344,7 +340,7 @@ class _DetailPageState extends State<DetailPage> {
                   );
                 }
               },
-              itemCount: _movieDetailBean.photos.length + 1,
+              itemCount: _movieDetailBean.photos.length + (_movieDetailBean.trailers.isNotEmpty ? 1 : 0),
             ),
           )
         ],
@@ -490,6 +486,17 @@ class _DetailPageState extends State<DetailPage> {
     } else {
       return '${a.toStringAsFixed(1)}k'; //保留一位小数
     }
+  }
+
+  _getTrailers(double w, double h) {
+    if(_movieDetailBean.trailers.isEmpty){
+      return Container();
+    }
+    return CachedNetworkImage(
+        width: w,
+        height: h,
+        fit: BoxFit.cover,
+        imageUrl: _movieDetailBean.trailers[0].medium);
   }
 
 //
