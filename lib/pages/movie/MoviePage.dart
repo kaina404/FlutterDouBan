@@ -5,9 +5,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
 import 'package:douban_app/pages/movie/ItemCountTitle.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
-import 'package:douban_app/bean/MovieBean.dart';
-import 'package:douban_app/bean/ComingSoonBean.dart';
-import 'package:douban_app/bean/WeeklyBean.dart';
+import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
 import 'package:douban_app/constant/ColorConstant.dart';
@@ -38,11 +36,11 @@ class _MoviePageState extends State<MoviePage> {
   ItemCountTitle hotTitle; //豆瓣热门
   ItemCountTitle topTitle; //豆瓣榜单
   TopItemWidget weeklyTop, weeklyHot, weeklyTop250; //周口碑榜单、周热门榜单、top250
-  List<MovieBean> hotShowBeans = List(); //影院热映
-  List<ComingSoonBean> comingSoonBeans = List(); //即将上映
-  List<MovieBean> hotBeans = List(); //豆瓣热门
-  List<WeeklyBean> weeklyBeans = List(); //一周口碑电影榜
-  List<MovieBean> top250Beans = List(); //Top250
+  List<Subject> hotShowBeans = List(); //影院热映
+  List<Subject> comingSoonBeans = List(); //即将上映
+  List<Subject> hotBeans = List(); //豆瓣热门
+  List<SubjectEntity> weeklyBeans = List(); //一周口碑电影榜
+  List<Subject> top250Beans = List(); //Top250
   var hotChildAspectRatio;
   var comingSoonChildAspectRatio;
   int selectIndex = 0; //选中的是热映、即将上映
@@ -175,7 +173,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   ///即将上映item
-  Widget getComingSoonItem(ComingSoonBean comingSoonBean, var itemW) {
+  Widget getComingSoonItem(Subject comingSoonBean, var itemW) {
     if (comingSoonBean == null) {
       return Container();
     }
@@ -241,7 +239,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   ///影院热映item
-  Widget getHotMovieItem(MovieBean hotMovieBean, var itemW) {
+  Widget getHotMovieItem(Subject hotMovieBean, var itemW) {
     if (hotMovieBean == null) {
       return Container();
     }
@@ -302,7 +300,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   ///图片+订阅+名称+星标
-  SliverGrid getCommonSliverGrid(List<MovieBean> hotBeans) {
+  SliverGrid getCommonSliverGrid(List<Subject> hotBeans) {
     return SliverGrid(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return getHotMovieItem(hotBeans[index], itemW);

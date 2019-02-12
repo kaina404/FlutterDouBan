@@ -6,7 +6,8 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
-import 'package:douban_app/bean/MovieBean.dart';
+import 'package:douban_app/bean/subject_entity.dart';
+//import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/demo/ImageColors.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/widgets/video_progress_bar.dart';
@@ -55,7 +56,7 @@ class DemoApp extends StatefulWidget {
 class _DemoAppState extends State<DemoApp> {
   var _api = API();
   HotSoonMovieWidget w;
-  List<MovieBean> hotMovieBeans = [];
+  List<Subject> hotMovieBeans = [];
 
   @override
   void initState() {

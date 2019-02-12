@@ -1,7 +1,7 @@
 import 'package:douban_app/http/HttpRequest.dart';
-import 'package:douban_app/bean/MovieBean.dart';
-import 'package:douban_app/bean/ComingSoonBean.dart';
-import 'package:douban_app/bean/WeeklyBean.dart';
+//import 'package:douban_app/bean/MovieBean.dart';
+//import 'package:douban_app/bean/ComingSoonBean.dart';
+import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
@@ -34,8 +34,8 @@ class API {
   void top250(RequestCallBack requestCallBack, {count = 250}) async {
     final Map result = await _request.get(TOP_250 + '?start=0&count=$count');
     var resultList = result['subjects'];
-    List<MovieBean> list =
-        resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+    List<Subject> list =
+        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     requestCallBack(list);
   }
 
@@ -43,8 +43,8 @@ class API {
   void getIntheaters(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(IN_THEATERS);
     var resultList = result['subjects'];
-    List<MovieBean> list =
-        resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+    List<Subject> list =
+        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     requestCallBack(list);
   }
 
@@ -54,8 +54,8 @@ class API {
     final Map result = await _request
         .get(COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
     var resultList = result['subjects'];
-    List<ComingSoonBean> list = resultList
-        .map<ComingSoonBean>((item) => ComingSoonBean.fromMap(item))
+    List<Subject> list = resultList
+        .map<Subject>((item) => Subject.fromMap(item))
         .toList();
     requestCallBack(list);
   }
@@ -66,16 +66,16 @@ class API {
     int start = math.Random().nextInt(220);
     final Map result = await _request.get(TOP_250 + '?start=$start&count=7');
     var resultList = result['subjects'];
-    List<MovieBean> list =
-        resultList.map<MovieBean>((item) => MovieBean.fromMap(item)).toList();
+    List<Subject> list =
+        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     requestCallBack(list);
   }
 
   void getWeekly(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(WEEKLY);
     var resultList = result['subjects'];
-    List<WeeklyBean> list =
-        resultList.map<WeeklyBean>((item) => WeeklyBean.fromMap(item)).toList();
+    List<SubjectEntity> list =
+        resultList.map<SubjectEntity>((item) => SubjectEntity.fromMap(item)).toList();
     requestCallBack(list);
   }
 

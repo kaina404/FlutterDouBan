@@ -277,9 +277,9 @@ class CommentsBeanSubjectDirectorsAvatars {
 }
 
 class CommentsBeanSubjectRating {
-	double average;
-	int min;
-	int max;
+	var average;
+	var min;
+	var max;
 	CommentsBeanSubjectRatingDetails details;
 	String stars;
 

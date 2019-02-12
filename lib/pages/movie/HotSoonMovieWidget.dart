@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/bean/MovieBean.dart';
+import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 
 ///影院热映、即将上映
@@ -13,7 +13,7 @@ class HotSoonMovieWidget extends StatefulWidget {
   }
 
   ///设置影院热映数据
-  void setHotMovieBeanList(List<MovieBean> list){
+  void setHotMovieBeanList(List<Subject> list){
     state.setHotMovieBeanList(list);
   }
 
@@ -29,7 +29,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   Widget tabBar;
   double childAspectRatio = 355.0 / 506.0;
   var hotCount, soonCount;//热映数量、即将上映数量、
-  List<MovieBean> hotMovieBeans, soonMovieBeans;
+  List<Subject> hotMovieBeans, soonMovieBeans;
 
   @override
   void initState() {
@@ -101,7 +101,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     super.dispose();
   }
 
-  void setHotMovieBeanList(List<MovieBean> list) {
+  void setHotMovieBeanList(List<Subject> list) {
       if(list != null){
         setState(() {
           hotMovieBeans = list;

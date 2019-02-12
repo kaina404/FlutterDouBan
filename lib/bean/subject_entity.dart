@@ -1,4 +1,4 @@
-class WeeklyBean {
+class SubjectEntity {
 
 //  "subject":Object{...},
 //  "rank":1,
@@ -8,32 +8,12 @@ class WeeklyBean {
   var rank;
   var delta;
 
-  WeeklyBean.fromMap(Map<String, dynamic> map){
+  SubjectEntity.fromMap(Map<String, dynamic> map){
     rank = map['rank'];
     delta = map['delta'];
     var subjectMap = map['subject'];
     subject = Subject.fromMap(subjectMap);
   }
-}
-
-//rating":{
-//"max":10,
-//"average":8.6,
-//"details":{
-//"1":125,
-//"2":308,
-//"3":3740,
-//"4":15985,
-//"5":16031
-//},
-//"stars":"45",
-//"min":0
-//},
-
-class Rating {
-  var max;
-  var average;
-  Rating(this.max, this.average);
 }
 
 class Subject {
@@ -54,31 +34,33 @@ class Subject {
   var alt;
   var id;
 
+  ///构造函数
   Subject.fromMap(Map<String, dynamic> map) {
-    var ratingMap = map['rating'];
-    rating = Rating(ratingMap['max'], ratingMap['average']);
+    var rating = map['rating'];
+    this.rating = Rating(rating['average'], rating['max']);
     genres = map['genres'];
     title = map['title'];
     var castMap = map['casts'];
-    casts = converCasts(castMap);
-    durations = map['durations'];
+    casts = _converCasts(castMap);
     collect_count = map['collect_count'];
-    mainland_pubdate = map['mainland_pubdate'];
-    has_video = map['has_video'];
     original_title = map['original_title'];
     subtype = map['subtype'];
     directors = map['directors'];
-    pubdates = map['pubdates'];
     year = map['year'];
     var img = map['images'];
     images = Images(img['small'], img['large'], img['medium']);
     alt = map['alt'];
     id = map['id'];
+    durations = map['durations'];
+    mainland_pubdate = map['mainland_pubdate'];
+    has_video = map['has_video'];
+    pubdates = map['pubdates'];
   }
 
-  converCasts(casts) {
+  _converCasts(casts) {
     return casts.map<Cast>((item)=>Cast.fromMap(item)).toList();
   }
+
 }
 
 class Images {
@@ -89,27 +71,20 @@ class Images {
   Images(this.small, this.large, this.medium);
 }
 
-//"avatars":{
-//"small":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1860.webp",
-//"large":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1860.webp",
-//"medium":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1860.webp"
-//},
-//"name_en":"Rami Malek",
-//"name":"拉米·马雷克",
-//"alt":"https://movie.douban.com/celebrity/1044903/",
-//"id":"1044903"
+class Rating {
+  var average;
+  var max;
+  Rating(this.average, this.max);
+}
+
+
 
 class Cast {
   var id;
-
   var name_en;
-
   var name;
-
   Avatar avatars;
-
   var alt;
-
   Cast(this.avatars, this.name_en, this.name, this.alt, this.id);
 
   Cast.fromMap(Map<String, dynamic> map) {
@@ -118,16 +93,18 @@ class Cast {
     name = map['name'];
     alt = map['alt'];
     var tmp = map['avatars'];
-    avatars = Avatar(tmp['small'], tmp['large'], tmp['medium']);
+    if(tmp == null){
+      avatars = null;
+    }else{
+      avatars = Avatar(tmp['small'], tmp['large'], tmp['medium']);
+    }
+
   }
 }
 
 class Avatar {
   var medium;
-
   var large;
-
   var small;
-
   Avatar(this.small, this.large, this.medium);
 }
