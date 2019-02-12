@@ -4,6 +4,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/manager/router.dart';
+import 'package:flutter/cupertino.dart';
 
 ///搜索
 class SearchPage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   SearchResultEntity _searchResultEntity;
   var imgW;
   var imgH;
+  bool showLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,42 +31,43 @@ class _SearchPageState extends State<SearchPage> {
       imgW = MediaQuery.of(context).size.width / 7;
       imgH = imgW / 0.75;
     }
-//    if(_searchResultEntity == null){
-//      return getSearchWidget();
-//    }
     if (_searchResultEntity != null &&
         _searchResultEntity.subjects.isNotEmpty) {
       _searchResultEntity.subjects.sort((a, b) => (b.year.compareTo(a.year)));
     }
     return Scaffold(
       body: SafeArea(
-          child: _searchResultEntity == null
-              ? getSearchWidget()
-              : Column(
-                  children: <Widget>[
-                    getSearchWidget(),
-                    Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                          SearchResultSubject bean =
-                              _searchResultEntity.subjects[index];
-                          return Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              child: _getItem(bean, index),
-                              onTap: () {
-                                Router.push(
-                                    context, Router.detailPage, bean.id);
-                              },
-                            ),
-                          );
-                        },
-                        itemCount: _searchResultEntity.subjects.length,
-                      ),
-                    )
-                  ],
-                )),
+          child: showLoading
+              ? Center(
+                  child: CupertinoActivityIndicator(),
+                )
+              : _searchResultEntity == null
+                  ? getSearchWidget()
+                  : Column(
+                      children: <Widget>[
+                        getSearchWidget(),
+                        Expanded(
+                          child: ListView.builder(
+                            itemBuilder: (BuildContext context, int index) {
+                              SearchResultSubject bean =
+                                  _searchResultEntity.subjects[index];
+                              return Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
+                                  child: _getItem(bean, index),
+                                  onTap: () {
+                                    Router.push(
+                                        context, Router.detailPage, bean.id);
+                                  },
+                                ),
+                              );
+                            },
+                            itemCount: _searchResultEntity.subjects.length,
+                          ),
+                        )
+                      ],
+                    )),
     );
   }
 
@@ -110,8 +113,10 @@ class _SearchPageState extends State<SearchPage> {
             child: SearchTextFieldWidget(
               hintText: widget.searchHintContent,
               onSubmitted: (searchContent) {
+                showLoading = true;
                 _api.searchMovie(searchContent, (searchResultEntity) {
                   setState(() {
+                    showLoading = false;
                     _searchResultEntity = searchResultEntity;
                   });
                 });
