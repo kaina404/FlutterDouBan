@@ -354,47 +354,82 @@ class _DetailPageState extends State<DetailPage> {
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
         CommantsBeanCommants bean = commentsEntity.comments[index];
-        return Column(
-          children: <Widget>[
-            Row(
+        if (index == 0) {
+          return Container(
+            margin: EdgeInsets.only(top: 30.0),
+            decoration: BoxDecoration(
+                color: Color(0x44000000),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    topRight: Radius.circular(10.0))),
+            padding: EdgeInsets.all(12.0),
+            child: Row(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 10.0, top: 10.0, bottom: 5.0),
-                  child: CircleAvatar(
-                    radius: 18.0,
-                    backgroundImage: NetworkImage(bean.author.avatar),
-                    backgroundColor: Colors.white,
+                Expanded(
+                  child: Text(
+                    '短评',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      bean.author.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                          color: Colors.white),
-                    ),
-                    RatingBar(
-                      ((bean.rating.value * 1.0) / (bean.rating.max * 1.0)) * 10.0,
-                      size: 11.0,
-                      fontSize: 0.0,
-                    )
-                  ],
+                Text(
+                  '全部短评 ${commentsEntity.total} >',
+                  style: TextStyle(color: Color(0x77ffffff), fontSize: 12.0),
                 )
               ],
             ),
-            Text(
-              bean.content,
-              softWrap: true,
-              maxLines: 6,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 15.0, color: Colors.white),
-            )
-          ],
-        );
-      }, childCount: math.min(4, commentsEntity.comments.length)));
+          );
+        } else {
+          return Container(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          EdgeInsets.only(right: 10.0, top: 10.0, bottom: 5.0),
+                      child: CircleAvatar(
+                        radius: 18.0,
+                        backgroundImage: NetworkImage(bean.author.avatar),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          bean.author.name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                              color: Colors.white),
+                        ),
+                        RatingBar(
+                          ((bean.rating.value * 1.0) /
+                                  (bean.rating.max * 1.0)) *
+                              10.0,
+                          size: 11.0,
+                          fontSize: 0.0,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Text(
+                  bean.content,
+                  softWrap: true,
+                  maxLines: 6,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 15.0, color: Colors.white),
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Color(0x44000000),
+            ),
+            padding: EdgeInsets.all(12.0),
+          );
+        }
+      }, childCount: math.min(5, commentsEntity.comments.length + 1)));
     }
   }
 
