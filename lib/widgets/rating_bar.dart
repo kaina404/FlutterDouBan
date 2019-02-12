@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RatingBar extends StatelessWidget {
-  final stars;
-  final size;
-  final fontSize;
+  final double stars;
+  final double size;
+  final double fontSize;
   final color = Color.fromARGB(255, 255, 170, 71);
 
   RatingBar(this.stars, {Key key, this.size = 18.0, this.fontSize = 13.0})

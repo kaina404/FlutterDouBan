@@ -11,6 +11,8 @@ import 'dart:math' as math;
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/pages/movie/ItemCountTitle.dart';
+import 'package:douban_app/bean/comments_entity.dart';
+import 'package:douban_app/widgets/rating_bar.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -28,6 +30,7 @@ class _DetailPageState extends State<DetailPage> {
   final subjectId;
   Color pickColor = Color(0xffffffff); //默认主题色
   Router _router = Router();
+  CommentsEntity commentsEntity;
 
   _DetailPageState(this.subjectId);
 
@@ -48,6 +51,11 @@ class _DetailPageState extends State<DetailPage> {
             pickColor = color;
           });
         }
+      });
+    });
+    _api.getComments(subjectId, (commentsEntity) {
+      setState(() {
+        this.commentsEntity = commentsEntity;
       });
     });
   }
@@ -92,7 +100,8 @@ class _DetailPageState extends State<DetailPage> {
             sliverTags(),
             sliverSummary(),
             sliverCasts(),
-            trailers(context)
+            trailers(context),
+            sliverComments(),
           ],
         )),
       ),
@@ -334,6 +343,58 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
     );
+  }
+
+  ///短评，默认显示4个
+  sliverComments() {
+    if (commentsEntity == null || commentsEntity.comments.isEmpty) {
+      return SliverToBoxAdapter();
+    } else {
+      return SliverList(
+          delegate:
+              SliverChildBuilderDelegate((BuildContext context, int index) {
+        CommantsBeanCommants bean = commentsEntity.comments[index];
+        return Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 5.0, top: 10.0, bottom: 5.0),
+                  child: CircleAvatar(
+                    radius: 18.0,
+                    backgroundImage: NetworkImage(bean.author.avatar),
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      bean.author.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                          color: Colors.white),
+                    ),
+                    RatingBar(
+                      (bean.rating.value / (bean.rating.max * 1.0)) * 10.0,
+                      size: 13.0,
+                      fontSize: 0.0,
+                    )
+                  ],
+                )
+              ],
+            ),
+            Text(
+              bean.content,
+              softWrap: true,
+              maxLines: 6,
+              overflow: TextOverflow.ellipsis,
+            )
+          ],
+        );
+      }, childCount: math.min(4, commentsEntity.comments.length)));
+    }
   }
 
 //

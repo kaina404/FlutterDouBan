@@ -92,7 +92,7 @@ class API {
   void getComments(subjectId, RequestCallBack requestCallBack) async {
     final result = await _request.get(
         '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
-    CommentsBeanEntity bean = CommentsBeanEntity.fromJson(result);
+    CommentsEntity bean = CommentsEntity.fromJson(result);
     requestCallBack(bean);
   }
 }

@@ -1,4 +1,4 @@
-class CommentsBeanEntity {
+class CommentsEntity {
 	int total;
 	List<CommantsBeanCommants> comments;
 	int nextStart;
@@ -6,9 +6,9 @@ class CommentsBeanEntity {
 	int count;
 	int start;
 
-	CommentsBeanEntity({this.total, this.comments, this.nextStart, this.subject, this.count, this.start});
+	CommentsEntity({this.total, this.comments, this.nextStart, this.subject, this.count, this.start});
 
-	CommentsBeanEntity.fromJson(Map<String, dynamic> json) {
+	CommentsEntity.fromJson(Map<String, dynamic> json) {
 		total = json['total'];
 		if (json['comments'] != null) {
 			comments = new List<CommantsBeanCommants>();
