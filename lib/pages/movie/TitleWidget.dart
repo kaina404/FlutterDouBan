@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:douban_app/manager/router.dart';
 typedef TapCallback = void Function();
 
 ///《书影业》顶部四个TAB
@@ -14,6 +14,7 @@ class TitleWidget extends StatelessWidget {
           'assets/images/find_movie.png',
           tabCallBack: () {
             print('点击找电影');
+            Router.push(context, Router.searchPage, '找电影');
           },
         ),
         _TextImgWidget(
@@ -21,17 +22,22 @@ class TitleWidget extends StatelessWidget {
           'assets/images/douban_top.png',
           tabCallBack: () {
             print('点击豆瓣榜单');
+            Router.push(context, Router.searchPage, '豆瓣榜单');
           },
         ),
         _TextImgWidget(
           '豆瓣猜',
           'assets/images/douban_guess.png',
-          tabCallBack: () {},
+          tabCallBack: () {
+            Router.push(context, Router.searchPage, '豆瓣猜');
+          },
         ),
         _TextImgWidget(
           '豆瓣片单',
           'assets/images/douban_film_list.png',
-          tabCallBack: () {},
+          tabCallBack: () {
+            Router.push(context, Router.searchPage, '豆瓣片单');
+          },
         )
       ],
     );
