@@ -350,15 +350,18 @@ class _DetailPageState extends State<DetailPage> {
     if (commentsEntity == null || commentsEntity.comments.isEmpty) {
       return SliverToBoxAdapter();
     } else {
+      var backgroundColor = Color(0x44000000);
+      int allCount = math.min(4, commentsEntity.comments.length);
+      allCount = allCount + 2; //多出来的2个表示头和脚
       return SliverList(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
-        CommantsBeanCommants bean = commentsEntity.comments[index];
         if (index == 0) {
+          ///头布局
           return Container(
             margin: EdgeInsets.only(top: 30.0),
             decoration: BoxDecoration(
-                color: Color(0x44000000),
+                color: backgroundColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0))),
@@ -373,13 +376,38 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 Text(
                   '全部短评 ${commentsEntity.total} >',
-                  style: TextStyle(color: Color(0x77ffffff), fontSize: 12.0),
+                  style: TextStyle(color: Color(0x88fffffff), fontSize: 12.0),
                 )
               ],
             ),
           );
-        } else {
+        } else if (index == allCount - 1) {
+          ///显示脚布局
           return Container(
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(bottom: 20.0),
+            decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0))),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    '查看全部评价',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
+                  ),
+                ),
+                Icon(Icons.keyboard_arrow_right,
+                    size: 20.0, color: Color(0x88fffffff))
+              ],
+            ),
+          );
+        } else {
+          CommantsBeanCommants bean = commentsEntity.comments[index - 1];
+          return Container(
+            ///内容item
             child: Column(
               children: <Widget>[
                 Row(
@@ -429,7 +457,7 @@ class _DetailPageState extends State<DetailPage> {
             padding: EdgeInsets.all(12.0),
           );
         }
-      }, childCount: math.min(5, commentsEntity.comments.length + 1)));
+      }, childCount: allCount));
     }
   }
 
