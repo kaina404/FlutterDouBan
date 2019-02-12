@@ -363,8 +363,8 @@ class _DetailPageState extends State<DetailPage> {
             decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0))),
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0))),
             padding: EdgeInsets.all(12.0),
             child: Row(
               children: <Widget>[
@@ -389,8 +389,8 @@ class _DetailPageState extends State<DetailPage> {
             decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0))),
+                    bottomLeft: Radius.circular(8.0),
+                    bottomRight: Radius.circular(8.0))),
             child: Row(
               children: <Widget>[
                 Expanded(
