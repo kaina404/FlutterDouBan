@@ -14,6 +14,7 @@ import 'package:douban_app/widgets/image/CacheImgRadius.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/pages/movie/TopItemWidget.dart';
 import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/util/pick_img_main_color.dart';
 
 var _api = API();
 //var _router = Router();
@@ -27,11 +28,7 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget,
-      todayPlayMovieWidget,
-      hotSoonTabBarPadding,
-      hotTitlePadding,
-      topPadding;
+  Widget titleWidget, hotSoonTabBarPadding, hotTitlePadding, topPadding;
   HotSoonTabBar hotSoonTabBar;
   ItemCountTitle hotTitle; //豆瓣热门
   ItemCountTitle topTitle; //豆瓣榜单
@@ -46,6 +43,15 @@ class _MoviePageState extends State<MoviePage> {
   int selectIndex = 0; //选中的是热映、即将上映
   var itemW;
   var imgSize;
+  List<String> todayUrls = [];
+
+  Color todayPlayBg =  Color.fromARGB(255, 47, 22, 74);
+
+//  [
+//  'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p792776858.webp',
+//  'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp',
+//  'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p917846733.webp',
+//  ]
 
   @override
   void initState() {
@@ -55,14 +61,6 @@ class _MoviePageState extends State<MoviePage> {
       child: TitleWidget(),
     );
 
-    todayPlayMovieWidget = Padding(
-      child: TodayPlayMovieWidget([
-        'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p792776858.webp',
-        'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1374786017.webp',
-        'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p917846733.webp',
-      ]),
-      padding: EdgeInsets.only(top: 22.0),
-    );
     hotSoonTabBar = HotSoonTabBar(
       onTabCallBack: (index) {
         setState(() {
@@ -120,7 +118,10 @@ class _MoviePageState extends State<MoviePage> {
             child: titleWidget,
           ),
           SliverToBoxAdapter(
-            child: todayPlayMovieWidget,
+            child: Padding(
+              child: _getTodayPlayWidget(),
+              padding: EdgeInsets.only(top: 22.0),
+            ),
           ),
           SliverToBoxAdapter(
             child: hotSoonTabBarPadding,
@@ -345,10 +346,25 @@ class _MoviePageState extends State<MoviePage> {
       });
     });
 
-    _api.getHot((hotBeanList) {
+    _api.getHot((hotBeanList) {//请求热门
       hotBeans = hotBeanList;
       hotTitle.setCount(hotBeans.length);
       weeklyHot.setData(TopItemBean.convertHotBeans(hotBeans));
+    });
+
+    _api.getHot((hotBeanList) {//请求今日可播放的电影
+      setState(() {
+        List<Subject> beans = hotBeanList;
+        todayUrls.add(beans[0].images.medium);
+        todayUrls.add(beans[1].images.medium);
+        todayUrls.add(beans[2].images.medium);
+      });
+      PickImgMainColor.pick(NetworkImage(todayUrls[0]), (color){
+        setState(() {//设置今日可播放的电影背景色
+          todayPlayBg = color;
+        });
+      });
+
     });
 
     _api.getWeekly((weeklyBeanList) {
@@ -374,6 +390,10 @@ class _MoviePageState extends State<MoviePage> {
         ),
       ),
     );
+  }
+
+  TodayPlayMovieWidget _getTodayPlayWidget() {
+    return TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg);
   }
 }
 
