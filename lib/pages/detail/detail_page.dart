@@ -448,6 +448,20 @@ class _DetailPageState extends State<DetailPage> {
                   maxLines: 6,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 15.0, color: Colors.white),
+                ),
+                Row(
+                  //赞的数量
+                  children: <Widget>[
+                    Image.asset(
+                      Constant.ASSETS_IMG + 'ic_vote_normal_large.png',
+                      width: 20.0,
+                      height: 20.0,
+                    ),
+                    Text(
+                      '${getUsefulCount(bean.usefulCount)}',
+                      style: TextStyle(color: Color(0x88fffffff)),
+                    )
+                  ],
                 )
               ],
             ),
@@ -458,6 +472,16 @@ class _DetailPageState extends State<DetailPage> {
           );
         }
       }, childCount: allCount));
+    }
+  }
+
+  ///将34123转成3.4k
+  getUsefulCount(int usefulCount) {
+    double a = usefulCount / 1000;
+    if(a < 1.0){
+      return usefulCount;
+    }else {
+      return '${a.toStringAsFixed(1)}k';//保留一位小数
     }
   }
 
