@@ -307,11 +307,11 @@ class CommentsBeanSubjectRating {
 }
 
 class CommentsBeanSubjectRatingDetails {
-	double d1;
-	double d2;
-	double d3;
-	double d4;
-	double d5;
+	var d1;
+	var d2;
+	var d3;
+	var d4;
+	var d5;
 
 	CommentsBeanSubjectRatingDetails({this.d1, this.d2, this.d3, this.d4, this.d5});
 

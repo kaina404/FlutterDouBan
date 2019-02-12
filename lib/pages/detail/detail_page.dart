@@ -213,6 +213,9 @@ class _DetailPageState extends State<DetailPage> {
                       director.id, director.avatars.large, director.name);
                 } else {
                   Cast cast = _movieDetailBean.casts[index - 1];
+                  if(cast.avatars == null){
+                    return Container();
+                  }
                   return getCast(cast.id, cast.avatars.large, cast.name);
                 }
               }),

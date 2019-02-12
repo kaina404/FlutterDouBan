@@ -165,7 +165,7 @@ class _SearchPageState extends State<SearchPage> {
               Text(bean.title + '(${bean.year})',
                   style: getStyle(Colors.black, 15.0, bold: true)),
               Text(
-                  '${bean.rating.average} 分 / ${bean.pubdates} / ${listConvertString(bean.genres)} / ${listConvertString2(bean.directors)}',
+                  '${bean.rating.average} 分 / ${listConvertString(bean.pubdates)} / ${listConvertString(bean.genres)} / ${listConvertString2(bean.directors)}',
                   style: getStyle(Colors.grey, 13.0))
             ],
           ),
