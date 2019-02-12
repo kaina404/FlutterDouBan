@@ -42,6 +42,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: SafeArea(
           child: DefaultTabController(
               length: titleList.length, child: _getNestedScrollView(tabBar))),
