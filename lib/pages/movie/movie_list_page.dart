@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MovieListPage{
+///院线电影
+class MovieListPage extends StatelessWidget {
 
-  MovieListPage();
+  MovieListPage({Key key}) : super(key: key);
 
-
-
+  @override
+  Widget build(BuildContext context) {
+    return null;
+  }
 }

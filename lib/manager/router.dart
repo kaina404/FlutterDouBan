@@ -32,8 +32,14 @@ class Router {
     }
     return null;
   }
+//
+//  void push(BuildContext context, String url, dynamic params) {
+//    Navigator.push(context, MaterialPageRoute(builder: (context) {
+//      return _getPage(url, params);
+//    }));
+//  }
 
-  void push(BuildContext context, String url, dynamic params) {
+  Router.push(BuildContext context, String url, dynamic params) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return _getPage(url, params);
     }));

@@ -1,10 +1,8 @@
-import 'dart:convert' as Convert;
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:douban_app/http/HttpRequest.dart';
-import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/http/API.dart';
+import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/bean/subject_entity.dart';
 
 class DouBanListView extends StatefulWidget {
   @override
@@ -15,16 +13,16 @@ class DouBanListView extends StatefulWidget {
 
 class DouBanState extends State<DouBanListView>
     with AutomaticKeepAliveClientMixin {
-  var subjects = [];
+  List<Subject> subjects = [];
   var api = API();
   var itemHeight = 150.0;
 
   @override
   void initState() {
     super.initState();
-    api.getTop250((data){
+    api.top250((datas){
       setState(() {
-        subjects = data['subjects'];
+        subjects = datas;
       });
     });
   }
@@ -47,6 +45,7 @@ class DouBanState extends State<DouBanListView>
         //item 的数量
         itemCount: subjects.length,
         itemBuilder: (BuildContext context, int index) {
+          Subject bean =  subjects[index];
           return GestureDetector(
             //Flutter 手势处理
             child: Container(
@@ -55,7 +54,7 @@ class DouBanState extends State<DouBanListView>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   numberWidget(index + 1),
-                  getItemContainerView(subjects[index]),
+                  getItemContainerView(bean),
                   //下面的灰色分割线
                   Container(
                     height: 10,
@@ -66,16 +65,16 @@ class DouBanState extends State<DouBanListView>
             ),
             onTap: () {
               //监听点击事件
-              print("click item index=$index");
+              Router.push(context, Router.detailPage, bean.id);
             },
           );
         });
   }
 
   //肖申克的救赎(1993) View
-  getTitleView(subject) {
-    var title = subject['title'];
-    var year = subject['year'];
+  getTitleView(Subject subject) {
+//    var title = subject['title'];
+//    var year = subject['year'];
     return Container(
       child: Row(
         children: <Widget>[
@@ -84,11 +83,11 @@ class DouBanState extends State<DouBanListView>
             color: Colors.redAccent,
           ),
           Text(
-            title,
+            subject.title,
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          Text('($year)',
+          Text('(${subject.year})',
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -98,14 +97,14 @@ class DouBanState extends State<DouBanListView>
     );
   }
 
-  getItemContainerView(var subject) {
-    var imgUrl = subject['images']['medium'];
+  getItemContainerView(Subject subject) {
+//    var imgUrl = subject['images']['medium'];
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(5.0),
       child: Row(
         children: <Widget>[
-          getImage(imgUrl),
+          getImage(subject.images.medium),
           Expanded(
             child: getMovieInfoView(subject),
             flex: 1,
@@ -135,15 +134,15 @@ class DouBanState extends State<DouBanListView>
   }
 
   //电影标题，星标评分，演员简介Container
-  getMovieInfoView(var subject) {
-    var start = subject['rating']['average'];
+  getMovieInfoView(Subject subject) {
+//    var start = subject['rating']['average'];
     return Container(
       height: itemHeight,
       alignment: Alignment.topLeft,
       child: Column(
         children: <Widget>[
           getTitleView(subject),
-          RatingBar(start),
+          RatingBar(subject.rating.average),
           DescWidget(subject)
         ],
       ),
@@ -184,21 +183,21 @@ class DouBanState extends State<DouBanListView>
 
 //类别、演员介绍
 class DescWidget extends StatelessWidget {
-  final subject;
+  final Subject subject;
 
   DescWidget(this.subject);
 
   @override
   Widget build(BuildContext context) {
-    var casts = subject['casts'];
+    var casts = subject.casts;
     var sb = StringBuffer();
-    var genres = subject['genres'];
+    var genres = subject.genres;
     for (var i = 0; i < genres.length; i++) {
       sb.write('${genres[i]}  ');
     }
     sb.write("/ ");
     List<String> list = List.generate(
-        casts.length, (int index) => casts[index]['name'].toString());
+        casts.length, (int index) => casts[index].name.toString());
 
     for (var i = 0; i < list.length; i++) {
       sb.write('${list[i]} ');

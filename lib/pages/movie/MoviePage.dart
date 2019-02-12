@@ -16,7 +16,7 @@ import 'package:douban_app/pages/movie/TopItemWidget.dart';
 import 'package:douban_app/manager/router.dart';
 
 var _api = API();
-var _router = Router();
+//var _router = Router();
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -233,7 +233,7 @@ class _MoviePageState extends State<MoviePage> {
         ),
       ),
       onTap: () {
-        _router.push(context, Router.detailPage, comingSoonBean.id);
+        Router.push(context, Router.detailPage, comingSoonBean.id);
       },
     );
   }
@@ -278,7 +278,7 @@ class _MoviePageState extends State<MoviePage> {
         ),
       ),
       onTap: () {
-        _router.push(context, Router.detailPage, hotMovieBean.id);
+        Router.push(context, Router.detailPage, hotMovieBean.id);
       },
     );
   }

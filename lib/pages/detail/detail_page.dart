@@ -29,7 +29,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   final subjectId;
   Color pickColor = Color(0xffffffff); //默认主题色
-  Router _router = Router();
+//  Router _router = Router();
   CommentsEntity commentsEntity;
 
   _DetailPageState(this.subjectId);
@@ -321,7 +321,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     onTap: () {
-                      _router.push(context, Router.playListPage,
+                      Router.push(context, Router.playListPage,
                           _movieDetailBean.trailers);
                     },
                   );
