@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/FlutterTabBarView.dart';
 import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
+import 'package:douban_app/manager/router.dart';
 
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
@@ -51,6 +52,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
 }
 
 Widget _getNestedScrollView(Widget tabBar) {
+  String hintText = '用一部电影来形容你的2018';
   return NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
@@ -59,7 +61,10 @@ Widget _getNestedScrollView(Widget tabBar) {
               color: Colors.white,
               padding: const EdgeInsets.all(10.0),
               child: SearchTextFieldWidget(
-                hintText: '用一部电影来形容你的2018',
+                hintText: hintText,
+                onTab: () {
+                  Router.push(context, Router.searchPage, hintText);
+                },
               ),
             ),
           ),

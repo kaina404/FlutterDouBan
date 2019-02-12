@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class SearchTextFieldWidget extends StatelessWidget {
   final ValueChanged<String> onSubmitted;
+  final VoidCallback onTab;
   final String hintText;
 
-  SearchTextFieldWidget({Key key, this.onSubmitted, this.hintText})
+  SearchTextFieldWidget({Key key, this.hintText, this.onSubmitted, this.onTab})
       : super(key: key);
 
   @override
@@ -18,12 +19,14 @@ class SearchTextFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(24.0)),
       child: TextField(
         onSubmitted: onSubmitted,
+        onTap: onTab,
         cursorColor: Color.fromARGB(255, 0, 189, 96),
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(top: 8.0),
             border: InputBorder.none,
             hintText: hintText,
-            hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 192, 191, 191)),
+            hintStyle: TextStyle(
+                fontSize: 17, color: Color.fromARGB(255, 192, 191, 191)),
             prefixIcon: Icon(
               Icons.search,
               size: 25,

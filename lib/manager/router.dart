@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:douban_app/pages/detail/detail_page.dart';
 import 'package:douban_app/pages/ContainerPageWidget.dart';
 import 'package:douban_app/pages/videos_play_page.dart';
+import 'package:douban_app/pages/search/search_page.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 
@@ -10,6 +11,7 @@ class Router {
   static const homePage = 'app/';
   static const detailPage = 'app/DetailPage';
   static const playListPage = 'app/VideosPlayPage';
+  static const String searchPage = 'app/SearchPage';
 
 //  Widget _router(String url, dynamic params) {
 //    String pageId = _pageIdMap[url];
@@ -29,9 +31,12 @@ class Router {
         return ContainerPageWidget();
       case playListPage:
         return VideoPlayPage(params);
+      case searchPage:
+        return SearchPage(searchHintContent: params);
     }
     return null;
   }
+
 //
 //  void push(BuildContext context, String url, dynamic params) {
 //    Navigator.push(context, MaterialPageRoute(builder: (context) {
