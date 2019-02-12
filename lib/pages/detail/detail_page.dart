@@ -150,30 +150,33 @@ class _DetailPageState extends State<DetailPage> {
   ///剧情简介
   SliverToBoxAdapter sliverSummary() {
     return SliverToBoxAdapter(
-      child: Container(child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 5.0, bottom: 15.0),
-            child: Text(
-              '剧情简介',
-              style: TextStyle(
-                  fontSize: 17.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 5.0, bottom: 15.0),
+              child: Text(
+                '剧情简介',
+                style: TextStyle(
+                    fontSize: 17.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Text(
-            _movieDetailBean.summary,
-            style: TextStyle(fontSize: 15.0, color: Colors.white),
-          ),
-        ],
-      ),decoration:  BoxDecoration(
-        color: Color(0x44000000),
-        borderRadius: BorderRadius.all(Radius.circular(10.0))
+            Text(
+              _movieDetailBean.summary,
+              style: TextStyle(fontSize: 15.0, color: Colors.white),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(
+            color: Color(0x44000000),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        padding: EdgeInsets.all(12.0),
+        margin: EdgeInsets.only(top: 15.0),
       ),
-        padding: EdgeInsets.all(12.0),margin: EdgeInsets.only(top: 15.0),),
     );
   }
 
@@ -482,10 +485,10 @@ class _DetailPageState extends State<DetailPage> {
   ///将34123转成3.4k
   getUsefulCount(int usefulCount) {
     double a = usefulCount / 1000;
-    if(a < 1.0){
+    if (a < 1.0) {
       return usefulCount;
-    }else {
-      return '${a.toStringAsFixed(1)}k';//保留一位小数
+    } else {
+      return '${a.toStringAsFixed(1)}k'; //保留一位小数
     }
   }
 

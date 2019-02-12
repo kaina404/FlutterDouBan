@@ -3,6 +3,7 @@ import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
+import 'package:douban_app/manager/router.dart';
 
 ///搜索
 class SearchPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     if (imgW == null) {
-      imgW = MediaQuery.of(context).size.width / 6;
+      imgW = MediaQuery.of(context).size.width / 7;
       imgH = imgW / 0.75;
     }
 //    if(_searchResultEntity == null){
@@ -41,25 +42,23 @@ class _SearchPageState extends State<SearchPage> {
               ? getSearchWidget()
               : Column(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: getSearchWidget(),
-                        ),
-                        GestureDetector(
-                          child: Text('取消'),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        )
-                      ],
-                    ),
+                    getSearchWidget(),
                     Expanded(
                       child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           SearchResultSubject bean =
                               _searchResultEntity.subjects[index];
-                          return _getItem(bean, index);
+                          return Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              child: _getItem(bean, index),
+                              onTap: () {
+                                Router.push(
+                                    context, Router.detailPage, bean.id);
+                              },
+                            ),
+                          );
                         },
                         itemCount: _searchResultEntity.subjects.length,
                       ),
@@ -102,15 +101,37 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget getSearchWidget() {
-    return SearchTextFieldWidget(
-      hintText: widget.searchHintContent,
-      onSubmitted: (searchContent) {
-        _api.searchMovie(searchContent, (searchResultEntity) {
-          setState(() {
-            _searchResultEntity = searchResultEntity;
-          });
-        });
-      },
+    return Padding(
+      padding:
+          EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0, bottom: 20.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: SearchTextFieldWidget(
+              hintText: widget.searchHintContent,
+              onSubmitted: (searchContent) {
+                _api.searchMovie(searchContent, (searchResultEntity) {
+                  setState(() {
+                    _searchResultEntity = searchResultEntity;
+                  });
+                });
+              },
+            ),
+          ),
+          GestureDetector(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                '取消',
+                style: getStyle(Colors.green, 17.0),
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -126,22 +147,37 @@ class _SearchPageState extends State<SearchPage> {
             height: imgH,
           ),
           clipBehavior: Clip.antiAlias,
-          elevation: 10.0,
+          elevation: 5.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
+        ),
+        Padding(
+          padding: EdgeInsets.all(5.0),
         ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(getType(bean.subtype)),
-              Text(bean.title + '(${bean.year})'),
               Text(
-                  '${bean.rating.average} 分 / ${bean.pubdates} / ${listConvertString(bean.genres)} / ${listConvertString2(bean.directors)}')
+                getType(bean.subtype),
+                style: getStyle(Colors.grey, 12.0),
+              ),
+              Text(bean.title + '(${bean.year})',
+                  style: getStyle(Colors.black, 15.0, bold: true)),
+              Text(
+                  '${bean.rating.average} 分 / ${bean.pubdates} / ${listConvertString(bean.genres)} / ${listConvertString2(bean.directors)}',
+                  style: getStyle(Colors.grey, 13.0))
             ],
           ),
         )
       ],
     );
+  }
+
+  TextStyle getStyle(Color color, double fontSize, {bool bold = false}) {
+    return TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: bold ? FontWeight.bold : FontWeight.normal);
   }
 }
