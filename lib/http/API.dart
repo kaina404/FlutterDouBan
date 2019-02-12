@@ -39,7 +39,7 @@ class API {
     requestCallBack(list);
   }
 
-  ///https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b
+  ///影院热映 https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b
   void getIntheaters(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(IN_THEATERS);
     var resultList = result['subjects'];
@@ -97,8 +97,10 @@ class API {
     requestCallBack(bean);
   }
 
-  ///根据关键字搜索电影
-///https://api.douban.com/v2/movie/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+
+/// 根据关键字搜索 电影  https://api.douban.com/v2/movie/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+/// 根据关键字搜索 书记 https://api.douban.com/v2/book/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+/// 根据关键字搜索 音乐 https://api.douban.com/v2/music/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
  void searchMovie(String searchContent, RequestCallBack requestCallBack)async {
    final result = await _request.get(
        '/v2/movie/search?q=$searchContent&apikey=0b2bdeda43b5688921839c8ecb20399b');
