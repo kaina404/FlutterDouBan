@@ -106,9 +106,9 @@ class CommentsBeanCommentsAuthor {
 }
 
 class CommentsBeanCommentsRating {
-	int min;
-	int max;
-	double value;
+	var min;
+	var max;
+	var value;
 
 	CommentsBeanCommentsRating({this.min, this.max, this.value});
 

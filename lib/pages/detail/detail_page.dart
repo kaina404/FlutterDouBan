@@ -359,7 +359,7 @@ class _DetailPageState extends State<DetailPage> {
             Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(right: 5.0, top: 10.0, bottom: 5.0),
+                  padding: EdgeInsets.only(right: 10.0, top: 10.0, bottom: 5.0),
                   child: CircleAvatar(
                     radius: 18.0,
                     backgroundImage: NetworkImage(bean.author.avatar),
@@ -377,8 +377,8 @@ class _DetailPageState extends State<DetailPage> {
                           color: Colors.white),
                     ),
                     RatingBar(
-                      (bean.rating.value / (bean.rating.max * 1.0)) * 10.0,
-                      size: 13.0,
+                      ((bean.rating.value * 1.0) / (bean.rating.max * 1.0)) * 10.0,
+                      size: 11.0,
                       fontSize: 0.0,
                     )
                   ],
@@ -390,6 +390,7 @@ class _DetailPageState extends State<DetailPage> {
               softWrap: true,
               maxLines: 6,
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 15.0, color: Colors.white),
             )
           ],
         );
