@@ -236,33 +236,38 @@ class _DetailPageState extends State<DetailPage> {
 
   ///演职表图片
   Widget getCast(String id, String imgUrl, String name) {
-    return GestureDetector(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              child: CachedNetworkImage(
-                imageUrl: imgUrl,
-                height: 120.0,
-                width: 80.0,
-                fit: BoxFit.cover,
-              ),
+    return Hero(
+        tag: imgUrl,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    child: Image.network(
+                      imgUrl,
+                      height: 120.0,
+                      width: 80.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 13.0, color: Colors.white),
+                ),
+              ],
             ),
+            onTap: () {
+              Router.push(context, Router.personDetailPage,
+                  {'personImgUrl': imgUrl, 'id': id});
+            },
           ),
-          Text(
-            name,
-            style: TextStyle(fontSize: 13.0, color: Colors.white),
-          ),
-        ],
-      ),
-      onTap: () {
-        Router.push(context, Router.personDetailPage,
-            {'personImgUrl': imgUrl, 'id': id});
-      },
-    );
+        ));
   }
 
   ///预告片、剧照 727x488
