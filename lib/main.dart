@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/pages/ContainerPageWidget.dart';
 import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
-import 'package:douban_app/pages/movie/movie_page.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
