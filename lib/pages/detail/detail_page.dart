@@ -13,6 +13,7 @@ import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/pages/movie/ItemCountTitle.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
+import 'package:douban_app/pages/photo_hero_page.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -209,14 +210,14 @@ class _DetailPageState extends State<DetailPage> {
                 if (index == 0 && _movieDetailBean.directors.isNotEmpty) {
                   //第一个显示导演
                   Director director = _movieDetailBean.directors[0];
-                  if(director.avatars == null){
+                  if (director.avatars == null) {
                     return Container();
                   }
                   return getCast(
                       director.id, director.avatars.large, director.name);
                 } else {
                   Cast cast = _movieDetailBean.casts[index - 1];
-                  if(cast.avatars == null){
+                  if (cast.avatars == null) {
                     return Container();
                   }
                   return getCast(cast.id, cast.avatars.large, cast.name);
@@ -233,28 +234,30 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   ///演职表图片
-  Column getCast(String id, String imgUrl, String name) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            child: CachedNetworkImage(
-              imageUrl: imgUrl,
-              height: 120.0,
-              width: 80.0,
-              fit: BoxFit.cover,
+  Widget getCast(String id, String imgUrl, String name) {
+    return showBigImg(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  height: 120.0,
+                  width: 80.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
+            Text(
+              name,
+              style: TextStyle(fontSize: 13.0, color: Colors.white),
+            ),
+          ],
         ),
-        Text(
-          name,
-          style: TextStyle(fontSize: 13.0, color: Colors.white),
-        ),
-      ],
-    );
+        imgUrl);
   }
 
   ///预告片、剧照 727x488
@@ -335,18 +338,20 @@ class _DetailPageState extends State<DetailPage> {
                     },
                   );
                 } else {
-                  Photo bean = _movieDetailBean.photos[index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
-                  return Padding(
+                  Photo bean = _movieDetailBean.photos[
+                      index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
+                  return showBigImg(Padding(
                     padding: EdgeInsets.only(right: 2.0),
                     child: CachedNetworkImage(
                         fit: BoxFit.cover,
                         width: w,
                         height: h,
                         imageUrl: bean.cover),
-                  );
+                  ), bean.cover);
                 }
               },
-              itemCount: _movieDetailBean.photos.length + (_movieDetailBean.trailers.isNotEmpty ? 1 : 0),
+              itemCount: _movieDetailBean.photos.length +
+                  (_movieDetailBean.trailers.isNotEmpty ? 1 : 0),
             ),
           )
         ],
@@ -496,7 +501,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   _getTrailers(double w, double h) {
-    if(_movieDetailBean.trailers.isEmpty){
+    if (_movieDetailBean.trailers.isEmpty) {
       return Container();
     }
     return CachedNetworkImage(
@@ -504,6 +509,19 @@ class _DetailPageState extends State<DetailPage> {
         height: h,
         fit: BoxFit.cover,
         imageUrl: _movieDetailBean.trailers[0].medium);
+  }
+
+  //传入的图片组件，点击后，会显示大图页面
+  Widget showBigImg(Widget widget, String imgUrl) {
+    return GestureDetector(
+      child: widget,
+      onTap: () {
+        Router.push(context, Router.photoHero, {
+          'photoUrl': imgUrl,
+          'width': MediaQuery.of(context).size.width
+        });
+      },
+    );
   }
 
 //

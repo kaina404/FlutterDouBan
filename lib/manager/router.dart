@@ -4,6 +4,7 @@ import 'package:douban_app/pages/detail/detail_page.dart';
 import 'package:douban_app/pages/ContainerPageWidget.dart';
 import 'package:douban_app/pages/videos_play_page.dart';
 import 'package:douban_app/pages/search/search_page.dart';
+import 'package:douban_app/pages/photo_hero_page.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 
@@ -11,7 +12,8 @@ class Router {
   static const homePage = 'app/';
   static const detailPage = 'app/DetailPage';
   static const playListPage = 'app/VideosPlayPage';
-  static const String searchPage = 'app/SearchPage';
+  static const searchPage = 'app/SearchPage';
+  static const photoHero = 'app/PhotoHero';
 
 //  Widget _router(String url, dynamic params) {
 //    String pageId = _pageIdMap[url];
@@ -33,6 +35,10 @@ class Router {
         return VideoPlayPage(params);
       case searchPage:
         return SearchPage(searchHintContent: params);
+      case photoHero:
+        //this.photoUrl, this.width
+        return PhotoHeroPage(
+            photoUrl: params['photoUrl'], width: params['width']);
     }
     return null;
   }
