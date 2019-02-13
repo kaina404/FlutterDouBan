@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/celebrity_entity.dart';
@@ -35,19 +36,17 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CupertinoNavigationBar(
+        middle: Text('人物'),
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TitleBar(
-            title: '人物',
-          ),
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: _getBody(),
-          )
-        ],
-      )),
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.all(10.0),
+          child: _getBody(),
+        ),
+      ),
     );
   }
 
@@ -57,29 +56,35 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
         photoUrl: widget.personImgUrl,
       );
     } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              _PersonPhoto(
-                photoUrl: widget.personImgUrl,
-              ),
-              Column(
-                children: <Widget>[
-                  Text(celebrityEntity.name),
-                  Text(celebrityEntity.name_en),
-                ],
-              )
-            ],
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    _PersonPhoto(
+                      photoUrl: widget.personImgUrl,
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(celebrityEntity.name),
+                        Text(celebrityEntity.name_en),
+                      ],
+                    )
+                  ],
+                ),
+                Text('简介'),
+                Text(
+                  celebrityEntity.summary,
+                  softWrap: true,
+                  maxLines: 6,
+                  overflow: TextOverflow.ellipsis,
+                )
+              ],
+            ),
           ),
-          Text('简介'),
-          Text(
-            celebrityEntity.summary,
-            softWrap: true,
-            maxLines: 6,
-            overflow: TextOverflow.ellipsis,
-          )
         ],
       );
     }
@@ -102,8 +107,7 @@ class _PersonPhoto extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
             },
-            child:
-                RadiusImg.get(photoUrl, w, elevation: 3.0),
+            child: RadiusImg.get(photoUrl, w, imgH: w / 0.8, elevation: 3.0),
           ),
         ),
       ),

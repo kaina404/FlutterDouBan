@@ -193,7 +193,7 @@ class Rating {
 
 	int max;
 	int min;
-	double average;
+	var average;
 	String stars;
 	Detail details;
 
