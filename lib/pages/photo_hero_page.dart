@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
+import 'package:douban_app/widgets/title_bar.dart';
 
 class PhotoHeroPage extends StatelessWidget {
   final String photoUrl;
@@ -9,17 +10,14 @@ class PhotoHeroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: _PhotoHero(
-          photoUrl: photoUrl,
-          width: width,
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-        ),
+    return TitleBar(
+      title: '人物',
+      body: _PhotoHero(
+        photoUrl: photoUrl,
+        width: width,
+        onTap: () {
+          Navigator.of(context).pop();
+        },
       ),
     );
   }

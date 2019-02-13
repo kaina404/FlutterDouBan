@@ -11,6 +11,7 @@ import 'package:douban_app/demo/ImageColors.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/widgets/video_progress_bar.dart';
 import 'package:douban_app/http/API.dart';
+import 'package:douban_app/widgets/title_bar.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
