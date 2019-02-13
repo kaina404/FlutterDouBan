@@ -32,6 +32,7 @@ class TitleBar extends StatelessWidget {
         alignment: Alignment.center,
         child: SafeArea(
             child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             _title(context),
             Expanded(
@@ -67,7 +68,7 @@ class TitleBar extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              title,
+              title == null ? '' : title,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
           )

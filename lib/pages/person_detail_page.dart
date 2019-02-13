@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/celebrity_entity.dart';
+import 'package:douban_app/widgets/title_bar.dart';
 
 class PersonDetailPage extends StatefulWidget {
   final String id;
@@ -33,7 +34,19 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: _getBody()),
+      body: SafeArea(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TitleBar(
+            title: '人物',
+          ),
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: _getBody(),
+          )
+        ],
+      )),
     );
   }
 
@@ -60,7 +73,12 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
             ],
           ),
           Text('简介'),
-          Text(celebrityEntity.summary)
+          Text(
+            celebrityEntity.summary,
+            softWrap: true,
+            maxLines: 6,
+            overflow: TextOverflow.ellipsis,
+          )
         ],
       );
     }
