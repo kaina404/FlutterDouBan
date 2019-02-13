@@ -30,7 +30,7 @@ class _ScoreStartState extends State<ScoreStartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    lineW = MediaQuery.of(context).size.width / 2;
+    lineW = MediaQuery.of(context).size.width / 3;
     return Container(
       padding: EdgeInsets.all(13.0),
       decoration: BoxDecoration(
