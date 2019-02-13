@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/widgets/title_bar.dart';
+import 'package:douban_app/manager/router.dart';
 
 class PhotoHeroPage extends StatelessWidget {
   final String photoUrl;
@@ -10,14 +11,16 @@ class PhotoHeroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TitleBar(
-      title: '人物',
-      body: _PhotoHero(
-        photoUrl: photoUrl,
-        width: width,
-        onTap: () {
-          Navigator.of(context).pop();
-        },
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: _PhotoHero(
+          photoUrl: photoUrl,
+          width: width,
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
     );
   }
@@ -43,6 +46,59 @@ class _PhotoHero extends StatelessWidget {
               photoUrl,
               fit: BoxFit.contain,
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HeroAnimation extends StatelessWidget {
+  final String url;
+
+  HeroAnimation(this.url, {Key key}) : super(key: key);
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Basic Hero Animation'),
+      ),
+      body: Center(
+        child: PhotoHero(
+            photo: url,
+            width: 300.0,
+            onTap: () {
+              Router.push(
+                  context, Router.photoHero, {'photoUrl': url, 'width': 100.0});
+            }),
+      ),
+    );
+  }
+}
+
+class PhotoHero extends StatelessWidget {
+  const PhotoHero({Key key, this.photo, this.onTap, this.width})
+      : super(key: key);
+
+  final String photo;
+  final VoidCallback onTap;
+  final double width;
+
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      child: Hero(
+        tag: photo,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            child: ListView.builder(itemBuilder: (BuildContext context, int index){
+              return Image.network(
+                photo,
+                fit: BoxFit.contain,
+              );
+            }, itemCount: 20,),
           ),
         ),
       ),

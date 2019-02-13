@@ -134,7 +134,7 @@ class WorkSubject {
 	List<String> durations;
 	List<dynamic> genres;
 	List<String> pubdates;
-	Image images;
+	_Image images;
 	Rating rating;
 
 	WorkSubject.fromParams({this.collect_count, this.has_video, this.alt, this.id, this.mainland_pubdate, this.original_title, this.subtype, this.title, this.year, this.casts, this.directors, this.durations, this.genres, this.pubdates, this.images, this.rating});
@@ -179,7 +179,7 @@ class WorkSubject {
 			pubdates.add(pubdatesItem);
 		}
 
-		images = jsonRes['images'] == null ? null : new Image.fromJson(jsonRes['images']);
+		images = jsonRes['images'] == null ? null : new _Image.fromJson(jsonRes['images']);
 		rating = jsonRes['rating'] == null ? null : new Rating.fromJson(jsonRes['rating']);
 	}
 
@@ -237,15 +237,15 @@ class Detail {
 	}
 }
 
-class Image {
+class _Image {
 
 	String large;
 	String medium;
 	String small;
 
-	Image.fromParams({this.large, this.medium, this.small});
+	_Image.fromParams({this.large, this.medium, this.small});
 
-	Image.fromJson(jsonRes) {
+	_Image.fromJson(jsonRes) {
 		large = jsonRes['large'];
 		medium = jsonRes['medium'];
 		small = jsonRes['small'];

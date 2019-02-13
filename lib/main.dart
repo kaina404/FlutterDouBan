@@ -6,12 +6,15 @@ import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/subject_entity.dart';
+
 //import 'package:douban_app/bean/MovieBean.dart';
 import 'package:douban_app/demo/ImageColors.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/widgets/video_progress_bar.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
+import 'package:douban_app/pages/photo_hero_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -21,11 +24,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(backgroundColor: Colors.white,),
+      theme: ThemeData(
+        backgroundColor: Colors.white,
+      ),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
             child: ContainerPageWidget()),
+//            child: HeroAnimation('https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1501738155.24.webp')),
       ),
     );
   }

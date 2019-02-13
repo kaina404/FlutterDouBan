@@ -235,29 +235,33 @@ class _DetailPageState extends State<DetailPage> {
 
   ///演职表图片
   Widget getCast(String id, String imgUrl, String name) {
-    return showBigImg(
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                child: CachedNetworkImage(
-                  imageUrl: imgUrl,
-                  height: 120.0,
-                  width: 80.0,
-                  fit: BoxFit.cover,
-                ),
+    return GestureDetector(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              child: CachedNetworkImage(
+                imageUrl: imgUrl,
+                height: 120.0,
+                width: 80.0,
+                fit: BoxFit.cover,
               ),
             ),
-            Text(
-              name,
-              style: TextStyle(fontSize: 13.0, color: Colors.white),
-            ),
-          ],
-        ),
-        imgUrl);
+          ),
+          Text(
+            name,
+            style: TextStyle(fontSize: 13.0, color: Colors.white),
+          ),
+        ],
+      ),
+      onTap: () {
+        Router.push(context, Router.personDetailPage,
+            {'personImgUrl': imgUrl, 'id': id});
+      },
+    );
   }
 
   ///预告片、剧照 727x488
@@ -340,14 +344,16 @@ class _DetailPageState extends State<DetailPage> {
                 } else {
                   Photo bean = _movieDetailBean.photos[
                       index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
-                  return showBigImg(Padding(
-                    padding: EdgeInsets.only(right: 2.0),
-                    child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        width: w,
-                        height: h,
-                        imageUrl: bean.cover),
-                  ), bean.cover);
+                  return showBigImg(
+                      Padding(
+                        padding: EdgeInsets.only(right: 2.0),
+                        child: Image.network(
+                          bean.cover,
+                            fit: BoxFit.cover,
+                            width: w,
+                            height: h,),
+                      ),
+                      bean.cover);
                 }
               },
               itemCount: _movieDetailBean.photos.length +
@@ -513,15 +519,29 @@ class _DetailPageState extends State<DetailPage> {
 
   //传入的图片组件，点击后，会显示大图页面
   Widget showBigImg(Widget widget, String imgUrl) {
-    return GestureDetector(
-      child: widget,
-      onTap: () {
-        Router.push(context, Router.photoHero, {
-          'photoUrl': imgUrl,
-          'width': MediaQuery.of(context).size.width
-        });
-      },
+    return Hero(
+      tag: imgUrl,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          child: widget,
+          onTap: () {
+            Router.push(context, Router.photoHero,
+                {'photoUrl': imgUrl, 'width': MediaQuery.of(context).size.width});
+          },
+        ),
+      ),
     );
+//    return GestureDetector(
+//      child: widget,
+//      onTap: () {
+//        Router.push(
+//            context, Router.photoHero, {'photoUrl': imgUrl, 'width': 200.0});
+////        Router.push(context, Router.photoHero,
+////            {'photoUrl': imgUrl, 'width': MediaQuery.of(context).size.width});
+//
+//      },
+//    );
   }
 
 //
