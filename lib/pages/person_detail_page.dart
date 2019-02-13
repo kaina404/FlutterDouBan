@@ -3,6 +3,7 @@ import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/celebrity_entity.dart';
 import 'package:douban_app/widgets/title_bar.dart';
+import 'package:douban_app/widgets/image/radius_img.dart';
 
 class PersonDetailPage extends StatefulWidget {
   final String id;
@@ -90,8 +91,9 @@ class _PersonPhoto extends StatelessWidget {
   final String photoUrl;
 
   Widget build(BuildContext context) {
+    var w = MediaQuery.of(context).size.width / 5;
     return SizedBox(
-      width: MediaQuery.of(context).size.width / 5,
+      width: w,
       child: Hero(
         tag: photoUrl,
         child: Material(
@@ -100,13 +102,15 @@ class _PersonPhoto extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
             },
-            child: Image.network(
-              photoUrl,
-              fit: BoxFit.contain,
-            ),
+            child:
+                RadiusImg.get(photoUrl, w, elevation: 3.0),
           ),
         ),
       ),
     );
   }
 }
+//Image.network(
+//photoUrl,
+//fit: BoxFit.contain,
+//)
