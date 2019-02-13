@@ -14,6 +14,7 @@ import 'package:douban_app/pages/movie/ItemCountTitle.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
+import 'package:douban_app/widgets/animal_photo.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -349,9 +350,10 @@ class _DetailPageState extends State<DetailPage> {
                         padding: EdgeInsets.only(right: 2.0),
                         child: Image.network(
                           bean.cover,
-                            fit: BoxFit.cover,
-                            width: w,
-                            height: h,),
+                          fit: BoxFit.cover,
+                          width: w,
+                          height: h,
+                        ),
                       ),
                       bean.cover);
                 }
@@ -526,23 +528,10 @@ class _DetailPageState extends State<DetailPage> {
         child: InkWell(
           child: widget,
           onTap: () {
-            Router.push(context, Router.photoHero,
-                {'photoUrl': imgUrl, 'width': MediaQuery.of(context).size.width});
+            AnimalPhoto.show(context, imgUrl);
           },
         ),
       ),
     );
-//    return GestureDetector(
-//      child: widget,
-//      onTap: () {
-//        Router.push(
-//            context, Router.photoHero, {'photoUrl': imgUrl, 'width': 200.0});
-////        Router.push(context, Router.photoHero,
-////            {'photoUrl': imgUrl, 'width': MediaQuery.of(context).size.width});
-//
-//      },
-//    );
   }
-
-//
 }
