@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/pages/DouBanDemo.dart';
-import 'package:douban_app/pages/movie/MoviePage.dart';
+import 'package:douban_app/pages/movie/movie_page.dart';
 
 class FlutterTabBarView extends StatefulWidget {
   final TabController tabController;
