@@ -415,6 +415,7 @@ class _DetailPageState extends State<DetailPage> {
           return Container(
             ///内容item
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
                   children: <Widget>[
