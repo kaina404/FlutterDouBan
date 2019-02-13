@@ -85,6 +85,20 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
               ],
             ),
           ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 200.0,
+              child: ListView.builder(
+                //TODO Shiyong影人作品API
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  Photo bean = celebrityEntity.photos[index];
+                  return RadiusImg.get(bean.cover, 50.0);
+                },
+                itemCount: celebrityEntity.photos.length,
+              ),
+            ),
+          ),
         ],
       );
     }

@@ -124,4 +124,7 @@ class API {
     celebrity.CelebrityEntity bean = celebrity.CelebrityEntity.fromJson(result);
     requestCallBack(bean);
   }
+
+///影人作品 https://api.douban.com/v2/movie/celebrity/1000525/works?apikey=0b2bdeda43b5688921839c8ecb20399b
+
 }
