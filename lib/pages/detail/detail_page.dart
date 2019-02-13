@@ -209,6 +209,9 @@ class _DetailPageState extends State<DetailPage> {
                 if (index == 0 && _movieDetailBean.directors.isNotEmpty) {
                   //第一个显示导演
                   Director director = _movieDetailBean.directors[0];
+                  if(director.avatars == null){
+                    return Container();
+                  }
                   return getCast(
                       director.id, director.avatars.large, director.name);
                 } else {

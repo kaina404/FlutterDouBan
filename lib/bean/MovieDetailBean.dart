@@ -5,7 +5,7 @@ class MovieDetailBean {
 
   bool collection;
   String current_season;
-  int do_count;
+  var do_count;
   var episodes_count;
   var seasons_count;
   var collect_count;
@@ -219,8 +219,8 @@ class MovieDetailBean {
 
 class Rating {
 
-  int max;
-  int min;
+  var max;
+  var min;
   var average;
   String stars;
   RatingDetails details;
@@ -387,8 +387,8 @@ class PopularReview {
 
 class PopularReviewRating {
 
-  int max;
-  int min;
+  var max;
+  var min;
   var value;
 
   PopularReviewRating.fromParams({this.max, this.min, this.value});
@@ -433,7 +433,7 @@ class PopularReviewAuthor {
 
 class PopularComment {
 
-  int useful_count;
+  var useful_count;
   String content;
   String created_at;
   String id;
@@ -461,8 +461,8 @@ class PopularComment {
 
 class PopularCommentRating {
 
-  int max;
-  int min;
+  var max;
+  var min;
   var value;
 
   PopularCommentRating.fromParams({this.max, this.min, this.value});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RatingBar extends StatelessWidget {
-  final double stars;
+  var stars;
   final double size;
   final double fontSize;
   final color = Color.fromARGB(255, 255, 170, 71);
@@ -11,6 +11,7 @@ class RatingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    stars = stars * 1.0;
     List<Widget> startList = [];
     //实心星星
     var startNumber = stars ~/ 2;

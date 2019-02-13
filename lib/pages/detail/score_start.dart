@@ -128,6 +128,9 @@ class _ScoreStartState extends State<ScoreStartWidget> {
   }
 
   startsLine(int startCount, double percent) {
+    if(percent == null || percent.isNaN){
+      percent = 0.0;
+    }
     return Padding(
       padding: EdgeInsets.only(bottom: 2.0),
       child: Row(
