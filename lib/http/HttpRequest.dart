@@ -32,8 +32,8 @@ class HttpRequest {
       http.Response response = await http.get(baseUrl + uri, headers: headers);
       final statusCode = response.statusCode;
       final body = response.body;
-      var result = Convert.jsonDecode(body);
       print('[uri=$uri][statusCode=$statusCode][response=$body]');
+      var result = Convert.jsonDecode(body);
       return result;
     } on Exception catch (e) {
       print('[uri=$uri]exception e=${e.toString()}');

@@ -1,12 +1,13 @@
 import 'package:douban_app/http/HttpRequest.dart';
+
 //import 'package:douban_app/bean/MovieBean.dart';
 //import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
+import 'package:douban_app/bean/celebrity_entity.dart' as celebrity;
 import 'dart:math' as math;
-
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
@@ -24,7 +25,16 @@ class API {
   ///一周口碑榜
   String WEEKLY = '/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b';
 
+  ///影人条目信息
+  String CELEBRITY = '/v2/movie/celebrity/';
+
   var _request = HttpRequest(API.BASE_URL);
+
+  Future<dynamic> _query(String uri, String value) async {
+    final result = await _request
+        .get('$uri$value?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    return result;
+  }
 
   void getTop250(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(TOP_250);
@@ -54,9 +64,8 @@ class API {
     final Map result = await _request
         .get(COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
     var resultList = result['subjects'];
-    List<Subject> list = resultList
-        .map<Subject>((item) => Subject.fromMap(item))
-        .toList();
+    List<Subject> list =
+        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     requestCallBack(list);
   }
 
@@ -74,8 +83,9 @@ class API {
   void getWeekly(RequestCallBack requestCallBack) async {
     final Map result = await _request.get(WEEKLY);
     var resultList = result['subjects'];
-    List<SubjectEntity> list =
-        resultList.map<SubjectEntity>((item) => SubjectEntity.fromMap(item)).toList();
+    List<SubjectEntity> list = resultList
+        .map<SubjectEntity>((item) => SubjectEntity.fromMap(item))
+        .toList();
     requestCallBack(list);
   }
 
@@ -97,14 +107,21 @@ class API {
     requestCallBack(bean);
   }
 
+  /// 根据关键字搜索 电影  https://api.douban.com/v2/movie/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+  /// 根据关键字搜索 书记 https://api.douban.com/v2/book/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+  /// 根据关键字搜索 音乐 https://api.douban.com/v2/music/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
+  void searchMovie(
+      String searchContent, RequestCallBack requestCallBack) async {
+    final result = await _request.get(
+        '/v2/movie/search?q=$searchContent&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    SearchResultEntity bean = SearchResultEntity.fromJson(result);
+    requestCallBack(bean);
+  }
 
-/// 根据关键字搜索 电影  https://api.douban.com/v2/movie/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
-/// 根据关键字搜索 书记 https://api.douban.com/v2/book/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
-/// 根据关键字搜索 音乐 https://api.douban.com/v2/music/search?q=%E6%B5%81%E6%B5%AA&apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10
- void searchMovie(String searchContent, RequestCallBack requestCallBack)async {
-   final result = await _request.get(
-       '/v2/movie/search?q=$searchContent&apikey=0b2bdeda43b5688921839c8ecb20399b');
-   SearchResultEntity bean = SearchResultEntity.fromJson(result);
-   requestCallBack(bean);
- }
+  ///影人条目信息 https://api.douban.com/v2/movie/celebrity/1000525?apikey=0b2bdeda43b5688921839c8ecb20399b
+  void searchCelebrity(String id, RequestCallBack requestCallBack) async {
+    final result = await _query(CELEBRITY, id);
+    celebrity.CelebrityEntity bean = celebrity.CelebrityEntity.fromJson(result);
+    requestCallBack(bean);
+  }
 }
