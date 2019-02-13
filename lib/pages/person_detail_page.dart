@@ -44,6 +44,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
       );
     } else {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
@@ -57,7 +58,9 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
                 ],
               )
             ],
-          )
+          ),
+          Text('简介'),
+          Text(celebrityEntity.summary)
         ],
       );
     }
