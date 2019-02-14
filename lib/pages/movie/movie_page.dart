@@ -17,6 +17,7 @@ import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/http/HttpRequest.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
+import 'package:douban_app/bean/movie_repository.dart';
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -45,6 +46,7 @@ class _MoviePageState extends State<MoviePage> {
   TopItemBean weeklyTopBean, weeklyHotBean, weeklyTop250Bean;
   Color weeklyTopColor, weeklyHotColor, weeklyTop250Color;
   Color todayPlayBg = Color.fromARGB(255, 47, 22, 74);
+
   @override
   void initState() {
     super.initState();
@@ -99,7 +101,8 @@ class _MoviePageState extends State<MoviePage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              child: TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg),
+              child:
+                  TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg),
               padding: EdgeInsets.only(top: 22.0),
             ),
           ),
@@ -335,84 +338,107 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
-  var _request = HttpRequest(API.BASE_URL);
+//  var _request = HttpRequest(API.BASE_URL);
+  MovieRepository repository = MovieRepository();
 
   void requestAPI() async {
-    ///影院热映
-    var result = await _request.get(API.IN_THEATERS);
-    var resultList = result['subjects'];
-    hotShowBeans =
-        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-    hotSoonTabBar.setCount(hotShowBeans);
-    ///即将上映
-    result = await _request
-        .get(API.COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
-    resultList = result['subjects'];
-    comingSoonBeans =
-        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-    hotSoonTabBar.setComingSoon(comingSoonBeans);
+    Future(() => (repository.requestAPI())).then((repository) {
+      hotShowBeans = repository.hotShowBeans;
+      comingSoonBeans = repository.comingSoonBeans;
+      hotBeans = repository.hotBeans;
+      weeklyBeans = repository.weeklyBeans;
+      top250Beans = repository.top250Beans;
+      todayUrls = repository.todayUrls;
+      weeklyTopBean = repository.weeklyTopBean;
+      weeklyHotBean = repository.weeklyHotBean;
+      weeklyTop250Bean = repository.weeklyTop250Bean;
+      weeklyTopColor = repository.weeklyTopColor;
+      weeklyHotColor = repository.weeklyHotColor;
+      weeklyTop250Color = repository.weeklyTop250Color;
+      todayPlayBg = repository.todayPlayBg;
+      hotSoonTabBar.setCount(hotShowBeans);
+      hotSoonTabBar.setComingSoon(comingSoonBeans);
+      hotTitle.setCount(hotBeans.length);
+      topTitle.setCount(weeklyBeans.length);
+      setState(() {
 
-
-    int start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
-    resultList = result['subjects'];
-    ///豆瓣榜单
-    hotBeans =
-        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-    hotTitle.setCount(hotBeans.length);
-
-    ///一周热门电影榜
-    weeklyHotBean = TopItemBean.convertHotBeans(hotBeans);
-    var paletteGenerator = await PaletteGenerator.fromImageProvider(
-        NetworkImage(hotBeans[0].images.medium));
-    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-      weeklyHotColor = (paletteGenerator.colors.toList()[0]);
-    }
-    ///一周口碑电影榜
-    result = await _request.get(API.WEEKLY);
-    resultList = result['subjects'];
-    weeklyBeans = resultList
-        .map<SubjectEntity>((item) => SubjectEntity.fromMap(item))
-        .toList();
-    weeklyTopBean = TopItemBean.convertWeeklyBeans(weeklyBeans);
-    paletteGenerator = await PaletteGenerator.fromImageProvider(
-        NetworkImage(weeklyBeans[0].subject.images.medium));
-    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-      weeklyTopColor = (paletteGenerator.colors.toList()[0]);
-    }
-    topTitle.setCount(weeklyBeans.length);
-
-    ///今日可播放电影
-    start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
-    resultList = result['subjects'];
-    List<Subject> beans =
-        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-    todayUrls.add(beans[0].images.medium);
-    todayUrls.add(beans[1].images.medium);
-    todayUrls.add(beans[2].images.medium);
-    paletteGenerator =
-        await PaletteGenerator.fromImageProvider(NetworkImage(todayUrls[0]));
-    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-      todayPlayBg = (paletteGenerator.colors.toList()[0]);
-    }
-
-    ///豆瓣TOP250
-    result = await _request.get(API.TOP_250 + '?start=0&count=5');
-    resultList = result['subjects'];
-    top250Beans =
-        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-    weeklyTop250Bean = TopItemBean.convertTopBeans(top250Beans);
-    paletteGenerator = await PaletteGenerator.fromImageProvider(
-        NetworkImage(top250Beans[0].images.medium));
-    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-      weeklyTop250Color = (paletteGenerator.colors.toList()[0]);
-    }
-    setState(() {
-      print('setState');
+      });
     });
-  }
 
+//    ///影院热映
+//    var result = await _request.get(API.IN_THEATERS);
+//    var resultList = result['subjects'];
+//    hotShowBeans =
+//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+//    hotSoonTabBar.setCount(hotShowBeans);
+//    ///即将上映
+//    result = await _request
+//        .get(API.COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
+//    resultList = result['subjects'];
+//    comingSoonBeans =
+//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+//    hotSoonTabBar.setComingSoon(comingSoonBeans);
+//
+//
+//    int start = math.Random().nextInt(220);
+//    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
+//    resultList = result['subjects'];
+//    ///豆瓣榜单
+//    hotBeans =
+//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+//    hotTitle.setCount(hotBeans.length);
+//
+//    ///一周热门电影榜
+//    weeklyHotBean = TopItemBean.convertHotBeans(hotBeans);
+//    var paletteGenerator = await PaletteGenerator.fromImageProvider(
+//        NetworkImage(hotBeans[0].images.medium));
+//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+//      weeklyHotColor = (paletteGenerator.colors.toList()[0]);
+//    }
+//    ///一周口碑电影榜
+//    result = await _request.get(API.WEEKLY);
+//    resultList = result['subjects'];
+//    weeklyBeans = resultList
+//        .map<SubjectEntity>((item) => SubjectEntity.fromMap(item))
+//        .toList();
+//    weeklyTopBean = TopItemBean.convertWeeklyBeans(weeklyBeans);
+//    paletteGenerator = await PaletteGenerator.fromImageProvider(
+//        NetworkImage(weeklyBeans[0].subject.images.medium));
+//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+//      weeklyTopColor = (paletteGenerator.colors.toList()[0]);
+//    }
+//    topTitle.setCount(weeklyBeans.length);
+//
+//    ///今日可播放电影
+//    start = math.Random().nextInt(220);
+//    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
+//    resultList = result['subjects'];
+//    List<Subject> beans =
+//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+//    todayUrls.add(beans[0].images.medium);
+//    todayUrls.add(beans[1].images.medium);
+//    todayUrls.add(beans[2].images.medium);
+//    paletteGenerator =
+//        await PaletteGenerator.fromImageProvider(NetworkImage(todayUrls[0]));
+//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+//      todayPlayBg = (paletteGenerator.colors.toList()[0]);
+//    }
+//
+//    ///豆瓣TOP250
+//    result = await _request.get(API.TOP_250 + '?start=0&count=5');
+//    resultList = result['subjects'];
+//    top250Beans =
+//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+//    weeklyTop250Bean = TopItemBean.convertTopBeans(top250Beans);
+//    paletteGenerator = await PaletteGenerator.fromImageProvider(
+//        NetworkImage(top250Beans[0].images.medium));
+//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+//      weeklyTop250Color = (paletteGenerator.colors.toList()[0]);
+//    }
+//    setState(() {
+//      print('setState');
+//    });
+  }
 }
 
 typedef OnTab = void Function();
