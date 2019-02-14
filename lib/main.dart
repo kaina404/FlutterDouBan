@@ -18,7 +18,7 @@ import 'package:douban_app/pages/photo_hero_page.dart';
 
 void main(){
   runApp(MyApp());
-  if (Platform.isAndroid) {
+  if (Platform.isAndroid) {//头部时间通知啥的导航栏透明
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
