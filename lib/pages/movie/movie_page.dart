@@ -86,9 +86,7 @@ class _MoviePageState extends State<MoviePage> {
     if (itemW == null) {
       imgSize = MediaQuery.of(context).size.width / 5 * 3;
       itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
-//      hotChildAspectRatio = itemW / 121.0 * (377.0 / 674.0);
       hotChildAspectRatio = (377.0 / 674.0);
-//      comingSoonChildAspectRatio = itemW / 121.0 * (377.0 / 712.0);
       comingSoonChildAspectRatio = (377.0 / 742.0);
     }
     return Padding(
