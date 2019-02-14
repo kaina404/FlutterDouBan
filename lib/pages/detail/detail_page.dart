@@ -135,7 +135,7 @@ class _DetailPageState extends State<DetailPage> {
             color: Color(0x44000000),
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         padding: EdgeInsets.all(12.0),
-        margin: EdgeInsets.only(top: 15.0),
+        margin: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
       ),
     );
   }
@@ -242,12 +242,12 @@ class _DetailPageState extends State<DetailPage> {
               children: <Widget>[
                 Expanded(
                     child: Text(
-                      '预告片 / 剧照',
-                      style: TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )),
+                  '预告片 / 剧照',
+                  style: TextStyle(
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
                 Text(
                   '全部 ${_movieDetailBean.photos.length} >',
                   style: TextStyle(
@@ -294,7 +294,7 @@ class _DetailPageState extends State<DetailPage> {
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 232, 145, 66),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(3.0)),
+                                  BorderRadius.all(Radius.circular(3.0)),
                             ),
                           )
                         ],
@@ -307,7 +307,7 @@ class _DetailPageState extends State<DetailPage> {
                   );
                 } else {
                   Photo bean = _movieDetailBean.photos[
-                  index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
+                      index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
                   return showBigImg(
                       Padding(
                         padding: EdgeInsets.only(right: 2.0),
@@ -344,7 +344,10 @@ class _DetailPageState extends State<DetailPage> {
         if (index == 0) {
           ///头布局
           return Container(
-            margin: EdgeInsets.only(top: 30.0),
+            margin: EdgeInsets.only(
+                top: 30.0,
+                left: Constant.MARGIN_LEFT,
+                right: Constant.MARGIN_RIGHT),
             decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
@@ -370,7 +373,9 @@ class _DetailPageState extends State<DetailPage> {
           ///显示脚布局
           return Container(
             padding: EdgeInsets.all(10.0),
-            margin: EdgeInsets.only(bottom: 20.0),
+            margin: EdgeInsets.only(bottom: 20.0,
+                left: Constant.MARGIN_LEFT,
+                right: Constant.MARGIN_RIGHT),
             decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
@@ -392,6 +397,7 @@ class _DetailPageState extends State<DetailPage> {
         } else {
           CommantsBeanCommants bean = commentsEntity.comments[index - 1];
           return Container(
+            margin: padding(),
             ///内容item
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -538,8 +544,9 @@ class _DetailPageState extends State<DetailPage> {
           child: getPadding(DetailTitleWidget(_movieDetailBean, pickColor)),
         ),
         SliverToBoxAdapter(
-          child: Padding(
+          child: Container(
             padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+            margin: padding(),
             child: ScoreStartWidget(
               score: _movieDetailBean.rating.average,
               p1: _movieDetailBean.rating.details.d1 / allCount,
@@ -559,7 +566,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  padding(){
+  padding() {
     return EdgeInsets.only(
         left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT);
   }
