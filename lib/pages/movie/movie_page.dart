@@ -99,7 +99,7 @@ class _MoviePageState extends State<MoviePage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              child: _getTodayPlayWidget(),
+              child: TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg),
               padding: EdgeInsets.only(top: 22.0),
             ),
           ),
@@ -413,10 +413,6 @@ class _MoviePageState extends State<MoviePage> {
     });
   }
 
-
-  TodayPlayMovieWidget _getTodayPlayWidget() {
-    return TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg);
-  }
 }
 
 typedef OnTab = void Function();
