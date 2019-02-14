@@ -180,9 +180,11 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SubjectMarkImageWidget(
-              bean.images.large,
-              width: itemW,
+            Expanded(
+              child: SubjectMarkImageWidget(
+                bean.images.large,
+                width: itemW,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 5.0),
