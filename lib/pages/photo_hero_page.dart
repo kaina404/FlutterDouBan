@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/widgets/title_bar.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 
 class PhotoHeroPage extends StatelessWidget {
   final String photoUrl;

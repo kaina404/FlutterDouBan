@@ -1,7 +1,7 @@
 import 'package:douban_app/bean/celebrity_work_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/celebrity_entity.dart';
 import 'package:douban_app/widgets/title_bar.dart';

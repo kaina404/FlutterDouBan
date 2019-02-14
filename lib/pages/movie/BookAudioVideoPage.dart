@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/FlutterTabBarView.dart';
 import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 

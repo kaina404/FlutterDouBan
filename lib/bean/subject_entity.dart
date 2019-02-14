@@ -17,6 +17,7 @@ class SubjectEntity {
 }
 
 class Subject {
+  bool tag = false;
   Rating rating;
   var genres;
   var title;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/GroupPage.dart';
+import 'package:douban_app/pages/group/group_page.dart';
 import 'package:douban_app/pages/movie/BookAudioVideoPage.dart';
 import 'package:douban_app/pages/home/home_page.dart';
 import 'package:douban_app/pages/PersonPage.dart';

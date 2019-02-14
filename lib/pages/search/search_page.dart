@@ -3,7 +3,7 @@ import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 import 'package:flutter/cupertino.dart';
 
 ///搜索

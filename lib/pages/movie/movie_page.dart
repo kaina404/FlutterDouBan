@@ -13,7 +13,7 @@ import 'dart:math' as math;
 import 'package:douban_app/widgets/image/CacheImgRadius.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/pages/movie/TopItemWidget.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 import 'package:douban_app/http/http_request.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 typedef TapCallback = void Function();
 
 ///《书影业》顶部四个TAB

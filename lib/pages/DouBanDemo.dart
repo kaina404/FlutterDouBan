@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/API.dart';
-import 'package:douban_app/manager/router.dart';
+import 'package:douban_app/router.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 
 class DouBanListView extends StatefulWidget {

@@ -4,13 +4,15 @@ class SearchTextFieldWidget extends StatelessWidget {
   final ValueChanged<String> onSubmitted;
   final VoidCallback onTab;
   final String hintText;
+  final EdgeInsetsGeometry margin;
 
-  SearchTextFieldWidget({Key key, this.hintText, this.onSubmitted, this.onTab})
+  SearchTextFieldWidget({Key key, this.hintText, this.onSubmitted, this.onTab, this.margin})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin == null ? EdgeInsets.all(0.0) : margin,
       width: MediaQuery.of(context).size.width,
       alignment: AlignmentDirectional.center,
       height: 37.0,
