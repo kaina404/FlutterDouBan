@@ -5,9 +5,11 @@ import 'package:douban_app/http/http_request.dart';
 import 'dart:math' as math;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:douban_app/http/API.dart';
+import 'package:douban_app/http/mock_request.dart';
 
 class MovieRepository {
-  var _request = HttpRequest(API.BASE_URL);
+  var _request = MockRequest();
+//  var _request = HttpRequest(API.BASE_URL);
 
   List<Subject> hotShowBeans; //影院热映
   List<Subject> comingSoonBeans; //即将上映
@@ -41,12 +43,14 @@ class MovieRepository {
     hotShowBeans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     ///即将上映
-    result = await _request.get('/v2/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    result = await _request.get(API.COMING_SOON);
     resultList = result['subjects'];
     comingSoonBeans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     int start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    ///这里使用了下面的模拟请求
+//    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    result = await _request.get(API.TOP_250);
     resultList = result['subjects'];
 
     ///豆瓣榜单
@@ -74,7 +78,9 @@ class MovieRepository {
     }
     ///今日可播放电影
     start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    ///这里使用了下面的模拟请求
+//    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    result = await _request.get(API.TOP_250);
     resultList = result['subjects'];
     List<Subject> beans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
@@ -89,7 +95,9 @@ class MovieRepository {
     }
 
     ///豆瓣TOP250
-    result = await _request.get(API.TOP_250 + '?start=0&count=5&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    /// ///这里使用了下面的模拟请求
+//    result = await _request.get(API.TOP_250 + '?start=0&count=5&apikey=0b2bdeda43b5688921839c8ecb20399b');
+    result = await _request.get(API.TOP_250);
     resultList = result['subjects'];
     top250Beans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
