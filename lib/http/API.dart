@@ -1,4 +1,4 @@
-import 'package:douban_app/http/HttpRequest.dart';
+import 'package:douban_app/http/http_request.dart';
 
 //import 'package:douban_app/bean/MovieBean.dart';
 //import 'package:douban_app/bean/ComingSoonBean.dart';

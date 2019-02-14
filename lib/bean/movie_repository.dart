@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
-import 'package:douban_app/http/HttpRequest.dart';
+import 'package:douban_app/http/http_request.dart';
 import 'dart:math' as math;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:douban_app/http/API.dart';
