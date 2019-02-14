@@ -11,6 +11,7 @@ import 'package:douban_app/widgets/image/radius_img.dart';
 import 'package:douban_app/repository/person_detail_repository.dart';
 import 'package:douban_app/widgets/ItemCountTitle.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
+import 'package:douban_app/widgets/title_bar.dart' as title;
 
 class PersonDetailPage extends StatefulWidget {
   final String id;
@@ -32,7 +33,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
   double itemW;
   double itemH;
   double photoH;
-  double titleSize = 15.0;
+  double titleSize = 16.0;
   bool loading = true;
 
   @override
@@ -46,18 +47,11 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
     itemW = MediaQuery.of(context).size.width / 4;
     itemH = itemW / 0.5;
     photoH = MediaQuery.of(context).size.width / 3;
-    return Scaffold(
-      appBar: CupertinoNavigationBar(
-        middle: Text('人物'),
-        backgroundColor: Colors.white,
-      ),
-      body: SafeArea(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(10.0),
-          child: LoadingWidget.containerLoadingBody(_getBody(),
-              loading: loading, backgroundColor: Colors.transparent),
-        ),
+    return title.TitleBar(
+      title: '人物',
+      body: LoadingWidget.containerLoadingBody(
+        _getBody(),
+        loading: loading,
       ),
     );
   }
@@ -75,22 +69,39 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     _PersonPhoto(
                       photoUrl: widget.personImgUrl,
                     ),
-                    Column(
-                      children: <Widget>[
-                        Text(celebrityEntity.name),
-                        Text(celebrityEntity.name_en),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            celebrityEntity.name,
+                            style: TextStyle(
+                                fontSize: 19.0, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            celebrityEntity.name_en,
+                            style: TextStyle(fontSize: 13.0),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
-                Text(
-                  '简介',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: titleSize),
+                Padding(
+                  padding: EdgeInsets.only(top: 25.0, bottom: 7.0),
+                  child: Text(
+                    '简介',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: titleSize),
+                  ),
                 ),
                 Text(
                   celebrityEntity.summary,
@@ -102,10 +113,13 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
             ),
           ),
           SliverToBoxAdapter(
-            child: ItemCountTitle(
-              '影视',
-              count: celebrityWorkEntity.works.length,
-              fontSize: titleSize,
+            child: Padding(
+              padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
+              child: ItemCountTitle(
+                '影视',
+                count: celebrityWorkEntity.works.length,
+                fontSize: titleSize,
+              ),
             ),
           ),
           SliverToBoxAdapter(

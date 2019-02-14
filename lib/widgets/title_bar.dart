@@ -29,6 +29,7 @@ class TitleBar extends StatelessWidget {
     } else {}
     return Scaffold(
       body: Container(
+        padding: padding == null ? EdgeInsets.all(10.0) : padding,
         alignment: Alignment.center,
         child: SafeArea(
             child: Column(
@@ -36,7 +37,10 @@ class TitleBar extends StatelessWidget {
           children: <Widget>[
             _title(context),
             Expanded(
-              child: body,
+              child: Padding(
+                padding: EdgeInsets.all(12.0),
+                child: body,
+              ),
             )
           ],
         )),
@@ -46,34 +50,31 @@ class TitleBar extends StatelessWidget {
   }
 
   Widget _title(BuildContext context) {
-    return Padding(
-      padding: padding == null ? EdgeInsets.all(10.0) : padding,
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              child: Image.asset(
-                Constant.ASSETS_IMG + 'ic_arrow_back.png',
-                width: 25.0,
-                height: 25.0,
-              ),
-              onTap: () {
-                if (onTabBack == null) {
-                  Navigator.of(context).pop();
-                }
-              },
+    return Stack(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: GestureDetector(
+            child: Image.asset(
+              Constant.ASSETS_IMG + 'ic_arrow_back.png',
+              width: 25.0,
+              height: 25.0,
             ),
+            onTap: () {
+              if (onTabBack == null) {
+                Navigator.of(context).pop();
+              }
+            },
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              title == null ? '' : title,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
-          )
-        ],
-      ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            title == null ? '' : title,
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          ),
+        )
+      ],
     );
   }
 }
