@@ -62,8 +62,6 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       backgroundColor: pickColor,
       body: Container(
-        margin: EdgeInsets.only(
-            left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
         child: SafeArea(child: _getBody()),
       ),
     );
@@ -74,6 +72,7 @@ class _DetailPageState extends State<DetailPage> {
     return SliverToBoxAdapter(
       child: Container(
         height: 30.0,
+        padding: padding(),
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: _movieDetailBean.tags.length + 1,
@@ -144,7 +143,7 @@ class _DetailPageState extends State<DetailPage> {
   ///演职员
   SliverToBoxAdapter sliverCasts() {
     return SliverToBoxAdapter(
-      child: Column(
+      child: getPadding(Column(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
@@ -189,7 +188,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
           )
         ],
-      ),
+      )),
     );
   }
 
@@ -235,7 +234,7 @@ class _DetailPageState extends State<DetailPage> {
     var h = w / 727 * 488;
     _movieDetailBean.trailers.addAll(_movieDetailBean.bloopers);
     return SliverToBoxAdapter(
-      child: Column(
+      child: getPadding(Column(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
@@ -243,12 +242,12 @@ class _DetailPageState extends State<DetailPage> {
               children: <Widget>[
                 Expanded(
                     child: Text(
-                  '预告片 / 剧照',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                )),
+                      '预告片 / 剧照',
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
                 Text(
                   '全部 ${_movieDetailBean.photos.length} >',
                   style: TextStyle(
@@ -295,7 +294,7 @@ class _DetailPageState extends State<DetailPage> {
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 232, 145, 66),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(3.0)),
+                              BorderRadius.all(Radius.circular(3.0)),
                             ),
                           )
                         ],
@@ -308,7 +307,7 @@ class _DetailPageState extends State<DetailPage> {
                   );
                 } else {
                   Photo bean = _movieDetailBean.photos[
-                      index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
+                  index - (_movieDetailBean.trailers.isNotEmpty ? 1 : 0)];
                   return showBigImg(
                       Padding(
                         padding: EdgeInsets.only(right: 2.0),
@@ -327,7 +326,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
           )
         ],
-      ),
+      )),
     );
   }
 
@@ -529,8 +528,14 @@ class _DetailPageState extends State<DetailPage> {
         _movieDetailBean.rating.details.d5;
     return CustomScrollView(
       slivers: <Widget>[
+        SliverAppBar(
+          title: Text('电影'),
+          centerTitle: true,
+          pinned: true,
+          backgroundColor: pickColor,
+        ),
         SliverToBoxAdapter(
-          child: DetailTitleWidget(_movieDetailBean, pickColor),
+          child: getPadding(DetailTitleWidget(_movieDetailBean, pickColor)),
         ),
         SliverToBoxAdapter(
           child: Padding(
@@ -551,6 +556,19 @@ class _DetailPageState extends State<DetailPage> {
         trailers(context),
         sliverComments(),
       ],
+    );
+  }
+
+  padding(){
+    return EdgeInsets.only(
+        left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT);
+  }
+
+  getPadding(Widget body) {
+    return Padding(
+      padding: EdgeInsets.only(
+          left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
+      child: body,
     );
   }
 }
