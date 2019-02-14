@@ -7,6 +7,7 @@ import 'package:douban_app/bean/MovieDetailBean.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/bean/celebrity_entity.dart' as celebrity;
+import 'package:douban_app/bean/celebrity_work_entity.dart';
 import 'dart:math' as math;
 typedef RequestCallBack<T> = void Function(T value);
 
@@ -125,6 +126,10 @@ class API {
     requestCallBack(bean);
   }
 
-///影人作品 https://api.douban.com/v2/movie/celebrity/1000525/works?apikey=0b2bdeda43b5688921839c8ecb20399b
-
+  ///影人作品 https://api.douban.com/v2/movie/celebrity/1000525/works?apikey=0b2bdeda43b5688921839c8ecb20399b
+  void searchCelebrityWorks(String id, RequestCallBack requestCallBack) async {
+    final result = await _query(CELEBRITY, id);
+    CelebrityWorkCelebrity bean = CelebrityWorkCelebrity.fromJson(result);
+    requestCallBack(bean);
+  }
 }
