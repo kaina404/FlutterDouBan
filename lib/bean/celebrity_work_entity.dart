@@ -120,7 +120,7 @@ class CelebrityWorkWorksSubject {
 	List<CelebrityWorkWorksSubjectCast> casts;
 	String subtype;
 	List<String> genres;
-	List<Null> durations;
+	List<String> durations;
 	String mainlandPubdate;
 	String id;
 
@@ -268,9 +268,9 @@ class CelebrityWorkWorksSubjectDirectorsAvatars {
 }
 
 class CelebrityWorkWorksSubjectRating {
-	int average;
-	int min;
-	int max;
+	var average;
+	var min;
+	var max;
 	CelebrityWorkWorksSubjectRatingDetails details;
 	String stars;
 
@@ -298,11 +298,11 @@ class CelebrityWorkWorksSubjectRating {
 }
 
 class CelebrityWorkWorksSubjectRatingDetails {
-	int d1;
-	int d2;
-	int d3;
-	int d4;
-	int d5;
+	var d1;
+	var d2;
+	var d3;
+	var d4;
+	var d5;
 
 	CelebrityWorkWorksSubjectRatingDetails({this.d1, this.d2, this.d3, this.d4, this.d5});
 

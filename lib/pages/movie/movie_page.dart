@@ -3,7 +3,7 @@ import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
-import 'package:douban_app/pages/movie/ItemCountTitle.dart';
+import 'package:douban_app/widgets/ItemCountTitle.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/bean/TopItemBean.dart';
@@ -17,7 +17,7 @@ import 'package:douban_app/manager/router.dart';
 import 'package:douban_app/http/http_request.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
-import 'package:douban_app/bean/movie_repository.dart';
+import 'package:douban_app/repository/movie_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 ///书影音-电影
@@ -29,10 +29,11 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  Widget titleWidget, hotSoonTabBarPadding, hotTitlePadding, topPadding;
+  Widget titleWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
-  ItemCountTitle hotTitle; //豆瓣热门
-  ItemCountTitle topTitle; //豆瓣榜单
+
+//  ItemCountTitle hotTitle; //豆瓣热门
+//  ItemCountTitle topTitle; //豆瓣榜单
   List<Subject> hotShowBeans = List(); //影院热映
   List<Subject> comingSoonBeans = List(); //即将上映
   List<Subject> hotBeans = List(); //豆瓣榜单
@@ -69,18 +70,18 @@ class _MoviePageState extends State<MoviePage> {
       child: hotSoonTabBar,
     );
 
-    hotTitle = ItemCountTitle('豆瓣热门');
+//    hotTitle = ItemCountTitle('豆瓣热门');
 
-    hotTitlePadding = Padding(
-      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
-      child: hotTitle,
-    );
+//    hotTitlePadding = Padding(
+//      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+//      child: ItemCountTitle('豆瓣热门'),
+//    );
 
-    topTitle = ItemCountTitle('豆瓣榜单');
-    topPadding = Padding(
-      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
-      child: topTitle,
-    );
+//    topTitle = ItemCountTitle('豆瓣榜单');
+//    topPadding = Padding(
+//      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+//      child: ItemCountTitle('豆瓣榜单'),
+//    );
     requestAPI();
   }
 
@@ -281,8 +282,8 @@ class _MoviePageState extends State<MoviePage> {
       todayPlayBg = value.todayPlayBg;
       hotSoonTabBar.setCount(hotShowBeans);
       hotSoonTabBar.setComingSoon(comingSoonBeans);
-      hotTitle.setCount(hotBeans.length);
-      topTitle.setCount(weeklyBeans.length);
+//      hotTitle.setCount(hotBeans.length);
+//      topTitle.setCount(weeklyBeans.length);
       setState(() {
         loading = false;
       });
@@ -342,12 +343,25 @@ class _MoviePageState extends State<MoviePage> {
                   childAspectRatio: _getRadio())),
           getCommonImg(Constant.IMG_TMP1, null),
           SliverToBoxAdapter(
-            child: hotTitlePadding,
+            child: Padding(
+              padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+              child: ItemCountTitle(
+                '豆瓣热门',
+                fontSize: 13.0,
+                count: hotBeans == null ? 0 : hotBeans.length,
+              ),
+            ),
           ),
           getCommonSliverGrid(hotBeans),
           getCommonImg(Constant.IMG_TMP2, null),
           SliverToBoxAdapter(
-            child: topPadding,
+            child: Padding(
+              padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+              child: ItemCountTitle(
+                '豆瓣榜单',
+                count: weeklyBeans == null ? 0 : weeklyBeans.length,
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Container(
@@ -396,7 +410,9 @@ var loadingBody = new Container(
     child: SizedBox(
       height: 25.0,
       width: 25.0,
-      child: CupertinoActivityIndicator(radius: 15.0,),
+      child: CupertinoActivityIndicator(
+        radius: 15.0,
+      ),
     ),
   ),
 );

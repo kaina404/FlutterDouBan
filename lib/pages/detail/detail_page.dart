@@ -10,7 +10,7 @@ import 'package:douban_app/pages/detail/look_confirm_button.dart';
 import 'dart:math' as math;
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 import 'package:douban_app/manager/router.dart';
-import 'package:douban_app/pages/movie/ItemCountTitle.dart';
+import 'package:douban_app/widgets/ItemCountTitle.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
