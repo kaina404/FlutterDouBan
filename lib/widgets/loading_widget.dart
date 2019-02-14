@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoadingWidget {
-  static Widget getLoading() {
+  static Widget getLoading({Color backgroundColor, Color loadingBgColor}) {
     return Container(
       alignment: AlignmentDirectional.center,
       decoration: new BoxDecoration(
-        color: Color(0x22000000),
+        color: backgroundColor == null ? Color(0x22000000) : backgroundColor,
       ),
       child: new Container(
         decoration: new BoxDecoration(
-            color: Colors.white, borderRadius: new BorderRadius.circular(10.0)),
+            color: loadingBgColor == null ? Colors.white : loadingBgColor, borderRadius: new BorderRadius.circular(10.0)),
         width: 70.0,
         height: 70.0,
         alignment: AlignmentDirectional.center,
@@ -25,12 +25,14 @@ class LoadingWidget {
     );
   }
 
-  static Widget containerLoadingBody(Widget body, {bool loading = true}) {
+  static Widget containerLoadingBody(Widget body,
+      {bool loading = true, Color backgroundColor, Color loadingBgColor}) {
     return Stack(
       children: <Widget>[
         body,
         Offstage(
-          child: LoadingWidget.getLoading(),
+          child: getLoading(
+              backgroundColor: backgroundColor, loadingBgColor: loadingBgColor),
           offstage: !loading,
         )
       ],

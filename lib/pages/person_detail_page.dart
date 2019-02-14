@@ -10,6 +10,7 @@ import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
 import 'package:douban_app/repository/person_detail_repository.dart';
 import 'package:douban_app/widgets/ItemCountTitle.dart';
+import 'package:douban_app/widgets/loading_widget.dart';
 
 class PersonDetailPage extends StatefulWidget {
   final String id;
@@ -31,7 +32,8 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
   double itemW;
   double itemH;
   double photoH;
-  double titleSize = 13.0;
+  double titleSize = 15.0;
+  bool loading = true;
 
   @override
   void initState() {
@@ -53,7 +55,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
         child: Container(
           color: Colors.white,
           padding: EdgeInsets.all(10.0),
-          child: _getBody(),
+          child: LoadingWidget.containerLoadingBody(_getBody(), loading: loading,backgroundColor: Colors.transparent),
         ),
       ),
     );
@@ -154,6 +156,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
     Future(() => (PersonDetailRepository().requestAPI(widget.id)))
         .then((personDetailRepository) {
       setState(() {
+        loading = false;
         celebrityEntity = personDetailRepository.celebrityEntity;
         celebrityWorkEntity = personDetailRepository.celebrityWorkEntity;
       });
