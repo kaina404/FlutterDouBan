@@ -120,24 +120,24 @@ class _MoviePageState extends State<MoviePage> {
                 return Stack(
                   children: <Widget>[
                     Offstage(
-                      child: getComingSoonItem(comingSoonBean, itemW),
+                      child: _getComingSoonItem(comingSoonBean, itemW),
                       offstage: !(selectIndex == 1 &&
                           comingSoonBeans != null &&
                           comingSoonBeans.length > 0),
                     ),
                     Offstage(
-                        child: getHotMovieItem(hotMovieBean, itemW),
+                        child: _getHotMovieItem(hotMovieBean, itemW),
                         offstage: !(selectIndex == 0 &&
                             hotShowBeans != null &&
                             hotShowBeans.length > 0))
                   ],
                 );
-              }, childCount: math.min(getChildCount(), 6)),
+              }, childCount: math.min(_getChildCount(), 6)),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
-                  childAspectRatio: getRadio())),
+                  childAspectRatio: _getRadio())),
           getCommonImg(Constant.IMG_TMP1, null),
           SliverToBoxAdapter(
             child: hotTitlePadding,
@@ -178,7 +178,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   ///即将上映item
-  Widget getComingSoonItem(Subject comingSoonBean, var itemW) {
+  Widget _getComingSoonItem(Subject comingSoonBean, var itemW) {
     if (comingSoonBean == null) {
       return Container();
     }
@@ -244,7 +244,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   ///影院热映item
-  Widget getHotMovieItem(Subject hotMovieBean, var itemW) {
+  Widget _getHotMovieItem(Subject hotMovieBean, var itemW) {
     if (hotMovieBean == null) {
       return Container();
     }
@@ -288,7 +288,7 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
-  int getChildCount() {
+  int _getChildCount() {
     if (selectIndex == 0) {
       return hotShowBeans.length;
     } else {
@@ -296,7 +296,7 @@ class _MoviePageState extends State<MoviePage> {
     }
   }
 
-  double getRadio() {
+  double _getRadio() {
     if (selectIndex == 0) {
       return hotChildAspectRatio;
     } else {
@@ -308,7 +308,7 @@ class _MoviePageState extends State<MoviePage> {
   SliverGrid getCommonSliverGrid(List<Subject> hotBeans) {
     return SliverGrid(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-          return getHotMovieItem(hotBeans[index], itemW);
+          return _getHotMovieItem(hotBeans[index], itemW);
         }, childCount: math.min(hotBeans.length, 6)),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
