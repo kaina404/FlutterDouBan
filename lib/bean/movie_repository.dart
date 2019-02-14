@@ -40,24 +40,18 @@ class MovieRepository {
     var resultList = result['subjects'];
     hotShowBeans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotSoonTabBar.setCount(hotShowBeans);
     ///即将上映
-    result = await _request
-        .get(API.COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    result = await _request.get('/v2/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b');
     resultList = result['subjects'];
     comingSoonBeans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotSoonTabBar.setComingSoon(comingSoonBeans);
-
     int start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
+    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
     resultList = result['subjects'];
 
     ///豆瓣榜单
     hotBeans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotTitle.setCount(hotBeans.length);
-
     ///一周热门电影榜
     weeklyHotBean = TopItemBean.convertHotBeans(hotBeans);
     var paletteGenerator = await PaletteGenerator.fromImageProvider(
@@ -78,11 +72,9 @@ class MovieRepository {
     if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
       weeklyTopColor = (paletteGenerator.colors.toList()[0]);
     }
-//    topTitle.setCount(weeklyBeans.length);
-
     ///今日可播放电影
     start = math.Random().nextInt(220);
-    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
+    result = await _request.get(API.TOP_250 + '?start=$start&count=7&apikey=0b2bdeda43b5688921839c8ecb20399b');
     resultList = result['subjects'];
     List<Subject> beans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
@@ -97,7 +89,7 @@ class MovieRepository {
     }
 
     ///豆瓣TOP250
-    result = await _request.get(API.TOP_250 + '?start=0&count=5');
+    result = await _request.get(API.TOP_250 + '?start=0&count=5&apikey=0b2bdeda43b5688921839c8ecb20399b');
     resultList = result['subjects'];
     top250Beans =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();

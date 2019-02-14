@@ -18,6 +18,7 @@ import 'package:douban_app/http/HttpRequest.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:douban_app/bean/movie_repository.dart';
+import 'package:flutter/cupertino.dart';
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -91,92 +92,14 @@ class _MoviePageState extends State<MoviePage> {
       hotChildAspectRatio = (377.0 / 674.0);
       comingSoonChildAspectRatio = (377.0 / 742.0);
     }
-    return Padding(
-      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-      child: CustomScrollView(
-        shrinkWrap: true,
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: titleWidget,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              child:
-                  TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg),
-              padding: EdgeInsets.only(top: 22.0),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: hotSoonTabBarPadding,
-          ),
-          SliverGrid(
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
-                var hotMovieBean;
-                var comingSoonBean;
-                if (hotShowBeans.length > 0) {
-                  hotMovieBean = hotShowBeans[index];
-                }
-                if (comingSoonBeans.length > 0) {
-                  comingSoonBean = comingSoonBeans[index];
-                }
-                return Stack(
-                  children: <Widget>[
-                    Offstage(
-                      child: _getComingSoonItem(comingSoonBean, itemW),
-                      offstage: !(selectIndex == 1 &&
-                          comingSoonBeans != null &&
-                          comingSoonBeans.length > 0),
-                    ),
-                    Offstage(
-                        child: _getHotMovieItem(hotMovieBean, itemW),
-                        offstage: !(selectIndex == 0 &&
-                            hotShowBeans != null &&
-                            hotShowBeans.length > 0))
-                  ],
-                );
-              }, childCount: math.min(_getChildCount(), 6)),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 0.0,
-                  childAspectRatio: _getRadio())),
-          getCommonImg(Constant.IMG_TMP1, null),
-          SliverToBoxAdapter(
-            child: hotTitlePadding,
-          ),
-          getCommonSliverGrid(hotBeans),
-          getCommonImg(Constant.IMG_TMP2, null),
-          SliverToBoxAdapter(
-            child: topPadding,
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: imgSize,
-              child: ListView(
-                children: [
-                  TopItemWidget(
-                    title: '一周口碑电影榜',
-                    bean: weeklyTopBean,
-                    partColor: weeklyTopColor,
-                  ),
-                  TopItemWidget(
-                    title: '一周热门电影榜',
-                    bean: weeklyHotBean,
-                    partColor: weeklyHotColor,
-                  ),
-                  TopItemWidget(
-                    title: '豆瓣电影 Top250',
-                    bean: weeklyTop250Bean,
-                    partColor: weeklyTop250Color,
-                  )
-                ],
-                scrollDirection: Axis.horizontal,
-              ),
-            ),
-          )
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        containerBody(),
+        Offstage(
+          child: loadingBody,
+          offstage: !loading,
+        )
+      ],
     );
   }
 
@@ -338,107 +261,142 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
-//  var _request = HttpRequest(API.BASE_URL);
   MovieRepository repository = MovieRepository();
+  bool loading = true;
 
   void requestAPI() async {
-    Future(() => (repository.requestAPI())).then((repository) {
-      hotShowBeans = repository.hotShowBeans;
-      comingSoonBeans = repository.comingSoonBeans;
-      hotBeans = repository.hotBeans;
-      weeklyBeans = repository.weeklyBeans;
-      top250Beans = repository.top250Beans;
-      todayUrls = repository.todayUrls;
-      weeklyTopBean = repository.weeklyTopBean;
-      weeklyHotBean = repository.weeklyHotBean;
-      weeklyTop250Bean = repository.weeklyTop250Bean;
-      weeklyTopColor = repository.weeklyTopColor;
-      weeklyHotColor = repository.weeklyHotColor;
-      weeklyTop250Color = repository.weeklyTop250Color;
-      todayPlayBg = repository.todayPlayBg;
+    Future(() => (repository.requestAPI())).then((value) {
+      hotShowBeans = value.hotShowBeans;
+      comingSoonBeans = value.comingSoonBeans;
+      hotBeans = value.hotBeans;
+      weeklyBeans = value.weeklyBeans;
+      top250Beans = value.top250Beans;
+      todayUrls = value.todayUrls;
+      weeklyTopBean = value.weeklyTopBean;
+      weeklyHotBean = value.weeklyHotBean;
+      weeklyTop250Bean = value.weeklyTop250Bean;
+      weeklyTopColor = value.weeklyTopColor;
+      weeklyHotColor = value.weeklyHotColor;
+      weeklyTop250Color = value.weeklyTop250Color;
+      todayPlayBg = value.todayPlayBg;
       hotSoonTabBar.setCount(hotShowBeans);
       hotSoonTabBar.setComingSoon(comingSoonBeans);
       hotTitle.setCount(hotBeans.length);
       topTitle.setCount(weeklyBeans.length);
       setState(() {
-
+        loading = false;
       });
     });
+  }
 
-//    ///影院热映
-//    var result = await _request.get(API.IN_THEATERS);
-//    var resultList = result['subjects'];
-//    hotShowBeans =
-//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotSoonTabBar.setCount(hotShowBeans);
-//    ///即将上映
-//    result = await _request
-//        .get(API.COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
-//    resultList = result['subjects'];
-//    comingSoonBeans =
-//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotSoonTabBar.setComingSoon(comingSoonBeans);
-//
-//
-//    int start = math.Random().nextInt(220);
-//    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
-//    resultList = result['subjects'];
-//    ///豆瓣榜单
-//    hotBeans =
-//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    hotTitle.setCount(hotBeans.length);
-//
-//    ///一周热门电影榜
-//    weeklyHotBean = TopItemBean.convertHotBeans(hotBeans);
-//    var paletteGenerator = await PaletteGenerator.fromImageProvider(
-//        NetworkImage(hotBeans[0].images.medium));
-//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-//      weeklyHotColor = (paletteGenerator.colors.toList()[0]);
-//    }
-//    ///一周口碑电影榜
-//    result = await _request.get(API.WEEKLY);
-//    resultList = result['subjects'];
-//    weeklyBeans = resultList
-//        .map<SubjectEntity>((item) => SubjectEntity.fromMap(item))
-//        .toList();
-//    weeklyTopBean = TopItemBean.convertWeeklyBeans(weeklyBeans);
-//    paletteGenerator = await PaletteGenerator.fromImageProvider(
-//        NetworkImage(weeklyBeans[0].subject.images.medium));
-//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-//      weeklyTopColor = (paletteGenerator.colors.toList()[0]);
-//    }
-//    topTitle.setCount(weeklyBeans.length);
-//
-//    ///今日可播放电影
-//    start = math.Random().nextInt(220);
-//    result = await _request.get(API.TOP_250 + '?start=$start&count=7');
-//    resultList = result['subjects'];
-//    List<Subject> beans =
-//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    todayUrls.add(beans[0].images.medium);
-//    todayUrls.add(beans[1].images.medium);
-//    todayUrls.add(beans[2].images.medium);
-//    paletteGenerator =
-//        await PaletteGenerator.fromImageProvider(NetworkImage(todayUrls[0]));
-//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-//      todayPlayBg = (paletteGenerator.colors.toList()[0]);
-//    }
-//
-//    ///豆瓣TOP250
-//    result = await _request.get(API.TOP_250 + '?start=0&count=5');
-//    resultList = result['subjects'];
-//    top250Beans =
-//        resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-//    weeklyTop250Bean = TopItemBean.convertTopBeans(top250Beans);
-//    paletteGenerator = await PaletteGenerator.fromImageProvider(
-//        NetworkImage(top250Beans[0].images.medium));
-//    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
-//      weeklyTop250Color = (paletteGenerator.colors.toList()[0]);
-//    }
-//    setState(() {
-//      print('setState');
-//    });
+  Widget containerBody() {
+    return Padding(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      child: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: titleWidget,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              child:
+                  TodayPlayMovieWidget(todayUrls, backgroundColor: todayPlayBg),
+              padding: EdgeInsets.only(top: 22.0),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: hotSoonTabBarPadding,
+          ),
+          SliverGrid(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                var hotMovieBean;
+                var comingSoonBean;
+                if (hotShowBeans.length > 0) {
+                  hotMovieBean = hotShowBeans[index];
+                }
+                if (comingSoonBeans.length > 0) {
+                  comingSoonBean = comingSoonBeans[index];
+                }
+                return Stack(
+                  children: <Widget>[
+                    Offstage(
+                      child: _getComingSoonItem(comingSoonBean, itemW),
+                      offstage: !(selectIndex == 1 &&
+                          comingSoonBeans != null &&
+                          comingSoonBeans.length > 0),
+                    ),
+                    Offstage(
+                        child: _getHotMovieItem(hotMovieBean, itemW),
+                        offstage: !(selectIndex == 0 &&
+                            hotShowBeans != null &&
+                            hotShowBeans.length > 0))
+                  ],
+                );
+              }, childCount: math.min(_getChildCount(), 6)),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 0.0,
+                  childAspectRatio: _getRadio())),
+          getCommonImg(Constant.IMG_TMP1, null),
+          SliverToBoxAdapter(
+            child: hotTitlePadding,
+          ),
+          getCommonSliverGrid(hotBeans),
+          getCommonImg(Constant.IMG_TMP2, null),
+          SliverToBoxAdapter(
+            child: topPadding,
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: imgSize,
+              child: ListView(
+                children: [
+                  TopItemWidget(
+                    title: '一周口碑电影榜',
+                    bean: weeklyTopBean,
+                    partColor: weeklyTopColor,
+                  ),
+                  TopItemWidget(
+                    title: '一周热门电影榜',
+                    bean: weeklyHotBean,
+                    partColor: weeklyHotColor,
+                  ),
+                  TopItemWidget(
+                    title: '豆瓣电影 Top250',
+                    bean: weeklyTop250Bean,
+                    partColor: weeklyTop250Color,
+                  )
+                ],
+                scrollDirection: Axis.horizontal,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
 typedef OnTab = void Function();
+
+var loadingBody = new Container(
+  alignment: AlignmentDirectional.center,
+  decoration: new BoxDecoration(
+    color: Color(0x22000000),
+  ),
+  child: new Container(
+    decoration: new BoxDecoration(
+        color: Colors.white, borderRadius: new BorderRadius.circular(10.0)),
+    width: 70.0,
+    height: 70.0,
+    alignment: AlignmentDirectional.center,
+    child: SizedBox(
+      height: 25.0,
+      width: 25.0,
+      child: CupertinoActivityIndicator(radius: 15.0,),
+    ),
+  ),
+);

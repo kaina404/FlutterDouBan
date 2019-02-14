@@ -25,6 +25,8 @@ dependencies:
   palette_generator: ^0.1.0
 
   video_player: ^0.10.0+1
+  # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
+  dio: ^1.0.13
 
 dev_dependencies:
   flutter_test:

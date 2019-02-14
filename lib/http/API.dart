@@ -18,10 +18,10 @@ class API {
   static const String TOP_250 = '/v2/movie/top250';
 
   ///正在热映
-  static const String IN_THEATERS = '/v2/movie/in_theaters';
+  static const String IN_THEATERS = '/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b';
 
   ///即将上映
-  static const String COMING_SOON = '/v2/movie/coming_soon';
+  static const String COMING_SOON = '/v2/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b';
 
   ///一周口碑榜
   static const String WEEKLY = '/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b';
@@ -37,13 +37,9 @@ class API {
     return result;
   }
 
-  void getTop250(RequestCallBack requestCallBack) async {
-    final Map result = await _request.get(TOP_250);
-    requestCallBack(result);
-  }
 
   void top250(RequestCallBack requestCallBack, {count = 250}) async {
-    final Map result = await _request.get(TOP_250 + '?start=0&count=$count');
+    final Map result = await _request.get(TOP_250 + '?start=0&count=$count&apikey=0b2bdeda43b5688921839c8ecb20399b');
     var resultList = result['subjects'];
     List<Subject> list =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
