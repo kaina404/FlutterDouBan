@@ -12,22 +12,22 @@ import 'dart:math' as math;
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
-  static String BASE_URL = 'https://api.douban.com';
+  static const BASE_URL = 'https://api.douban.com';
 
   ///TOP250
-  String TOP_250 = '/v2/movie/top250';
+  static const String TOP_250 = '/v2/movie/top250';
 
   ///正在热映
-  String IN_THEATERS = '/v2/movie/in_theaters';
+  static const String IN_THEATERS = '/v2/movie/in_theaters';
 
   ///即将上映
-  String COMING_SOON = '/v2/movie/coming_soon';
+  static const String COMING_SOON = '/v2/movie/coming_soon';
 
   ///一周口碑榜
-  String WEEKLY = '/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b';
+  static const String WEEKLY = '/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b';
 
   ///影人条目信息
-  String CELEBRITY = '/v2/movie/celebrity/';
+  static const String CELEBRITY = '/v2/movie/celebrity/';
 
   var _request = HttpRequest(API.BASE_URL);
 
