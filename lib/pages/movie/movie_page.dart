@@ -19,6 +19,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:douban_app/repository/movie_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:douban_app/widgets/loading_widget.dart';
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
@@ -97,7 +98,7 @@ class _MoviePageState extends State<MoviePage> {
       children: <Widget>[
         containerBody(),
         Offstage(
-          child: loadingBody,
+          child: LoadingWidget.getLoading(),
           offstage: !loading,
         )
       ],
@@ -395,24 +396,24 @@ class _MoviePageState extends State<MoviePage> {
 }
 
 typedef OnTab = void Function();
-
-var loadingBody = new Container(
-  alignment: AlignmentDirectional.center,
-  decoration: new BoxDecoration(
-    color: Color(0x22000000),
-  ),
-  child: new Container(
-    decoration: new BoxDecoration(
-        color: Colors.white, borderRadius: new BorderRadius.circular(10.0)),
-    width: 70.0,
-    height: 70.0,
-    alignment: AlignmentDirectional.center,
-    child: SizedBox(
-      height: 25.0,
-      width: 25.0,
-      child: CupertinoActivityIndicator(
-        radius: 15.0,
-      ),
-    ),
-  ),
-);
+//
+//var loadingBody = new Container(
+//  alignment: AlignmentDirectional.center,
+//  decoration: new BoxDecoration(
+//    color: Color(0x22000000),
+//  ),
+//  child: new Container(
+//    decoration: new BoxDecoration(
+//        color: Colors.white, borderRadius: new BorderRadius.circular(10.0)),
+//    width: 70.0,
+//    height: 70.0,
+//    alignment: AlignmentDirectional.center,
+//    child: SizedBox(
+//      height: 25.0,
+//      width: 25.0,
+//      child: CupertinoActivityIndicator(
+//        radius: 15.0,
+//      ),
+//    ),
+//  ),
+//);
