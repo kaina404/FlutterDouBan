@@ -15,6 +15,10 @@ import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/widgets/animal_photo.dart';
+import 'package:palette_generator/palette_generator.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
+import 'package:douban_app/http/http_request.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -38,28 +42,12 @@ class _DetailPageState extends State<DetailPage> {
 
   API _api = API();
   MovieDetailBean _movieDetailBean;
+  var _request = HttpRequest(API.BASE_URL);
 
   @override
   void initState() {
     super.initState();
-    _api.getMovieDetail(subjectId, (movieDetailBean) {
-      _movieDetailBean = movieDetailBean;
-      setState(() {});
-      //提取海报主题色 https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2541901817.jpg
-      PickImgMainColor.pick(NetworkImage(_movieDetailBean.images.large),
-          (color) {
-        if (color != null) {
-          setState(() {
-            pickColor = color;
-          });
-        }
-      });
-    });
-    _api.getComments(subjectId, (commentsEntity) {
-      setState(() {
-        this.commentsEntity = commentsEntity;
-      });
-    });
+    requestAPI();
   }
 
   @override
@@ -538,5 +526,25 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
+  }
+
+  void requestAPI() async {
+    Future(() {
+      return _request.get(
+          '/v2/movie/subject/$subjectId?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    }).then((result) {
+      _movieDetailBean = MovieDetailBean.fromJson(result);
+      return PaletteGenerator.fromImageProvider(
+          NetworkImage(_movieDetailBean.images.large));
+    }).then((paletteGenerator) {
+      if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+        pickColor = paletteGenerator.colors.toList()[0];
+      }
+      return _request.get(
+          '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    }).then((result2) {
+      commentsEntity = CommentsEntity.fromJson(result2);
+      setState(() {});
+    });
   }
 }
