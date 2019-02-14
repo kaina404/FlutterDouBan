@@ -19,6 +19,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:douban_app/http/http_request.dart';
+import 'package:douban_app/widgets/loading_widget.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -35,12 +36,11 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   final subjectId;
   Color pickColor = Color(0xffffffff); //默认主题色
-//  Router _router = Router();
   CommentsEntity commentsEntity;
+  bool loading = true;
 
   _DetailPageState(this.subjectId);
 
-  API _api = API();
   MovieDetailBean _movieDetailBean;
   var _request = HttpRequest(API.BASE_URL);
 
@@ -54,46 +54,17 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     if (_movieDetailBean == null) {
       return Scaffold(
-        body: CupertinoActivityIndicator(),
+        body: Center(
+          child: CupertinoActivityIndicator(),
+        ),
       );
     }
-    var allCount = _movieDetailBean.rating.details.d1 +
-        _movieDetailBean.rating.details.d2 +
-        _movieDetailBean.rating.details.d3 +
-        _movieDetailBean.rating.details.d4 +
-        _movieDetailBean.rating.details.d5;
-
     return Scaffold(
       backgroundColor: pickColor,
       body: Container(
         margin: EdgeInsets.only(
             left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
-        child: SafeArea(
-            child: CustomScrollView(
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: DetailTitleWidget(_movieDetailBean, pickColor),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
-                child: ScoreStartWidget(
-                  score: _movieDetailBean.rating.average,
-                  p1: _movieDetailBean.rating.details.d1 / allCount,
-                  p2: _movieDetailBean.rating.details.d2 / allCount,
-                  p3: _movieDetailBean.rating.details.d3 / allCount,
-                  p4: _movieDetailBean.rating.details.d4 / allCount,
-                  p5: _movieDetailBean.rating.details.d5 / allCount,
-                ),
-              ),
-            ),
-            sliverTags(),
-            sliverSummary(),
-            sliverCasts(),
-            trailers(context),
-            sliverComments(),
-          ],
-        )),
+        child: SafeArea(child: _getBody()),
       ),
     );
   }
@@ -544,7 +515,42 @@ class _DetailPageState extends State<DetailPage> {
           '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
     }).then((result2) {
       commentsEntity = CommentsEntity.fromJson(result2);
-      setState(() {});
+      setState(() {
+        loading = false;
+      });
     });
+  }
+
+  Widget _getBody() {
+    var allCount = _movieDetailBean.rating.details.d1 +
+        _movieDetailBean.rating.details.d2 +
+        _movieDetailBean.rating.details.d3 +
+        _movieDetailBean.rating.details.d4 +
+        _movieDetailBean.rating.details.d5;
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverToBoxAdapter(
+          child: DetailTitleWidget(_movieDetailBean, pickColor),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+            child: ScoreStartWidget(
+              score: _movieDetailBean.rating.average,
+              p1: _movieDetailBean.rating.details.d1 / allCount,
+              p2: _movieDetailBean.rating.details.d2 / allCount,
+              p3: _movieDetailBean.rating.details.d3 / allCount,
+              p4: _movieDetailBean.rating.details.d4 / allCount,
+              p5: _movieDetailBean.rating.details.d5 / allCount,
+            ),
+          ),
+        ),
+        sliverTags(),
+        sliverSummary(),
+        sliverCasts(),
+        trailers(context),
+        sliverComments(),
+      ],
+    );
   }
 }
