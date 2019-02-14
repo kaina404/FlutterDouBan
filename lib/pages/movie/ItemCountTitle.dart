@@ -57,8 +57,9 @@ class _ItemCountTitleState extends State<ItemCountTitle> {
   }
 
   void setCount(countValue) {
-    setState(() {
-      count = countValue;
-    });
+    count = countValue;
+//    setState(() {
+//      count = countValue;
+//    });
   }
 }

@@ -16,4 +16,15 @@ class PickImgMainColor {
       callBack(null);
     }
   }
+
+  static Future<void> pick2(
+      ImageProvider imageProvider) async {
+    var paletteGenerator =
+    await PaletteGenerator.fromImageProvider(imageProvider);
+    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+      return (paletteGenerator.colors.toList()[0]);
+    } else {
+      return (null);
+    }
+  }
 }
