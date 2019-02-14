@@ -6,7 +6,7 @@ class LoadingWidget {
     return Container(
       alignment: AlignmentDirectional.center,
       decoration: new BoxDecoration(
-        color: backgroundColor == null ? Color(0x22000000) : backgroundColor,
+        color: backgroundColor == null ? Colors.transparent : backgroundColor,
       ),
       child: new Container(
         decoration: new BoxDecoration(
