@@ -98,7 +98,7 @@ class _MoviePageState extends State<MoviePage> {
       children: <Widget>[
         containerBody(),
         Offstage(
-          child: LoadingWidget.getLoading(),
+          child: LoadingWidget.getLoading(backgroundColor: Colors.transparent),
           offstage: !loading,
         )
       ],

@@ -55,7 +55,8 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
         child: Container(
           color: Colors.white,
           padding: EdgeInsets.all(10.0),
-          child: LoadingWidget.containerLoadingBody(_getBody(), loading: loading,backgroundColor: Colors.transparent),
+          child: LoadingWidget.containerLoadingBody(_getBody(),
+              loading: loading, backgroundColor: Colors.transparent),
         ),
       ),
     );
@@ -115,7 +116,10 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
                 itemBuilder: (BuildContext context, int index) {
                   CelebrityWorkWorksSubject bean =
                       celebrityWorkEntity.works[index].subject;
-                  return Padding(padding: EdgeInsets.all(5.0),child: _getItem(bean),);
+                  return Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: _getItem(bean),
+                  );
                 },
                 itemCount: celebrityWorkEntity.works.length,
               ),
