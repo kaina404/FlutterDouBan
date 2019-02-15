@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/pages/group/group_page.dart';
 import 'package:douban_app/pages/movie/BookAudioVideoPage.dart';
 import 'package:douban_app/pages/home/home_page.dart';
-import 'package:douban_app/pages/PersonPage.dart';
+import 'package:douban_app/pages/person/person_center_page.dart';
 import 'package:douban_app/pages/ShopPage.dart';
 
 class ContainerPageWidget extends StatefulWidget {
@@ -26,7 +26,7 @@ class _ContainerPageWidgetState extends State<ContainerPageWidget> {
     HomePage(),
     GroupPage(),
     ShopPage(),
-    PersonPage()
+    PersonCenterPage()
   ];
 
   final defaultItemColor = Color.fromARGB(255, 125, 125, 125);
