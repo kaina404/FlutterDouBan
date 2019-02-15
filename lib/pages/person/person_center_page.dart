@@ -9,19 +9,20 @@ class PersonCenterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-          title: Text('Title'),
-          centerTitle: false,
-          flexibleSpace:
-              Image.asset(Constant.ASSETS_IMG + 'person_top_bg.jpg')),
       body: CustomScrollView(
         shrinkWrap: false,
         slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Colors.transparent,
+            flexibleSpace:
+                Image.asset(Constant.ASSETS_IMG + 'person_top_bg.jpg'),
+            expandedHeight: 200.0,
+          ),
           SliverToBoxAdapter(
             child: Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.only(left: 10.0, top: 15.0, bottom: 20.0, right: 10.0),
                   child: Image.asset(
                     Constant.ASSETS_IMG + 'ic_notify.png',
                     width: 30.0,
@@ -40,7 +41,7 @@ class PersonCenterPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              height: 50.0,
+              height: 100.0,
               alignment: Alignment.center,
               child: Text('暂无新提醒'),
             ),
@@ -99,8 +100,8 @@ class PersonCenterPage extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: Image.asset(
                 Constant.ASSETS_IMG + imgAsset,
-                width: 26.0,
-                height: 26.0,
+                width: 30.0,
+                height: 30.0,
               ),
             ),
             Expanded(
@@ -135,7 +136,7 @@ class _VideoBookMusicBookWidgetState extends State<_VideoBookMusicBookWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110.0,
+      height: 130.0,
       child: DefaultTabController(
           length: tabTxt.length,
           child: Column(
