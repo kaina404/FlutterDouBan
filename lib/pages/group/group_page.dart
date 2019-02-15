@@ -97,7 +97,7 @@ class _GroupWidgetState extends State<_GroupWidget> {
     return GestureDetector(
       child: Row(
         children: <Widget>[
-          RadiusImg.get(bean.images.small, 50.0),
+          RadiusImg.get(bean.images.small, 50.0, radius: 3.0),
           Expanded(
             child: Container(
               alignment: Alignment.topLeft,
@@ -108,16 +108,16 @@ class _GroupWidgetState extends State<_GroupWidget> {
                   Text(
                     bean.title,
                     style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                   ),
-                  Text(bean.pubdates != null ? bean.pubdates[0] : '')
+                  Text(bean.pubdates != null ? bean.pubdates[0] : '', style: TextStyle(fontSize: 13.0))
                 ],
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(right: 10.0),
-            child: Text('${bean.collect_count}人'),
+            child: Text('${bean.collect_count}人', style: TextStyle(fontSize: 13.0),),
           ),
           GestureDetector(
             child: Image.asset(
