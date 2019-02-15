@@ -9,20 +9,25 @@ class PersonCenterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CustomScrollView(
+      body: SafeArea(child: Padding(padding: EdgeInsets.only(top: 10.0),child: CustomScrollView(
         shrinkWrap: false,
         slivers: <Widget>[
           SliverAppBar(
             backgroundColor: Colors.transparent,
-            flexibleSpace:
-                Image.asset(Constant.ASSETS_IMG + 'person_top_bg.jpg'),
+            flexibleSpace: Image.network(
+              'https://upload-images.jianshu.io/upload_images/3884536-33d4ced049938cb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp',
+              fit: BoxFit.cover,
+              color: Colors.orangeAccent,
+              colorBlendMode: BlendMode.saturation,
+            ),
             expandedHeight: 200.0,
           ),
           SliverToBoxAdapter(
             child: Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0, top: 15.0, bottom: 20.0, right: 10.0),
+                  padding: EdgeInsets.only(
+                      left: 10.0, top: 15.0, bottom: 20.0, right: 10.0),
                   child: Image.asset(
                     Constant.ASSETS_IMG + 'ic_notify.png',
                     width: 30.0,
@@ -43,7 +48,10 @@ class PersonCenterPage extends StatelessWidget {
             child: Container(
               height: 100.0,
               alignment: Alignment.center,
-              child: Text('暂无新提醒'),
+              child: Text(
+                '暂无新提醒',
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
           ),
           _divider(),
@@ -69,7 +77,7 @@ class PersonCenterPage extends StatelessWidget {
           _divider(),
           _personItem('ic_me_wallet.png', '钱包'),
         ],
-      ),
+      ),)),
     );
   }
 
@@ -100,8 +108,8 @@ class PersonCenterPage extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: Image.asset(
                 Constant.ASSETS_IMG + imgAsset,
-                width: 30.0,
-                height: 30.0,
+                width: 25.0,
+                height: 25.0,
               ),
             ),
             Expanded(
