@@ -9,6 +9,8 @@ import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/bean/celebrity_entity.dart' as celebrity;
 import 'package:douban_app/bean/celebrity_work_entity.dart';
 import 'dart:math' as math;
+import 'package:palette_generator/palette_generator.dart';
+import 'package:flutter/material.dart';
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
@@ -37,6 +39,27 @@ class API {
     return result;
   }
 
+  ///当日可播放电影已经更新
+  void getTodayPlay(RequestCallBack requestCallBack) async{
+    int start = math.Random().nextInt(220);
+    final Map result = await _request.get(TOP_250 + '?start=$start&count=4');
+    var resultList = result['subjects'];
+    List<Subject> list =
+    resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+    List<String> todayUrls = [];
+    todayUrls.add(list[0].images.medium);
+    todayUrls.add(list[1].images.medium);
+    todayUrls.add(list[2].images.medium);
+
+    var paletteGenerator =
+    await PaletteGenerator.fromImageProvider(NetworkImage(list[0].images.small));
+    var todayPlayBg = Color(0x44000000);
+    if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
+      todayPlayBg = (paletteGenerator.colors.toList()[0]);
+    }
+    requestCallBack({'list':todayUrls, 'todayPlayBg':todayPlayBg});
+  }
+
 
   void top250(RequestCallBack requestCallBack, {count = 250}) async {
     final Map result = await _request.get(TOP_250 + '?start=0&count=$count&apikey=0b2bdeda43b5688921839c8ecb20399b');
@@ -44,6 +67,23 @@ class API {
     List<Subject> list =
         resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
     requestCallBack(list);
+  }
+
+  ///影院热映 + 即将上映
+  void getHotComingSoon(RequestCallBack requestCallBack) async {
+    //影院热映
+    Map result = await _request.get(IN_THEATERS);
+    var resultList = result['subjects'];
+    List<Subject> hots =
+    resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+
+    //即将上映
+    result = await _request
+        .get(COMING_SOON + '?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    resultList = result['subjects'];
+    List<Subject> comingSoons =
+    resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+    requestCallBack({'hots':hots, 'comingSoons':comingSoons});
   }
 
   ///影院热映 https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b

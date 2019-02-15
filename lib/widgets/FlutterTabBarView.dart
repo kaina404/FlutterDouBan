@@ -2,28 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/pages/DouBanDemo.dart';
 import 'package:douban_app/pages/movie/movie_page.dart';
 
-class FlutterTabBarView extends StatefulWidget {
+class FlutterTabBarView extends StatelessWidget {
   final TabController tabController;
 
   FlutterTabBarView({Key key, @required this.tabController}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _FlutterTabBarViewState(tabController: tabController);
-  }
-}
-
-var viewList;
-
-class _FlutterTabBarViewState extends State<FlutterTabBarView> {
-  final TabController tabController;
-
-  _FlutterTabBarViewState({@required this.tabController});
-
-  @override
-  void initState() {
-    super.initState();
-    viewList = [
+  Widget build(BuildContext context) {
+    print('build FlutterTabBarView');
+    var viewList = [
       MoviePage(),
       Page2(),
       DouBanListView(),
@@ -31,17 +18,6 @@ class _FlutterTabBarViewState extends State<FlutterTabBarView> {
       Page5(),
       Page1(),
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-//    TabBarView({
-//    Key key,
-//    @required this.children,
-//    this.controller,
-//    this.physics,
-//    })
-  print('build FlutterTabBarView');
     return TabBarView(
       children: viewList,
       controller: tabController,
@@ -71,7 +47,6 @@ class Page2 extends StatelessWidget {
 }
 
 class Page3 extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     print('build Page3');

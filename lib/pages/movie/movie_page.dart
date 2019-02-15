@@ -32,9 +32,6 @@ class MoviePage extends StatefulWidget {
 class _MoviePageState extends State<MoviePage> {
   Widget titleWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
-
-//  ItemCountTitle hotTitle; //豆瓣热门
-//  ItemCountTitle topTitle; //豆瓣榜单
   List<Subject> hotShowBeans = List(); //影院热映
   List<Subject> comingSoonBeans = List(); //即将上映
   List<Subject> hotBeans = List(); //豆瓣榜单
@@ -70,19 +67,6 @@ class _MoviePageState extends State<MoviePage> {
       padding: EdgeInsets.only(top: 35.0, bottom: 15.0),
       child: hotSoonTabBar,
     );
-
-//    hotTitle = ItemCountTitle('豆瓣热门');
-
-//    hotTitlePadding = Padding(
-//      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
-//      child: ItemCountTitle('豆瓣热门'),
-//    );
-
-//    topTitle = ItemCountTitle('豆瓣榜单');
-//    topPadding = Padding(
-//      padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
-//      child: ItemCountTitle('豆瓣榜单'),
-//    );
     requestAPI();
   }
 
