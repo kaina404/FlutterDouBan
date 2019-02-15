@@ -77,16 +77,10 @@ class _GroupWidgetState extends State<_GroupWidget> {
         }
 
         Subject bean = list[index - 1];
-        return GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                right: Constant.MARGIN_RIGHT, left: 6.0, top: 13.0),
-            child: _getItem(bean, index - 1),
-          ),
-          onTap: () {
-            Router.push(context, Router.detailPage, bean.id);
-          },
+        return Padding(
+          padding: const EdgeInsets.only(
+              right: Constant.MARGIN_RIGHT, left: 6.0, top: 13.0),
+          child: _getItem(bean, index - 1),
         );
       },
       itemCount: list.length + 1,
@@ -95,6 +89,7 @@ class _GroupWidgetState extends State<_GroupWidget> {
 
   Widget _getItem(Subject bean, int index) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       child: Row(
         children: <Widget>[
           RadiusImg.get(bean.images.small, 50.0, radius: 3.0),
@@ -136,7 +131,9 @@ class _GroupWidgetState extends State<_GroupWidget> {
           )
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        Router.push(context, Router.detailPage, bean.id);
+      },
     );
   }
 }
