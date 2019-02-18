@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/constant/Constant.dart';
-
+import 'package:douban_app/widgets/image/heart_img_widget.dart';
 typedef VoidCallback = void Function();
 
 ///个人中心
@@ -14,12 +14,8 @@ class PersonCenterPage extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             backgroundColor: Colors.transparent,
-            flexibleSpace: Image.network(
-              'https://upload-images.jianshu.io/upload_images/3884536-33d4ced049938cb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp',
-              fit: BoxFit.cover,
-              color: Colors.orangeAccent,
-              colorBlendMode: BlendMode.saturation,
-            ),
+            flexibleSpace: HeartImgWidget(Image.asset(
+                Constant.ASSETS_IMG + 'bg_person_center_default.webp')),
             expandedHeight: 200.0,
           ),
           SliverToBoxAdapter(

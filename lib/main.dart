@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/ContainerPageWidget.dart';
+import 'package:douban_app/pages/container_page.dart';
 import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
-            child: ContainerPageWidget()),
+            child: ContainerPage()),
 //            child: HeroAnimation('https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1501738155.24.webp')),
       ),
     );

@@ -5,12 +5,12 @@ import 'package:douban_app/pages/home/home_page.dart';
 import 'package:douban_app/pages/person/person_center_page.dart';
 import 'package:douban_app/pages/ShopPage.dart';
 
-class ContainerPageWidget extends StatefulWidget {
-  ContainerPageWidget({Key key}) : super(key: key);
+class ContainerPage extends StatefulWidget {
+  ContainerPage({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _ContainerPageWidgetState();
+    return _ContainerPageState();
   }
 }
 
@@ -20,7 +20,7 @@ class Item {
   Item(this.name, this.activeIcon, this.normalIcon);
 }
 
-class _ContainerPageWidgetState extends State<ContainerPageWidget> {
+class _ContainerPageState extends State<ContainerPage> {
   final List<Widget> pages = [
     BookAudioVideoPage(),
     HomePage(),

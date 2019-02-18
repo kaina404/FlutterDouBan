@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/pages/detail/detail_page.dart';
-import 'package:douban_app/pages/ContainerPageWidget.dart';
+import 'package:douban_app/pages/container_page.dart';
 import 'package:douban_app/pages/videos_play_page.dart';
 import 'package:douban_app/pages/search/search_page.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
@@ -32,7 +32,7 @@ class Router {
       case detailPage:
         return DetailPage(params);
       case homePage:
-        return ContainerPageWidget();
+        return ContainerPage();
       case playListPage:
         return VideoPlayPage(params);
       case searchPage:
