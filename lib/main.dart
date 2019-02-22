@@ -14,11 +14,16 @@ import 'package:douban_app/widgets/video_progress_bar.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
+import 'package:douban_app/demo/bottom_drag_widget.dart';
+import 'package:douban_app/demo/slide_container.dart';
+import 'package:douban_app/widgets/determine_top.dart';
 
-void main(){
+void main() {
   runApp(MyApp());
-  if (Platform.isAndroid) {//设置Android头部的导航栏透明
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  if (Platform.isAndroid) {
+    //设置Android头部的导航栏透明
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
@@ -36,8 +41,122 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: SafeArea(
-            child: ContainerPage()),
+            child: BottomDragWidget(
+                body: Container(
+                  color: Colors.blueAccent,
+                ),
+                dragContainer: DragContainer(
+                  drawer: getListView(),
+                  defaultShowHeight: 200.0,
+                  height: 700.0,
+                ))),
       ),
     );
+  }
+
+  Widget getListView() {
+    Widget listView = newListView();
+
+    return Container(
+      height: 700.0,
+
+      ///总高度
+      color: Colors.amberAccent,
+      child: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.deepOrangeAccent,
+            height: 70.0,
+          ),
+          Expanded(child: listView)
+        ],
+      ),
+    );
+  }
+
+  Widget newListView() {
+    return DetermineTop(
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return Text('data=$index');
+        },
+        itemCount: 100,
+      ),
+      refreshOnTopListener: () {
+        print('mode=');
+      },
+    );
+  }
+
+//  Widget newListView() {
+//    return RefreshIndicator(child: ListView.builder(
+//      itemBuilder: (BuildContext context, int index) {
+//        print('index=$index');
+//        return Text('data=$index');
+//      },
+//      itemCount: 100,
+//    ),onRefresh: onRefresh,);
+//  }
+
+  Future<void> onRefresh() {
+    return null;
+  }
+}
+
+class TestSlide extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => TestSlideState();
+}
+
+class TestSlideState extends State<TestSlide> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SlideStack(
+        drawer: getListView(),
+        child: SlideContainer(
+            drawerSize: 200.0,
+            child: Container(
+              color: Colors.blueAccent,
+            )),
+      ),
+    );
+  }
+
+  Widget getListView() {
+    ListView listView = newListView();
+
+    return Container(
+      height: 700.0,
+
+      ///总高度
+      color: Colors.amberAccent,
+      child: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.deepOrangeAccent,
+            height: 70.0,
+          ),
+          Expanded(child: listView)
+        ],
+      ),
+    );
+  }
+
+  Widget newListView() {
+    return RefreshIndicator(
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            print('index=$index');
+            return Text('data=$index');
+          },
+          itemCount: 100,
+        ),
+        onRefresh: onRefresh);
+  }
+
+  Future<void> onRefresh() {
+    setState(() {});
+    return null;
   }
 }
