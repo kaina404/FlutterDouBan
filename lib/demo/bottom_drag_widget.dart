@@ -43,29 +43,33 @@ class DragContainer extends StatefulWidget {
 
 class _DragContainerState extends State<DragContainer>
     with TickerProviderStateMixin {
-  AnimationController animationController;
-
-  double _value;
+  AnimationController controller;
   double maxOffsetDistance;
+  bool onResetControllerValue = false;
+  double offsetDistance;
+  Animation<double> animation;
 
-  double get offsetDistance => _value;
+  double get defaultOffsetDistance => widget.height - widget.defaultShowHeight;
 
   @override
   void initState() {
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300))
-      ..addListener(() {
-        print('animationController.value=${animationController.value}');
-      });
-    maxOffsetDistance = widget.height / 2;
+    controller =
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 250));
+    maxOffsetDistance = widget.height / 3 + 70.0;
     super.initState();
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (_value == null) {
+    if (offsetDistance == null || onResetControllerValue) {
       ///说明是第一次加载,由于BottomDragWidget中 alignment: Alignment.bottomCenter,故直接设置
-      _value = widget.height - widget.defaultShowHeight;
+      offsetDistance = defaultOffsetDistance;
     }
     return Transform.translate(
       offset: Offset(0.0, offsetDistance),
@@ -74,16 +78,36 @@ class _DragContainerState extends State<DragContainer>
           print('onPanStart');
         },
         onPanUpdate: (DragUpdateDetails details) {
-          _value = _value + details.delta.dy;
+          offsetDistance = offsetDistance + details.delta.dy;
           setState(() {});
         },
         onPanEnd: (DragEndDetails details) {
-          if (_value <= maxOffsetDistance) {
-            _value = 0.0;
+          onResetControllerValue = true;
+          ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
+          ///重置value的值时，会刷新UI，故这里使用[onResetControllerValue]来进行过滤。
+          controller.value = 0.0;
+          onResetControllerValue = false;
+          double start;
+          double end;
+          if (offsetDistance <= maxOffsetDistance) {
+            start = offsetDistance;
+            end = 0.0;
           } else {
-            _value = widget.height - widget.defaultShowHeight;
+            start = offsetDistance;
+            end = defaultOffsetDistance;
           }
-          setState(() {});
+          ///easeOut 先快后慢
+          final CurvedAnimation curve =
+              new CurvedAnimation(parent: controller, curve: Curves.easeOut);
+          animation = Tween(begin: start, end: end)
+              .animate(curve)
+                ..addListener(() {
+                  if (!onResetControllerValue) {
+                    offsetDistance = animation.value;
+                    setState(() {});
+                  }
+                });
+          controller.forward();
         },
         child: widget.drawer,
       ),
