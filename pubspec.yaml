@@ -10,7 +10,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,7 +24,7 @@ dependencies:
 
   palette_generator: ^0.1.0
 
-  video_player: ^0.10.0+1
+  video_player: ^0.10.0+2
   # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
   dio: ^1.0.13
 

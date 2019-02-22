@@ -40,6 +40,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
         fontSize: 20, color: selectColor, fontWeight: FontWeight.bold);
     unselectedStyle = TextStyle(fontSize: 20, color: unselectedColor);
     _tabController = TabController(vsync: this, length: 2);
+    _tabController.addListener(listener);
     tabBar = TabBar(
       tabs: [Text('影院热映'), Text('即将上映')],
       indicatorColor: selectColor,
@@ -50,17 +51,33 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
       indicatorSize: TabBarIndicatorSize.label,
       controller: _tabController,
       isScrollable: true,
-      onTap: (index) {
-        setState(() {
-          if (index == 0) {
-            movieCount = hotCount;
-          } else {
-            movieCount = 20;
-          }
-        });
-      },
+//      onTap: (index) {
+//        setState(() {
+//          if (index == 0) {
+//            movieCount = hotCount;
+//          } else {
+//            movieCount = 20;
+//          }
+//        });
+//      },
     );
   }
+
+  void listener(){
+    if(_tabController.indexIsChanging) {
+      var index = _tabController.index;
+      print("HotSoonMovieWidget index changing=$index");
+      setState(() {
+        if (index == 0) {
+          movieCount = hotCount;
+        } else {
+          movieCount = 20;
+        }
+      });
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +114,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
 
   @override
   void dispose() {
+    _tabController.removeListener(listener);
     _tabController.dispose();
     super.dispose();
   }

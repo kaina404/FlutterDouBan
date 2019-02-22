@@ -37,6 +37,8 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   int comingSoonCount = 0;
   int selectIndex = 0;
 
+
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +51,7 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
     unselectedStyle = TextStyle(
         fontSize: TextSizeConstant.BookAudioPartTabBar, color: unselectedColor);
     _tabController = TabController(vsync: this, length: 2);
+    _tabController.addListener(listener);
     tabBar = TabBar(
       tabs: [Text('影院热映'), Text('即将上映')],
       indicatorColor: selectColor,
@@ -59,20 +62,48 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
       indicatorSize: TabBarIndicatorSize.label,
       controller: _tabController,
       isScrollable: true,
-      onTap: (index) {
-        selectIndex = index;
-        setState(() {
-          if (index == 0) {
-            movieCount = hotCount;
-          } else {
-            movieCount = comingSoonCount;
-          }
-          if (onTabCallBack != null) {
-            onTabCallBack(index);
-          }
-        });
-      },
+//      onTap: (index) {
+//        selectIndex = index;
+//        setState(() {
+//          if (index == 0) {
+//            movieCount = hotCount;
+//          } else {
+//            movieCount = comingSoonCount;
+//          }
+//          if (onTabCallBack != null) {
+//            onTabCallBack(index);
+//          }
+//        });
+//      },
     );
+  }
+
+
+  void listener() {
+    if(_tabController.indexIsChanging){
+      var index = _tabController.index;
+      print("HotSoonTabBar index changing=$index");
+      selectIndex = index;
+      setState(() {
+        if (index == 0) {
+          movieCount = hotCount;
+        } else {
+          movieCount = comingSoonCount;
+        }
+        if (onTabCallBack != null) {
+          onTabCallBack(index);
+        }
+      });
+    }
+  }
+
+
+
+  @override
+  void dispose() {
+    _tabController.removeListener(listener);
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -119,4 +150,5 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
   void setTabCallBack(TabCallBack onTabCallBack) {
     this.onTabCallBack = onTabCallBack;
   }
+
 }
