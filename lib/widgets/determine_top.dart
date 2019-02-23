@@ -13,7 +13,7 @@ const double _kDragContainerExtentPercentage = 0.25;
 const double _kDragSizeFactorLimit = 1.5;
 
 typedef RefreshCallback = Future<void> Function();
-typedef RefreshOnTopListener = void Function(double dragDistance);
+typedef RefreshOnTopListener = void Function(double dragDistance, bool isDragEnd);
 
 // The state machine moves through these modes only when the scrollable
 // identified by scrollableKey has been scrolled to its min or max limit.
@@ -238,6 +238,8 @@ class DetermineTopState extends State<DetermineTop>
   ///OverscrollNotification 表示窗口小部件未更改它的滚动位置，因为更改会导致滚动位置超出其滚动范围
   ///ScrollEndNotification 部件停止滚动
 
+
+
   @override
   Widget build(BuildContext context) {
     final Widget child = NotificationListener<ScrollStartNotification>(
@@ -248,13 +250,16 @@ class DetermineTopState extends State<DetermineTop>
             child: widget.child,
             onNotification: (ScrollEndNotification notification) {
               print('ScrollEndNotification');
+              if(widget.refreshOnTopListener != null){
+                widget.refreshOnTopListener(0.0, true);
+              }
               return false;
             },
           ),
           onNotification: (OverscrollNotification notification) {
             print('OverscrollNotification');
             if(widget.refreshOnTopListener != null && notification.dragDetails.delta != null){
-              widget.refreshOnTopListener(notification.dragDetails.delta.dy);
+              widget.refreshOnTopListener(notification.dragDetails.delta.dy, false);
             }
             return false;
           },

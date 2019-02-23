@@ -93,8 +93,8 @@ class MyApp extends StatelessWidget {
     return null;
   }
 
-  void _refreshOnTopListener(double dragDistance) {
-    controller.updateDragDistance(dragDistance);
+  void _refreshOnTopListener(double dragDistance, bool isDragEnd) {
+    controller.updateDragDistance(dragDistance, isDragEnd);
   }
 }
 
