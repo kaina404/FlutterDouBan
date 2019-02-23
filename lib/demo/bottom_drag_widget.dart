@@ -54,6 +54,8 @@ class DragContainer extends StatefulWidget {
       @required this.defaultShowHeight,
       @required this.height})
       : assert(drawer != null),
+        assert(defaultShowHeight != null),
+        assert(height != null),
         super(key: key);
 
   @override
