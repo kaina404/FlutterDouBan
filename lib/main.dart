@@ -28,6 +28,8 @@ void main() {
   }
 }
 
+DragController controller = DragController();
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
@@ -43,11 +45,12 @@ class MyApp extends StatelessWidget {
         body: SafeArea(
             child: BottomDragWidget(
                 body: Container(
-                  color: Colors.blueAccent,
+                  color: Colors.brown,
                 ),
                 dragContainer: DragContainer(
+                  controller: controller,
                   drawer: getListView(),
-                  defaultShowHeight: 200.0,
+                  defaultShowHeight: 150.0,
                   height: 700.0,
                 ))),
       ),
@@ -82,24 +85,16 @@ class MyApp extends StatelessWidget {
         },
         itemCount: 100,
       ),
-      refreshOnTopListener: () {
-        print('mode=');
-      },
+      refreshOnTopListener: _refreshOnTopListener,
     );
   }
 
-//  Widget newListView() {
-//    return RefreshIndicator(child: ListView.builder(
-//      itemBuilder: (BuildContext context, int index) {
-//        print('index=$index');
-//        return Text('data=$index');
-//      },
-//      itemCount: 100,
-//    ),onRefresh: onRefresh,);
-//  }
-
   Future<void> onRefresh() {
     return null;
+  }
+
+  void _refreshOnTopListener(double dragDistance) {
+    controller.updateDragDistance(dragDistance);
   }
 }
 
@@ -117,7 +112,7 @@ class TestSlideState extends State<TestSlide> {
         child: SlideContainer(
             drawerSize: 200.0,
             child: Container(
-              color: Colors.blueAccent,
+              color: Colors.brown,
             )),
       ),
     );

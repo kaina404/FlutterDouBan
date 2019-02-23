@@ -1,3 +1,4 @@
+import 'package:douban_app/main.dart';
 import 'package:flutter/material.dart';
 
 ///上拉抽屉
@@ -24,13 +25,31 @@ class BottomDragWidget extends StatelessWidget {
   }
 }
 
+typedef DragListener = void Function(double dragDistance);
+
+class DragController {
+  DragListener _dragListener;
+
+  setDrag(DragListener l){
+    _dragListener = l;
+  }
+
+  void updateDragDistance(double dragDistance) {
+    if(_dragListener != null){
+      _dragListener(dragDistance);
+    }
+  }
+}
+
 class DragContainer extends StatefulWidget {
   final Widget drawer;
   final double defaultShowHeight;
   final double height;
+  final DragController controller;
 
   DragContainer(
       {Key key,
+      this.controller,
       @required this.drawer,
       @required this.defaultShowHeight,
       @required this.height})
@@ -53,9 +72,18 @@ class _DragContainerState extends State<DragContainer>
 
   @override
   void initState() {
-    controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 250));
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 250));
     maxOffsetDistance = widget.height / 3 + 70.0;
+    if(widget.controller != null){
+      widget.controller.setDrag((double value){
+        print('drag listener=$value');
+        setState(() {
+          offsetDistance = offsetDistance + value;
+        });
+      });
+
+    }
     super.initState();
   }
 
@@ -83,6 +111,7 @@ class _DragContainerState extends State<DragContainer>
         },
         onPanEnd: (DragEndDetails details) {
           onResetControllerValue = true;
+
           ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
           ///重置value的值时，会刷新UI，故这里使用[onResetControllerValue]来进行过滤。
           controller.value = 0.0;
@@ -96,17 +125,17 @@ class _DragContainerState extends State<DragContainer>
             start = offsetDistance;
             end = defaultOffsetDistance;
           }
+
           ///easeOut 先快后慢
           final CurvedAnimation curve =
               new CurvedAnimation(parent: controller, curve: Curves.easeOut);
-          animation = Tween(begin: start, end: end)
-              .animate(curve)
-                ..addListener(() {
-                  if (!onResetControllerValue) {
-                    offsetDistance = animation.value;
-                    setState(() {});
-                  }
-                });
+          animation = Tween(begin: start, end: end).animate(curve)
+            ..addListener(() {
+              if (!onResetControllerValue) {
+                offsetDistance = animation.value;
+                setState(() {});
+              }
+            });
           controller.forward();
         },
         child: widget.drawer,
