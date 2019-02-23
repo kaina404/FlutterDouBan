@@ -66,6 +66,12 @@ class DetermineTopState extends State<DetermineTop>
         ),
         onNotification: (ScrollUpdateNotification notification) {
           print('ScrollUpdateNotification');
+//          if (widget.refreshOnTopListener != null &&
+//              notification.dragDetails != null &&
+//              notification.dragDetails.delta != null) {
+//            widget.refreshOnTopListener(
+//                notification.dragDetails.delta.dy, ScrollNotificationListener.edge);
+//          }
           return false;
         },
       ),

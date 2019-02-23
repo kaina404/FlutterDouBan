@@ -54,6 +54,7 @@ class Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<Demo> {
+
   @override
   Widget build(BuildContext context) {
     return BottomDragWidget(
@@ -93,12 +94,79 @@ class _DemoState extends State<Demo> {
           return Text('data=$index');
         },
         itemCount: 100,
+//        physics: ScrollPhysics(parent: MyClampingScrollPhysics()),
       ),
       refreshOnTopListener: _refreshOnTopListener,
     );
   }
 
-  void _refreshOnTopListener(double dragDistance, ScrollNotificationListener isDragEnd) {
+  void _refreshOnTopListener(
+      double dragDistance, ScrollNotificationListener isDragEnd) {
     controller.updateDragDistance(dragDistance, isDragEnd);
   }
 }
+//
+//class Tmp extends my_scrollable.VerticalDragGestureListener {
+//  @override
+//  bool handleDragDown(DragDownDetails details) {
+//    return super.handleDragDown(details);
+//  }
+//
+//  @override
+//  bool handleDragStart(DragStartDetails details) {
+//    return super.handleDragStart(details);
+//  }
+//
+//  @override
+//  bool handleDragUpdate(DragUpdateDetails details) {
+//    controller.updateDragDistance(details.delta.dy, ScrollNotificationListener.edge);
+//    return true;
+//  }
+//
+//  @override
+//  bool handleDragEnd(DragEndDetails details) {
+//    return true;
+//  }
+//
+//  @override
+//  bool handleDragCancel() {
+//    return true;
+//  }
+//}
+//
+//class MyClampingScrollPhysics extends ScrollPhysics {
+//  @override
+//  ScrollPhysics buildParent(ScrollPhysics ancestor) {
+//    return this;
+//  }
+//
+//  @override
+//  double applyBoundaryConditions(ScrollMetrics position, double value) {
+//    if (value < position.pixels &&
+//        position.pixels <= position.minScrollExtent) {
+//      /// underscroll
+//      print('underscroll');
+//      return value - position.pixels;
+//    }
+//    if (position.maxScrollExtent <= position.pixels &&
+//        position.pixels < value) {
+//      print(' // overscroll');
+//
+//      /// overscroll
+//      return value - position.pixels;
+//    }
+//    if (value < position.minScrollExtent &&
+//        position.minScrollExtent < position.pixels) {
+//      /// hit top edge
+//      print('hit top edge');
+//      return value - position.minScrollExtent;
+//    }
+//    if (position.pixels < position.maxScrollExtent &&
+//        position.maxScrollExtent < value) {
+//      /// hit bottom edge
+//      print('hit bottom edge');
+//      return value - position.maxScrollExtent;
+//    }
+//    return 0.0;
+//  }
+//}

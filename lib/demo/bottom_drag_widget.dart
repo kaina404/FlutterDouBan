@@ -74,6 +74,8 @@ class _DragContainerState extends State<DragContainer>
   double offsetDistance;
   Animation<double> animation;
 
+  bool offstage = false;
+
   double get defaultOffsetDistance => widget.height - widget.defaultShowHeight;
 
   @override
@@ -111,6 +113,8 @@ class _DragContainerState extends State<DragContainer>
 
     ///偏移值在这个范围内
     offsetDistance = offsetDistance.clamp(0.0, defaultOffsetDistance);
+    offstage = offsetDistance < maxOffsetDistance;
+    print('offstage=$offstage');
     return Transform.translate(
       offset: Offset(0.0, offsetDistance),
       child: GestureDetector(
@@ -124,7 +128,18 @@ class _DragContainerState extends State<DragContainer>
         onPanEnd: (_) {
           onDragEnd();
         },
-        child: widget.drawer,
+        child: Stack(
+          children: <Widget>[
+            widget.drawer,
+            Offstage(
+              child: Container(///使用图层解决的方案最佳
+                color: Colors.blueGrey,
+                height: widget.height,
+              ),
+              offstage: offstage,
+            )
+          ],
+        ),
       ),
     );
   }
