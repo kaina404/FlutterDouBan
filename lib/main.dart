@@ -15,7 +15,6 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/demo/bottom_drag_widget.dart';
-import 'package:douban_app/demo/slide_container.dart';
 import 'package:douban_app/widgets/determine_top.dart';
 
 void main() {
