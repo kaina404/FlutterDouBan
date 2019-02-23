@@ -1,5 +1,7 @@
 import 'package:douban_app/main.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:douban_app/widgets/determine_top.dart';
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
@@ -25,7 +27,8 @@ class BottomDragWidget extends StatelessWidget {
   }
 }
 
-typedef DragListener = void Function(double dragDistance, bool isDragEnd);
+typedef DragListener = void Function(
+    double dragDistance, ScrollNotificationListener isDragEnd);
 
 class DragController {
   DragListener _dragListener;
@@ -34,7 +37,8 @@ class DragController {
     _dragListener = l;
   }
 
-  void updateDragDistance(double dragDistance, bool isDragEnd) {
+  void updateDragDistance(
+      double dragDistance, ScrollNotificationListener isDragEnd) {
     if (_dragListener != null) {
       _dragListener(dragDistance, isDragEnd);
     }
@@ -78,9 +82,9 @@ class _DragContainerState extends State<DragContainer>
         vsync: this, duration: const Duration(milliseconds: 250));
     maxOffsetDistance = widget.height / 3 + 70.0;
     if (widget.controller != null) {
-      widget.controller.setDrag((double value, bool isDragEnd) {
-        print('drag listener=$value');
-        if (isDragEnd) {
+      widget.controller
+          .setDrag((double value, ScrollNotificationListener notification) {
+        if (notification != ScrollNotificationListener.edge) {
           onDragEnd();
         } else {
           setState(() {
@@ -125,6 +129,24 @@ class _DragContainerState extends State<DragContainer>
     );
   }
 
+//
+//  return Transform.translate(
+//  offset: Offset(0.0, offsetDistance),
+//  child: GestureDetector(
+//  onPanStart: (DragStartDetails details) {
+//  print('onPanStart');
+//  },
+//  onPanUpdate: (DragUpdateDetails details) {
+//  offsetDistance = offsetDistance + details.delta.dy;
+//  setState(() {});
+//  },
+//  onPanEnd: (_) {
+//  onDragEnd();
+//  },
+//  child: widget.drawer,
+//  ),
+//  );
+
   double get screenH => MediaQuery.of(context).size.height;
 
   ///当拖拽结束时调用
@@ -159,4 +181,31 @@ class _DragContainerState extends State<DragContainer>
       });
     controller.forward();
   }
+}
+
+class MyVerticalDragGestureRecognizer extends VerticalDragGestureRecognizer {
+  @override
+  void rejectGesture(int pointer) {
+    acceptGesture(pointer);
+    print('MyVerticalDragGestureRecognizer rejectGesture');
+  }
+
+  @override
+  void acceptGesture(int pointer) {
+    super.acceptGesture(pointer);
+    print('MyVerticalDragGestureRecognizer acceptGesture');
+  }
+}
+
+GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>
+    getRecognizer() {
+  return GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>(
+    () => MyVerticalDragGestureRecognizer(), //constructor
+    (MyVerticalDragGestureRecognizer instance) {
+      //initializer
+      instance.onUpdate = (DragUpdateDetails details) {
+        print('MyVerticalDragGestureRecognizer onUpdate=${details.delta.dy}');
+      };
+    },
+  );
 }

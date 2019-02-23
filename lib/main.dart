@@ -42,24 +42,33 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: SafeArea(
-            child: BottomDragWidget(
-                body: Container(
-                  color: Colors.brown,
-                ),
-                dragContainer: DragContainer(
-                  controller: controller,
-                  drawer: getListView(),
-                  defaultShowHeight: 150.0,
-                  height: 700.0,
-                ))),
+        body: SafeArea(child: Demo()),
       ),
     );
   }
+}
+
+class Demo extends StatefulWidget {
+  @override
+  _DemoState createState() => _DemoState();
+}
+
+class _DemoState extends State<Demo> {
+  @override
+  Widget build(BuildContext context) {
+    return BottomDragWidget(
+        body: Container(
+          color: Colors.brown,
+        ),
+        dragContainer: DragContainer(
+          controller: controller,
+          drawer: getListView(),
+          defaultShowHeight: 150.0,
+          height: 700.0,
+        ));
+  }
 
   Widget getListView() {
-    Widget listView = newListView();
-
     return Container(
       height: 700.0,
 
@@ -71,7 +80,7 @@ class MyApp extends StatelessWidget {
             color: Colors.deepOrangeAccent,
             height: 70.0,
           ),
-          Expanded(child: listView)
+          Expanded(child: newListView())
         ],
       ),
     );
@@ -89,69 +98,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Future<void> onRefresh() {
-    return null;
-  }
-
-  void _refreshOnTopListener(double dragDistance, bool isDragEnd) {
+  void _refreshOnTopListener(double dragDistance, ScrollNotificationListener isDragEnd) {
     controller.updateDragDistance(dragDistance, isDragEnd);
-  }
-}
-
-class TestSlide extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => TestSlideState();
-}
-
-class TestSlideState extends State<TestSlide> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: SlideStack(
-        drawer: getListView(),
-        child: SlideContainer(
-            drawerSize: 200.0,
-            child: Container(
-              color: Colors.brown,
-            )),
-      ),
-    );
-  }
-
-  Widget getListView() {
-    ListView listView = newListView();
-
-    return Container(
-      height: 700.0,
-
-      ///总高度
-      color: Colors.amberAccent,
-      child: Column(
-        children: <Widget>[
-          Container(
-            color: Colors.deepOrangeAccent,
-            height: 70.0,
-          ),
-          Expanded(child: listView)
-        ],
-      ),
-    );
-  }
-
-  Widget newListView() {
-    return RefreshIndicator(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            print('index=$index');
-            return Text('data=$index');
-          },
-          itemCount: 100,
-        ),
-        onRefresh: onRefresh);
-  }
-
-  Future<void> onRefresh() {
-    setState(() {});
-    return null;
   }
 }

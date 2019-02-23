@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
-
 typedef RefreshOnTopListener = void Function(
-    double dragDistance, bool isDragEnd);
+    double dragDistance, ScrollNotificationListener notification);
 
 class DetermineTop extends StatefulWidget {
   const DetermineTop({
@@ -18,6 +18,7 @@ class DetermineTop extends StatefulWidget {
 
   final Widget child;
   final RefreshOnTopListener refreshOnTopListener;
+
   @override
   DetermineTopState createState() => DetermineTopState();
 }
@@ -26,7 +27,6 @@ class DetermineTop extends StatefulWidget {
 /// programmatically show the refresh indicator, see the [show] method.
 class DetermineTopState extends State<DetermineTop>
     with TickerProviderStateMixin<DetermineTop> {
-
   final GlobalKey _key = GlobalKey();
 
   ///ScrollStartNotification 部件开始滑动
@@ -49,17 +49,17 @@ class DetermineTopState extends State<DetermineTop>
             onNotification: (ScrollEndNotification notification) {
               print('ScrollEndNotification');
               if (widget.refreshOnTopListener != null) {
-                widget.refreshOnTopListener(0.0, true);
+                widget.refreshOnTopListener(0.0, ScrollNotificationListener.end);
               }
               return false;
             },
           ),
           onNotification: (OverscrollNotification notification) {
-            print('OverscrollNotification');
             if (widget.refreshOnTopListener != null &&
+                notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
               widget.refreshOnTopListener(
-                  notification.dragDetails.delta.dy, false);
+                  notification.dragDetails.delta.dy, ScrollNotificationListener.edge);
             }
             return false;
           },
@@ -71,7 +71,9 @@ class DetermineTopState extends State<DetermineTop>
       ),
       onNotification: (ScrollStartNotification scrollUpdateNotification) {
         print('ScrollStartNotification');
-
+        if (widget.refreshOnTopListener != null) {
+          widget.refreshOnTopListener(0.0, ScrollNotificationListener.start);
+        }
         return false;
       },
     );
@@ -79,3 +81,5 @@ class DetermineTopState extends State<DetermineTop>
     return child;
   }
 }
+
+enum ScrollNotificationListener { start, end, edge }
