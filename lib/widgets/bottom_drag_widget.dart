@@ -71,8 +71,8 @@ class _DragContainerState extends State<DragContainer>
   bool onResetControllerValue = false;
   double offsetDistance;
   Animation<double> animation;
-
   bool offstage = false;
+  bool _isFling = false;
 
   double get defaultOffsetDistance => widget.height - widget.defaultShowHeight;
 
@@ -85,7 +85,7 @@ class _DragContainerState extends State<DragContainer>
       widget.controller
           .setDrag((double value, ScrollNotificationListener notification) {
         if (notification != ScrollNotificationListener.edge) {
-          onDragEnd();
+          _handleDragEnd(null);
         } else {
           setState(() {
             offsetDistance = offsetDistance + value;
@@ -94,6 +94,23 @@ class _DragContainerState extends State<DragContainer>
       });
     }
     super.initState();
+  }
+
+  GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>
+      getRecognizer() {
+    return GestureRecognizerFactoryWithHandlers<
+        MyVerticalDragGestureRecognizer>(
+      () => MyVerticalDragGestureRecognizer(flingListener: (bool isFling) {
+            _isFling = isFling;
+          }), //constructor
+      (MyVerticalDragGestureRecognizer instance) {
+        //initializer
+        instance
+          ..onStart = _handleDragStart
+          ..onUpdate = _handleDragUpdate
+          ..onEnd = _handleDragEnd;
+      },
+    );
   }
 
   @override
@@ -112,25 +129,16 @@ class _DragContainerState extends State<DragContainer>
     ///偏移值在这个范围内
     offsetDistance = offsetDistance.clamp(0.0, defaultOffsetDistance);
     offstage = offsetDistance < maxOffsetDistance;
-    print('offstage=$offstage');
     return Transform.translate(
       offset: Offset(0.0, offsetDistance),
-      child: GestureDetector(
-        onPanStart: (DragStartDetails details) {
-          print('onPanStart');
-        },
-        onPanUpdate: (DragUpdateDetails details) {
-          offsetDistance = offsetDistance + details.delta.dy;
-          setState(() {});
-        },
-        onPanEnd: (_) {
-          onDragEnd();
-        },
+      child: RawGestureDetector(
+        gestures: {MyVerticalDragGestureRecognizer: getRecognizer()},
         child: Stack(
           children: <Widget>[
             widget.drawer,
             Offstage(
-              child: Container(///使用图层解决的方案最佳
+              child: Container(
+                ///使用图层解决的方案最佳
                 color: Colors.blueGrey,
                 height: widget.height,
               ),
@@ -145,8 +153,8 @@ class _DragContainerState extends State<DragContainer>
   double get screenH => MediaQuery.of(context).size.height;
 
   ///当拖拽结束时调用
-  void onDragEnd() {
-    print('onPanEnd');
+  void _handleDragEnd(DragEndDetails details) {
+    print('_handleDragEnd');
     onResetControllerValue = true;
 
     ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
@@ -156,12 +164,22 @@ class _DragContainerState extends State<DragContainer>
     double start;
     double end;
     if (offsetDistance <= maxOffsetDistance) {
-      ///需要滚动到顶部了
+      ///这个判断通过，说明已经child位置超过警戒线了，需要滚动到顶部了
       start = offsetDistance;
       end = 0.0;
     } else {
       start = offsetDistance;
       end = defaultOffsetDistance;
+    }
+
+    if (_isFling &&
+        details != null &&
+        details.velocity != null &&
+        details.velocity.pixelsPerSecond != null &&
+        details.velocity.pixelsPerSecond.dy < 0) {
+      ///这个判断通过，说明是快速向上滑动，此时需要滚动到顶部了
+      start = offsetDistance;
+      end = 0.0;
     }
 
     ///easeOut 先快后慢
@@ -176,36 +194,79 @@ class _DragContainerState extends State<DragContainer>
       });
     controller.forward();
   }
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    offsetDistance = offsetDistance + details.delta.dy;
+    setState(() {});
+  }
+
+  void _handleDragStart(DragStartDetails details) {
+    _isFling = false;
+  }
 }
 
+typedef FlingListener = void Function(bool isFling);
+///MyVerticalDragGestureRecognizer 负责任务
+///1.监听child的位置更新
+///2.判断child在手松的那一刻是否是出于fling状态
 class MyVerticalDragGestureRecognizer extends VerticalDragGestureRecognizer {
+  final FlingListener flingListener;
+
+  /// Create a gesture recognizer for interactions in the vertical axis.
+  MyVerticalDragGestureRecognizer({Object debugOwner, this.flingListener})
+      : super(debugOwner: debugOwner);
+
+  final Map<int, VelocityTracker> _velocityTrackers = <int, VelocityTracker>{};
+
   @override
-  void rejectGesture(int pointer) {
-    acceptGesture(pointer);
-    print('MyVerticalDragGestureRecognizer rejectGesture');
+  void handleEvent(PointerEvent event) {
+    super.handleEvent(event);
+    if (!event.synthesized &&
+        (event is PointerDownEvent || event is PointerMoveEvent)) {
+      final VelocityTracker tracker = _velocityTrackers[event.pointer];
+      assert(tracker != null);
+      tracker.addPosition(event.timeStamp, event.position);
+    }
   }
 
   @override
-  void acceptGesture(int pointer) {
-    super.acceptGesture(pointer);
-    print('MyVerticalDragGestureRecognizer acceptGesture');
+  void addPointer(PointerEvent event) {
+    super.addPointer(event);
+    _velocityTrackers[event.pointer] = VelocityTracker();
+  }
+
+  ///来检测是否是fling
+  @override
+  void didStopTrackingLastPointer(int pointer) {
+    final double minVelocity = minFlingVelocity ?? kMinFlingVelocity;
+    final double minDistance = minFlingDistance ?? kTouchSlop;
+    final VelocityTracker tracker = _velocityTrackers[pointer];
+
+    ///VelocityEstimate 计算二位速度的
+    final VelocityEstimate estimate = tracker.getVelocityEstimate();
+    print('estimate  != null ${estimate != null}');
+    bool isFling = false;
+    if (estimate != null && estimate.pixelsPerSecond != null) {
+      isFling = estimate.pixelsPerSecond.dy.abs() > minVelocity &&
+          estimate.offset.dy.abs() > minDistance;
+    }
+    print('isFling=$isFling');
+    _velocityTrackers.clear();
+    if (flingListener != null) {
+      flingListener(isFling);
+    }
+
+    ///super.didStopTrackingLastPointer(pointer) 会调用[_handleDragEnd]
+    ///所以将[lingListener(isFling);]放在前一步调用
+    super.didStopTrackingLastPointer(pointer);
+  }
+
+  @override
+  void dispose() {
+    _velocityTrackers.clear();
+    super.dispose();
   }
 }
-
-GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>
-    getRecognizer() {
-  return GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>(
-    () => MyVerticalDragGestureRecognizer(), //constructor
-    (MyVerticalDragGestureRecognizer instance) {
-      //initializer
-      instance.onUpdate = (DragUpdateDetails details) {
-        print('MyVerticalDragGestureRecognizer onUpdate=${details.delta.dy}');
-      };
-    },
-  );
-}
-
-
 
 typedef ScrollListener = void Function(
     double dragDistance, ScrollNotificationListener notification);
