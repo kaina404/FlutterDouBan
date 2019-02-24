@@ -1,11 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:math' as math;
-
-import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
