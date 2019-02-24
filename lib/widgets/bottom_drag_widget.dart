@@ -321,11 +321,11 @@ class OverscrollNotificationWidgetState
     with TickerProviderStateMixin<OverscrollNotificationWidget> {
   final GlobalKey _key = GlobalKey();
 
-  ///ScrollStartNotification 部件开始滑动
-  ///ScrollUpdateNotification 部件位置发生改变
-  ///OverscrollNotification 表示窗口小部件未更改它的滚动位置，因为更改会导致滚动位置超出其滚动范围
-  ///ScrollEndNotification 部件停止滚动
-  ///之所以不能使用这个来build或者layout，是因为这个通知会回调是会有延迟的。
+  ///[ScrollStartNotification] 部件开始滑动
+  ///[ScrollUpdateNotification] 部件位置发生改变
+  ///[OverscrollNotification] 表示窗口小部件未更改它的滚动位置，因为更改会导致滚动位置超出其滚动范围
+  ///[ScrollEndNotification] 部件停止滚动
+  ///之所以不能使用这个来build或者layout，是因为这个通知的回调是会有延迟的。
   ///Any attempt to adjust the build or layout based on a scroll notification would
   ///result in a layout that lagged one frame behind, which is a poor user experience.
 
