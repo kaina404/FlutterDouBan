@@ -154,7 +154,6 @@ class _DragContainerState extends State<DragContainer>
 
   ///当拖拽结束时调用
   void _handleDragEnd(DragEndDetails details) {
-    print('_handleDragEnd');
     onResetControllerValue = true;
 
     ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
@@ -242,15 +241,13 @@ class MyVerticalDragGestureRecognizer extends VerticalDragGestureRecognizer {
     final double minDistance = minFlingDistance ?? kTouchSlop;
     final VelocityTracker tracker = _velocityTrackers[pointer];
 
-    ///VelocityEstimate 计算二位速度的
+    ///VelocityEstimate 计算二维速度的
     final VelocityEstimate estimate = tracker.getVelocityEstimate();
-    print('estimate  != null ${estimate != null}');
     bool isFling = false;
     if (estimate != null && estimate.pixelsPerSecond != null) {
       isFling = estimate.pixelsPerSecond.dy.abs() > minVelocity &&
           estimate.offset.dy.abs() > minDistance;
     }
-    print('isFling=$isFling');
     _velocityTrackers.clear();
     if (flingListener != null) {
       flingListener(isFling);
@@ -274,6 +271,33 @@ typedef ScrollListener = void Function(
 ///监听手指在child处于边缘时的滑动
 ///例如：当child滚动到顶部时，此时下拉，会回调[ScrollNotificationListener.edge],
 ///或者child滚动到底部时，此时下拉，会回调[ScrollNotificationListener.edge],
+///当child为[ScrollView]的子类时，例如：[ListView] / [GridView] 等，时，需要将其`physics`属性设置为[ClampingScrollPhysics]
+///想看原因的，可以看下：
+/// ///这个属性是用来断定滚动的部件的物理特性，例如：
+//        ///scrollStart
+//        ///ScrollUpdate
+//        ///Overscroll
+//        ///ScrollEnd
+//        ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
+//
+//        /// The scroll physics to use for the platform given by [getPlatform].
+//        ///
+//        /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
+//        /// Android.
+////  ScrollPhysics getScrollPhysics(BuildContext context) {
+////    switch (getPlatform(context)) {
+////    case TargetPlatform.iOS:/*/
+////         return const BouncingScrollPhysics();
+////    case TargetPlatform.android:
+////    case TargetPlatform.fuchsia:
+////        return const ClampingScrollPhysics();
+////    }
+////    return null;
+////  }
+///在ios中，默认返回BouncingScrollPhysics，对于[BouncingScrollPhysics]而言，
+///由于   double applyBoundaryConditions(ScrollMetrics position, double value) => 0.0;
+///会导致：当listview的第一条目显示时，继续下拉时，不会调用上面提到的Overscroll监听。
+///故这里，设定为[ClampingScrollPhysics]
 class OverscrollNotificationWidget extends StatefulWidget {
   const OverscrollNotificationWidget({
     Key key,

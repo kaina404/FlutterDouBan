@@ -15,6 +15,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/widgets/bottom_drag_widget.dart';
+
 void main() {
   runApp(MyApp());
   if (Platform.isAndroid) {
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor:  Colors.brown,
+        backgroundColor: Colors.brown,
         body: SafeArea(child: Demo()),
       ),
     );
@@ -91,12 +92,39 @@ class _DemoState extends State<Demo> {
           return Text('data=$index');
         },
         itemCount: 100,
+        ///这个属性是用来断定滚动的部件的物理特性，例如：
+        ///scrollStart
+        ///ScrollUpdate
+        ///Overscroll
+        ///ScrollEnd
+        ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
+
+        /// The scroll physics to use for the platform given by [getPlatform].
+        ///
+        /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
+        /// Android.
+//  ScrollPhysics getScrollPhysics(BuildContext context) {
+//    switch (getPlatform(context)) {
+//    case TargetPlatform.iOS:/*/
+//         return const BouncingScrollPhysics();
+//    case TargetPlatform.android:
+//    case TargetPlatform.fuchsia:
+//        return const ClampingScrollPhysics();
+//    }
+//    return null;
+//  }
+        ///在ios中，默认返回BouncingScrollPhysics，对于[BouncingScrollPhysics]而言，
+        ///由于   double applyBoundaryConditions(ScrollMetrics position, double value) => 0.0;
+        ///会导致：当listview的第一条目显示时，继续下拉时，不会调用上面提到的Overscroll监听。
+        ///故这里，设定为[ClampingScrollPhysics]
+        physics: const ClampingScrollPhysics(),
       ),
       scrollListener: _scrollListener,
     );
   }
 
-  void _scrollListener(double dragDistance, ScrollNotificationListener isDragEnd) {
+  void _scrollListener(
+      double dragDistance, ScrollNotificationListener isDragEnd) {
     controller.updateDragDistance(dragDistance, isDragEnd);
   }
 }
