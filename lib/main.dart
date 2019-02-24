@@ -14,9 +14,7 @@ import 'package:douban_app/widgets/video_progress_bar.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
-import 'package:douban_app/demo/bottom_drag_widget.dart';
-import 'package:douban_app/widgets/scroll_to_top_notification.dart';
-
+import 'package:douban_app/widgets/bottom_drag_widget.dart';
 void main() {
   runApp(MyApp());
   if (Platform.isAndroid) {
