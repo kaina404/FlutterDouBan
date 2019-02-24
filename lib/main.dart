@@ -99,7 +99,8 @@ class _DemoState extends State<Demo> {
         ///ScrollEnd
         ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
 
-        /// The scroll physics to use for the platform given by [getPlatform].
+///下面代码是我在翻源码找到的解决方案
+/// The scroll physics to use for the platform given by [getPlatform].
         ///
         /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
         /// Android.
