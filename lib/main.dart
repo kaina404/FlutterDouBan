@@ -15,7 +15,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/demo/bottom_drag_widget.dart';
-import 'package:douban_app/widgets/determine_top.dart';
+import 'package:douban_app/widgets/scroll_to_top_notification.dart';
 
 void main() {
   runApp(MyApp());
@@ -87,19 +87,18 @@ class _DemoState extends State<Demo> {
   }
 
   Widget newListView() {
-    return DetermineTop(
+    return OverscrollNotificationWidget(
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Text('data=$index');
         },
         itemCount: 100,
       ),
-      refreshOnTopListener: _refreshOnTopListener,
+      scrollListener: _scrollListener,
     );
   }
 
-  void _refreshOnTopListener(
-      double dragDistance, ScrollNotificationListener isDragEnd) {
+  void _scrollListener(double dragDistance, ScrollNotificationListener isDragEnd) {
     controller.updateDragDistance(dragDistance, isDragEnd);
   }
 }

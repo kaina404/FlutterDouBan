@@ -5,28 +5,31 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
-typedef RefreshOnTopListener = void Function(
+typedef ScrollListener = void Function(
     double dragDistance, ScrollNotificationListener notification);
 
-class DetermineTop extends StatefulWidget {
-  const DetermineTop({
+///监听手指在child处于边缘时的滑动
+///例如：当child滚动到顶部时，此时下拉，会回调[ScrollNotificationListener.edge],
+///或者child滚动到底部时，此时下拉，会回调[ScrollNotificationListener.edge],
+class OverscrollNotificationWidget extends StatefulWidget {
+  const OverscrollNotificationWidget({
     Key key,
     @required this.child,
-    this.refreshOnTopListener,
+    this.scrollListener,
   })  : assert(child != null),
         super(key: key);
 
   final Widget child;
-  final RefreshOnTopListener refreshOnTopListener;
+  final ScrollListener scrollListener;
 
   @override
-  DetermineTopState createState() => DetermineTopState();
+  OverscrollNotificationWidgetState createState() => OverscrollNotificationWidgetState();
 }
 
-/// Contains the state for a [DetermineTop]. This class can be used to
+/// Contains the state for a [OverscrollNotificationWidget]. This class can be used to
 /// programmatically show the refresh indicator, see the [show] method.
-class DetermineTopState extends State<DetermineTop>
-    with TickerProviderStateMixin<DetermineTop> {
+class OverscrollNotificationWidgetState extends State<OverscrollNotificationWidget>
+    with TickerProviderStateMixin<OverscrollNotificationWidget> {
   final GlobalKey _key = GlobalKey();
 
   ///ScrollStartNotification 部件开始滑动
@@ -47,38 +50,30 @@ class DetermineTopState extends State<DetermineTop>
           child: NotificationListener<ScrollEndNotification>(
             child: widget.child,
             onNotification: (ScrollEndNotification notification) {
-              print('ScrollEndNotification');
-              if (widget.refreshOnTopListener != null) {
-                widget.refreshOnTopListener(0.0, ScrollNotificationListener.end);
+              if (widget.scrollListener != null) {
+                widget.scrollListener(0.0, ScrollNotificationListener.end);
               }
               return false;
             },
           ),
           onNotification: (OverscrollNotification notification) {
-            if (widget.refreshOnTopListener != null &&
+            if (widget.scrollListener != null &&
                 notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
-              widget.refreshOnTopListener(
+              widget.scrollListener(
                   notification.dragDetails.delta.dy, ScrollNotificationListener.edge);
             }
             return false;
           },
         ),
         onNotification: (ScrollUpdateNotification notification) {
-          print('ScrollUpdateNotification');
-//          if (widget.refreshOnTopListener != null &&
-//              notification.dragDetails != null &&
-//              notification.dragDetails.delta != null) {
-//            widget.refreshOnTopListener(
-//                notification.dragDetails.delta.dy, ScrollNotificationListener.edge);
-//          }
           return false;
         },
       ),
       onNotification: (ScrollStartNotification scrollUpdateNotification) {
         print('ScrollStartNotification');
-        if (widget.refreshOnTopListener != null) {
-          widget.refreshOnTopListener(0.0, ScrollNotificationListener.start);
+        if (widget.scrollListener != null) {
+          widget.scrollListener(0.0, ScrollNotificationListener.start);
         }
         return false;
       },
@@ -88,4 +83,10 @@ class DetermineTopState extends State<DetermineTop>
   }
 }
 
-enum ScrollNotificationListener { start, end, edge }
+enum ScrollNotificationListener {
+  ///滑动开始
+  start,
+  ///滑动结束
+  end,
+  ///滑动时，控件在边缘位置
+  edge }

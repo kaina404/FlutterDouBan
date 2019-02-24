@@ -1,7 +1,7 @@
 import 'package:douban_app/main.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/determine_top.dart';
+import 'package:douban_app/widgets/scroll_to_top_notification.dart';
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
@@ -143,24 +143,6 @@ class _DragContainerState extends State<DragContainer>
       ),
     );
   }
-
-//
-//  return Transform.translate(
-//  offset: Offset(0.0, offsetDistance),
-//  child: GestureDetector(
-//  onPanStart: (DragStartDetails details) {
-//  print('onPanStart');
-//  },
-//  onPanUpdate: (DragUpdateDetails details) {
-//  offsetDistance = offsetDistance + details.delta.dy;
-//  setState(() {});
-//  },
-//  onPanEnd: (_) {
-//  onDragEnd();
-//  },
-//  child: widget.drawer,
-//  ),
-//  );
 
   double get screenH => MediaQuery.of(context).size.height;
 
