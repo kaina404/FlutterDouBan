@@ -23,12 +23,14 @@ class OverscrollNotificationWidget extends StatefulWidget {
   final ScrollListener scrollListener;
 
   @override
-  OverscrollNotificationWidgetState createState() => OverscrollNotificationWidgetState();
+  OverscrollNotificationWidgetState createState() =>
+      OverscrollNotificationWidgetState();
 }
 
 /// Contains the state for a [OverscrollNotificationWidget]. This class can be used to
 /// programmatically show the refresh indicator, see the [show] method.
-class OverscrollNotificationWidgetState extends State<OverscrollNotificationWidget>
+class OverscrollNotificationWidgetState
+    extends State<OverscrollNotificationWidget>
     with TickerProviderStateMixin<OverscrollNotificationWidget> {
   final GlobalKey _key = GlobalKey();
 
@@ -60,8 +62,8 @@ class OverscrollNotificationWidgetState extends State<OverscrollNotificationWidg
             if (widget.scrollListener != null &&
                 notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
-              widget.scrollListener(
-                  notification.dragDetails.delta.dy, ScrollNotificationListener.edge);
+              widget.scrollListener(notification.dragDetails.delta.dy,
+                  ScrollNotificationListener.edge);
             }
             return false;
           },
@@ -86,7 +88,10 @@ class OverscrollNotificationWidgetState extends State<OverscrollNotificationWidg
 enum ScrollNotificationListener {
   ///滑动开始
   start,
+
   ///滑动结束
   end,
+
   ///滑动时，控件在边缘位置
-  edge }
+  edge
+}
