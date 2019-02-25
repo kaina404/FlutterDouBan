@@ -11,6 +11,7 @@ import 'package:douban_app/bean/celebrity_work_entity.dart';
 import 'dart:math' as math;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:douban_app/bean/movie_long_comments_entity.dart';
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
@@ -166,6 +167,14 @@ class API {
   void searchCelebrityWorks(String id, RequestCallBack requestCallBack) async {
     final result = await _query(CELEBRITY, id);
     CelebrityWorkCelebrity bean = CelebrityWorkCelebrity.fromJson(result);
+    requestCallBack(bean);
+  }
+
+  ///电影长评 https://api.douban.com/v2/movie/subject/26266893/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b
+  void getMovieReviews(String id, RequestCallBack requestCallBack) async {
+    final result = await _request.get(
+        '/v2/movie/subject/$id/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    MovieLongCommentReviews bean = MovieLongCommentReviews.fromJson(result);
     requestCallBack(bean);
   }
 }

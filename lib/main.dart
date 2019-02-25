@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Colors.brown,
-        body: SafeArea(child: Demo()),
+        backgroundColor: Colors.white,
+        body: SafeArea(child: ContainerPage()),
       ),
     );
   }
@@ -58,6 +58,9 @@ class _DemoState extends State<Demo> {
     return BottomDragWidget(
         body: Container(
           color: Colors.brown,
+          child: ListView.builder(itemBuilder: (BuildContext context, int index){
+            return Text('我是listview下面一层的东东，index=$index');
+          }, itemCount: 100,),
         ),
         dragContainer: DragContainer(
           controller: controller,
@@ -69,7 +72,7 @@ class _DemoState extends State<Demo> {
 
   Widget getListView() {
     return Container(
-      height: 700.0,
+      height:600.0,
 
       ///总高度
       color: Colors.amberAccent,
@@ -77,7 +80,7 @@ class _DemoState extends State<Demo> {
         children: <Widget>[
           Container(
             color: Colors.deepOrangeAccent,
-            height: 70.0,
+            height: 10.0,
           ),
           Expanded(child: newListView())
         ],

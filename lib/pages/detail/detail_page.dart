@@ -20,6 +20,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:douban_app/http/http_request.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
+import '../../bean/movie_long_comments_entity.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -37,6 +38,7 @@ class _DetailPageState extends State<DetailPage> {
   final subjectId;
   Color pickColor = Color(0xffffffff); //默认主题色
   CommentsEntity commentsEntity;
+  MovieLongCommentsEntity movieLongCommentReviews;
   bool loading = true;
 
   _DetailPageState(this.subjectId);
@@ -520,6 +522,11 @@ class _DetailPageState extends State<DetailPage> {
           '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
     }).then((result2) {
       commentsEntity = CommentsEntity.fromJson(result2);
+    }).then((_){
+      return _request.get(
+          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
+    }).then((result3){
+      movieLongCommentReviews = MovieLongCommentsEntity.fromJson(result3);
       setState(() {
         loading = false;
       });
