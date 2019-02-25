@@ -15,6 +15,7 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/widgets/bottom_drag_widget.dart';
+import 'package:douban_app/pages/detail/long_comment_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
-        body: SafeArea(child: ContainerPage()),
+        body: SafeArea(child: LongCommentWidget(movieLongCommentsEntity: null)),
       ),
     );
   }

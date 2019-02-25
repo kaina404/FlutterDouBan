@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/MovieDetailBean.dart';
-import 'package:douban_app/pages/detail/DetailTitleWidget.dart';
+import 'package:douban_app/pages/detail/detail_title_widget.dart';
 import 'package:douban_app/util/pick_img_main_color.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/pages/detail/score_start.dart';
