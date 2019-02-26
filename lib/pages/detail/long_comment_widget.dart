@@ -87,7 +87,7 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
                     ),
                     Container(
                       height: 10.0,
-                      color: Color.fromARGB(255, 244, 245, 248),
+                      color: const Color.fromARGB(255, 244, 245, 248),
                     )
                   ],
                 );
