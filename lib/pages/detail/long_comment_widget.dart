@@ -157,8 +157,11 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
             style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
           ),
         ),
-        Text(
-            '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用'),
+        Padding(
+          child: Text(
+              '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用'),
+          padding: const EdgeInsets.only(bottom: 10.0),
+        ),
       ],
     );
   }
