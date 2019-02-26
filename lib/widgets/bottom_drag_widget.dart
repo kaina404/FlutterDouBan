@@ -79,7 +79,8 @@ class _DragContainerState extends State<DragContainer>
   void initState() {
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 250));
-    maxOffsetDistance = widget.height / 3 + 70.0;
+    maxOffsetDistance = (widget.height + widget.defaultShowHeight ) * 0.5;
+
     if (widget.controller != null) {
       widget.controller
           .setDrag((double value, ScrollNotificationListener notification) {
@@ -163,7 +164,6 @@ class _DragContainerState extends State<DragContainer>
   ///当拖拽结束时调用
   void _handleDragEnd(DragEndDetails details) {
     onResetControllerValue = true;
-
     ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
     ///重置value的值时，会刷新UI，故这里使用[onResetControllerValue]来进行过滤。
     controller.value = 0.0;
