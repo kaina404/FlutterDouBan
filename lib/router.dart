@@ -10,12 +10,12 @@ import 'package:douban_app/pages/person_detail_page.dart';
 ///https://www.jianshu.com/p/b9d6ec92926f
 
 class Router {
-  static const homePage = 'app/';
-  static const detailPage = 'app/DetailPage';
-  static const playListPage = 'app/VideosPlayPage';
-  static const searchPage = 'app/SearchPage';
-  static const photoHero = 'app/PhotoHero';
-  static const personDetailPage = 'app/PersonDetailPage';
+  static const homePage = 'app://';
+  static const detailPage = 'app://DetailPage';
+  static const playListPage = 'app://VideosPlayPage';
+  static const searchPage = 'app://SearchPage';
+  static const photoHero = 'app://PhotoHero';
+  static const personDetailPage = 'app://PersonDetailPage';
 
 //  Widget _router(String url, dynamic params) {
 //    String pageId = _pageIdMap[url];
