@@ -556,10 +556,10 @@ class _DetailPageState extends State<DetailPage> {
     }).then((result2) {
       commentsEntity = CommentsEntity.fromJson(result2);
     }).then((_) {
-//      return _request.get(
-//          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      return _request.get(
+          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
       //使用模拟数据
-      return _mockRequest.get(API.REIVIEWS);
+//      return _mockRequest.get(API.REIVIEWS);
     }).then((result3) {
       movieLongCommentReviews = MovieLongCommentsEntity.fromJson(result3);
       setState(() {
