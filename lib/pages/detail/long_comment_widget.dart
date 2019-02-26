@@ -68,7 +68,13 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
         Container(
           padding: const EdgeInsets.only(top: 15.0),
           child: TabBar(
-            tabs: list.map((item) => Padding(padding: const EdgeInsets.only(bottom: 8.0),child: Text(item),)).toList(),
+            tabs: list
+                .map((item) => Padding(
+                      padding:
+                          const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
+                      child: Text(item),
+                    ))
+                .toList(),
             isScrollable: true,
             indicatorColor: selectColor,
             labelColor: selectColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/constant/TextSizeConstant.dart';
 import 'package:douban_app/constant/ColorConstant.dart';
-
+import '../../constant/Constant.dart';
 typedef TabCallBack = void Function(int index);
 
 class HotSoonTabBar extends StatefulWidget {
@@ -53,7 +53,14 @@ class _HotSoonTabBarState extends State<HotSoonTabBar>
     _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(listener);
     tabBar = TabBar(
-      tabs: [Text('影院热映'), Text('即将上映')],
+      tabs: [Padding(
+        padding: const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
+        child: Text('影院热映'),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
+        child: Text('即将上映'),
+      )],
       indicatorColor: selectColor,
       labelColor: selectColor,
       labelStyle: selectStyle,

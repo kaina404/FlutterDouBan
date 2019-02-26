@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:douban_app/widgets/FlutterTabBarView.dart';
 import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
 import 'package:douban_app/router.dart';
-
+import '../../constant/Constant.dart';
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
 List<Widget> tabList;
@@ -34,7 +34,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
   List<Widget> getTabList() {
     return titleList
         .map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
               child: Text(
                 '$item',
                 style: TextStyle(fontSize: 15),

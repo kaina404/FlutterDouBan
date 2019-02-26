@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
-
+import '../../constant/Constant.dart';
 ///影院热映、即将上映
 class HotSoonMovieWidget extends StatefulWidget {
-
   final state = _HotSoonMovieWidgetState();
 
   @override
@@ -13,10 +12,9 @@ class HotSoonMovieWidget extends StatefulWidget {
   }
 
   ///设置影院热映数据
-  void setHotMovieBeanList(List<Subject> list){
+  void setHotMovieBeanList(List<Subject> list) {
     state.setHotMovieBeanList(list);
   }
-
 }
 
 TabController _tabController;
@@ -28,7 +26,7 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   TextStyle selectStyle, unselectedStyle;
   Widget tabBar;
   double childAspectRatio = 355.0 / 506.0;
-  var hotCount, soonCount;//热映数量、即将上映数量、
+  var hotCount, soonCount; //热映数量、即将上映数量、
   List<Subject> hotMovieBeans, soonMovieBeans;
 
   @override
@@ -42,7 +40,16 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(listener);
     tabBar = TabBar(
-      tabs: [Text('影院热映'), Text('即将上映')],
+      tabs: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
+          child: Text('影院热映'),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: Constant.TAB_BOTTOM),
+          child: Text('即将上映'),
+        )
+      ],
       indicatorColor: selectColor,
       labelColor: selectColor,
       labelStyle: selectStyle,
@@ -63,8 +70,8 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
     );
   }
 
-  void listener(){
-    if(_tabController.indexIsChanging) {
+  void listener() {
+    if (_tabController.indexIsChanging) {
       var index = _tabController.index;
       print("HotSoonMovieWidget index changing=$index");
       setState(() {
@@ -76,8 +83,6 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
       });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,11 +125,11 @@ class _HotSoonMovieWidgetState extends State<HotSoonMovieWidget>
   }
 
   void setHotMovieBeanList(List<Subject> list) {
-      if(list != null){
-        setState(() {
-          hotMovieBeans = list;
-          hotCount = hotMovieBeans.length;
-        });
-      }
+    if (list != null) {
+      setState(() {
+        hotMovieBeans = list;
+        hotCount = hotMovieBeans.length;
+      });
+    }
   }
 }
