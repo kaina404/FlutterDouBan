@@ -75,13 +75,19 @@ class _DetailPageState extends State<DetailPage> {
                 body: _getBody(),
                 dragContainer: DragContainer(
                     controller: controller,
-                    drawer: OverscrollNotificationWidget(
-                      child: LongCommentWidget(
-                          movieLongCommentsEntity: movieLongCommentReviews),
-                      scrollListener: _scrollListener,
+                    drawer: Container(
+                      child: OverscrollNotificationWidget(
+                        child: LongCommentWidget(
+                            movieLongCommentsEntity: movieLongCommentReviews),
+                        scrollListener: _scrollListener,
+                      ),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 243, 244, 248),
+                          borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(10.0),
+                              topRight: const Radius.circular(10.0))),
                     ),
                     defaultShowHeight: screenH * 0.1,
-                    color: Colors.white,
                     height: screenH * 0.8))),
       ),
     );

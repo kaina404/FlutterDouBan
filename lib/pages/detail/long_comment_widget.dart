@@ -57,7 +57,16 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Align(
+        Container(
+          height: 6.0,
+          width: 45.0,
+          margin: const EdgeInsets.only(top: 10.0),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 214, 215, 218),
+              borderRadius: BorderRadius.all(const Radius.circular(5.0))),
+        ),
+        Container(
+          padding: const EdgeInsets.only(top: 15.0),
           child: TabBar(
             tabs: list.map((item) => Text(item)).toList(),
             isScrollable: true,
@@ -78,16 +87,17 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   children: <Widget>[
-                    Padding(
+                    Container(
                       child: getItem(
                           widget.movieLongCommentsEntity.reviews[index]),
                       padding: const EdgeInsets.only(
                           left: Constant.MARGIN_LEFT,
                           right: Constant.MARGIN_RIGHT),
+                      color: Colors.white,
                     ),
                     Container(
                       height: 10.0,
-                      color: const Color.fromARGB(255, 244, 245, 248),
+                      color: Colors.transparent,
                     )
                   ],
                 );

@@ -35,8 +35,8 @@ class DragController {
     _dragListener = l;
   }
 
-  void updateDragDistance(
-      double dragDistance, ScrollNotificationListener isDragEnd) {
+  void updateDragDistance(double dragDistance,
+      ScrollNotificationListener isDragEnd) {
     if (_dragListener != null) {
       _dragListener(dragDistance, isDragEnd);
     }
@@ -48,15 +48,12 @@ class DragContainer extends StatefulWidget {
   final double defaultShowHeight;
   final double height;
   final DragController controller;
-  final Color color;
 
-  DragContainer(
-      {Key key,
-      this.controller,
-      this.color = Colors.white,
-      @required this.drawer,
-      @required this.defaultShowHeight,
-      @required this.height})
+  DragContainer({Key key,
+    this.controller,
+    @required this.drawer,
+    @required this.defaultShowHeight,
+    @required this.height})
       : assert(drawer != null),
         assert(defaultShowHeight != null),
         assert(height != null),
@@ -99,13 +96,14 @@ class _DragContainerState extends State<DragContainer>
   }
 
   GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>
-      getRecognizer() {
+  getRecognizer() {
     return GestureRecognizerFactoryWithHandlers<
         MyVerticalDragGestureRecognizer>(
-      () => MyVerticalDragGestureRecognizer(flingListener: (bool isFling) {
+          () =>
+          MyVerticalDragGestureRecognizer(flingListener: (bool isFling) {
             _isFling = isFling;
           }), //constructor
-      (MyVerticalDragGestureRecognizer instance) {
+          (MyVerticalDragGestureRecognizer instance) {
         //initializer
         instance
           ..onStart = _handleDragStart
@@ -139,11 +137,11 @@ class _DragContainerState extends State<DragContainer>
           children: <Widget>[
             Container(
               child: widget.drawer,
-              color: widget.color,
               height: widget.height,
             ),
             Offstage(
               child: Container(
+
                 ///使用图层解决的方案最佳
                 color: Colors.transparent,
                 height: widget.height,
@@ -156,7 +154,11 @@ class _DragContainerState extends State<DragContainer>
     );
   }
 
-  double get screenH => MediaQuery.of(context).size.height;
+  double get screenH =>
+      MediaQuery
+          .of(context)
+          .size
+          .height;
 
   ///当拖拽结束时调用
   void _handleDragEnd(DragEndDetails details) {
@@ -189,7 +191,7 @@ class _DragContainerState extends State<DragContainer>
 
     ///easeOut 先快后慢
     final CurvedAnimation curve =
-        new CurvedAnimation(parent: controller, curve: Curves.easeOut);
+    new CurvedAnimation(parent: controller, curve: Curves.easeOut);
     animation = Tween(begin: start, end: end).animate(curve)
       ..addListener(() {
         if (!onResetControllerValue) {
@@ -310,7 +312,8 @@ class OverscrollNotificationWidget extends StatefulWidget {
     Key key,
     @required this.child,
     this.scrollListener,
-  })  : assert(child != null),
+  })
+      : assert(child != null),
         super(key: key);
 
   final Widget child;
