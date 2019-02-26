@@ -33,9 +33,12 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
 
   List<Widget> getTabList() {
     return titleList
-        .map((item) => Text(
-              '$item',
-              style: TextStyle(fontSize: 15),
+        .map((item) => Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                '$item',
+                style: TextStyle(fontSize: 15),
+              ),
             ))
         .toList();
   }
