@@ -55,42 +55,52 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-          left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
-      child: Column(
-        children: <Widget>[
-          Align(
-            child: TabBar(
-              tabs: list.map((item) => Text(item)).toList(),
-              isScrollable: true,
-              indicatorColor: selectColor,
-              labelColor: selectColor,
-              labelStyle: selectStyle,
-              unselectedLabelColor: unselectedColor,
-              unselectedLabelStyle: unselectedStyle,
-              indicatorSize: TabBarIndicatorSize.label,
-              controller: controller,
-            ),
-            alignment: Alignment.centerLeft,
-          ),
-          Expanded(
-              child: TabBarView(
-            children: <Widget>[
-              ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return getItem(widget.movieLongCommentsEntity.reviews[index]);
-                },
-                physics: const ClampingScrollPhysics(),
-                itemCount: widget.movieLongCommentsEntity.reviews.length,
-              ),
-              Text('话题'),
-              Text('讨论')
-            ],
+    return Column(
+      children: <Widget>[
+        Align(
+          child: TabBar(
+            tabs: list.map((item) => Text(item)).toList(),
+            isScrollable: true,
+            indicatorColor: selectColor,
+            labelColor: selectColor,
+            labelStyle: selectStyle,
+            unselectedLabelColor: unselectedColor,
+            unselectedLabelStyle: unselectedStyle,
+            indicatorSize: TabBarIndicatorSize.label,
             controller: controller,
-          ))
-        ],
-      ),
+          ),
+          alignment: Alignment.centerLeft,
+        ),
+        Expanded(
+            child: TabBarView(
+          children: <Widget>[
+            ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: <Widget>[
+                    Padding(
+                      child: getItem(
+                          widget.movieLongCommentsEntity.reviews[index]),
+                      padding: const EdgeInsets.only(
+                          left: Constant.MARGIN_LEFT,
+                          right: Constant.MARGIN_RIGHT),
+                    ),
+                    Container(
+                      height: 10.0,
+                      color: Color.fromARGB(255, 244, 245, 248),
+                    )
+                  ],
+                );
+              },
+              physics: const ClampingScrollPhysics(),
+              itemCount: widget.movieLongCommentsEntity.reviews.length,
+            ),
+            Text('话题'),
+            Text('讨论')
+          ],
+          controller: controller,
+        ))
+      ],
     );
   }
 
@@ -138,7 +148,7 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
           ),
         ),
         Text(
-            '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用')
+            '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用'),
       ],
     );
   }
