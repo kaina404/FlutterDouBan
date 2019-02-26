@@ -19,8 +19,11 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:douban_app/http/http_request.dart';
+import 'package:douban_app/http/mock_request.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
 import '../../bean/movie_long_comments_entity.dart';
+import '../../widgets/bottom_drag_widget.dart';
+import 'long_comment_widget.dart';
 
 ///影片、电视详情页面
 class DetailPage extends StatefulWidget {
@@ -45,6 +48,9 @@ class _DetailPageState extends State<DetailPage> {
 
   MovieDetailBean _movieDetailBean;
   var _request = HttpRequest(API.BASE_URL);
+  DragController controller = DragController();
+
+  double get screenH => MediaQuery.of(context).size.height;
 
   @override
   void initState() {
@@ -64,9 +70,26 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       backgroundColor: pickColor,
       body: Container(
-        child: SafeArea(child: _getBody()),
+        child: SafeArea(
+            child: BottomDragWidget(
+                body: _getBody(),
+                dragContainer: DragContainer(
+                    controller: controller,
+                    drawer: OverscrollNotificationWidget(
+                      child: LongCommentWidget(
+                          movieLongCommentsEntity: movieLongCommentReviews),
+                      scrollListener: _scrollListener,
+                    ),
+                    defaultShowHeight: screenH * 0.1,
+                    color: Colors.white,
+                    height: screenH * 0.8))),
       ),
     );
+  }
+
+  void _scrollListener(
+      double dragDistance, ScrollNotificationListener isDragEnd) {
+    controller.updateDragDistance(dragDistance, isDragEnd);
   }
 
   ///所属频道
@@ -375,7 +398,8 @@ class _DetailPageState extends State<DetailPage> {
           ///显示脚布局
           return Container(
             padding: EdgeInsets.all(10.0),
-            margin: EdgeInsets.only(bottom: 20.0,
+            margin: EdgeInsets.only(
+                bottom: 20.0,
                 left: Constant.MARGIN_LEFT,
                 right: Constant.MARGIN_RIGHT),
             decoration: BoxDecoration(
@@ -400,6 +424,7 @@ class _DetailPageState extends State<DetailPage> {
           CommantsBeanCommants bean = commentsEntity.comments[index - 1];
           return Container(
             margin: padding(),
+
             ///内容item
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -506,6 +531,8 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
+  MockRequest _mockRequest = MockRequest();
+
   void requestAPI() async {
     Future(() {
       return _request.get(
@@ -522,10 +549,12 @@ class _DetailPageState extends State<DetailPage> {
           '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
     }).then((result2) {
       commentsEntity = CommentsEntity.fromJson(result2);
-    }).then((_){
-      return _request.get(
-          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
-    }).then((result3){
+    }).then((_) {
+//      return _request.get(
+//          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      //使用模拟数据
+      return _mockRequest.get(API.REIVIEWS);
+    }).then((result3) {
       movieLongCommentReviews = MovieLongCommentsEntity.fromJson(result3);
       setState(() {
         loading = false;

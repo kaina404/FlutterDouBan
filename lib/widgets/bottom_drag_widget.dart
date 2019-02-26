@@ -48,10 +48,12 @@ class DragContainer extends StatefulWidget {
   final double defaultShowHeight;
   final double height;
   final DragController controller;
+  final Color color;
 
   DragContainer(
       {Key key,
       this.controller,
+      this.color = Colors.white,
       @required this.drawer,
       @required this.defaultShowHeight,
       @required this.height})
@@ -135,11 +137,15 @@ class _DragContainerState extends State<DragContainer>
         gestures: {MyVerticalDragGestureRecognizer: getRecognizer()},
         child: Stack(
           children: <Widget>[
-            widget.drawer,
+            Container(
+              child: widget.drawer,
+              color: widget.color,
+              height: widget.height,
+            ),
             Offstage(
               child: Container(
                 ///使用图层解决的方案最佳
-                color: Colors.blueGrey,
+                color: Colors.transparent,
                 height: widget.height,
               ),
               offstage: offstage,
@@ -205,6 +211,7 @@ class _DragContainerState extends State<DragContainer>
 }
 
 typedef FlingListener = void Function(bool isFling);
+
 ///MyVerticalDragGestureRecognizer 负责任务
 ///1.监听child的位置更新
 ///2.判断child在手松的那一刻是否是出于fling状态
@@ -383,9 +390,11 @@ enum ScrollNotificationListener {
   edge
 }
 
-
 /// -----------------------DEMO-----------------------
 ///
+///
+///
+/// DragController controller = DragController();
 //class Demo extends StatefulWidget {
 //  @override
 //  _DemoState createState() => _DemoState();

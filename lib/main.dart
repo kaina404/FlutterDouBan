@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
-        body: SafeArea(child: LongCommentWidget(movieLongCommentsEntity: null)),
+        body: SafeArea(child: ContainerPage()),
       ),
     );
   }
@@ -56,24 +56,28 @@ class Demo extends StatefulWidget {
 class _DemoState extends State<Demo> {
   @override
   Widget build(BuildContext context) {
-    return BottomDragWidget(
-        body: Container(
-          color: Colors.brown,
-          child: ListView.builder(itemBuilder: (BuildContext context, int index){
-            return Text('我是listview下面一层的东东，index=$index');
-          }, itemCount: 100,),
-        ),
-        dragContainer: DragContainer(
-          controller: controller,
-          drawer: getListView(),
-          defaultShowHeight: 150.0,
-          height: 700.0,
-        ));
+//    return BottomDragWidget(
+//        body: Container(
+//          color: Colors.brown,
+//          child: ListView.builder(itemBuilder: (BuildContext context, int index){
+//            return Text('我是listview下面一层的东东，index=$index');
+//          }, itemCount: 100,),
+//        ),
+//        dragContainer: DragContainer(
+//          controller: controller,
+//          drawer: getListView(),
+//          defaultShowHeight: 150.0,
+//          height: 700.0,
+//        ));
+    return Container(
+      color: Colors.brown,
+      height: MediaQuery.of(context).size.height * 0.8,
+    );
   }
 
   Widget getListView() {
     return Container(
-      height:600.0,
+      height: 600.0,
 
       ///总高度
       color: Colors.amberAccent,
@@ -96,6 +100,7 @@ class _DemoState extends State<Demo> {
           return Text('data=$index');
         },
         itemCount: 100,
+
         ///这个属性是用来断定滚动的部件的物理特性，例如：
         ///scrollStart
         ///ScrollUpdate
@@ -103,8 +108,8 @@ class _DemoState extends State<Demo> {
         ///ScrollEnd
         ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
 
-///下面代码是我在翻源码找到的解决方案
-/// The scroll physics to use for the platform given by [getPlatform].
+        ///下面代码是我在翻源码找到的解决方案
+        /// The scroll physics to use for the platform given by [getPlatform].
         ///
         /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
         /// Android.

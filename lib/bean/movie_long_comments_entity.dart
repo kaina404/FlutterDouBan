@@ -127,9 +127,9 @@ class MovieLongCommentsReviewsAuthor {
 }
 
 class MovieLongCommentsReviewsRating {
-	int min;
-	int max;
-	double value;
+	var min;
+	var max;
+	var value;
 
 	MovieLongCommentsReviewsRating({this.min, this.max, this.value});
 

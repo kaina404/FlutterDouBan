@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../bean/movie_long_comments_entity.dart';
+import '../../widgets/rating_bar.dart';
+import '../../constant/Constant.dart';
 
 ///电影长评论
 class LongCommentWidget extends StatelessWidget {
   final MovieLongCommentsEntity movieLongCommentsEntity;
 
   LongCommentWidget({Key key, @required this.movieLongCommentsEntity})
-      : super(key: key);
+      : assert(movieLongCommentsEntity != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
   TabController controller;
   Color selectColor, unselectedColor;
   TextStyle selectStyle, unselectedStyle;
+
   @override
   void initState() {
     controller = TabController(length: list.length, vsync: this);
@@ -51,25 +55,101 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+          left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT),
+      child: Column(
+        children: <Widget>[
+          Align(
+            child: TabBar(
+              tabs: list.map((item) => Text(item)).toList(),
+              isScrollable: true,
+              indicatorColor: selectColor,
+              labelColor: selectColor,
+              labelStyle: selectStyle,
+              unselectedLabelColor: unselectedColor,
+              unselectedLabelStyle: unselectedStyle,
+              indicatorSize: TabBarIndicatorSize.label,
+              controller: controller,
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          Expanded(
+              child: TabBarView(
+            children: <Widget>[
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return getItem(widget.movieLongCommentsEntity.reviews[index]);
+                },
+                physics: const ClampingScrollPhysics(),
+                itemCount: widget.movieLongCommentsEntity.reviews.length,
+              ),
+              Text('话题'),
+              Text('讨论')
+            ],
+            controller: controller,
+          ))
+        ],
+      ),
+    );
+  }
+
+  Widget getItem(MovieLongCommentReviews review) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Align(child: TabBar(
-          tabs: list.map((item) => Text(item)).toList(),
-          isScrollable: true,
-          indicatorColor: selectColor,
-          labelColor: selectColor,
-          labelStyle: selectStyle,
-          unselectedLabelColor: unselectedColor,
-          unselectedLabelStyle: unselectedStyle,
-          indicatorSize: TabBarIndicatorSize.label,
-          controller: controller,
-        ),alignment: Alignment.centerLeft,),
-        Expanded(
-            child: TabBarView(
-          children: list.map((item) => Text(item)).toList(),
-          controller: controller,
-        ))
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 10.0, bottom: 7.0, right: 5.0),
+              child: CircleAvatar(
+                radius: 10.0,
+                backgroundImage: NetworkImage(review.author.avatar),
+                backgroundColor: Colors.white,
+              ),
+            ),
+            Padding(
+              child: Text(review.author.name),
+              padding: const EdgeInsets.only(right: 5.0),
+            ),
+            RatingBar(
+              ((review.rating.value * 1.0) / (review.rating.max * 1.0)) * 10.0,
+              size: 11.0,
+              fontSize: 0.0,
+            )
+          ],
+        ),
+        Text(
+          review.title,
+          style: TextStyle(
+              fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+          child: Text(
+            review.content,
+            softWrap: true,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+          ),
+        ),
+        Text(
+            '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用')
       ],
     );
+  }
+
+  ///将34123转成3.4k
+  getUsefulCount(int usefulCount) {
+    double a = usefulCount / 1000;
+    if (a < 1.0) {
+      return usefulCount;
+    } else {
+      return '${a.toStringAsFixed(1)}k'; //保留一位小数
+    }
   }
 }

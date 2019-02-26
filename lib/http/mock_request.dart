@@ -25,6 +25,7 @@ class MockRequest {
     API.COMING_SOON: 'coming_soon',
     API.TOP_250: 'top250',
     API.WEEKLY: 'weekly',
+    API.REIVIEWS: 'reviews',
   };
 
   getJsonName(String action) {
