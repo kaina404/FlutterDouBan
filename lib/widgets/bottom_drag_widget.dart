@@ -66,6 +66,7 @@ class DragContainer extends StatefulWidget {
 class _DragContainerState extends State<DragContainer>
     with TickerProviderStateMixin {
   AnimationController controller;
+  ///滑动位置超过这个位置，会滚到顶部；小于，会滚动底部。
   double maxOffsetDistance;
   bool onResetControllerValue = false;
   double offsetDistance;
