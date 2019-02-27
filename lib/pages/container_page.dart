@@ -21,13 +21,8 @@ class Item {
 }
 
 class _ContainerPageState extends State<ContainerPage> {
-  final List<Widget> pages = [
-    BookAudioVideoPage(),
-    HomePage(),
-    GroupPage(),
-    ShopPage(),
-    PersonCenterPage()
-  ];
+  final ShopPageWidget shopPageWidget  = ShopPageWidget();
+  List<Widget> pages;
 
   final defaultItemColor = Color.fromARGB(255, 125, 125, 125);
 
@@ -49,11 +44,26 @@ class _ContainerPageState extends State<ContainerPage> {
   @override
   void initState() {
     super.initState();
+    pages = [
+      BookAudioVideoPage(),
+      HomePage(),
+      GroupPage(),
+      shopPageWidget,
+      PersonCenterPage()
+    ];
     itemList = itemNames
         .map((item) => BottomNavigationBarItem(
-            icon: Image.asset(item.normalIcon, width: 30.0, height: 30.0,),
-            title: Text(item.name, style: TextStyle(fontSize: 10.0),),
-            activeIcon: Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
+            icon: Image.asset(
+              item.normalIcon,
+              width: 30.0,
+              height: 30.0,
+            ),
+            title: Text(
+              item.name,
+              style: TextStyle(fontSize: 10.0),
+            ),
+            activeIcon:
+                Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
         .toList();
   }
 
@@ -109,6 +119,7 @@ class _ContainerPageState extends State<ContainerPage> {
         onTap: (int index) {
           setState(() {
             _selectIndex = index;
+            shopPageWidget.setShowState(pages.indexOf(shopPageWidget) == _selectIndex);
           });
         },
         //图标大小
