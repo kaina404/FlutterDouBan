@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/bean/subject_entity.dart';
-import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
+import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import '../../constant/Constant.dart';
 ///影院热映、即将上映
 class HotSoonMovieWidget extends StatefulWidget {

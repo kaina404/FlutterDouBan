@@ -4,7 +4,7 @@ import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/pages/movie/TitleWidget.dart';
 import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
-import 'package:douban_app/widgets/SubjectMarkImageWidget.dart';
+import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';

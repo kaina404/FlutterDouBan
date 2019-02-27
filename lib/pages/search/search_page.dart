@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/SearchTextFieldWidget.dart';
+import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';

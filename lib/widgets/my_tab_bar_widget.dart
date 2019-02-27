@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/DouBanDemo.dart';
+import 'package:douban_app/pages/douya_top_250_list_widget.dart';
 import 'package:douban_app/pages/movie/movie_page.dart';
 
 class FlutterTabBarView extends StatelessWidget {

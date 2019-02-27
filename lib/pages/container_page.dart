@@ -3,7 +3,7 @@ import 'package:douban_app/pages/group/group_page.dart';
 import 'package:douban_app/pages/movie/BookAudioVideoPage.dart';
 import 'package:douban_app/pages/home/home_page.dart';
 import 'package:douban_app/pages/person/person_center_page.dart';
-import 'package:douban_app/pages/ShopPage.dart';
+import 'package:douban_app/pages/shop_page.dart';
 
 class ContainerPage extends StatefulWidget {
   ContainerPage({Key key}) : super(key: key);
