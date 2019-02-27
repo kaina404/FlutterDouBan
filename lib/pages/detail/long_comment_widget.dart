@@ -113,8 +113,8 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
               physics: const ClampingScrollPhysics(),
               itemCount: widget.movieLongCommentsEntity.reviews.length,
             ),
-            Text('话题'),
-            Text('讨论')
+            Text('话题，暂无数据~'),
+            Text('讨论，暂无数据~')
           ],
           controller: controller,
         ))
