@@ -326,7 +326,9 @@ class _MoviePageState extends State<MoviePage> {
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 0.0,
                   childAspectRatio: _getRadio())),
-          getCommonImg(Constant.IMG_TMP1, null),
+          getCommonImg(Constant.IMG_TMP1, (){
+            Router.pushNoParams(context, "http://www.flutterall.com");
+          }),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(top: 20.0, bottom: 15.0),

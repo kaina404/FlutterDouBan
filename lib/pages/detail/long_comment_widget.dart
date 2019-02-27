@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../bean/movie_long_comments_entity.dart';
 import '../../widgets/rating_bar.dart';
 import '../../constant/Constant.dart';
+import 'package:douban_app/router.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 ///电影长评论
 class LongCommentWidget extends StatelessWidget {
@@ -121,54 +123,88 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
   }
 
   Widget getItem(MovieLongCommentReviews review) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 10.0, bottom: 7.0, right: 5.0),
-              child: CircleAvatar(
-                radius: 10.0,
-                backgroundImage: NetworkImage(review.author.avatar),
-                backgroundColor: Colors.white,
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 10.0, bottom: 7.0, right: 5.0),
+                child: CircleAvatar(
+                  radius: 10.0,
+                  backgroundImage: NetworkImage(review.author.avatar),
+                  backgroundColor: Colors.white,
+                ),
+              ),
+              Padding(
+                child: Text(review.author.name),
+                padding: const EdgeInsets.only(right: 5.0),
+              ),
+              RatingBar(
+                ((review.rating.value * 1.0) / (review.rating.max * 1.0)) *
+                    10.0,
+                size: 11.0,
+                fontSize: 0.0,
+              )
+            ],
+          ),
+          Text(
+            review.title,
+            style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Text(
+              review.content,
+              softWrap: true,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+            ),
+          ),
+          Padding(
+            child: Text(
+                '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用'),
+            padding: const EdgeInsets.only(bottom: 10.0),
+          ),
+        ],
+      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return WebviewScaffold(
+            url: review.shareUrl,
+            appBar: new AppBar(
+              backgroundColor: Colors.green,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10.0, bottom: 7.0, right: 5.0),
+                    child: CircleAvatar(
+                      radius: 10.0,
+                      backgroundImage: NetworkImage(review.author.avatar),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    child: Text(review.author.name),
+                    padding: const EdgeInsets.only(right: 5.0),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              child: Text(review.author.name),
-              padding: const EdgeInsets.only(right: 5.0),
-            ),
-            RatingBar(
-              ((review.rating.value * 1.0) / (review.rating.max * 1.0)) * 10.0,
-              size: 11.0,
-              fontSize: 0.0,
-            )
-          ],
-        ),
-        Text(
-          review.title,
-          style: TextStyle(
-              fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-          child: Text(
-            review.content,
-            softWrap: true,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
-          ),
-        ),
-        Padding(
-          child: Text(
-              '${getUsefulCount(review.commentsCount)}回复 · ${getUsefulCount(review.usefulCount)} 有用'),
-          padding: const EdgeInsets.only(bottom: 10.0),
-        ),
-      ],
+          );
+        }));
+      },
     );
   }
 
