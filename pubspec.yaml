@@ -26,6 +26,8 @@ dependencies:
 
   flutter_webview_plugin: ^0.3.0+2
 
+  webview_flutter: ^0.3.3+1
+
   video_player: ^0.10.0+2
   # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
   dio: ^1.0.13
