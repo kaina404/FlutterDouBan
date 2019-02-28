@@ -71,6 +71,7 @@ class _GroupWidgetState extends State<_GroupWidget> {
       );
     }
     return ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
           return Image.asset(Constant.ASSETS_IMG + 'ic_group_top.png');

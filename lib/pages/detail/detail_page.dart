@@ -581,6 +581,7 @@ class _DetailPageState extends State<DetailPage> {
         _movieDetailBean.rating.details.d4 +
         _movieDetailBean.rating.details.d5;
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: <Widget>[
         SliverAppBar(
           title: Text('电影'),

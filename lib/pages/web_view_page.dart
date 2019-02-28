@@ -7,9 +7,12 @@ class WebViewPage extends StatelessWidget {
   static final String TITLE = 'title';
 
   WebViewPage(this.url, {Key key, this.params}) : super(key: key);
-
+//  final _webviewReference = FlutterWebviewPlugin();
   @override
   Widget build(BuildContext context) {
+//    _webviewReference.close();
+//    _webviewReference.dispose();
+
     return WebviewScaffold(
       url: url,
       appBar: AppBar(

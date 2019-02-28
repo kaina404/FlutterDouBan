@@ -10,6 +10,7 @@ class PersonCenterPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(child: Padding(padding: EdgeInsets.only(top: 10.0),child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: false,
         slivers: <Widget>[
           SliverAppBar(

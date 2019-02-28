@@ -279,6 +279,7 @@ class _MoviePageState extends State<MoviePage> {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         slivers: <Widget>[
           SliverToBoxAdapter(
