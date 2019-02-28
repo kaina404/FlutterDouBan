@@ -99,8 +99,7 @@ class _DragContainerState extends State<DragContainer>
 
   GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>
   getRecognizer() {
-    return GestureRecognizerFactoryWithHandlers<
-        MyVerticalDragGestureRecognizer>(
+    return GestureRecognizerFactoryWithHandlers<MyVerticalDragGestureRecognizer>(
           () =>
           MyVerticalDragGestureRecognizer(flingListener: (bool isFling) {
             _isFling = isFling;

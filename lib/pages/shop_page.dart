@@ -137,7 +137,7 @@ class _WebViewWidget extends StatefulWidget {
 
 class _WebViewWidgetState extends State<_WebViewWidget>  {
   Rect _rect;
-
+  bool needFullScreen = false;
   @override
   void initState() {
     super.initState();
@@ -154,28 +154,34 @@ class _WebViewWidgetState extends State<_WebViewWidget>  {
   @override
   Widget build(BuildContext context) {
     print('build widget.url=${widget.url}');
-    return Container(
-      child: _WebviewPlaceholder(onRectChanged: (Rect value) {
-        if (_rect == null || _closed) {
-          if(_rect != value){
-            _rect = value;
-          }
-          print('_webviewReference.launch');
-          _webviewReference.launch(widget.url,
-              withJavascript: true,
-              withLocalStorage: true,
-              scrollBar: true,
-              rect: Rect.fromLTRB(0.0, ScreenUtils.padTopH() + 60.0,
-                  ScreenUtils.screenW(), ScreenUtils.screenH() * 0.8));
-        } else {
-          print('_webviewReference.launch else');
-          if (_rect != value) {
-            _rect = value;
-          }
-          _webviewReference.reloadUrl(widget.url);
+    return _WebviewPlaceholder(onRectChanged: (Rect value) {
+      if (_rect == null || _closed) {
+        if(_rect != value){
+          _rect = value;
         }
-      }),
-    );
+        print('_webviewReference.launch');
+        _webviewReference.launch(widget.url,
+            withJavascript: true,
+            withLocalStorage: true,
+            scrollBar: true,
+            rect: getRect());
+      } else {
+        print('_webviewReference.launch else');
+        if (_rect != value) {
+          _rect = value;
+        }
+        _webviewReference.reloadUrl(widget.url);
+      }
+    });
+  }
+
+  getRect() {
+    if(needFullScreen){
+      return null;
+    }else{
+      return Rect.fromLTRB(0.0, ScreenUtils.padTopH() + 60.0,
+          ScreenUtils.screenW(), ScreenUtils.screenH() - 60.0);
+    }
   }
 
 }
