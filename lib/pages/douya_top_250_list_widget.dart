@@ -20,14 +20,12 @@ class DouBanState extends State<DouBanListView>
   @override
   void initState() {
     super.initState();
-    api.top250((datas){
+    api.top250((datas) {
       setState(() {
         subjects = datas;
       });
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +40,11 @@ class DouBanState extends State<DouBanListView>
       return CupertinoActivityIndicator();
     }
     return ListView.builder(
+        physics: const BouncingScrollPhysics(),
         //item 的数量
         itemCount: subjects.length,
         itemBuilder: (BuildContext context, int index) {
-          Subject bean =  subjects[index];
+          Subject bean = subjects[index];
           return GestureDetector(
             //Flutter 手势处理
             child: Container(
