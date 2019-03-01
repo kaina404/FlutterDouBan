@@ -172,7 +172,7 @@ class _WebViewWidgetState extends State<_WebViewWidget>  {
         }
         _webviewReference.reloadUrl(widget.url);
       }
-    });
+    }, child: const Center(child: const CircularProgressIndicator()),);
   }
 
   getRect() {
