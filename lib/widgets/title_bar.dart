@@ -55,14 +55,19 @@ class TitleBar extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: GestureDetector(
-            child: Image.asset(
-              Constant.ASSETS_IMG + 'ic_arrow_back.png',
-              width: 25.0,
-              height: 25.0,
+            child: Padding(
+              padding: padding,
+              child: Image.asset(
+                Constant.ASSETS_IMG + 'ic_arrow_back.png',
+                width: 25.0,
+                height: 25.0,
+              ),
             ),
             onTap: () {
               if (onTabBack == null) {
                 Navigator.of(context).pop();
+              } else {
+                onTabBack();
               }
             },
           ),
