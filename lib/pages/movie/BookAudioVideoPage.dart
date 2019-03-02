@@ -45,6 +45,7 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
 
   @override
   Widget build(BuildContext context) {
+    print('build book audio video');
     return Container(
       color: Colors.white,
       child: SafeArea(

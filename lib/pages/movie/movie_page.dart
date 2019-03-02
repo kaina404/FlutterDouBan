@@ -23,13 +23,16 @@ import 'package:douban_app/widgets/loading_widget.dart';
 
 ///书影音-电影
 class MoviePage extends StatefulWidget {
+
+  MoviePage({Key key}):super(key:key);
+
   @override
   State<StatefulWidget> createState() {
     return _MoviePageState();
   }
 }
 
-class _MoviePageState extends State<MoviePage> {
+class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMixin {
   Widget titleWidget, hotSoonTabBarPadding;
   HotSoonTabBar hotSoonTabBar;
   List<Subject> hotShowBeans = List(); //影院热映
@@ -50,6 +53,7 @@ class _MoviePageState extends State<MoviePage> {
   @override
   void initState() {
     super.initState();
+    print('initState movie_page');
     titleWidget = Padding(
       padding: EdgeInsets.only(top: 10.0),
       child: TitleWidget(),
@@ -72,6 +76,7 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('build movie_page');
     if (itemW == null) {
       imgSize = MediaQuery.of(context).size.width / 5 * 3;
       itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
@@ -380,6 +385,9 @@ class _MoviePageState extends State<MoviePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 typedef OnTab = void Function();

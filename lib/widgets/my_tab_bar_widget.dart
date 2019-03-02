@@ -11,9 +11,9 @@ class FlutterTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     print('build FlutterTabBarView');
     var viewList = [
-      MoviePage(),
+      MoviePage(key: PageStorageKey<String>('MoviePage'),),
       Page2(),
-      DouBanListView(),
+      DouBanListView(key: PageStorageKey<String>('DouBanListView'),),
       Page4(),
       Page5(),
       Page1(),

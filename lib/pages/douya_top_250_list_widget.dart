@@ -5,6 +5,9 @@ import 'package:douban_app/router.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 
 class DouBanListView extends StatefulWidget {
+
+  DouBanListView({Key key}):super(key:key);
+
   @override
   State<StatefulWidget> createState() {
     return DouBanState();
@@ -29,6 +32,7 @@ class DouBanState extends State<DouBanListView>
 
   @override
   Widget build(BuildContext context) {
+    print('build douban_250');
     return Container(
       child: getListViewContainer(),
     );
