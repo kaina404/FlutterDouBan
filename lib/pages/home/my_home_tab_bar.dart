@@ -36,11 +36,11 @@ class _HomeTabBarState extends State<HomeTabBar> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Positioned(
+        Positioned(///搜索框
           left: 15.0,
           right: ScreenUtils.screenW() / 5 * 4 - 10.0,
           top: getTop(widget.translate),
-          child: Container(
+          child: getOpacityWidget(Container(
             padding: const EdgeInsets.only(
                 top: 3.0, bottom: 3.0, right: 10.0, left: 5.0),
             decoration: BoxDecoration(
@@ -48,7 +48,10 @@ class _HomeTabBarState extends State<HomeTabBar> {
                 borderRadius: BorderRadius.all(Radius.circular(17.0))),
             child: Row(
               children: <Widget>[
-                Icon(Icons.search),
+                Icon(
+                  Icons.search,
+                  color: const Color.fromARGB(255, 128, 128, 129),
+                ),
                 Expanded(
                   child: Align(
                     alignment: Alignment(1.0, 0.0),
@@ -62,7 +65,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
                 )
               ],
             ),
-          ),
+          )),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 5.0),
@@ -90,5 +93,16 @@ class _HomeTabBarState extends State<HomeTabBar> {
   double getTop(double translate) {
     return Tween<double>(begin: allHeight, end: 0.0)
         .transform(widget.translate);
+  }
+
+  Widget getOpacityWidget(Widget child) {
+    if (widget.translate == 1) {
+      return child;
+    }
+    return Opacity(
+      opacity: const Interval(0.0, 1.0, curve: Curves.fastOutSlowIn)
+          .transform(widget.translate),
+      child: child,
+    );
   }
 }
