@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
+import 'package:douban_app/demo/my_tab_bar_demo.dart';
 
 // Examples can assume:
 // void _airDress() { }
@@ -527,17 +528,6 @@ class _AppBarState extends State<AppBar> {
   }
 }
 
-getText(TabBar tabBar) {
-  List<Text> txts = [];
-  for (Widget item in tabBar.tabs) {
-    if (item is Tab) {
-      final Tab tab = item;
-      if (tab.text != null && tab.icon != null) ;
-    }
-  }
-  return txts;
-}
-
 class _FloatingAppBar extends StatefulWidget {
   const _FloatingAppBar({Key key, this.child}) : super(key: key);
 
@@ -684,17 +674,23 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     Color color = Color.lerp(Colors.white, Colors.green, t);
 
 //    List<>getTabBarText(bottom);
-    bottom = TabBar(
-      // These are the widgets to put in each tab in the tab bar.
-      tabs: bottomList
-          .map((String name) => Container(
-                child: Text(
-                  name,
-                  style: TextStyle(color: color),
-                ),
-                padding: const EdgeInsets.only(bottom: 5.0),
-              ))
-          .toList(),
+    bottom = MyTabBar(
+      translate: t,
+      tabBar: TabBar(
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorWeight: 2.0,
+        indicatorColor: color,
+        // These are the widgets to put in each tab in the tab bar.
+        tabs: bottomList
+            .map((String name) => Container(
+                  child: Text(
+                    name,
+                    style: TextStyle(color: color, fontSize: 17.0),
+                  ),
+                  padding: const EdgeInsets.only(bottom: 5.0, top: 5.0),
+                ))
+            .toList(),
+      ),
     );
 
     final FlexibleSpaceBarSettings settings = FlexibleSpaceBar.createSettings(
@@ -1177,7 +1173,6 @@ class _SliverAppBarState extends State<SliverAppBar>
   }
 }
 
-
 ///            ----------DEMO--------------
 ///
 ///
@@ -1229,11 +1224,11 @@ getWidget() {
                 // These are the widgets to put in each tab in the tab bar.
                 tabs: _tabs
                     .map((String name) => Container(
-                  child: Text(
-                    name,
-                  ),
-                  padding: const EdgeInsets.only(bottom: 5.0),
-                ))
+                          child: Text(
+                            name,
+                          ),
+                          padding: const EdgeInsets.only(bottom: 5.0),
+                        ))
                     .toList(),
               ),
             ),
@@ -1279,7 +1274,7 @@ getWidget() {
                         // ListTile widgets.
                         itemExtent: 48.0,
                         delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
+                          (BuildContext context, int index) {
                             // This builder is called for each child.
                             // In this example, we just number each list item.
                             return ListTile(

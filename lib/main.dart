@@ -110,88 +110,8 @@ class _DemoState2 extends State<Demo> {
   }
 }
 
-//class _DemoState extends State<Demo> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return NestedScrollView(
-//        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-//          return <Widget>[
-//            SliverToBoxAdapter(
-//              child: Container(
-//                color: Colors.green,
-//                padding: const EdgeInsets.all(10.0),
-//                child: SearchTextFieldWidget(
-//                  hintText: "测试",
-//                  onTab: () {},
-//                ),
-//              ),
-//            ),
-//            SliverPersistentHeader(
-//                floating: true,
-//                pinned: true,
-//                delegate: _SliverAppBarDelegate(
-//                    maxHeight: 49.0,
-//                    minHeight: 49.0,
-//                    child: Container(
-//                      color: Colors.green,
-//                      child: Text('TEOJWO'),
-//                    )))
-//          ];
-//        },
-//        body: ListView.builder(
-//          physics: BouncingScrollPhysics(),
-//          itemBuilder: (BuildContext context, int index) {
-//            return Text('Text$index');
-//          },
-//          itemCount: 100,
-//        ));
-//  }
-//
-//  void _scrollListener(
-//      double dragDistance, ScrollNotificationListener isDragEnd) {
-//    controller.updateDragDistance(dragDistance, isDragEnd);
-//  }
-//
-//  getSliverList() {
-//    return SliverList(
-//        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-//      return Text('Text$index');
-//    }, childCount: 100));
-//  }
-//}
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.child,
-  });
-
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  double get maxExtent => math.max((minHeight ?? kToolbarHeight), minExtent);
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
-  }
-}
-
-var _tabs = ['GIEWHG', 'FEWO'];
+var _tabs = ['动态', '推荐'];
 
 getWidget() {
   return DefaultTabController(
