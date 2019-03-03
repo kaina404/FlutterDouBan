@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 
 const double _kTabHeight = 46.0;
-const double _kTextAndIconTabHeight = 72.0;
+const double _kTextAndIconTabHeight = 42.0;
 
 class MyTabBar extends StatefulWidget implements PreferredSizeWidget {
   final TabBar tabBar;

@@ -6,11 +6,11 @@ import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/celebrity_entity.dart';
 import 'package:douban_app/widgets/title_bar.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
-import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
 import 'package:douban_app/repository/person_detail_repository.dart';
 import 'package:douban_app/widgets/item_count_title.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
+import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import 'package:douban_app/widgets/title_bar.dart' as title;
 
 class PersonDetailPage extends StatefulWidget {

@@ -19,6 +19,7 @@ import 'package:douban_app/widgets/bottom_drag_widget.dart';
 import 'package:douban_app/pages/detail/long_comment_widget.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'dart:math' as math;
+import 'package:douban_app/widgets/my_app_bar.dart' as myapp;
 
 void main() {
   runApp(MyApp());
@@ -42,7 +43,10 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.green,
-        body: getWidget(),
+        body: Container(
+          color: Colors.white,
+          child: SafeArea(child: getWidget()),
+        ),
       ),
     );
   }
@@ -205,10 +209,11 @@ getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: SliverAppBar(
+            child: myapp.SliverAppBar(
               pinned: true,
-              expandedHeight: 150.0,
+              expandedHeight: 100.0,
               primary: false,
+              titleSpacing: 0.0,
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
@@ -216,8 +221,9 @@ getWidget() {
                   color: Colors.green,
                   child: SearchTextFieldWidget(
                     hintText: 'fjeow',
+                    margin: const EdgeInsets.only(left: 15.0, right: 15.0),
                   ),
-                  alignment: Alignment(0.0, 0.0),
+                  alignment: Alignment(0.0, -0.5),
                 ),
               ),
               // The "forceElevated" property causes the SliverAppBar to show
@@ -228,9 +234,17 @@ getWidget() {
               // or not appear inappropriately, because the SliverAppBar is
               // not actually aware of the precise position of the inner
               // scroll views.
+              bottomTextString: _tabs,
               bottom: TabBar(
                 // These are the widgets to put in each tab in the tab bar.
-                tabs: _tabs.map((String name) => Tab(text: name)).toList(),
+                tabs: _tabs
+                    .map((String name) => Container(
+                  child: Text(
+                    name,
+                  ),
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                ))
+                    .toList(),
               ),
             ),
           ),
@@ -300,3 +314,4 @@ getWidget() {
     ),
   );
 }
+
