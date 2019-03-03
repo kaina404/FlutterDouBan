@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/util/screen_utils.dart';
+import 'package:douban_app/router.dart';
 
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 42.0;
@@ -53,7 +54,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
                   color: const Color.fromARGB(255, 128, 128, 129),
                 ),
                 Expanded(
-                  child: Align(
+                  child: GestureDetector(child: Align(
                     alignment: Alignment(1.0, 0.0),
                     child: Text(
                       '搜索',
@@ -61,7 +62,9 @@ class _HomeTabBarState extends State<HomeTabBar> {
                           fontSize: 16.0,
                           color: const Color.fromARGB(255, 192, 192, 192)),
                     ),
-                  ),
+                  ),onTap: (){
+                    Router.push(context, Router.searchPage, '搜索豆芽');
+                  },),
                 )
               ],
             ),

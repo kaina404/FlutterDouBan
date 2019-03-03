@@ -8,6 +8,7 @@ import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
 import 'package:douban_app/constant/Constant.dart';
 import 'package:douban_app/widgets/video_widget.dart';
+import 'package:douban_app/router.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -47,6 +48,9 @@ DefaultTabController getWidget() {
                   child: SearchTextFieldWidget(
                     hintText: '影视作品中你难忘的离别',
                     margin: const EdgeInsets.only(left: 15.0, right: 15.0),
+                    onTab: (){
+                      Router.push(context, Router.searchPage, '影视作品中你难忘的离别');
+                    },
                   ),
                   alignment: Alignment(0.0, 0.0),
                 ),
@@ -130,12 +134,12 @@ class _SliverContainerState extends State<SliverContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return getContentSliver(list);
+    return getContentSliver(context, list);
   }
 
-  getContentSliver(List<Subject> list) {
+  getContentSliver(BuildContext context, List<Subject> list) {
     if (widget.name == _tabs[0]) {
-      return _loginContainer();
+      return _loginContainer(context);
     }
 
     print('getContentSliver');
@@ -287,7 +291,7 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 }
 
-_loginContainer() {
+_loginContainer(BuildContext context) {
   return Align(
     alignment: Alignment(0.0, 0.0),
     child: Column(
@@ -301,21 +305,24 @@ _loginContainer() {
           padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
           child: Text(
             '登录后查看关注人动态',
-            style: TextStyle(
-                fontSize: 16.0, color: Colors.grey),
+            style: TextStyle(fontSize: 16.0, color: Colors.grey),
           ),
         ),
-        Container(
-          child: Text(
-            '去登录',
-            style: TextStyle(
-                fontSize: 16.0, color: Colors.green),
+        GestureDetector(
+          child: Container(
+            child: Text(
+              '去登录',
+              style: TextStyle(fontSize: 16.0, color: Colors.green),
+            ),
+            padding: const EdgeInsets.only(
+                left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+                borderRadius: const BorderRadius.all(Radius.circular(6.0))),
           ),
-          padding: const EdgeInsets.only(
-              left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.green),
-              borderRadius: const BorderRadius.all(Radius.circular(6.0))),
+          onTap: () {
+            Router.push(context, Router.searchPage, '搜索笨啦灯');
+          },
         )
       ],
     ),
