@@ -42,7 +42,7 @@ class _MyTabBarState extends State<MyTabBar> {
           top: getTop(widget.translate),
           child: Container(
             padding: const EdgeInsets.only(
-                top: 5.0, bottom: 5.0, right: 10.0, left: 5.0),
+                top: 3.0, bottom: 3.0, right: 10.0, left: 5.0),
             decoration: BoxDecoration(
                 color: const Color.fromARGB(245, 236, 236, 236),
                 borderRadius: BorderRadius.all(Radius.circular(17.0))),
@@ -87,7 +87,7 @@ class _MyTabBarState extends State<MyTabBar> {
     );
   }
 
-  getTop(double translate) {
+  double getTop(double translate) {
     return Tween<double>(begin: allHeight, end: 0.0)
         .transform(widget.translate);
   }
