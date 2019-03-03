@@ -134,6 +134,10 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentSliver(List<Subject> list) {
+    if (widget.name == _tabs[0]) {
+      return _loginContainer();
+    }
+
     print('getContentSliver');
     if (list == null || list.length == 0) {
       return Text('暂无数据');
@@ -276,6 +280,44 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentVideo() {
-    return VideoWidget(Constant.URL_MP4_DEMO_0, showProgressBar: false,);
+    return VideoWidget(
+      Constant.URL_MP4_DEMO_0,
+      showProgressBar: false,
+    );
   }
+}
+
+_loginContainer() {
+  return Align(
+    alignment: Alignment(0.0, 0.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.asset(
+          Constant.ASSETS_IMG + 'ic_new_empty_view_default.png',
+          width: 120.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
+          child: Text(
+            '登录后查看关注人动态',
+            style: TextStyle(
+                fontSize: 16.0, color: Colors.grey),
+          ),
+        ),
+        Container(
+          child: Text(
+            '去登录',
+            style: TextStyle(
+                fontSize: 16.0, color: Colors.green),
+          ),
+          padding: const EdgeInsets.only(
+              left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.green),
+              borderRadius: const BorderRadius.all(Radius.circular(6.0))),
+        )
+      ],
+    ),
+  );
 }
