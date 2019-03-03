@@ -6,6 +6,7 @@ import 'package:douban_app/http/mock_request.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
+import 'package:douban_app/constant/Constant.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -132,6 +133,7 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentSliver(List<Subject> list) {
+    print('getContentSliver');
     if (list == null || list.length == 0) {
       return Text('暂无数据');
     }
@@ -159,71 +161,92 @@ class _SliverContainerState extends State<SliverContainer> {
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.all(8.0),
-                // In this example, the inner scroll view has
-                // fixed-height list items, hence the use of
-                // SliverFixedExtentList. However, one could use any
-                // sliver widget here, e.g. SliverList or SliverGrid.
-                sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        ((BuildContext context, int index) {
-                  Subject item = list[index];
-                  return Container(
-                    height: 140.0,
-                    margin: const EdgeInsets.only(top: 10.0, bottom: 15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 25.0,
-                              backgroundImage:
-                                  NetworkImage(item.casts[0].avatars.medium),
-                              backgroundColor: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Text(item.title),
-                            )
-                          ],
-                        ),
-                        Expanded(
-                            child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      ((BuildContext context, int index) {
+                        Subject item = list[index];
+                        return Container(
+                          height: 180.0,
+                          color: Colors.white,
+                          margin: const EdgeInsets.only(bottom: 10.0),
+                          padding: const EdgeInsets.only(left: Constant.MARGIN_LEFT, right: Constant.MARGIN_RIGHT, top: Constant.MARGIN_RIGHT, bottom: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Expanded(
-                                child: RadiusImg.get(item.images.large, null,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5.0),
-                                          bottomLeft: Radius.circular(5.0)),
-                                    )),
+                              Row(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    radius: 25.0,
+                                    backgroundImage:
+                                    NetworkImage(item.casts[0].avatars.medium),
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(item.title),
+                                  )
+                                ],
                               ),
                               Expanded(
-                                child: RadiusImg.get(
-                                    item.casts[1].avatars.medium, null,
-                                    radius: 0.0),
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: RadiusImg.get(item.images.large, null,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(5.0),
+                                                    bottomLeft: Radius.circular(5.0)),
+                                              )),
+                                        ),
+                                        Expanded(
+                                          child: RadiusImg.get(
+                                              item.casts[1].avatars.medium, null,
+                                              radius: 0.0),
+                                        ),
+                                        Expanded(
+                                          child: RadiusImg.get(
+                                              item.casts[2].avatars.medium, null,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.only(
+                                                      topRight: Radius.circular(5.0),
+                                                      bottomRight:
+                                                      Radius.circular(5.0)))),
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                              Padding(
+                                padding:
+                                const EdgeInsets.only(left: 15.0, right: 15.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Image.asset(
+                                      Constant.ASSETS_IMG + 'ic_vote.png',
+                                      width: 25.0,
+                                      height: 25.0,
+                                    ),
+                                    Image.asset(
+                                      Constant.ASSETS_IMG +
+                                          'ic_notification_tv_calendar_comments.png',
+                                      width: 20.0,
+                                      height: 20.0,
+                                    ),
+                                    Image.asset(
+                                      Constant.ASSETS_IMG +
+                                          'ic_status_detail_reshare_icon.png',
+                                      width: 25.0,
+                                      height: 25.0,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Expanded(
-                                child: RadiusImg.get(
-                                    item.casts[2].avatars.medium, null,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            bottomRight:
-                                                Radius.circular(5.0)))),
-                              )
                             ],
                           ),
-                        ))
-                      ],
-                    ),
-                  );
-                }), childCount: list.length)),
-              ),
+                        );
+                      }), childCount: list.length)),
             ],
           );
         },
