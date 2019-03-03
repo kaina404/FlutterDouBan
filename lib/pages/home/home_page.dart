@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/pages/home/home_app_bar.dart' as myapp;
+import 'package:douban_app/http/http_request.dart';
+import 'package:douban_app/http/mock_request.dart';
+import 'package:douban_app/http/API.dart';
+import 'package:douban_app/bean/subject_entity.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -70,64 +75,119 @@ DefaultTabController getWidget() {
       body: TabBarView(
         // These are the contents of the tab views, below the tabs.
         children: _tabs.map((String name) {
-          return SafeArea(
-            top: false,
-            bottom: false,
-            child: Builder(
-              // This Builder is needed to provide a BuildContext that is "inside"
-              // the NestedScrollView, so that sliverOverlapAbsorberHandleFor() can
-              // find the NestedScrollView.
-              builder: (BuildContext context) {
-                return CustomScrollView(
-                  // The "controller" and "primary" members should be left
-                  // unset, so that the NestedScrollView can control this
-                  // inner scroll view.
-                  // If the "controller" property is set, then this scroll
-                  // view will not be associated with the NestedScrollView.
-                  // The PageStorageKey should be unique to this ScrollView;
-                  // it allows the list to remember its scroll position when
-                  // the tab view is not on the screen.
-                  key: PageStorageKey<String>(name),
-                  slivers: <Widget>[
-                    SliverOverlapInjector(
-                      // This is the flip side of the SliverOverlapAbsorber above.
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context),
-                    ),
-                    SliverPadding(
-                      padding: const EdgeInsets.all(8.0),
-                      // In this example, the inner scroll view has
-                      // fixed-height list items, hence the use of
-                      // SliverFixedExtentList. However, one could use any
-                      // sliver widget here, e.g. SliverList or SliverGrid.
-                      sliver: SliverFixedExtentList(
-                        // The items in this example are fixed to 48 pixels
-                        // high. This matches the Material Design spec for
-                        // ListTile widgets.
-                        itemExtent: 48.0,
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                            // This builder is called for each child.
-                            // In this example, we just number each list item.
-                            return ListTile(
-                              title: Text('Item $index'),
-                            );
-                          },
-                          // The childCount of the SliverChildBuilderDelegate
-                          // specifies how many children this inner list
-                          // has. In this example, each tab has a list of
-                          // exactly 30 items, but this is arbitrary.
-                          childCount: 30,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+          return SliverContainer(
+            name: name,
           );
         }).toList(),
       ),
     ),
   );
+}
+
+class SliverContainer extends StatefulWidget {
+  final String name;
+
+  SliverContainer({Key key, @required this.name}) : super(key: key);
+
+  @override
+  _SliverContainerState createState() => _SliverContainerState();
+}
+
+class _SliverContainerState extends State<SliverContainer> {
+  @override
+  void initState() {
+    super.initState();
+    print('init state${widget.name}');
+
+    ///请求动态数据
+    if (list == null || list.isEmpty) {
+      if (_tabs[0] == widget.name) {
+        requestAPI();
+      } else {
+        ///请求推荐数据
+        requestAPI();
+      }
+    }
+  }
+
+  List<Subject> list;
+
+  void requestAPI() async {
+//    var _request = HttpRequest(API.BASE_URL);
+//    int start = math.Random().nextInt(220);
+//    final Map result = await _request.get(API.TOP_250 + '?start=$start&count=30');
+//    var resultList = result['subjects'];
+
+    var _request = MockRequest();
+    var result = await _request.get(API.TOP_250);
+    var resultList = result['subjects'];
+    list = resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return getContentSliver(list);
+  }
+
+  getContentSliver(List<Subject> list) {
+    if (list == null || list.length == 0) {
+      return Text('暂无数据');
+    }
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: Builder(
+        // This Builder is needed to provide a BuildContext that is "inside"
+        // the NestedScrollView, so that sliverOverlapAbsorberHandleFor() can
+        // find the NestedScrollView.
+        builder: (BuildContext context) {
+          return CustomScrollView(
+            // The "controller" and "primary" members should be left
+            // unset, so that the NestedScrollView can control this
+            // inner scroll view.
+            // If the "controller" property is set, then this scroll
+            // view will not be associated with the NestedScrollView.
+            // The PageStorageKey should be unique to this ScrollView;
+            // it allows the list to remember its scroll position when
+            // the tab view is not on the screen.
+            key: PageStorageKey<String>(widget.name),
+            slivers: <Widget>[
+              SliverOverlapInjector(
+                // This is the flip side of the SliverOverlapAbsorber above.
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.all(8.0),
+                // In this example, the inner scroll view has
+                // fixed-height list items, hence the use of
+                // SliverFixedExtentList. However, one could use any
+                // sliver widget here, e.g. SliverList or SliverGrid.
+                sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        ((BuildContext context, int index) {
+                          Subject item = list[index];
+                  return Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 30.0,
+                            backgroundImage: NetworkImage(item.images.medium),
+                            backgroundColor: Colors.white,
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                  ;
+                }), childCount: list.length)),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }
