@@ -43,7 +43,7 @@ DefaultTabController getWidget() {
                 background: Container(
                   color: Colors.green,
                   child: SearchTextFieldWidget(
-                    hintText: 'fjeow',
+                    hintText: '影视作品中你难忘的离别',
                     margin: const EdgeInsets.only(left: 15.0, right: 15.0),
                   ),
                   alignment: Alignment(0.0, 0.0),
@@ -192,6 +192,7 @@ class _SliverContainerState extends State<SliverContainer> {
                         Expanded(
                             child: Container(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               Expanded(
                                 child: RadiusImg.get(item.images.large, null,
@@ -203,7 +204,8 @@ class _SliverContainerState extends State<SliverContainer> {
                               ),
                               Expanded(
                                 child: RadiusImg.get(
-                                    item.casts[1].avatars.medium, null, radius: 0.0),
+                                    item.casts[1].avatars.medium, null,
+                                    radius: 0.0),
                               ),
                               Expanded(
                                 child: RadiusImg.get(
@@ -211,7 +213,8 @@ class _SliverContainerState extends State<SliverContainer> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
                                             topRight: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0)))),
+                                            bottomRight:
+                                                Radius.circular(5.0)))),
                               )
                             ],
                           ),
