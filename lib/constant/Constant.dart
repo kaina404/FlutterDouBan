@@ -17,4 +17,6 @@ class Constant {
 
   static const double TAB_BOTTOM = 8.0;
 
+  static String URL_MP4_DEMO_0 = 'http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4';
+
 }

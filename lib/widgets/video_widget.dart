@@ -7,8 +7,14 @@ import 'package:douban_app/widgets/video_progress_bar.dart';
 class VideoWidget extends StatefulWidget {
   final String url;
   final String previewImgUrl; //预览图片的地址
-
-  VideoWidget(this.url, {Key key, this.previewImgUrl}) : super(key: key);
+  final bool showProgressBar; //是否显示进度条
+  final bool showProgressText; //是否显示进度文本
+  VideoWidget(this.url,
+      {Key key,
+      this.previewImgUrl,
+      this.showProgressBar = true,
+      this.showProgressText = true})
+      : super(key: key);
 
   _VideoWidgetState state;
 
@@ -153,27 +159,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                 }),
             alignment: Alignment.center,
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    height: 13.0,
-                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                    child: VideoProgressIndicator(
-                      _controller,
-                      allowScrubbing: true,
-                      colors: VideoProgressColors(
-                          playedColor: Colors.amberAccent,
-                          backgroundColor: Colors.grey),
-                    ),
-                  ),
-                ),
-                getDurationText()
-              ],
-            ),
-          ),
+          getProgressContent(),
           Align(
             alignment: Alignment.bottomCenter,
             child: Center(
@@ -202,6 +188,38 @@ class _VideoWidgetState extends State<VideoWidget> {
         }
       });
     _controller.addListener(listener);
+  }
+
+  Widget getProgressContent() {
+    return (widget.showProgressBar || widget.showProgressText
+        ? Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 13.0,
+                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Offstage(
+                      offstage: !widget.showProgressBar,
+                      child: VideoProgressIndicator(
+                        _controller,
+                        allowScrubbing: true,
+                        colors: VideoProgressColors(
+                            playedColor: Colors.amberAccent,
+                            backgroundColor: Colors.grey),
+                      ),
+                    ),
+                  ),
+                ),
+                Offstage(
+                  child: getDurationText(),
+                  offstage: !widget.showProgressText,
+                )
+              ],
+            ),
+          )
+        : Container());
   }
 }
 
