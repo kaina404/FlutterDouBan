@@ -9,7 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
-import 'package:douban_app/demo/my_home_tab_bar.dart';
+import 'package:douban_app/pages/home/my_home_tab_bar.dart';
 
 // Examples can assume:
 // void _airDress() { }
@@ -1132,10 +1132,8 @@ class _SliverAppBarState extends State<SliverAppBar>
   Widget build(BuildContext context) {
     assert(!widget.primary || debugCheckHasMediaQuery(context));
     final double topPadding = 0.0;
-    final double collapsedHeight =
-        (widget.pinned && widget.floating && widget.bottom != null)
-            ? widget.bottom.preferredSize.height + topPadding
-            : null;
+     final double collapsedHeight = widget.bottom.preferredSize.height + 26.0;
+//    final collapsedHeight = 80.0;
 
     return MediaQuery.removePadding(
       context: context,

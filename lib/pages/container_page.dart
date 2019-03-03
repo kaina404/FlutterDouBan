@@ -45,8 +45,8 @@ class _ContainerPageState extends State<ContainerPage> {
   void initState() {
     super.initState();
     pages = [
-      BookAudioVideoPage(),
       HomePage(),
+      BookAudioVideoPage(),
       GroupPage(),
       shopPageWidget,
       PersonCenterPage()

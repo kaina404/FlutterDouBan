@@ -16,4 +16,5 @@ class Constant {
   static const String ASSETS_IMG = 'assets/images/';
 
   static const double TAB_BOTTOM = 8.0;
+
 }
