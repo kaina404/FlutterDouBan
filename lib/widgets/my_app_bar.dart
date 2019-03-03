@@ -9,7 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
-import 'package:douban_app/demo/my_tab_bar_demo.dart';
+import 'package:douban_app/demo/my_home_tab_bar.dart';
 
 // Examples can assume:
 // void _airDress() { }
@@ -674,7 +674,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     Color color = Color.lerp(Colors.white, Colors.green, t);
 
 //    List<>getTabBarText(bottom);
-    bottom = MyTabBar(
+    bottom = HomeTabBar(
       translate: t,
       tabBar: TabBar(
         indicatorSize: TabBarIndicatorSize.label,

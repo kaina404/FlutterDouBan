@@ -8,7 +8,7 @@ import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:douban_app/demo/my_tab_bar_demo.dart';
+import 'package:douban_app/demo/my_home_tab_bar.dart';
 import 'package:douban_app/demo/ImageColors.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/widgets/video_progress_bar.dart';

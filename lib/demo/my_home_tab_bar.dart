@@ -5,14 +5,14 @@ import 'package:douban_app/util/screen_utils.dart';
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 42.0;
 
-class MyTabBar extends StatefulWidget implements PreferredSizeWidget {
+class HomeTabBar extends StatefulWidget implements PreferredSizeWidget {
   final TabBar tabBar;
   final double translate;
 
-  MyTabBar({Key key, this.tabBar, this.translate}) : super(key: key);
+  HomeTabBar({Key key, this.tabBar, this.translate}) : super(key: key);
 
   @override
-  _MyTabBarState createState() => _MyTabBarState();
+  _HomeTabBarState createState() => _HomeTabBarState();
 
   @override
   Size get preferredSize {
@@ -29,7 +29,7 @@ class MyTabBar extends StatefulWidget implements PreferredSizeWidget {
   }
 }
 
-class _MyTabBarState extends State<MyTabBar> {
+class _HomeTabBarState extends State<HomeTabBar> {
   double get allHeight => widget.preferredSize.height;
 
   @override
