@@ -46,6 +46,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
+    print('播放${widget.url}');
     _controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) {
         //初始化完成后，更新状态
@@ -58,11 +59,16 @@ class _VideoWidgetState extends State<VideoWidget> {
     _controller.addListener(listener);
   }
 
+
+
   @override
   void deactivate() {
+    _controller.pause();
+    _controller.dispose();
     _controller.removeListener(listener);
     super.deactivate();
   }
+
 
   FadeAnimation imageFadeAnim;
 

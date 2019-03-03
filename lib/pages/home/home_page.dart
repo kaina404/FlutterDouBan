@@ -21,6 +21,7 @@ var _tabs = ['动态', '推荐'];
 
 DefaultTabController getWidget() {
   return DefaultTabController(
+    initialIndex: 1,
     length: _tabs.length, // This is the number of tabs.
     child: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -48,7 +49,7 @@ DefaultTabController getWidget() {
                   child: SearchTextFieldWidget(
                     hintText: '影视作品中你难忘的离别',
                     margin: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    onTab: (){
+                    onTab: () {
                       Router.push(context, Router.searchPage, '影视作品中你难忘的离别');
                     },
                   ),
@@ -155,6 +156,7 @@ class _SliverContainerState extends State<SliverContainer> {
         // find the NestedScrollView.
         builder: (BuildContext context) {
           return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             // The "controller" and "primary" members should be left
             // unset, so that the NestedScrollView can control this
             // inner scroll view.
@@ -183,12 +185,12 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   double singleLineImgHeight = 180.0;
-  double contentVideoHeight = 280.0;
+  double contentVideoHeight = 350.0;
 
   ///列表的普通单个item
   getCommonItem(List<Subject> items, int index) {
     Subject item = items[index];
-    bool showVideo = index == 1;
+    bool showVideo = index == 1 || index == 3;
     return Container(
       height: showVideo ? contentVideoHeight : singleLineImgHeight,
       color: Colors.white,
@@ -226,7 +228,7 @@ class _SliverContainerState extends State<SliverContainer> {
           ),
           Expanded(
               child: Container(
-            child: showVideo ? getContentVideo() : getItemCenterImg(item),
+            child: showVideo ? getContentVideo(index) : getItemCenterImg(item),
           )),
           Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15.0),
@@ -283,9 +285,9 @@ class _SliverContainerState extends State<SliverContainer> {
     );
   }
 
-  getContentVideo() {
+  getContentVideo(int index) {
     return VideoWidget(
-      Constant.URL_MP4_DEMO_0,
+      index == 1 ? Constant.URL_MP4_DEMO_0 :  Constant.URL_MP4_DEMO_1,
       showProgressBar: false,
     );
   }
