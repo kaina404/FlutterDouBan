@@ -5,6 +5,7 @@ import 'package:douban_app/http/http_request.dart';
 import 'package:douban_app/http/mock_request.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/subject_entity.dart';
+import 'package:douban_app/widgets/image/radius_img.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -167,21 +168,57 @@ class _SliverContainerState extends State<SliverContainer> {
                 sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                         ((BuildContext context, int index) {
-                          Subject item = list[index];
-                  return Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          CircleAvatar(
-                            radius: 30.0,
-                            backgroundImage: NetworkImage(item.images.medium),
-                            backgroundColor: Colors.white,
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                  ;
+                  Subject item = list[index];
+                  return Container(
+                    height: 140.0,
+                    margin: const EdgeInsets.only(top: 10.0, bottom: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 25.0,
+                              backgroundImage:
+                                  NetworkImage(item.casts[0].avatars.medium),
+                              backgroundColor: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(item.title),
+                            )
+                          ],
+                        ),
+                        Expanded(
+                            child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: RadiusImg.get(item.images.large, null,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5.0),
+                                          bottomLeft: Radius.circular(5.0)),
+                                    )),
+                              ),
+                              Expanded(
+                                child: RadiusImg.get(
+                                    item.casts[1].avatars.medium, null, radius: 0.0),
+                              ),
+                              Expanded(
+                                child: RadiusImg.get(
+                                    item.casts[2].avatars.medium, null,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(5.0),
+                                            bottomRight: Radius.circular(5.0)))),
+                              )
+                            ],
+                          ),
+                        ))
+                      ],
+                    ),
+                  );
                 }), childCount: list.length)),
               ),
             ],
