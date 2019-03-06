@@ -36,10 +36,10 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   _VideoWidgetState() {
     listener = () {
-      if (!mounted) {
-        return;
+      if (mounted) {
+        setState(() {});
       }
-      setState(() {});
+
     };
   }
 
@@ -49,11 +49,13 @@ class _VideoWidgetState extends State<VideoWidget> {
     print('播放${widget.url}');
     _controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) {
-        //初始化完成后，更新状态
-        setState(() {});
-        if (_controller.value.duration == _controller.value.position) {
-          _controller.seekTo(Duration(seconds: 0));
+        if(mounted){
+          //初始化完成后，更新状态
           setState(() {});
+          if (_controller.value.duration == _controller.value.position) {
+            _controller.seekTo(Duration(seconds: 0));
+            setState(() {});
+          }
         }
       });
     _controller.addListener(listener);
@@ -63,7 +65,6 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   void deactivate() {
-    _controller.pause();
     _controller.dispose();
     _controller.removeListener(listener);
     super.deactivate();
@@ -180,20 +181,22 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   ///更新播放的URL
   void setUrl(String url) {
-    if (_controller != null) {
-      _controller.removeListener(listener);
-      _controller.pause();
-    }
-    _controller = VideoPlayerController.network(url)
-      ..initialize().then((_) {
-        //初始化完成后，更新状态
-        setState(() {});
-        if (_controller.value.duration == _controller.value.position) {
-          _controller.seekTo(Duration(seconds: 0));
+    if(mounted){
+      if (_controller != null) {
+        _controller.removeListener(listener);
+        _controller.pause();
+      }
+      _controller = VideoPlayerController.network(url)
+        ..initialize().then((_) {
+          //初始化完成后，更新状态
           setState(() {});
-        }
-      });
-    _controller.addListener(listener);
+          if (_controller.value.duration == _controller.value.position) {
+            _controller.seekTo(Duration(seconds: 0));
+            setState(() {});
+          }
+        });
+      _controller.addListener(listener);
+    }
   }
 
   Widget getProgressContent() {
