@@ -29,7 +29,7 @@ class TitleBar extends StatelessWidget {
     } else {}
     return Scaffold(
       body: Container(
-        padding: padding == null ? EdgeInsets.all(10.0) : padding,
+        padding: padding ?? EdgeInsets.all(10.0),
         alignment: Alignment.center,
         child: SafeArea(
             child: Column(
@@ -56,7 +56,7 @@ class TitleBar extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: GestureDetector(
             child: Padding(
-              padding: padding,
+              padding: padding ?? EdgeInsets.all(10.0),
               child: Image.asset(
                 Constant.ASSETS_IMG + 'ic_arrow_back.png',
                 width: 25.0,

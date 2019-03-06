@@ -65,7 +65,6 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   void deactivate() {
-    _controller.dispose();
     _controller.removeListener(listener);
     super.deactivate();
   }
@@ -182,6 +181,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   ///更新播放的URL
   void setUrl(String url) {
     if(mounted){
+      print('updateUrl');
       if (_controller != null) {
         _controller.removeListener(listener);
         _controller.pause();

@@ -286,6 +286,9 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentVideo(int index) {
+    if(!mounted){
+      return Container();
+    }
     return VideoWidget(
       index == 1 ? Constant.URL_MP4_DEMO_0 :  Constant.URL_MP4_DEMO_1,
       showProgressBar: false,
