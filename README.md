@@ -32,3 +32,28 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+# dev-open-push
+
+   * 这个分支供广大Flutter开发者来学习Flutter
+   * *此分支囊括了Flutter 90%的组件的基本与组合使用*，是初学者真正实践的不错选择
+   * 在此豆芽APP的首页实现与影片详情的UI特效，基于魔改Flutter源码。有兴趣可以看看
+   * 大家想实战自己的Flutter能力，可以将某瓣APP作为设计稿，完成需求，并提交
+   * 每位开发者提交的代码，我都会在文档中进行备注
+
+# TODO
+
+
+   
+   
+### dev-0.2
+
+  * 优化代码
+  
+### dev-0.3
+  
+  * 接入rxDart
+  
+### dev-0.4
+
+ * 使用Fish Redux 重构
