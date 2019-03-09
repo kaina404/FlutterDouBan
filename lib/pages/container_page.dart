@@ -44,28 +44,35 @@ class _ContainerPageState extends State<ContainerPage> {
   @override
   void initState() {
     super.initState();
-    pages = [
-      HomePage(),
-      BookAudioVideoPage(),
-      GroupPage(),
-      shopPageWidget,
-      PersonCenterPage()
-    ];
-    itemList = itemNames
-        .map((item) => BottomNavigationBarItem(
-            icon: Image.asset(
-              item.normalIcon,
-              width: 30.0,
-              height: 30.0,
-            ),
-            title: Text(
-              item.name,
-              style: TextStyle(fontSize: 10.0),
-            ),
-            activeIcon:
-                Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
-        .toList();
+    print('initState _ContainerPageState');
+    if(pages == null){
+      pages = [
+        HomePage(),
+        BookAudioVideoPage(),
+        GroupPage(),
+        shopPageWidget,
+        PersonCenterPage()
+      ];
+    }
+    if(itemList == null){
+      itemList = itemNames
+          .map((item) => BottomNavigationBarItem(
+          icon: Image.asset(
+            item.normalIcon,
+            width: 30.0,
+            height: 30.0,
+          ),
+          title: Text(
+            item.name,
+            style: TextStyle(fontSize: 10.0),
+          ),
+          activeIcon:
+          Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
+          .toList();
+    }
+
   }
+
 
   int _selectIndex = 0;
 
@@ -78,6 +85,13 @@ class _ContainerPageState extends State<ContainerPage> {
         child: pages[index],
       ),
     );
+  }
+
+
+  @override
+  void didUpdateWidget(ContainerPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('didUpdateWidget');
   }
 
   @override
@@ -98,6 +112,7 @@ class _ContainerPageState extends State<ContainerPage> {
 //    this.resizeToAvoidBottomPadding = true,
 //    this.primary = true,
 //    })
+    print('build _ContainerPageState');
     return Scaffold(
       body: new Stack(
         children: [
@@ -130,51 +145,6 @@ class _ContainerPageState extends State<ContainerPage> {
         fixedColor: Color.fromARGB(255, 0, 188, 96),
         type: BottomNavigationBarType.fixed,
       ),
-    );
-  }
-}
-
-class Page1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page1'),
-    );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page2'),
-    );
-  }
-}
-
-class Page3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page3'),
-    );
-  }
-}
-
-class Page4 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page4'),
-    );
-  }
-}
-
-class Page5 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page5'),
     );
   }
 }
