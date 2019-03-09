@@ -7,6 +7,8 @@
    * ![大年初一写代码](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E5%A4%A7%E5%B9%B4%E5%88%9D%E4%B8%80%E5%86%99%E4%BB%A3%E7%A0%81.png)
    
 # dev-open-push
+   
+   ###大家可以向这个分支根据豆瓣UI做设计稿，提交代码
 
    * 这个分支供广大Flutter开发者来学习Flutter
    * **此分支囊括了Flutter 90%的组件的基本与组合使用**，是初学者真正实践的不错选择
