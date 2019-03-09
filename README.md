@@ -23,9 +23,9 @@
     ![抽屉特效3](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
     
 
-# 版本计划
+# 未来版本计划
 
-
+ **欢迎Flutter爱好者共同完成**
    
    
 ### dev-0.2
