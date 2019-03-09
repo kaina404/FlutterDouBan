@@ -17,6 +17,9 @@
     ![魔改Flutter AppBar源码实现豆瓣头部特效](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E4%BB%BF%E8%B1%86%E7%93%A3%E5%A4%B4%E9%83%A8.gif)
 
  * 魔改源码实现电影详情抽屉特效
+    ![](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part1.gif)
+    ![](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part2.gif)
+    ![](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
     
 
 # 版本计划
