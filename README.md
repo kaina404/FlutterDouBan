@@ -19,7 +19,9 @@
  * 魔改源码实现电影详情抽屉特效(GIF图如果加载不出来，多刷几次)
  
     ![抽屉特效1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part1.gif)
+    
     ![抽屉特效2](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part2.gif)
+    
     ![抽屉特效3](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
     
 
