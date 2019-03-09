@@ -49,6 +49,7 @@ samples, guidance on mobile development, and a full API reference.
 ### dev-0.2
 
   * 优化代码
+  * 解决卡顿
   
 ### dev-0.3
   
