@@ -4,7 +4,8 @@
    * 项目中用到了几乎所有的Flutter widget
    * 还有两个比较大的自定义魔改源码实现特效
    * 大年初一也在维护的项目
-
+   * ![大年初一写代码](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E5%A4%A7%E5%B9%B4%E5%88%9D%E4%B8%80%E5%86%99%E4%BB%A3%E7%A0%81.png)
+   
 # dev-open-push
 
    * 这个分支供广大Flutter开发者来学习Flutter
