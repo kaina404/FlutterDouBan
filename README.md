@@ -6,7 +6,7 @@
    * 大年初一也在维护的项目
    * ![大年初一写代码](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E5%A4%A7%E5%B9%B4%E5%88%9D%E4%B8%80%E5%86%99%E4%BB%A3%E7%A0%81.png)
    
-#### Demo(刷不出gif图的，耐心等待一会，或者多刷几次)
+#### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。实在看不到 。拉倒最下面)
 
 
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-12-55.gif)
@@ -116,3 +116,30 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
+# 看不到Demo的看这个
+
+ ![Mar-10-2019 14-12-55.gif](https://upload-images.jianshu.io/upload_images/3884536-4fed2105c4fe3ca6.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-13-11.gif](https://upload-images.jianshu.io/upload_images/3884536-b0b684312c696a85.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-17-38.gif](https://upload-images.jianshu.io/upload_images/3884536-267e85f77f414c44.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-17-48.gif](https://upload-images.jianshu.io/upload_images/3884536-9fef10bd264a7cec.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-18-03.gif](https://upload-images.jianshu.io/upload_images/3884536-208890932fc7f1e1.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-18-12.gif](https://upload-images.jianshu.io/upload_images/3884536-6164026573a34c3e.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-18-23.gif](https://upload-images.jianshu.io/upload_images/3884536-24c50050fac29865.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-30-58.gif](https://upload-images.jianshu.io/upload_images/3884536-5e30422072838bf0.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-31-13.gif](https://upload-images.jianshu.io/upload_images/3884536-3fc07adcdfa3efde.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-32-29.gif](https://upload-images.jianshu.io/upload_images/3884536-e26cceb83c30b486.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-32-41.gif](https://upload-images.jianshu.io/upload_images/3884536-752b8ee323ced90c.gif?imageMogr2/auto-orient/strip)
+
+![Mar-10-2019 14-33-02.gif](https://upload-images.jianshu.io/upload_images/3884536-adaa5a2764e132f9.gif?imageMogr2/auto-orient/strip)
