@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/router.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/http/http_request.dart';
 import 'package:douban_app/bean/subject_entity.dart';

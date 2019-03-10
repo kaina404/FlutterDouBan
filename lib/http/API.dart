@@ -3,7 +3,7 @@ import 'package:douban_app/http/http_request.dart';
 //import 'package:douban_app/bean/MovieBean.dart';
 //import 'package:douban_app/bean/ComingSoonBean.dart';
 import 'package:douban_app/bean/subject_entity.dart';
-import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/bean/movie_detail_bean.dart';
 import 'package:douban_app/bean/comments_entity.dart';
 import 'package:douban_app/bean/search_result_entity.dart';
 import 'package:douban_app/bean/celebrity_entity.dart' as celebrity;

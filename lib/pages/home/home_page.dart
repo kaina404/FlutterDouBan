@@ -6,7 +6,7 @@ import 'package:douban_app/http/mock_request.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/router.dart';
 

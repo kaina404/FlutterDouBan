@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/constant/TextSizeConstant.dart';
-import 'package:douban_app/constant/ColorConstant.dart';
-import '../../constant/Constant.dart';
+import 'package:douban_app/constant/text_size_constant.dart';
+import 'package:douban_app/constant/color_constant.dart';
+import '../../constant/constant.dart';
 typedef TabCallBack = void Function(int index);
 
 class HotSoonTabBar extends StatefulWidget {

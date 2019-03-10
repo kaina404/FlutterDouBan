@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/bean/MovieDetailBean.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/bean/movie_detail_bean.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/pages/detail/look_confirm_button.dart';
 
 class DetailTitleWidget extends StatelessWidget {
