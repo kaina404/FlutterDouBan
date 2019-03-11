@@ -31,8 +31,6 @@ void main() {
   }
 }
 
-DragController controller = DragController();
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
@@ -44,64 +42,6 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: ContainerPage(),
       ),
-    );
-  }
-
-  Widget _buildButtonItem(IconData icon, String text) {
-    return Expanded(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(icon, size: 28.0),
-        Container(
-          margin: EdgeInsets.only(top: 8.0),
-          child: Text(text,
-              style: TextStyle(color: Color(0xff999999), fontSize: 12)),
-        )
-      ],
-    ));
-  }
-
-  Widget _buildTabBarBg() {
-    return Container(
-      //TabBar圆角背景颜色
-      height: 50,
-      child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          child: Container(color: Colors.white)),
-    );
-  }
-}
-
-class Demo extends StatefulWidget {
-  @override
-  _DemoState2 createState() => _DemoState2();
-}
-
-class _DemoState2 extends State<Demo> {
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        myapp.SliverAppBar(
-          title: SearchTextFieldWidget(
-            hintText: '搜索',
-          ),
-          floating: true,
-          pinned: false,
-          flexibleSpace: FlexibleSpaceBar(
-            background: FlutterLogo(),
-            title: Text('费话费'),
-          ),
-          expandedHeight: 200.0,
-        ),
-        SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-          return Text("jfiewo$index");
-        }, childCount: 100))
-      ],
     );
   }
 }

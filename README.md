@@ -6,7 +6,7 @@
    * 大年初一也在维护的项目
    * ![大年初一写代码](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E5%A4%A7%E5%B9%B4%E5%88%9D%E4%B8%80%E5%86%99%E4%BB%A3%E7%A0%81.png)
    
-#### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。实在看不到 。拉倒最下面)
+#### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
 
 
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-12-55.gif)
