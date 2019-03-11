@@ -43,21 +43,6 @@
    * 在此豆芽APP的首页实现与影片详情的UI特效，基于魔改Flutter源码。有兴趣可以看看
    * 大家想实战自己的Flutter能力，可以将某瓣APP作为设计稿，完成需求，并提交
    * 每位开发者提交的代码，我都会在文档中进行备注
-   
-# 对魔改源码或者喜欢翻源码的童鞋可以看看下面两个
-   
- * 魔改Flutter AppBar源码实现豆瓣头部特效
- 
-    ![魔改Flutter AppBar源码实现豆瓣头部特效](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E4%BB%BF%E8%B1%86%E7%93%A3%E5%A4%B4%E9%83%A8.gif)
-
- * 魔改源码实现电影详情抽屉特效(GIF图如果加载不出来，多刷几次)
- 
-    ![抽屉特效1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part1.gif)
-    
-    ![抽屉特效2](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part2.gif)
-    
-    ![抽屉特效3](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
-    
 
 # 未来版本计划(欢迎Flutter爱好者前来认领)
 
@@ -85,6 +70,21 @@
  * [使用Fish Redux 重构](https://www.yuque.com/xytech/flutter/ycc9ni)
  
  
+   
+# 对魔改源码或者喜欢翻源码的童鞋可以看看下面两个
+   
+ * 魔改Flutter AppBar源码实现豆瓣头部特效
+ 
+    ![魔改Flutter AppBar源码实现豆瓣头部特效](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E4%BB%BF%E8%B1%86%E7%93%A3%E5%A4%B4%E9%83%A8.gif)
+
+ * 魔改源码实现电影详情抽屉特效(GIF图如果加载不出来，多刷几次)
+ 
+    ![抽屉特效1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part1.gif)
+    
+    ![抽屉特效2](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part2.gif)
+    
+    ![抽屉特效3](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
+    
     
 
 
