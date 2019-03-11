@@ -22,6 +22,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
 
 ///书影音-电影
+///这个Widget整个布局较为复杂
+///整个是使用CustomScrollView内存放各种Slivers构成
 class MoviePage extends StatefulWidget {
 
   MoviePage({Key key}):super(key:key);

@@ -10,6 +10,7 @@ import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/video_widget.dart';
 import 'package:douban_app/router.dart';
 
+///首页，TAB页面，显示动态和推荐TAB
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -296,7 +297,7 @@ class _SliverContainerState extends State<SliverContainer> {
     );
   }
 }
-
+///动态TAB
 _loginContainer(BuildContext context) {
   return Align(
     alignment: Alignment(0.0, 0.0),

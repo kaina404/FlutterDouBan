@@ -7,7 +7,7 @@ import 'package:douban_app/http/http_request.dart';
 import 'package:douban_app/bean/subject_entity.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
 import 'package:douban_app/widgets/image/radius_img.dart';
-
+///小组
 class GroupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

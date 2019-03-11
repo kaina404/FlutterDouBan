@@ -59,23 +59,30 @@
     ![抽屉特效3](https://github.com/kaina404/DouBanProject/blob/dev-0.1/part3.gif)
     
 
-# 未来版本计划
+# 未来版本计划(欢迎Flutter爱好者前来认领)
 
  **欢迎Flutter爱好者共同完成**
    
+ > 涉及到UI，可参考豆瓣。
    
-### dev-0.2
-
+### 萌新TASK
+    
+   * 完成任意一个未实现的按钮
+   * 完成任意一个未实现的页面
+   * 优化原有Widget
+   * 爱好者想实现但是未能实现的需求
+   * More ...
+  
+### 进阶TASK
+  
   * 优化代码
-  * 解决卡顿
+  * 解决卡顿(可参考：https://flutter-io.cn/docs/testing/ui-performance)
+  * 优化路由（可参考咸鱼方案：https://www.yuque.com/xytech/flutter/vf1dpf）
   
-### dev-0.3
-  
-  * 接入rxDart
-  
-### dev-0.4
+### 老手TASK
 
- * 使用Fish Redux 重构
+ * [接入rxdart](https://github.com/ReactiveX/rxdart)
+ * [使用Fish Redux 重构](https://www.yuque.com/xytech/flutter/ycc9ni)
  
  
     

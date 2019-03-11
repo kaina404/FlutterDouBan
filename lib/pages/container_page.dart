@@ -5,6 +5,8 @@ import 'package:douban_app/pages/home/home_page.dart';
 import 'package:douban_app/pages/person/person_center_page.dart';
 import 'package:douban_app/pages/shop_page.dart';
 
+
+///这个页面是作为整个APP的最外层的容器，以Tab为基础控制每个item的显示与隐藏
 class ContainerPage extends StatefulWidget {
   ContainerPage({Key key}) : super(key: key);
 
@@ -132,6 +134,7 @@ class _ContainerPageState extends State<ContainerPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: itemList,
         onTap: (int index) {
+          ///这里根据点击的index来显示，非index的page均隐藏
           setState(() {
             _selectIndex = index;
             //这个是用来控制比较特别的shopPage中WebView不能动态隐藏的问题
