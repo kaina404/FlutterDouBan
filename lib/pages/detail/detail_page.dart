@@ -48,7 +48,6 @@ class _DetailPageState extends State<DetailPage> {
 
   MovieDetailBean _movieDetailBean;
   var _request = HttpRequest(API.BASE_URL);
-  DragController controller = DragController();
 
   double get screenH => MediaQuery.of(context).size.height;
 
@@ -74,12 +73,12 @@ class _DetailPageState extends State<DetailPage> {
             child: BottomDragWidget(
                 body: _getBody(),
                 dragContainer: DragContainer(
-                    controller: controller,
+//                    controller: controller,
                     drawer: Container(
                       child: OverscrollNotificationWidget(
                         child: LongCommentWidget(
                             movieLongCommentsEntity: movieLongCommentReviews),
-                        scrollListener: _scrollListener,
+//                        scrollListener: _scrollListener,
                       ),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 243, 244, 248),
