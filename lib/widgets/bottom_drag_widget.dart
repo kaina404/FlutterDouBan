@@ -65,7 +65,7 @@ class DragContainer extends StatefulWidget {
 
 class _DragContainerState extends State<DragContainer>
     with TickerProviderStateMixin {
-  AnimationController controller;
+  AnimationController animalController;
   ///滑动位置超过这个位置，会滚到顶部；小于，会滚动底部。
   double maxOffsetDistance;
   bool onResetControllerValue = false;
@@ -78,7 +78,7 @@ class _DragContainerState extends State<DragContainer>
 
   @override
   void initState() {
-    controller = AnimationController(
+    animalController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 250));
     maxOffsetDistance = (widget.height + widget.defaultShowHeight ) * 0.5;
 
@@ -116,7 +116,7 @@ class _DragContainerState extends State<DragContainer>
 
   @override
   void dispose() {
-    controller.dispose();
+    animalController.dispose();
     super.dispose();
   }
 
@@ -166,7 +166,7 @@ class _DragContainerState extends State<DragContainer>
     onResetControllerValue = true;
     ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
     ///重置value的值时，会刷新UI，故这里使用[onResetControllerValue]来进行过滤。
-    controller.value = 0.0;
+    animalController.value = 0.0;
     onResetControllerValue = false;
     double start;
     double end;
@@ -191,7 +191,7 @@ class _DragContainerState extends State<DragContainer>
 
     ///easeOut 先快后慢
     final CurvedAnimation curve =
-    new CurvedAnimation(parent: controller, curve: Curves.easeOut);
+    new CurvedAnimation(parent: animalController, curve: Curves.easeOut);
     animation = Tween(begin: start, end: end).animate(curve)
       ..addListener(() {
         if (!onResetControllerValue) {
@@ -199,7 +199,7 @@ class _DragContainerState extends State<DragContainer>
           setState(() {});
         }
       });
-    controller.forward();
+    animalController.forward();
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
