@@ -73,12 +73,10 @@ class _DetailPageState extends State<DetailPage> {
             child: BottomDragWidget(
                 body: _getBody(),
                 dragContainer: DragContainer(
-//                    controller: controller,
                     drawer: Container(
                       child: OverscrollNotificationWidget(
                         child: LongCommentWidget(
                             movieLongCommentsEntity: movieLongCommentReviews),
-//                        scrollListener: _scrollListener,
                       ),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 243, 244, 248),
@@ -92,10 +90,6 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  void _scrollListener(
-      double dragDistance, ScrollNotificationListener isDragEnd) {
-    controller.updateDragDistance(dragDistance, isDragEnd);
-  }
 
   ///所属频道
   SliverToBoxAdapter sliverTags() {
