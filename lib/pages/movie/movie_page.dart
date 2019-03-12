@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/movie/TitleWidget.dart';
-import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
+import 'package:douban_app/pages/movie/title_widget.dart';
+import 'package:douban_app/pages/movie/today_play_movie_widget.dart';
 import 'package:douban_app/http/API.dart';
-import 'package:douban_app/pages/movie/HotSoonTabBar.dart';
+import 'package:douban_app/pages/movie/hot_soon_tab_bar.dart';
 import 'package:douban_app/widgets/item_count_title.dart';
 import 'package:douban_app/widgets/subject_mark_image_widget.dart';
 import 'package:douban_app/bean/subject_entity.dart';
-import 'package:douban_app/bean/TopItemBean.dart';
+import 'package:douban_app/bean/top_item_bean.dart';
 import 'package:douban_app/widgets/rating_bar.dart';
-import 'package:douban_app/constant/ColorConstant.dart';
+import 'package:douban_app/constant/color_constant.dart';
 import 'dart:math' as math;
-import 'package:douban_app/widgets/image/CacheImgRadius.dart';
-import 'package:douban_app/constant/Constant.dart';
-import 'package:douban_app/pages/movie/TopItemWidget.dart';
+import 'package:douban_app/widgets/image/cache_img_radius.dart';
+import 'package:douban_app/constant/constant.dart';
+import 'package:douban_app/pages/movie/top_item_widget.dart';
 import 'package:douban_app/router.dart';
 import 'package:douban_app/http/http_request.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -22,6 +22,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:douban_app/widgets/loading_widget.dart';
 
 ///书影音-电影
+///这个Widget整个布局较为复杂
+///整个是使用CustomScrollView内存放各种Slivers构成
 class MoviePage extends StatefulWidget {
 
   MoviePage({Key key}):super(key:key);

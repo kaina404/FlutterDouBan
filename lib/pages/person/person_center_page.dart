@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/image/heart_img_widget.dart';
 typedef VoidCallback = void Function();
 

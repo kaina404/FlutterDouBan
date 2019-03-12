@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:douban_app/http/API.dart';
-import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/bean/movie_detail_bean.dart';
 import 'package:douban_app/pages/detail/detail_title_widget.dart';
 import 'package:douban_app/util/pick_img_main_color.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/pages/detail/score_start.dart';
 import 'package:douban_app/pages/detail/look_confirm_button.dart';
 import 'dart:math' as math;
@@ -48,7 +48,6 @@ class _DetailPageState extends State<DetailPage> {
 
   MovieDetailBean _movieDetailBean;
   var _request = HttpRequest(API.BASE_URL);
-  DragController controller = DragController();
 
   double get screenH => MediaQuery.of(context).size.height;
 
@@ -74,12 +73,10 @@ class _DetailPageState extends State<DetailPage> {
             child: BottomDragWidget(
                 body: _getBody(),
                 dragContainer: DragContainer(
-                    controller: controller,
                     drawer: Container(
                       child: OverscrollNotificationWidget(
                         child: LongCommentWidget(
                             movieLongCommentsEntity: movieLongCommentReviews),
-                        scrollListener: _scrollListener,
                       ),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 243, 244, 248),
@@ -93,10 +90,6 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  void _scrollListener(
-      double dragDistance, ScrollNotificationListener isDragEnd) {
-    controller.updateDragDistance(dragDistance, isDragEnd);
-  }
 
   ///所属频道
   SliverToBoxAdapter sliverTags() {
