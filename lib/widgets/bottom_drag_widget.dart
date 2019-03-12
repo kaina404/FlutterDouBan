@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert' as Convert;
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
@@ -146,7 +147,7 @@ class _DragContainerState extends State<DragContainer>
             ),
             Offstage(
               child: Container(
-                ///使用图层解决的方案最佳
+                ///使用图层来解决当抽屉露出头时，上拉抽屉上移。解决的方案最佳
                 color: Colors.transparent,
                 height: widget.height,
               ),
