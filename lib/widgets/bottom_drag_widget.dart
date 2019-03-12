@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert' as Convert;
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
@@ -48,11 +47,9 @@ class DragContainer extends StatefulWidget {
   final Widget drawer;
   final double defaultShowHeight;
   final double height;
-//  final DragController controller;
 
   DragContainer(
       {Key key,
-//      this.controller,
       @required this.drawer,
       @required this.defaultShowHeight,
       @required this.height})
@@ -200,6 +197,7 @@ class _DragContainerState extends State<DragContainer>
           setState(() {});
         }
       });
+    ///自己滚动
     animalController.forward();
   }
 
@@ -351,20 +349,14 @@ class OverscrollNotificationWidgetState
           child: NotificationListener<ScrollEndNotification>(
             child: widget.child,
             onNotification: (ScrollEndNotification notification) {
-//              if (widget.scrollListener != null) {
-//                widget.scrollListener(0.0, ScrollNotificationListener.end);
-//              }
               _controller.updateDragDistance(
                   0.0, ScrollNotificationListener.end);
               return false;
             },
           ),
           onNotification: (OverscrollNotification notification) {
-//            if (widget.scrollListener != null &&
             if (notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
-//              widget.scrollListener(notification.dragDetails.delta.dy,
-//                  ScrollNotificationListener.edge);
               _controller.updateDragDistance(notification.dragDetails.delta.dy,
                   ScrollNotificationListener.edge);
             }
@@ -376,10 +368,6 @@ class OverscrollNotificationWidgetState
         },
       ),
       onNotification: (ScrollStartNotification scrollUpdateNotification) {
-        print('ScrollStartNotification');
-//        if (widget.scrollListener != null) {
-//          widget.scrollListener(0.0, ScrollNotificationListener.start);
-//        }
         _controller.updateDragDistance(0.0, ScrollNotificationListener.start);
         return false;
       },
