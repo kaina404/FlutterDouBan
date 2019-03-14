@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/container_page.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:douban_app/widgets/bottom_drag_widget.dart';
+import 'package:douban_app/pages/splash/splash_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(backgroundColor: Colors.white),
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: ContainerPage(),
+        body: SplashWidget(),
       ),
     );
   }
