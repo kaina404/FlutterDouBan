@@ -5,6 +5,7 @@ import 'package:douban_app/pages/container_page.dart';
 import 'package:douban_app/util/screen_utils.dart';
 import 'package:douban_app/constant/constant.dart';
 
+///打开APP首页
 class SplashWidget extends StatefulWidget {
   @override
   _SplashWidgetState createState() => _SplashWidgetState();
