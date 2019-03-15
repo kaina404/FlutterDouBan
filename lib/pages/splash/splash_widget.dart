@@ -31,11 +31,23 @@ class _SplashWidgetState extends State<SplashWidget> {
               children: <Widget>[
                 Align(
                   alignment: Alignment(0.0, 0.0),
-                  child: CircleAvatar(
-                    radius: ScreenUtils.screenW() / 3,
-                    backgroundColor: Colors.white,
-                    backgroundImage:
-                        AssetImage(Constant.ASSETS_IMG + 'home.png'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: ScreenUtils.screenW() / 3,
+                        backgroundColor: Colors.white,
+                        backgroundImage:
+                            AssetImage(Constant.ASSETS_IMG + 'home.png'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Text(
+                          '落花有意随流水,流水无心恋落花',
+                          style: TextStyle(fontSize: 15.0, color: Colors.black),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 SafeArea(
@@ -52,7 +64,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                           onCountDownFinishCallBack: (bool value) {
                             if (value) {
                               setState(() {
-                                showAd = false;
+                                showAd = true;
                               });
                             }
                           },
