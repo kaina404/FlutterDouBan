@@ -64,7 +64,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                           onCountDownFinishCallBack: (bool value) {
                             if (value) {
                               setState(() {
-                                showAd = true;
+                                showAd = false;
                               });
                             }
                           },
