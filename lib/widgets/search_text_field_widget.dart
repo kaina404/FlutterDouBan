@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+///文本搜索框
 class SearchTextFieldWidget extends StatelessWidget {
   final ValueChanged<String> onSubmitted;
   final VoidCallback onTab;

@@ -10,6 +10,9 @@ var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 List<Widget> tabList;
 
 ///书影音
+///包含了'电影', '电视', '综艺', '读书', '音乐', '同城' item Widget
+///这个Widget是整个项目中，十分复杂的Widget之一
+///
 class BookAudioVideoPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -170,7 +173,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: TabBar(
         tabs: tabList,
-        isScrollable: false,
+        isScrollable: true,
         controller: _tabController,
         indicatorColor: selectColor,
         labelColor: selectColor,

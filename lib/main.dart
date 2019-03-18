@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/container_page.dart';
-import 'package:douban_app/pages/movie/HotSoonMovieWidget.dart';
-import 'package:douban_app/http/API.dart';
-import 'package:douban_app/pages/movie/TitleWidget.dart';
-import 'package:douban_app/pages/movie/TodayPlayMovieWidget.dart';
-import 'package:douban_app/widgets/subject_mark_image_widget.dart';
-import 'package:douban_app/bean/subject_entity.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:douban_app/pages/home/my_home_tab_bar.dart';
-import 'package:douban_app/demo/ImageColors.dart';
-import 'package:douban_app/widgets/video_widget.dart';
-import 'package:douban_app/widgets/video_progress_bar.dart';
-import 'package:douban_app/http/API.dart';
-import 'package:douban_app/widgets/title_bar.dart';
-import 'package:douban_app/pages/photo_hero_page.dart';
 import 'package:douban_app/widgets/bottom_drag_widget.dart';
-import 'package:douban_app/pages/detail/long_comment_widget.dart';
-import 'package:douban_app/widgets/search_text_field_widget.dart';
-import 'dart:math' as math;
-import 'package:douban_app/pages/home/home_app_bar.dart' as myapp;
+import 'package:douban_app/pages/splash/splash_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,78 +14,56 @@ void main() {
   }
 }
 
-DragController controller = DragController();
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(backgroundColor: Colors.white),
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: ContainerPage(),
+    return RestartWidget(
+      child: MaterialApp(
+        theme: ThemeData(backgroundColor: Colors.white),
+        home: Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: SplashWidget(),
+        ),
       ),
     );
   }
-
-  Widget _buildButtonItem(IconData icon, String text) {
-    return Expanded(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(icon, size: 28.0),
-        Container(
-          margin: EdgeInsets.only(top: 8.0),
-          child: Text(text,
-              style: TextStyle(color: Color(0xff999999), fontSize: 12)),
-        )
-      ],
-    ));
-  }
-
-  Widget _buildTabBarBg() {
-    return Container(
-      //TabBar圆角背景颜色
-      height: 50,
-      child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          child: Container(color: Colors.white)),
-    );
-  }
 }
 
-class Demo extends StatefulWidget {
+///这个组件用来重新加载整个child Widget的。当我们需要重启APP的时候，可以使用这个方案
+///https://stackoverflow.com/questions/50115311/flutter-how-to-force-an-application-restart-in-production-mode
+class RestartWidget extends StatefulWidget {
+  final Widget child;
+
+  RestartWidget({Key key, @required this.child})
+      : assert(child != null),
+        super(key: key);
+
+  static restartApp(BuildContext context) {
+    final _RestartWidgetState state =
+        context.ancestorStateOfType(const TypeMatcher<_RestartWidgetState>());
+    state.restartApp();
+  }
+
   @override
-  _DemoState2 createState() => _DemoState2();
+  _RestartWidgetState createState() => _RestartWidgetState();
 }
 
-class _DemoState2 extends State<Demo> {
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        myapp.SliverAppBar(
-          title: SearchTextFieldWidget(
-            hintText: '搜索',
-          ),
-          floating: true,
-          pinned: false,
-          flexibleSpace: FlexibleSpaceBar(
-            background: FlutterLogo(),
-            title: Text('费话费'),
-          ),
-          expandedHeight: 200.0,
-        ),
-        SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-          return Text("jfiewo$index");
-        }, childCount: 100))
-      ],
+    return Container(
+      key: key,
+      child: widget.child,
     );
   }
 }
-

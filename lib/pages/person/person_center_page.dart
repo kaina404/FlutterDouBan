@@ -1,80 +1,93 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/image/heart_img_widget.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:douban_app/constant/cache_key.dart';
+import 'package:douban_app/main.dart';
 typedef VoidCallback = void Function();
 
 ///个人中心
 class PersonCenterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('build PersonCenterPage');
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(child: Padding(padding: EdgeInsets.only(top: 10.0),child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: false,
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Colors.transparent,
-            flexibleSpace: HeartImgWidget(Image.asset(
-                Constant.ASSETS_IMG + 'bg_person_center_default.webp')),
-            expandedHeight: 200.0,
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 10.0, top: 15.0, bottom: 20.0, right: 10.0),
-                  child: Image.asset(
-                    Constant.ASSETS_IMG + 'ic_notify.png',
-                    width: 30.0,
-                    height: 30.0,
+      body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: 10.0),
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: false,
+              slivers: <Widget>[
+                SliverAppBar(
+                  backgroundColor: Colors.transparent,
+                  flexibleSpace: HeartImgWidget(Image.asset(
+                      Constant.ASSETS_IMG + 'bg_person_center_default.webp')),
+                  expandedHeight: 200.0,
+                ),
+                SliverToBoxAdapter(
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 10.0, top: 15.0, bottom: 20.0, right: 10.0),
+                        child: Image.asset(
+                          Constant.ASSETS_IMG + 'ic_notify.png',
+                          width: 30.0,
+                          height: 30.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '提醒',
+                          style: TextStyle(fontSize: 17.0),
+                        ),
+                      ),
+                      _rightArrow()
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    '提醒',
-                    style: TextStyle(fontSize: 17.0),
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: 100.0,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '暂无新提醒',
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
                 ),
-                _rightArrow()
+                _divider(),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 10.0, top: 10.0, bottom: 20.0),
+                    child: Text(
+                      '我的书影音',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18.0),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    child: _VideoBookMusicBookWidget(),
+                  ),
+                ),
+                _divider(),
+                _dataSelect(),
+                _divider(),
+                _personItem('ic_me_journal.png', '我的发布'),
+                _personItem('ic_me_follows.png', '我的关注'),
+                _personItem('ic_me_photo_album.png', '相册'),
+                _personItem('ic_me_doulist.png', '豆列 / 收藏'),
+                _divider(),
+                _personItem('ic_me_wallet.png', '钱包'),
               ],
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 100.0,
-              alignment: Alignment.center,
-              child: Text(
-                '暂无新提醒',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-          _divider(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 20.0),
-              child: Text(
-                '我的书影音',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              child: _VideoBookMusicBookWidget(),
-            ),
-          ),
-          _divider(),
-          _personItem('ic_me_journal.png', '我的发布'),
-          _personItem('ic_me_follows.png', '我的关注'),
-          _personItem('ic_me_photo_album.png', '相册'),
-          _personItem('ic_me_doulist.png', '豆列 / 收藏'),
-          _divider(),
-          _personItem('ic_me_wallet.png', '钱包'),
-        ],
-      ),)),
+          )),
     );
   }
 
@@ -119,6 +132,80 @@ class PersonCenterPage extends StatelessWidget {
           ],
         ),
         onTap: onTab,
+      ),
+    );
+  }
+
+  _dataSelect() {
+    return UseNetDataWidget();
+  }
+}
+
+///这个用来改变书影音数据来自网络还是本地模拟
+class UseNetDataWidget extends StatefulWidget {
+  @override
+  _UseNetDataWidgetState createState() => _UseNetDataWidgetState();
+}
+
+class _UseNetDataWidgetState extends State<UseNetDataWidget> {
+  bool mSelectNetData = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      mSelectNetData = prefs.getBool(CacheKey.USE_NET_DATA) ?? false;
+    });
+  }
+
+  _setData(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(CacheKey.USE_NET_DATA, value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        child: Row(
+          children: <Widget>[
+            Text('书影音数据是否来自网络', style: TextStyle(color: Colors.black, fontSize: 17.0),),
+            Expanded(
+              child: Container(),
+            ),
+            CupertinoSwitch(
+              value: mSelectNetData,
+              onChanged: (bool value) {
+                mSelectNetData = value;
+                _setData(value);
+                var tmp;
+                if(value){
+                  tmp = '书影音数据 使用网络数据，重启APP后生效';
+                }else{
+                  tmp = '书影音数据 使用本地数据，重启APP后生效';
+                }
+                showDialog(context: context, builder: (BuildContext context){
+                  return AlertDialog(title: Text('提示'),content: Text(tmp),actions: <Widget>[
+                    FlatButton(child: Text('稍后我自己重启'),onPressed: (){
+                      Navigator.of(context).pop();
+                    },),
+                    FlatButton(child: Text('现在重启'),onPressed: (){
+                      RestartWidget.restartApp(context);
+                      Navigator.of(context).pop();
+                    },)
+                  ],);
+                });
+                setState(() {});
+              },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -220,10 +307,11 @@ class _TabBarWidgetState extends State<_TabBarWidget> {
     selectStyle = TextStyle(fontSize: 18, color: selectColor);
     unselectedStyle = TextStyle(fontSize: 18, color: selectColor);
     tabWidgets = tabTxt
-        .map((item) => Text(
-              item,
-              style: TextStyle(fontSize: 15),
-            ))
+        .map((item) =>
+        Text(
+          item,
+          style: TextStyle(fontSize: 15),
+        ))
         .toList();
   }
 

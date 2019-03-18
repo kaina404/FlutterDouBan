@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/video_widget.dart';
-import 'package:douban_app/bean/MovieDetailBean.dart';
+import 'package:douban_app/bean/movie_detail_bean.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
 
 class VideoPlayPage extends StatefulWidget {

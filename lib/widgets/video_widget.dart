@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/image/cached_network_image.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/video_progress_bar.dart';
 
 ///http://vt1.doubanio.com/201902111139/0c06a85c600b915d8c9cbdbbaf06ba9f/view/movie/M/302420330.mp4

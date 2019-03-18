@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/constant/Constant.dart';
+import 'package:douban_app/constant/constant.dart';
 
 typedef OnTabBack = void Function();
 
