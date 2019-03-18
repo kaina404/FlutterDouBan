@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/image/heart_img_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:douban_app/constant/cache_key.dart';
 import 'package:douban_app/main.dart';
@@ -12,6 +11,7 @@ typedef VoidCallback = void Function();
 class PersonCenterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('build PersonCenterPage');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -78,6 +78,7 @@ class PersonCenterPage extends StatelessWidget {
                 ),
                 _divider(),
                 _dataSelect(),
+                _divider(),
                 _personItem('ic_me_journal.png', '我的发布'),
                 _personItem('ic_me_follows.png', '我的关注'),
                 _personItem('ic_me_photo_album.png', '相册'),
@@ -140,6 +141,7 @@ class PersonCenterPage extends StatelessWidget {
   }
 }
 
+///这个用来改变书影音数据来自网络还是本地模拟
 class UseNetDataWidget extends StatefulWidget {
   @override
   _UseNetDataWidgetState createState() => _UseNetDataWidgetState();
@@ -173,7 +175,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: Row(
           children: <Widget>[
-            Text('书影音数据是否来自网络'),
+            Text('书影音数据是否来自网络', style: TextStyle(color: Colors.black, fontSize: 17.0),),
             Expanded(
               child: Container(),
             ),
