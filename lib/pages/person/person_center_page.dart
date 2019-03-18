@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:douban_app/constant/cache_key.dart';
-
+import 'package:douban_app/main.dart';
 typedef VoidCallback = void Function();
 
 ///个人中心
@@ -194,6 +194,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
                       Navigator.of(context).pop();
                     },),
                     FlatButton(child: Text('现在重启'),onPressed: (){
+                      RestartWidget.restartApp(context);
                       Navigator.of(context).pop();
                     },)
                   ],);

@@ -14,20 +14,55 @@ void main() {
   }
 }
 
-DragController controller = DragController();
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(backgroundColor: Colors.white),
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: SplashWidget(),
+    return RestartWidget(
+      child: MaterialApp(
+        theme: ThemeData(backgroundColor: Colors.white),
+        home: Scaffold(
+          resizeToAvoidBottomPadding: false,
+          body: SplashWidget(),
+        ),
       ),
     );
   }
 }
 
+///这个组件用来重新加载整个child Widget的。当我们需要重启APP的时候，可以使用这个方案
+class RestartWidget extends StatefulWidget {
+  final Widget child;
+
+  RestartWidget({Key key, @required this.child})
+      : assert(child != null),
+        super(key: key);
+
+  static restartApp(BuildContext context) {
+    final _RestartWidgetState state =
+        context.ancestorStateOfType(const TypeMatcher<_RestartWidgetState>());
+    state.restartApp();
+  }
+
+  @override
+  _RestartWidgetState createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: key,
+      child: widget.child,
+    );
+  }
+}
