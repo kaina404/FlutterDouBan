@@ -173,7 +173,7 @@ class _HomePageTabBarState extends State<HomePageTabBar> {
       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: TabBar(
         tabs: tabList,
-        isScrollable: false,
+        isScrollable: true,
         controller: _tabController,
         indicatorColor: selectColor,
         labelColor: selectColor,

@@ -37,9 +37,10 @@ class _HomeTabBarState extends State<HomeTabBar> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Positioned(///搜索框
+        Positioned(
+          ///搜索框
           left: 15.0,
-          right: ScreenUtils.screenW() / 5 * 4 - 10.0,
+          right: ScreenUtils.screenW() * 0.75 - 10.0,
           top: getTop(widget.translate),
           child: getOpacityWidget(Container(
             padding: const EdgeInsets.only(
@@ -54,17 +55,20 @@ class _HomeTabBarState extends State<HomeTabBar> {
                   color: const Color.fromARGB(255, 128, 128, 129),
                 ),
                 Expanded(
-                  child: GestureDetector(child: Align(
-                    alignment: Alignment(1.0, 0.0),
-                    child: Text(
-                      '搜索',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          color: const Color.fromARGB(255, 192, 192, 192)),
+                  child: GestureDetector(
+                    child: Align(
+                      alignment: Alignment(1.0, 0.0),
+                      child: Text(
+                        '搜索',
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: const Color.fromARGB(255, 192, 192, 192)),
+                      ),
                     ),
-                  ),onTap: (){
-                    Router.push(context, Router.searchPage, '搜索豆芽');
-                  },),
+                    onTap: () {
+                      Router.push(context, Router.searchPage, '搜索流浪地球试一试');
+                    },
+                  ),
                 )
               ],
             ),
