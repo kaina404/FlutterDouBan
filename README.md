@@ -39,7 +39,7 @@
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-33-02.gif)   
 
    
-# dev-open-push
+# dev-open
    
    ### 大家可以向这个分支根据豆瓣UI做设计稿，提交代码
 
