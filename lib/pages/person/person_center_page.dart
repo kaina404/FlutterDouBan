@@ -147,7 +147,6 @@ class UseNetDataWidget extends StatefulWidget {
 
 class _UseNetDataWidgetState extends State<UseNetDataWidget> {
   bool mSelectNetData = false;
-  var desc;
 
   @override
   void initState() {
@@ -158,7 +157,6 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      desc = '书影音数据是否来自网络';
       mSelectNetData = prefs.getBool(CacheKey.USE_NET_DATA) ?? false;
     });
   }
@@ -175,7 +173,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: Row(
           children: <Widget>[
-            Text(desc),
+            Text('书影音数据是否来自网络'),
             Expanded(
               child: Container(),
             ),
