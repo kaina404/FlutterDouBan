@@ -184,13 +184,13 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
                 _setData(value);
                 var tmp;
                 if(value){
-                  tmp = '书影音数据使用网络数据，重启APP后生效';
+                  tmp = '书影音数据 使用网络数据，重启APP后生效';
                 }else{
-                  tmp = '书影音数据使用本地数据，重启后生效';
+                  tmp = '书影音数据 使用本地数据，重启APP后生效';
                 }
                 showDialog(context: context, builder: (BuildContext context){
                   return AlertDialog(title: Text('提示'),content: Text(tmp),actions: <Widget>[
-                    FlatButton(child: Text('我知道了'),onPressed: (){
+                    FlatButton(child: Text('稍后我自己重启'),onPressed: (){
                       Navigator.of(context).pop();
                     },),
                     FlatButton(child: Text('现在重启'),onPressed: (){
