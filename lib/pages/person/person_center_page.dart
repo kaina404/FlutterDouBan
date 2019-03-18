@@ -152,14 +152,13 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
   @override
   void initState() {
     super.initState();
-    desc = '使用网络数据请求书影音数据?';
     _getData();
   }
 
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      desc = '书影音数据来自网络';
+      desc = '书影音数据是否来自网络';
       mSelectNetData = prefs.getBool(CacheKey.USE_NET_DATA) ?? false;
     });
   }
@@ -185,12 +184,22 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
               onChanged: (bool value) {
                 mSelectNetData = value;
                 _setData(value);
+                var tmp;
                 if(value){
-                  desc = '重启APP后，使用网络数据请求书影音数据';
+                  tmp = '书影音数据使用网络数据，重启APP后生效';
                 }else{
-                  desc = '使用网络数据请求书影音数据?';
+                  tmp = '书影音数据使用本地数据，重启后生效';
                 }
-
+                showDialog(context: context, builder: (BuildContext context){
+                  return AlertDialog(title: Text('提示'),content: Text(tmp),actions: <Widget>[
+                    FlatButton(child: Text('我知道了'),onPressed: (){
+                      Navigator.of(context).pop();
+                    },),
+                    FlatButton(child: Text('现在重启'),onPressed: (){
+                      Navigator.of(context).pop();
+                    },)
+                  ],);
+                });
                 setState(() {});
               },
             )
