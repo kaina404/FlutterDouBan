@@ -10,6 +10,10 @@
    > APP中所有数据均为真实数据。但是默认，对于"书影音单个电影tab"的数据，使用模拟数据。因为，频繁的打开关闭APP，会频繁调用
     这个接口。接口是有调用限制的，次数过于频繁，会被锁IP。如果想看真实数据，则可以进入
     "我的"，然后打开"书影音数据来自网络"开关后，重启APP即可。
+    
+# 扫一扫下载
+
+![扫一扫下载体验](https://upload-images.jianshu.io/upload_images/3884536-a72a813067bc59bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/210/format/webp)
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
 
@@ -38,9 +42,7 @@
   
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-33-02.gif)   
 
-# 扫一扫下载
 
-![扫一扫下载体验](https://upload-images.jianshu.io/upload_images/3884536-a72a813067bc59bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/210/format/webp)
    
 # dev-open
    
