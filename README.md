@@ -16,7 +16,7 @@
     
 # 扫一扫下载
 
-![扫一扫下载体验](https://upload-images.jianshu.io/upload_images/3884536-a72a813067bc59bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/210/format/webp)
+![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douyaapk.png)
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
 
