@@ -38,6 +38,9 @@
   
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-33-02.gif)   
 
+# 扫一扫下载
+
+![扫一扫下载体验](https://upload-images.jianshu.io/upload_images/3884536-a72a813067bc59bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/210/format/webp)
    
 # dev-open
    
