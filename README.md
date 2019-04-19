@@ -21,7 +21,12 @@
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douyaapk.png)
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
-
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/0E95A04AE84EFE31104AC8E0A5808CB9.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919372752_04CCDD7BC1BDB6015935EE50DDF75C29F.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919374444_0B3C7C7E29941F75D0A7C944D4E352CB7.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919375761_05292CAB58428C7C77C544027FC899CC0.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919380838_07B17727ACF231C6D91914D71114A96CF.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919381924_01CE541B98F565C72B75567A319271CA1.png)
 
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-12-55.gif)
     
