@@ -20,7 +20,7 @@
 
 > apk是debug包，你可以打个release包，会更加流畅。
 
-![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douyaapk.png)
+![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-release/douyaapk.png)
    
 [百度云下载地址](https://pan.baidu.com/s/1DIb-kGhy3YhQv54-4NTTsg)  提取码: wvui 
    
