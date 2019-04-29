@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:flutter/services.dart';
-import 'package:douban_app/widgets/bottom_drag_widget.dart';
 import 'package:douban_app/pages/splash/splash_widget.dart';
 
 void main() {
