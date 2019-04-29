@@ -18,7 +18,11 @@
     
 # 扫一扫下载
 
+> apk是debug包，你可以打个release包，会更加流畅。
+
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douyaapk.png)
+   
+[百度云下载地址](链接: https://pan.baidu.com/s/1DIb-kGhy3YhQv54-4NTTsg)  提取码: wvui 
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
 ![](https://github.com/kaina404/FlutterDouBan/blob/master-new/0E95A04AE84EFE31104AC8E0A5808CB9.png)
