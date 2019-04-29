@@ -16,15 +16,16 @@
     这个接口。接口是有调用限制的，次数过于频繁，会被锁IP。如果想看真实数据，则可以进入
     "我的"，然后打开"书影音数据来自网络"开关后，重启APP即可。
     
-# 扫一扫下载
-
+# 下载地址
 
 
 [Release版本下载地址](https://github.com/kaina404/FlutterDouBan/blob/master-new/douya-release.apk)
 
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/download_qr.png)
+
+> 如果下载失败，可以使用[百度云下载地址](https://pan.baidu.com/s/12OOywTiegrfwLIitodxrwg)
    
-[百度云下载地址](https://pan.baidu.com/s/12OOywTiegrfwLIitodxrwg)
+
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
 ![](https://github.com/kaina404/FlutterDouBan/blob/master-release/0E95A04AE84EFE31104AC8E0A5808CB9.png)
