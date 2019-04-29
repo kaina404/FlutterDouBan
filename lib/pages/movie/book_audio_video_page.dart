@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:douban_app/widgets/my_tab_bar_widget.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/router.dart';
+import 'package:flutter/services.dart';
 
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
@@ -32,6 +33,8 @@ class _BookAudioVideoPageState extends State<BookAudioVideoPage>
     tabBar = HomePageTabBar();
     tabList = getTabList();
     _tabController = TabController(vsync: this, length: tabList.length);
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
 
   List<Widget> getTabList() {
