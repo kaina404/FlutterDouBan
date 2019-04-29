@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/util/screen_utils.dart';
 import 'package:douban_app/router.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 42.0;
@@ -35,12 +36,14 @@ class _HomeTabBarState extends State<HomeTabBar> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQuery.of(context);
+    var value = ScreenUtils.screenW(context) * 0.75 - 10.0;
     return Stack(
       children: <Widget>[
         Positioned(
           ///搜索框
           left: 15.0,
-          right: ScreenUtils.screenW() * 0.75 - 10.0,
+          right: value,
           top: getTop(widget.translate),
           child: getOpacityWidget(Container(
             padding: const EdgeInsets.only(

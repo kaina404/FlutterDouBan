@@ -179,8 +179,8 @@ class _WebViewWidgetState extends State<_WebViewWidget>  {
     if(needFullScreen){
       return null;
     }else{
-      return Rect.fromLTRB(0.0, ScreenUtils.padTopH() + 60.0,
-          ScreenUtils.screenW(), ScreenUtils.screenH() - 60.0);
+      return Rect.fromLTRB(0.0, ScreenUtils.getStatusBarH(context) + 60.0,
+          ScreenUtils.screenW(context), ScreenUtils.screenH(context) - 60.0);
     }
   }
 

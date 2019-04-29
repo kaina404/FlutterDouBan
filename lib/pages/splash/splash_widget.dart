@@ -36,7 +36,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        radius: ScreenUtils.screenW() / 3,
+                        radius: ScreenUtils.screenW(context) / 3,
                         backgroundColor: Colors.white,
                         backgroundImage:
                             AssetImage(Constant.ASSETS_IMG + 'home.png'),
@@ -103,8 +103,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                 ))
               ],
             ),
-            width: ScreenUtils.screenW(),
-            height: ScreenUtils.screenH(),
+            width: ScreenUtils.screenW(context),
+            height: ScreenUtils.screenH(context),
           ),
           offstage: !showAd,
         )
