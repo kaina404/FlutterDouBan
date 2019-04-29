@@ -11,7 +11,6 @@
    * 项目中用到了几乎所有的Flutter widget
    * 还有两个比较大的自定义魔改源码实现特效
    * 大年初一也在维护的项目
-   * ![大年初一写代码](https://github.com/kaina404/DouBanProject/blob/dev-0.1/%E5%A4%A7%E5%B9%B4%E5%88%9D%E4%B8%80%E5%86%99%E4%BB%A3%E7%A0%81.png)
    
    > APP中所有数据均为真实数据。但是默认，对于"书影音单个电影tab"的数据，使用模拟数据。因为，频繁的打开关闭APP，会频繁调用
     这个接口。接口是有调用限制的，次数过于频繁，会被锁IP。如果想看真实数据，则可以进入
@@ -22,7 +21,12 @@
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douyaapk.png)
    
 #### Demo(刷不出gif图的，耐心等待一会，或者多刷几次。)
-
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/0E95A04AE84EFE31104AC8E0A5808CB9.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919372752_04CCDD7BC1BDB6015935EE50DDF75C29F.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919374444_0B3C7C7E29941F75D0A7C944D4E352CB7.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919375761_05292CAB58428C7C77C544027FC899CC0.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919380838_07B17727ACF231C6D91914D71114A96CF.png)
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/041919381924_01CE541B98F565C72B75567A319271CA1.png)
 
 ![demo1](https://github.com/kaina404/DouBanProject/blob/dev-0.1/demogif/Mar-10-2019%2014-12-55.gif)
     
