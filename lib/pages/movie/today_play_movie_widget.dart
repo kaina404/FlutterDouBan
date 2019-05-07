@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/image/LaminatedImage.dart';
+import 'package:doubanapp/widgets/image/LaminatedImage.dart';
 
 ///今日可播放电影已更新 Widget
 class TodayPlayMovieWidget extends StatelessWidget {

@@ -8,8 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:douban_app/widgets/search_text_field_widget.dart';
-import 'package:douban_app/pages/home/my_home_tab_bar.dart';
+import 'package:doubanapp/widgets/search_text_field_widget.dart';
+import 'package:doubanapp/pages/home/my_home_tab_bar.dart';
 
 // Examples can assume:
 // void _airDress() { }

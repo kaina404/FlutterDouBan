@@ -1,17 +1,17 @@
-import 'package:douban_app/bean/celebrity_work_entity.dart';
+import 'package:doubanapp/bean/celebrity_work_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:douban_app/router.dart';
-import 'package:douban_app/http/API.dart';
-import 'package:douban_app/bean/celebrity_entity.dart';
-import 'package:douban_app/widgets/title_bar.dart';
-import 'package:douban_app/widgets/rating_bar.dart';
-import 'package:douban_app/widgets/image/radius_img.dart';
-import 'package:douban_app/repository/person_detail_repository.dart';
-import 'package:douban_app/widgets/item_count_title.dart';
-import 'package:douban_app/widgets/loading_widget.dart';
-import 'package:douban_app/widgets/subject_mark_image_widget.dart';
-import 'package:douban_app/widgets/title_bar.dart' as title;
+import 'package:doubanapp/router.dart';
+import 'package:doubanapp/http/API.dart';
+import 'package:doubanapp/bean/celebrity_entity.dart';
+import 'package:doubanapp/widgets/title_bar.dart';
+import 'package:doubanapp/widgets/rating_bar.dart';
+import 'package:doubanapp/widgets/image/radius_img.dart';
+import 'package:doubanapp/repository/person_detail_repository.dart';
+import 'package:doubanapp/widgets/item_count_title.dart';
+import 'package:doubanapp/widgets/loading_widget.dart';
+import 'package:doubanapp/widgets/subject_mark_image_widget.dart';
+import 'package:doubanapp/widgets/title_bar.dart' as title;
 
 class PersonDetailPage extends StatefulWidget {
   final String id;

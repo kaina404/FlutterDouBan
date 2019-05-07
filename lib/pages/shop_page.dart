@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:douban_app/util/screen_utils.dart';
+import 'package:doubanapp/util/screen_utils.dart';
 
 String url1 = 'https://flutterchina.club/';
 String url2 = 'http://flutterall.com/';
@@ -179,8 +179,8 @@ class _WebViewWidgetState extends State<_WebViewWidget>  {
     if(needFullScreen){
       return null;
     }else{
-      return Rect.fromLTRB(0.0, ScreenUtils.getStatusBarH(context) + 60.0,
-          ScreenUtils.screenW(context), ScreenUtils.screenH(context) - 60.0);
+      return Rect.fromLTRB(0.0, ScreenUtils.padTopH() + 60.0,
+          ScreenUtils.screenW(), ScreenUtils.screenH() - 60.0);
     }
   }
 

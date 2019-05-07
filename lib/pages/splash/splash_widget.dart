@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/container_page.dart';
-import 'package:douban_app/util/screen_utils.dart';
-import 'package:douban_app/constant/constant.dart';
+import 'package:doubanapp/pages/container_page.dart';
+import 'package:doubanapp/util/screen_utils.dart';
+import 'package:doubanapp/constant/constant.dart';
 
 ///打开APP首页
 class SplashWidget extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        radius: ScreenUtils.screenW(context) / 3,
+                        radius: ScreenUtils.screenW() / 3,
                         backgroundColor: Colors.white,
                         backgroundImage:
                             AssetImage(Constant.ASSETS_IMG + 'home.png'),
@@ -103,8 +103,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                 ))
               ],
             ),
-            width: ScreenUtils.screenW(context),
-            height: ScreenUtils.screenH(context),
+            width: ScreenUtils.screenW(),
+            height: ScreenUtils.screenH(),
           ),
           offstage: !showAd,
         )

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/pages/group/group_page.dart';
-import 'package:douban_app/pages/movie/book_audio_video_page.dart';
-import 'package:douban_app/pages/home/home_page.dart';
-import 'package:douban_app/pages/person/person_center_page.dart';
-import 'package:douban_app/pages/shop_page.dart';
+import 'package:doubanapp/pages/group/group_page.dart';
+import 'package:doubanapp/pages/movie/book_audio_video_page.dart';
+import 'package:doubanapp/pages/home/home_page.dart';
+import 'package:doubanapp/pages/person/person_center_page.dart';
+import 'package:doubanapp/pages/shop_page.dart';
 
 
 ///这个页面是作为整个APP的最外层的容器，以Tab为基础控制每个item的显示与隐藏

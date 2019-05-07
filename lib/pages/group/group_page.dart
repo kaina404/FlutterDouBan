@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/search_text_field_widget.dart';
-import 'package:douban_app/router.dart';
-import 'package:douban_app/constant/constant.dart';
-import 'package:douban_app/http/API.dart';
-import 'package:douban_app/http/http_request.dart';
-import 'package:douban_app/bean/subject_entity.dart';
-import 'package:douban_app/widgets/loading_widget.dart';
-import 'package:douban_app/widgets/image/radius_img.dart';
+import 'package:doubanapp/widgets/search_text_field_widget.dart';
+import 'package:doubanapp/router.dart';
+import 'package:doubanapp/constant/constant.dart';
+import 'package:doubanapp/http/API.dart';
+import 'package:doubanapp/http/http_request.dart';
+import 'package:doubanapp/bean/subject_entity.dart';
+import 'package:doubanapp/widgets/loading_widget.dart';
+import 'package:doubanapp/widgets/image/radius_img.dart';
 ///小组
 class GroupPage extends StatelessWidget {
   @override

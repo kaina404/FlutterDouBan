@@ -1,5 +1,5 @@
 
-import 'package:douban_app/bean/subject_entity.dart';
+import 'package:doubanapp/bean/subject_entity.dart';
 import 'dart:math' as math;
 
 class TopItemBean {

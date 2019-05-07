@@ -1,7 +1,7 @@
-import 'package:douban_app/bean/celebrity_entity.dart';
-import 'package:douban_app/bean/celebrity_work_entity.dart';
-import 'package:douban_app/http/http_request.dart';
-import 'package:douban_app/http/API.dart';
+import 'package:doubanapp/bean/celebrity_entity.dart';
+import 'package:doubanapp/bean/celebrity_work_entity.dart';
+import 'package:doubanapp/http/http_request.dart';
+import 'package:doubanapp/http/API.dart';
 
 class PersonDetailRepository {
   CelebrityEntity celebrityEntity;

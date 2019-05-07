@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/constant/text_size_constant.dart';
-import 'package:douban_app/constant/color_constant.dart';
+import 'package:doubanapp/constant/text_size_constant.dart';
+import 'package:doubanapp/constant/color_constant.dart';
 import '../../constant/constant.dart';
 typedef TabCallBack = void Function(int index);
 //影院热映、即将上映 tab

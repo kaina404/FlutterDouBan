@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/image/cached_network_image.dart';
-import 'package:douban_app/bean/top_item_bean.dart';
-import 'package:douban_app/util/pick_img_main_color.dart';
-import 'package:douban_app/constant/color_constant.dart';
+import 'package:doubanapp/widgets/image/cached_network_image.dart';
+import 'package:doubanapp/bean/top_item_bean.dart';
+import 'package:doubanapp/util/pick_img_main_color.dart';
+import 'package:doubanapp/constant/color_constant.dart';
 import 'dart:math' as math;
 
 ///豆瓣榜单Item

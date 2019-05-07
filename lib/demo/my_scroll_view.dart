@@ -6,7 +6,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:douban_app/demo/my_scrollable.dart' as my_scrollable;
+import 'package:doubanapp/demo/my_scrollable.dart' as my_scrollable;
 
 /// A widget that scrolls.
 ///

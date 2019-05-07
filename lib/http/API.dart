@@ -1,17 +1,17 @@
-import 'package:douban_app/http/http_request.dart';
+import 'package:doubanapp/http/http_request.dart';
 
-//import 'package:douban_app/bean/MovieBean.dart';
-//import 'package:douban_app/bean/ComingSoonBean.dart';
-import 'package:douban_app/bean/subject_entity.dart';
-import 'package:douban_app/bean/movie_detail_bean.dart';
-import 'package:douban_app/bean/comments_entity.dart';
-import 'package:douban_app/bean/search_result_entity.dart';
-import 'package:douban_app/bean/celebrity_entity.dart' as celebrity;
-import 'package:douban_app/bean/celebrity_work_entity.dart';
+//import 'package:doubanapp/bean/MovieBean.dart';
+//import 'package:doubanapp/bean/ComingSoonBean.dart';
+import 'package:doubanapp/bean/subject_entity.dart';
+import 'package:doubanapp/bean/movie_detail_bean.dart';
+import 'package:doubanapp/bean/comments_entity.dart';
+import 'package:doubanapp/bean/search_result_entity.dart';
+import 'package:doubanapp/bean/celebrity_entity.dart' as celebrity;
+import 'package:doubanapp/bean/celebrity_work_entity.dart';
 import 'dart:math' as math;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:douban_app/bean/movie_long_comments_entity.dart';
+import 'package:doubanapp/bean/movie_long_comments_entity.dart';
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {

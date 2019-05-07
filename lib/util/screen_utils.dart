@@ -1,202 +1,85 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
+import 'dart:ui';
 //系统默认的appBar等高度
 //位于Dart Packages/flutter/src/material/constans.dart
-
-/**
- * @Author: thl
- * @GitHub: https://github.com/Sky24n
- * @Email: 863764940@qq.com
- * @Email: sky24no@gmail.com
- * @Description: Screen Util.
- * @Date: 2018/9/8
- */
-
-///默认设计稿尺寸（单位 dp or pt）
-double _designW = 360.0;
-double _designH = 640.0;
-double _designD = 3.0;
-
-/**
- * 配置设计稿尺寸（单位 dp or pt）
- * w 宽
- * h 高
- * density 像素密度
- */
-
-/// 配置设计稿尺寸 屏幕 宽，高，密度。
-/// Configuration design draft size  screen width, height, density.
-void setDesignWHD(double w, double h, {double density = 3.0}) {
-  _designW = w;
-  _designH = h;
-  _designD = density;
-}
-
-/// Screen Util.
+///https://zhuanlan.zhihu.com/p/52959378
 class ScreenUtils {
-  double _screenWidth = 0.0;
-  double _screenHeight = 0.0;
-  double _screenDensity = 0.0;
-  double _statusBarHeight = 0.0;
-  double _bottomBarHeight = 0.0;
-  double _appBarHeight = 0.0;
-  MediaQueryData _mediaQueryData;
+  static MediaQueryData mediaQuery = MediaQueryData.fromWindow(window);
+  static double _width = mediaQuery.size.width;
+  static double _height = mediaQuery.size.height;
+  static double _topbarH = mediaQuery.padding.top;
+  static double _botbarH = mediaQuery.padding.bottom;
+  static double _pixelRatio = mediaQuery.devicePixelRatio;
 
-  static final ScreenUtils _singleton = ScreenUtils();
+  static var _ratio;
 
-  static ScreenUtils getInstance() {
-    _singleton._init();
-    return _singleton;
+  static init(int number) {
+//    750设计图
+    int uiwidth = number is int ? number : 750;
+    _ratio = _width / uiwidth;
   }
 
-  _init() {
-    MediaQueryData mediaQuery = MediaQueryData.fromWindow(ui.window);
-    if (_mediaQueryData != mediaQuery) {
-      _mediaQueryData = mediaQuery;
-      _screenWidth = mediaQuery.size.width;
-      _screenHeight = mediaQuery.size.height;
-      _screenDensity = mediaQuery.devicePixelRatio;
-      _statusBarHeight = mediaQuery.padding.top;
-      _bottomBarHeight = mediaQuery.padding.bottom;
-      _appBarHeight = kToolbarHeight;
+  static px(number) {
+    if (!(_ratio is double || _ratio is int)) {
+      ScreenUtils.init(750);
     }
+    return number * _ratio;
   }
 
-  /// screen width
-  /// 屏幕 宽
-  double get screenWidth => _screenWidth;
-
-  /// screen height
-  /// 屏幕 高
-  double get screenHeight => _screenHeight;
-
-  /// appBar height
-  /// appBar 高
-  double get appBarHeight => _appBarHeight;
-
-  /// screen density
-  /// 屏幕 像素密度
-  double get screenDensity => _screenDensity;
-
-  /// status bar Height
-  /// 状态栏高度
-  double get statusBarHeight => _statusBarHeight;
-
-  /// bottom bar Height
-  double get bottomBarHeight => _bottomBarHeight;
-
-  /// media Query Data
-  MediaQueryData get mediaQueryData => _mediaQueryData;
-
-  /// screen width
-  /// 当前屏幕 宽
-  static double screenW(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.size.width;
+  static onepx() {
+    return 1 / _pixelRatio;
   }
 
-  /// screen height
-  /// 当前屏幕 高
-  static double screenH(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.size.height;
+  static screenW() {
+    return _width;
   }
 
-  /// screen density
-  /// 当前屏幕 像素密度
-  static double getScreenDensity(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.devicePixelRatio;
+  static screenH() {
+    return _height;
   }
 
-  /// status bar Height
-  /// 当前状态栏高度
-  static double getStatusBarH(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.padding.top;
+  static padTopH() {
+    return _topbarH;
   }
 
-  /// status bar Height
-  /// 当前BottomBar高度
-  static double getBottomBarH(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.padding.bottom;
-  }
-
-  /// 当前MediaQueryData
-  static MediaQueryData getMediaQueryData(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery;
-  }
-
-  /// returns the size after adaptation according to the screen width.(unit dp or pt)
-  /// 返回根据屏幕宽适配后尺寸（单位 dp or pt）
-  /// size 单位 dp or pt
-  static double getScaleW(BuildContext context, double size) {
-    if (context == null || screenW(context) == 0.0) return size;
-    return size * screenW(context) / _designW;
-  }
-
-  /// returns the size after adaptation according to the screen height.(unit dp or pt)
-  /// 返回根据屏幕高适配后尺寸 （单位 dp or pt）
-  /// size unit dp or pt
-  static double getScaleH(BuildContext context, double size) {
-    if (context == null || screenH(context) == 0.0) return size;
-    return size * screenH(context) / _designH;
-  }
-
-  /// returns the font size after adaptation according to the screen density.
-  /// 返回根据屏幕宽适配后字体尺寸
-  /// fontSize 字体尺寸
-  static double getScaleSp(BuildContext context, double fontSize) {
-    if (context == null || getScreenDensity(context) == 0.0) return fontSize;
-    return fontSize * screenW(context) / _designW;
-  }
-
-  /// Orientation
-  /// 设备方向(portrait, landscape)
-  static Orientation getOrientation(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    return mediaQuery.orientation;
-  }
-
-  /// returns the size after adaptation according to the screen width.(unit dp or pt)
-  /// 返回根据屏幕宽适配后尺寸（单位 dp or pt）
-  /// size 单位 dp or pt
-  double getWidth(double size) {
-    return _screenWidth == 0.0 ? size : (size * _screenWidth / _designW);
-  }
-
-  /// returns the size after adaptation according to the screen height.(unit dp or pt)
-  /// 返回根据屏幕高适配后尺寸（单位 dp or pt）
-  /// size unit dp or pt
-  double getHeight(double size) {
-    return _screenHeight == 0.0 ? size : (size * _screenHeight / _designH);
-  }
-
-  /// returns the size after adaptation according to the screen width.(unit dp or pt)
-  /// 返回根据屏幕宽适配后尺寸（单位 dp or pt）
-  /// sizePx unit px
-  double getWidthPx(double sizePx) {
-    return _screenWidth == 0.0
-        ? (sizePx / _designD)
-        : (sizePx * _screenWidth / (_designW * _designD));
-  }
-
-  /// returns the size after adaptation according to the screen height.(unit dp or pt)
-  /// 返回根据屏幕高适配后尺寸（单位 dp or pt）
-  /// sizePx unit px
-  double getHeightPx(double sizePx) {
-    return _screenHeight == 0.0
-        ? (sizePx / _designD)
-        : (sizePx * _screenHeight / (_designH * _designD));
-  }
-
-  /// returns the font size after adaptation according to the screen density.
-  /// 返回根据屏幕宽适配后字体尺寸
-  /// fontSize 字体尺寸
-  double getSp(double fontSize) {
-    if (_screenDensity == 0.0) return fontSize;
-    return fontSize * _screenWidth / _designW;
+  static padBotH() {
+    return _botbarH;
   }
 }
+//
+//解析：
+//
+//1、默认750设计图
+//
+//2、引入 'dart:ui' 获得屏幕尺寸相关信息
+//
+//3、计算真实像素值
+//
+//
+//
+//使用方式：
+//// 设置文本大小 30 为设计图尺寸
+//new Text(
+//'Hello World!',
+//style: TextStyle(
+//fontSize: Adapt.px(30),
+//)
+//)
+//
+//
+//// 容器尺寸大小设置 一个设计图为 300*300像素的容器
+//new Container(    width: Adapt.px(300),
+//height: Adapt.px(300),
+//)
+//
+//
+//// 1px
+//new Container(
+//decoration: new BoxDecoration(
+//border: new Border(bottom:BorderSide(width: Adapt.one())),
+//),
+//)
+//
+//
+//Adapt.px(100) 计算适配后的尺寸
+//Adapt.onepx() 1px像素大小
