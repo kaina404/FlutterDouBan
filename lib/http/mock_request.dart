@@ -1,4 +1,4 @@
-import 'package:douban_app/http/API.dart';
+import 'package:doubanapp/http/API.dart';
 import 'dart:async';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';

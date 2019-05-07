@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/image/cached_network_image.dart';
+import 'package:doubanapp/widgets/image/cached_network_image.dart';
 //import 'package:connectivity/connectivity.dart';
 
 typedef BoolCallback = void Function(bool markAdded);

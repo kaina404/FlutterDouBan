@@ -1,4 +1,4 @@
-name: douban_app
+name: doubanapp
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -6,8 +6,12 @@ description: A new Flutter project.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
-version: 1.2.1
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -32,9 +36,7 @@ dependencies:
   # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
   dio: ^1.0.13
 
-  sqflite: ^1.1.0
 
-  fluttertoast: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -52,8 +54,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/
-    - mock/
+      - assets/images/
+      - mock/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

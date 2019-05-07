@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:douban_app/widgets/rating_bar.dart';
+import 'package:doubanapp/widgets/rating_bar.dart';
 
 class ScoreStartWidget extends StatefulWidget {
   final score;
