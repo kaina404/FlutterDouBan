@@ -175,7 +175,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: Row(
           children: <Widget>[
-            Text('书影音数据是否来自网络', style: TextStyle(color: Colors.red, fontSize: 17.0),),
+            Text('书影音数据是否来自网络', style: TextStyle(color: Colors.redAccent, fontSize: 17.0),),
             Expanded(
               child: Container(),
             ),
