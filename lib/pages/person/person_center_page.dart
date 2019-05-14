@@ -159,7 +159,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
   _getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      mSelectNetData = prefs.getBool(CacheKey.USE_NET_DATA) ?? false;
+      mSelectNetData = prefs.getBool(CacheKey.USE_NET_DATA) ?? true;
     });
   }
 
