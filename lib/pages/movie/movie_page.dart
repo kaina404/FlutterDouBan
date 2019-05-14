@@ -20,7 +20,8 @@ import 'package:flutter/rendering.dart';
 import 'package:doubanapp/repository/movie_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:doubanapp/widgets/loading_widget.dart';
-
+import 'package:doubanapp/util/screen_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 ///书影音-电影
 ///这个Widget整个布局较为复杂
 ///整个是使用CustomScrollView内存放各种Slivers构成
@@ -79,9 +80,11 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
   @override
   Widget build(BuildContext context) {
     print('build movie_page');
-    if (itemW == null) {
-      imgSize = MediaQuery.of(context).size.width / 5 * 3;
-      itemW = (MediaQuery.of(context).size.width - 30.0 - 20.0) / 3;
+    if (itemW == null || imgSize <= 0) {
+      MediaQuery.of(context);
+      var w = MediaQuery.of(context).size.width;
+      imgSize = w / 5 * 3;
+      itemW = (w - 30.0 - 20.0) / 3;
       hotChildAspectRatio = (377.0 / 674.0);
       comingSoonChildAspectRatio = (377.0 / 742.0);
     }
