@@ -23,7 +23,7 @@
 
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/download_qr.png)
 
-> 如果下载失败，可以使用[百度云下载地址](https://pan.baidu.com/s/12OOywTiegrfwLIitodxrwg)
+> 如果下载失败，可以使用[百度云下载地址](https://pan.baidu.com/s/16c7pT1vHudzyFNbP5lnXxg)
    
 
    
