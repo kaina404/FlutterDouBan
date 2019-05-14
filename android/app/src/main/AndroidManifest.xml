@@ -13,7 +13,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="doubanapp"
+        android:label="豆芽"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
