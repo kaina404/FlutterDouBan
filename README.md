@@ -19,7 +19,7 @@
 # 下载地址
 
 
-[Release版本下载地址](https://github.com/kaina404/FlutterDouBan/blob/master-new/douya-release.apk)
+[Release版本下载地址](https://www.pgyer.com/Gt1H)
 
 ![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douya-release.png)
 
