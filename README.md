@@ -1,3 +1,5 @@
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/logo.png)
+
 [![GitHub stars](https://img.shields.io/github/stars/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/network)
 [![GitHub issues](https://img.shields.io/github/issues/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/issues) 
