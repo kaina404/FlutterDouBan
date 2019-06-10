@@ -1,4 +1,8 @@
- # [博客地址flutterall.com: ](http://www.flutterall.com)
+[![GitHub stars](https://img.shields.io/github/stars/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/network)
+[![GitHub issues](https://img.shields.io/github/issues/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/issues) 
+
+# [博客地址flutterall.com](http://www.flutterall.com)
 真正的豆瓣客户端，90%还原豆瓣。首页、书影音、小组、市集及个人中心，一个不拉。项目持续更新中...
 # [演示预览(右键，新标签页面打开)](https://img.xuvip.top/douyademo.mp4)
 
