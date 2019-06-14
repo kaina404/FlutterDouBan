@@ -1,5 +1,7 @@
 ![](https://github.com/kaina404/FlutterDouBan/blob/master-new/logo.png)
 
+> Flutter SDK : Flutter (Channel stable, v1.5.4-hotfix.2, on Mac OS X 10.13.6 17G2112, locale zh-Hans-CN)
+
 [![GitHub stars](https://img.shields.io/github/stars/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/network)
 [![GitHub issues](https://img.shields.io/github/issues/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/issues) 
