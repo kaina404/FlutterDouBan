@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:doubanapp/widgets/image/cached_network_image.dart';
+//import 'package:doubanapp/widgets/image/cached_network_image.dart';
 //import 'package:connectivity/connectivity.dart';
 
 typedef BoolCallback = void Function(bool markAdded);
@@ -60,7 +61,9 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
         width: width,
         height: height,
         fit: BoxFit.fill,
-        placeholder: defaultImg,
+        placeholder: (BuildContext context, String url){
+          return defaultImg;
+        },
         fadeInDuration: const Duration(milliseconds: 80),
         fadeOutDuration: const Duration(milliseconds: 80),
       ),

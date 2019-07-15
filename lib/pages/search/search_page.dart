@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:doubanapp/widgets/search_text_field_widget.dart';
 import 'package:doubanapp/http/API.dart';
 import 'package:doubanapp/bean/search_result_entity.dart';
-import 'package:doubanapp/widgets/image/cached_network_image.dart';
+//import 'package:doubanapp/widgets/image/cached_network_image.dart';
 import 'package:doubanapp/router.dart';
 import 'package:flutter/cupertino.dart';
 

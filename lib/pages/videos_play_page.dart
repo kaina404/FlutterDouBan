@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:doubanapp/widgets/video_widget.dart';
 import 'package:doubanapp/bean/movie_detail_bean.dart';
-import 'package:doubanapp/widgets/image/cached_network_image.dart';
 
 class VideoPlayPage extends StatefulWidget {
   final List<Blooper> beans;

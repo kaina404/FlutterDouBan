@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:doubanapp/widgets/image/cached_network_image.dart';
 import 'package:doubanapp/widgets/title_bar.dart';
 import 'package:doubanapp/router.dart';
 

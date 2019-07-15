@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:doubanapp/widgets/image/cached_network_image.dart';
+//import 'package:doubanapp/widgets/image/cached_network_image.dart';
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/widgets/video_progress_bar.dart';
 

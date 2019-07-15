@@ -15,7 +15,7 @@ import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/pages/movie/top_item_widget.dart';
 import 'package:doubanapp/router.dart';
 import 'package:doubanapp/http/http_request.dart';
-import 'package:palette_generator/palette_generator.dart';
+//import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:doubanapp/repository/movie_repository.dart';
 import 'package:flutter/cupertino.dart';

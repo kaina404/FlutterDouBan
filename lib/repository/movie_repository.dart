@@ -1,9 +1,10 @@
+import 'package:doubanapp/util/palette_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:doubanapp/bean/subject_entity.dart';
 import 'package:doubanapp/bean/top_item_bean.dart';
 import 'package:doubanapp/http/http_request.dart';
 import 'dart:math' as math;
-import 'package:palette_generator/palette_generator.dart';
+//import 'package:palette_generator/palette_generator.dart';
 import 'package:doubanapp/http/API.dart';
 import 'package:doubanapp/http/mock_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
