@@ -179,6 +179,8 @@
 
 # **如果您觉得还可以的话，给个Star白~**
 
+![Thanks](https://github.com/kaina404/FlutterDouBan/blob/master-new/48.jpg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
