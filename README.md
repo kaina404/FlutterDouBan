@@ -179,7 +179,9 @@
 
 # **如果您觉得还可以的话，给个Star白~**
 
-![Thanks](https://github.com/kaina404/FlutterDouBan/blob/master-new/48.jpg)
+# Thanks
+
+<img src="https://github.com/kaina404/FlutterDouBan/blob/master-new/48.jpg" width="426px">
 
 ## Getting Started
 
