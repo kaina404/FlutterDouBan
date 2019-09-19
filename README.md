@@ -181,7 +181,7 @@
 
 # Thanks
 
-<img src="https://github.com/kaina404/FlutterDouBan/blob/master-new/48.jpg" width="426px">
+![](https://github.com/kaina404/FlutterDouBan/blob/master-new/48.jpg)
 
 ## Getting Started
 
