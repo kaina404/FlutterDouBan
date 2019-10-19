@@ -5,7 +5,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/network)
 [![GitHub issues](https://img.shields.io/github/issues/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/issues) 
 
-> Flutter SDK (Channel stable, v1.5.4-hotfix.2, on Mac OS X 10.13.6 17G2112, locale zh-Hans-CN)
+> Flutter SDK (Channel stable, v1.5.4-hotfix.2, on Mac OS X 10.13.6 17G2112, locale zh-Hans-CN， Dart SDK : 2.5.0)
 
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉，重新编译尝试。
 
