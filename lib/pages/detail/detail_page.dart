@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doubanapp/util/palette_generator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:doubanapp/http/API.dart';
@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:doubanapp/http/http_request.dart';
 import 'package:doubanapp/http/mock_request.dart';
 import 'package:doubanapp/widgets/loading_widget.dart';
+import 'package:palette_generator/palette_generator.dart';
 import '../../bean/movie_long_comments_entity.dart';
 import '../../widgets/bottom_drag_widget.dart';
 import 'long_comment_widget.dart';
