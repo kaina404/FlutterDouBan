@@ -30,7 +30,7 @@
 # 下载地址
 
 ## [Release版本下载地址](https://img.xuvip.top/douya_release.apk)
-##### [新页面扫码下载](https://img.xuvip.top/douyaqr.png)
+#### [新页面扫码下载](https://upload-images.jianshu.io/upload_images/3884536-d9adbda0e5f61c84.png?imageMogr2/auto-orient/strip|imageView2/2/w/400/format/webp)
 
 ![扫一扫下载体验](https://img.xuvip.top/douya.png)
 
