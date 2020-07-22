@@ -31,7 +31,7 @@
 
 ## [Release版本下载地址](https://img.xuvip.top/douya_release.apk)
 
-![扫一扫下载体验](https://github.com/kaina404/FlutterDouBan/blob/master-new/douya-release.png)
+![扫一扫下载体验](https://img.xuvip.top/douya.png)
 
 
    
