@@ -28,9 +28,9 @@
     "我的"，然后打开"书影音数据来自网络"开关后，重启APP即可。
     
 # 下载地址
+## [打开新页面扫码下载](https://upload-images.jianshu.io/upload_images/3884536-d9adbda0e5f61c84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+#### [Release版本下载地址](https://img.xuvip.top/douya_release.apk)
 
-## [Release版本下载地址](https://img.xuvip.top/douya_release.apk)
-#### [打开新页面扫码下载](https://upload-images.jianshu.io/upload_images/3884536-d9adbda0e5f61c84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![扫一扫下载体验](https://img.xuvip.top/douya.png)
 
