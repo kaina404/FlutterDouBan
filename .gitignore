@@ -69,3 +69,6 @@ build/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+ios/Flutter/flutter_export_environment.sh
+android/app/src/main/gen/com/example/doubanapp/Manifest.java
+android/app/src/main/gen/com/example/doubanapp/R.java
