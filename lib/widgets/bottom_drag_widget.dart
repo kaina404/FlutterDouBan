@@ -56,7 +56,7 @@ class DragContainer extends StatefulWidget {
       : assert(drawer != null),
         assert(defaultShowHeight != null),
         assert(height != null),
-        super(key: key){
+        super(key: key) {
     _controller = DragController();
   }
 
@@ -86,15 +86,15 @@ class _DragContainerState extends State<DragContainer>
 
 //    if (controller != null) {
     _controller
-          .setDrag((double value, ScrollNotificationListener notification) {
-        if (notification != ScrollNotificationListener.edge) {
-          _handleDragEnd(null);
-        } else {
-          setState(() {
-            offsetDistance = offsetDistance + value;
-          });
-        }
-      });
+        .setDrag((double value, ScrollNotificationListener notification) {
+      if (notification != ScrollNotificationListener.edge) {
+        _handleDragEnd(null);
+      } else {
+        setState(() {
+          offsetDistance = offsetDistance + value;
+        });
+      }
+    });
 //    }
     super.initState();
   }
@@ -104,8 +104,8 @@ class _DragContainerState extends State<DragContainer>
     return GestureRecognizerFactoryWithHandlers<
         MyVerticalDragGestureRecognizer>(
       () => MyVerticalDragGestureRecognizer(flingListener: (bool isFling) {
-            _isFling = isFling;
-          }), //constructor
+        _isFling = isFling;
+      }), //constructor
       (MyVerticalDragGestureRecognizer instance) {
         //initializer
         instance
@@ -197,6 +197,7 @@ class _DragContainerState extends State<DragContainer>
           setState(() {});
         }
       });
+
     ///自己滚动
     animalController.forward();
   }
@@ -317,6 +318,7 @@ class OverscrollNotificationWidget extends StatefulWidget {
         super(key: key);
 
   final Widget child;
+
 //  final ScrollListener scrollListener;
 
   @override
@@ -342,37 +344,31 @@ class OverscrollNotificationWidgetState
   @override
   Widget build(BuildContext context) {
     print('NotificationListener build');
-    final Widget child = NotificationListener<ScrollStartNotification>(
-      key: _key,
-      child: NotificationListener<ScrollUpdateNotification>(
-        child: NotificationListener<OverscrollNotification>(
-          child: NotificationListener<ScrollEndNotification>(
-            child: widget.child,
-            onNotification: (ScrollEndNotification notification) {
-              _controller.updateDragDistance(
-                  0.0, ScrollNotificationListener.end);
-              return false;
-            },
-          ),
-          onNotification: (OverscrollNotification notification) {
+
+    final Widget child = NotificationListener<ScrollNotification>(
+        key: _key,
+        child: widget.child,
+        onNotification: (ScrollNotification notification) {
+          if (notification is ScrollEndNotification) {
+            _controller.updateDragDistance(0.0, ScrollNotificationListener.end);
+            return false;
+          } else if (notification is OverscrollNotification) {
             if (notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
               _controller.updateDragDistance(notification.dragDetails.delta.dy,
                   ScrollNotificationListener.edge);
             }
             return false;
-          },
-        ),
-        onNotification: (ScrollUpdateNotification notification) {
-          return false;
-        },
-      ),
-      onNotification: (ScrollStartNotification scrollUpdateNotification) {
-        _controller.updateDragDistance(0.0, ScrollNotificationListener.start);
-        return false;
-      },
-    );
+          } else if (notification is ScrollUpdateNotification) {
+            return false;
+          } else if (notification is ScrollStartNotification) {
+            _controller.updateDragDistance(
+                0.0, ScrollNotificationListener.start);
+            return false;
+          }
 
+          return false;
+        });
     return child;
   }
 }
