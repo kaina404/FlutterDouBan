@@ -155,7 +155,7 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
         preferredSize =
-        Size.fromHeight(1.0 + (bottom?.preferredSize?.height ?? 0.0)),
+            Size.fromHeight(1.0 + (bottom?.preferredSize?.height ?? 0.0)),
         super(key: key);
 
   /// A widget to display before the [title].
@@ -398,8 +398,8 @@ class _AppBarState extends State<AppBar> {
 
     if (widget.toolbarOpacity != 1.0) {
       final double opacity =
-      const Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)
-          .transform(widget.toolbarOpacity);
+          const Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)
+              .transform(widget.toolbarOpacity);
       if (centerStyle?.color != null)
         centerStyle =
             centerStyle.copyWith(color: centerStyle.color.withOpacity(opacity));
@@ -468,12 +468,12 @@ class _AppBarState extends State<AppBar> {
         widget.bottomOpacity == 1.0
             ? widget.bottom
             : Opacity(
-          opacity: const Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)
-              .transform(widget.bottomOpacity),
-          child: Container(
-            height: 46.0,
-          ),
-        ),
+                opacity: const Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)
+                    .transform(widget.bottomOpacity),
+                child: Container(
+                  height: 46.0,
+                ),
+              ),
       ],
     );
 //    }
@@ -516,7 +516,7 @@ class _AppBarState extends State<AppBar> {
               appBarTheme.color ??
               themeData.primaryColor,
           elevation:
-          widget.elevation ?? appBarTheme.elevation ?? _defaultElevation,
+              widget.elevation ?? appBarTheme.elevation ?? _defaultElevation,
           child: Semantics(
             explicitChildNodes: true,
             child: appBar,
@@ -632,6 +632,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Color unselectedColor = Color.fromARGB(255, 117, 117, 117);
   TextStyle selectStyle = TextStyle(fontSize: 18, color: Colors.black);
   TextStyle unselectedStyle = TextStyle(fontSize: 18, color: Colors.black);
+
   @override
   double get minExtent =>
       collapsedHeight ?? (topPadding + kToolbarHeight + _bottomHeight);
@@ -669,20 +670,20 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     // 1.0 -> Collapsed to toolbar
 
     final double t = (1.0 -
-        (math.max(minExtent, maxExtent - shrinkOffset) - minExtent) /
-            deltaExtent)
+            (math.max(minExtent, maxExtent - shrinkOffset) - minExtent) /
+                deltaExtent)
         .clamp(0.0, 1.0);
 
 //    List<>getTabBarText(bottom);
     bottom = TabBar(
       tabs: bottomList
           .map((item) => Padding(
-        padding: const EdgeInsets.only(bottom: 5.0),
-        child: Text(
-          '$item',
-          style: TextStyle(fontSize: 15),
-        ),
-      ))
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Text(
+                  '$item',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ))
           .toList(),
       isScrollable: false,
       indicatorColor: selectColor,
@@ -708,8 +709,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             : flexibleSpace,
         bottom: bottom,
         elevation: forceElevated ||
-            overlapsContent ||
-            (pinned && shrinkOffset > maxExtent - minExtent)
+                overlapsContent ||
+                (pinned && shrinkOffset > maxExtent - minExtent)
             ? elevation ?? 4.0
             : 0.0,
         backgroundColor: backgroundColor,
@@ -721,7 +722,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         titleSpacing: titleSpacing,
         toolbarOpacity: toolbarOpacity,
         bottomOpacity:
-        pinned ? 1.0 : (visibleMainHeight / _bottomHeight).clamp(0.0, 1.0),
+            pinned ? 1.0 : (visibleMainHeight / _bottomHeight).clamp(0.0, 1.0),
       ),
     );
 
@@ -869,7 +870,7 @@ class SliverAppBar extends StatefulWidget {
         assert(pinned != null),
         assert(snap != null),
         assert(floating || !snap,
-        'The "snap" argument only makes sense for floating app bars.'),
+            'The "snap" argument only makes sense for floating app bars.'),
         super(key: key);
 
   /// A widget to display before the [title].
@@ -1192,7 +1193,7 @@ getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: SliverAppBar(
+            sliver: SliverAppBar(
               pinned: true,
               expandedHeight: 100.0,
               primary: false,
@@ -1222,11 +1223,11 @@ getWidget() {
                 // These are the widgets to put in each tab in the tab bar.
                 tabs: _tabs
                     .map((String name) => Container(
-                  child: Text(
-                    name,
-                  ),
-                  padding: const EdgeInsets.only(bottom: 5.0),
-                ))
+                          child: Text(
+                            name,
+                          ),
+                          padding: const EdgeInsets.only(bottom: 5.0),
+                        ))
                     .toList(),
               ),
             ),
@@ -1272,7 +1273,7 @@ getWidget() {
                         // ListTile widgets.
                         itemExtent: 48.0,
                         delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
+                          (BuildContext context, int index) {
                             // This builder is called for each child.
                             // In this example, we just number each list item.
                             return ListTile(

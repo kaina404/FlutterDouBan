@@ -1132,7 +1132,7 @@ class _SliverAppBarState extends State<SliverAppBar>
   Widget build(BuildContext context) {
     assert(!widget.primary || debugCheckHasMediaQuery(context));
     final double topPadding = 0.0;
-     final double collapsedHeight = widget.bottom.preferredSize.height + 26.0;
+    final double collapsedHeight = widget.bottom.preferredSize.height + 26.0;
 //    final collapsedHeight = 80.0;
 
     return MediaQuery.removePadding(
@@ -1192,7 +1192,7 @@ getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: SliverAppBar(
+            sliver: SliverAppBar(
               pinned: true,
               expandedHeight: 100.0,
               primary: false,
