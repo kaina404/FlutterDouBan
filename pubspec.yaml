@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: 0.1.2
 
-  flutter_cache_manager: 1.1.0
+  flutter_cache_manager: 1.2.0
 
 #  palette_generator: 0.1.1
 
@@ -38,9 +38,11 @@ dependencies:
 
   fluttertoast: 3.0.4
 
-  cached_network_image: 1.1.0
+  cached_network_image: 2.2.0
 
-  shared_preferences: 0.5.3+2
+  shared_preferences: 0.5.6
+
+  palette_generator: 0.2.2
 
 dev_dependencies:
   flutter_test:
