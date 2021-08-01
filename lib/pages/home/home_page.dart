@@ -38,7 +38,7 @@ DefaultTabController getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: myapp.SliverAppBar(
+            sliver: myapp.SliverAppBar(
               pinned: true,
               expandedHeight: 120.0,
               primary: true,
@@ -288,15 +288,16 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentVideo(int index) {
-    if(!mounted){
+    if (!mounted) {
       return Container();
     }
     return VideoWidget(
-      index == 1 ? Constant.URL_MP4_DEMO_0 :  Constant.URL_MP4_DEMO_1,
+      index == 1 ? Constant.URL_MP4_DEMO_0 : Constant.URL_MP4_DEMO_1,
       showProgressBar: false,
     );
   }
 }
+
 ///动态TAB
 _loginContainer(BuildContext context) {
   return Align(
