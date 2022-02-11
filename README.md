@@ -9,7 +9,7 @@
 
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉，重新编译尝试。
 
-# [博客地址flutterall.com](https://www.jianshu.com/u/1c09737416aa)
+# [博客地址flutterall.xyz](https://www.jianshu.com/u/1c09737416aa)
 真正的豆瓣客户端，90%还原豆瓣。首页、书影音、小组、市集及个人中心，一个不拉。项目持续更新中...
 # [演示预览(右键，新标签页面打开)](https://img.xuvip.top/douyademo.mp4)
 
