@@ -68,7 +68,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
                       ),
                     ),
                     onTap: () {
-                      Router.push(context, Router.searchPage, '搜索流浪地球试一试');
+                      MyRouter.push(context, MyRouter.searchPage, '搜索流浪地球试一试');
                     },
                   ),
                 )

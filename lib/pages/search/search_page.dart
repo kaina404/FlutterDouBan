@@ -57,8 +57,8 @@ class _SearchPageState extends State<SearchPage> {
                                   behavior: HitTestBehavior.translucent,
                                   child: _getItem(bean, index),
                                   onTap: () {
-                                    Router.push(
-                                        context, Router.detailPage, bean.id);
+                                    MyRouter.push(
+                                        context, MyRouter.detailPage, bean.id);
                                   },
                                 ),
                               );

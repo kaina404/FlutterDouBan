@@ -10,7 +10,7 @@ import 'package:doubanapp/pages/web_view_page.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 
-class Router {
+class MyRouter {
   static const homePage = 'app://';
   static const detailPage = 'app://DetailPage';
   static const playListPage = 'app://VideosPlayPage';
@@ -58,13 +58,13 @@ class Router {
 //    }));
 //  }
 
-  Router.pushNoParams(BuildContext context, String url) {
+  MyRouter.pushNoParams(BuildContext context, String url) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return _getPage(url, null);
     }));
   }
 
-  Router.push(BuildContext context, String url, dynamic params) {
+  MyRouter.push(BuildContext context, String url, dynamic params) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return _getPage(url, params);
     }));

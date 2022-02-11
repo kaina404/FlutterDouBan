@@ -68,7 +68,7 @@ class DouBanState extends State<DouBanListView>
             ),
             onTap: () {
               //监听点击事件
-              Router.push(context, Router.detailPage, bean.id);
+              MyRouter.push(context, MyRouter.detailPage, bean.id);
             },
           );
         });

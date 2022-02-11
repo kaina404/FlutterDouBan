@@ -344,19 +344,6 @@ class AppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  bool _getEffectiveCenterTitle(ThemeData themeData) {
-    if (centerTitle != null) return centerTitle;
-    assert(themeData.platform != null);
-    switch (themeData.platform) {
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-        return false;
-      case TargetPlatform.iOS:
-        return actions == null || actions.length < 2;
-    }
-    return null;
-  }
-
   @override
   _AppBarState createState() => _AppBarState();
 }
@@ -378,7 +365,7 @@ class _AppBarState extends State<AppBar> {
     assert(debugCheckHasMaterialLocalizations(context));
     final ThemeData themeData = Theme.of(context);
     final AppBarTheme appBarTheme = AppBarTheme.of(context);
-    final ScaffoldState scaffold = Scaffold.of(context, nullOk: true);
+    final ScaffoldState scaffold = Scaffold.of(context);
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
 
     final bool hasDrawer = scaffold?.hasDrawer ?? false;
@@ -389,12 +376,12 @@ class _AppBarState extends State<AppBar> {
 
     IconThemeData appBarIconTheme =
         widget.iconTheme ?? appBarTheme.iconTheme ?? themeData.primaryIconTheme;
-    TextStyle centerStyle = widget.textTheme?.title ??
-        appBarTheme.textTheme?.title ??
-        themeData.primaryTextTheme.title;
-    TextStyle sideStyle = widget.textTheme?.body1 ??
-        appBarTheme.textTheme?.body1 ??
-        themeData.primaryTextTheme.body1;
+    TextStyle centerStyle = widget.textTheme?.bodyText1 ??
+        appBarTheme.textTheme?.bodyText1 ??
+        themeData.primaryTextTheme.bodyText1;
+    TextStyle sideStyle = widget.textTheme?.bodyText1 ??
+        appBarTheme.textTheme?.bodyText1 ??
+        themeData.primaryTextTheme.bodyText1;
 
     if (widget.toolbarOpacity != 1.0) {
       final double opacity =
@@ -439,6 +426,12 @@ class _AppBarState extends State<AppBar> {
           namesRoute = true;
           break;
         case TargetPlatform.iOS:
+          break;
+        case TargetPlatform.linux:
+          break;
+        case TargetPlatform.macOS:
+          break;
+        case TargetPlatform.windows:
           break;
       }
       title = DefaultTextStyle(
@@ -559,8 +552,8 @@ class _FloatingAppBarState extends State<_FloatingAppBar> {
   }
 
   RenderSliverFloatingPersistentHeader _headerRenderer() {
-    return context.ancestorRenderObjectOfType(
-        const TypeMatcher<RenderSliverFloatingPersistentHeader>());
+    return context.findAncestorRenderObjectOfType<RenderSliverFloatingPersistentHeader>(
+        );
   }
 
   void _isScrollingListener() {
@@ -1192,7 +1185,7 @@ getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: SliverAppBar(
+            sliver: SliverAppBar(
               pinned: true,
               expandedHeight: 100.0,
               primary: false,

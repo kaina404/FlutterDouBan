@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doubanapp/util/palette_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:doubanapp/http/API.dart';
@@ -23,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:doubanapp/http/http_request.dart';
 import 'package:doubanapp/http/mock_request.dart';
 import 'package:doubanapp/widgets/loading_widget.dart';
+import 'package:palette_generator/palette_generator.dart';
 import '../../bean/movie_long_comments_entity.dart';
 import '../../widgets/bottom_drag_widget.dart';
 import 'long_comment_widget.dart';
@@ -247,7 +247,7 @@ class _DetailPageState extends State<DetailPage> {
               ],
             ),
             onTap: () {
-              Router.push(context, Router.personDetailPage,
+              MyRouter.push(context, MyRouter.personDetailPage,
                   {'personImgUrl': imgUrl, 'id': id});
             },
           ),
@@ -327,7 +327,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     onTap: () {
-                      Router.push(context, Router.playListPage,
+                      MyRouter.push(context, MyRouter.playListPage,
                           _movieDetailBean.trailers);
                     },
                   );
@@ -493,7 +493,7 @@ class _DetailPageState extends State<DetailPage> {
               padding: EdgeInsets.all(12.0),
             ),
             onTap: () {
-              Router.push(context, bean.author.alt, {'title': '个人主页'});
+              MyRouter.push(context, bean.author.alt, {'title': '个人主页'});
             },
           );
         }

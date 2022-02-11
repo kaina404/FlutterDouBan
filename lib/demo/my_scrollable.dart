@@ -195,8 +195,7 @@ class Scrollable extends StatefulWidget {
   /// ScrollableState scrollable = Scrollable.of(context);
   /// ```
   static ScrollableState of(BuildContext context) {
-    final _ScrollableScope widget =
-        context.inheritFromWidgetOfExactType(_ScrollableScope);
+    final _ScrollableScope widget = context.dependOnInheritedWidgetOfExactType<_ScrollableScope>();
     return widget?.scrollable;
   }
 
@@ -566,6 +565,15 @@ class ScrollableState extends State<Scrollable>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<ScrollPosition>('position', position));
+  }
+
+  @override
+  void saveOffset(double offset) {
+    // // TODO: implement saveOffset
+    // _persistedScrollOffset.value = offset;
+    // // [saveOffset] is called after a scrolling ends and it is usually not
+    // // followed by a frame. Therefore, manually flush restoration data.
+    // ServicesBinding.instance!.restorationManager.flushData();
   }
 }
 

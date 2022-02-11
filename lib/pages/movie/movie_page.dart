@@ -14,14 +14,11 @@ import 'package:doubanapp/widgets/image/cache_img_radius.dart';
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/pages/movie/top_item_widget.dart';
 import 'package:doubanapp/router.dart';
-import 'package:doubanapp/http/http_request.dart';
 //import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:doubanapp/repository/movie_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:doubanapp/widgets/loading_widget.dart';
-import 'package:doubanapp/util/screen_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 ///书影音-电影
 ///这个Widget整个布局较为复杂
 ///整个是使用CustomScrollView内存放各种Slivers构成
@@ -160,7 +157,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, comingSoonBean.id);
+        MyRouter.push(context, MyRouter.detailPage, comingSoonBean.id);
       },
     );
   }
@@ -205,7 +202,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, hotMovieBean.id);
+        MyRouter.push(context, MyRouter.detailPage, hotMovieBean.id);
       },
     );
   }
@@ -338,7 +335,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
                   mainAxisSpacing: 0.0,
                   childAspectRatio: _getRadio())),
           getCommonImg(Constant.IMG_TMP1, (){
-            Router.pushNoParams(context, "http://www.flutterall.com");
+            MyRouter.pushNoParams(context, "http://www.flutterall.com");
           }),
           SliverToBoxAdapter(
             child: Padding(

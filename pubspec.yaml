@@ -22,25 +22,27 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: 0.1.2
+  cupertino_icons: ^1.0.4
 
-  flutter_cache_manager: 1.1.0
+  flutter_cache_manager: ^3.3.0
 
-#  palette_generator: 0.1.1
+  palette_generator: ^0.3.2
 
-  flutter_webview_plugin: 0.3.0+2
+  flutter_webview_plugin: 0.4.0
 
-  webview_flutter: 0.3.3+1
+  webview_flutter: ^3.0.0
 
-  video_player: 0.10.0+2
+  video_player: ^2.2.17
+
+
   # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
-  dio: 1.0.13
+  dio: ^4.0.4
 
-  fluttertoast: 3.0.4
+  fluttertoast: ^8.0.8
 
-  cached_network_image: 1.1.0
+  cached_network_image: ^3.2.0
 
-  shared_preferences: 0.5.3+2
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

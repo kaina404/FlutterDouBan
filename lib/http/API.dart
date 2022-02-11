@@ -8,11 +8,11 @@ import 'package:doubanapp/bean/comments_entity.dart';
 import 'package:doubanapp/bean/search_result_entity.dart';
 import 'package:doubanapp/bean/celebrity_entity.dart' as celebrity;
 import 'package:doubanapp/bean/celebrity_work_entity.dart';
-import 'package:doubanapp/util/palette_generator.dart';
 import 'dart:math' as math;
 //import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:doubanapp/bean/movie_long_comments_entity.dart';
+import 'package:palette_generator/palette_generator.dart';
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
@@ -75,6 +75,7 @@ class API {
 
   ///影院热映 + 即将上映
   void getHotComingSoon(RequestCallBack requestCallBack) async {
+
     //影院热映
     Map result = await _request.get(IN_THEATERS);
     var resultList = result['subjects'];

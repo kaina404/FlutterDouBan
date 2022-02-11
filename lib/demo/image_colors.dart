@@ -1,8 +1,8 @@
 //import 'package:palette_generator/palette_generator.dart';
-import 'package:doubanapp/util/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:palette_generator/palette_generator.dart';
 
 
 const Color _kBackgroundColor = Color(0xffa0a0a0);

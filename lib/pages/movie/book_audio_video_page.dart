@@ -66,7 +66,7 @@ Widget _getNestedScrollView(Widget tabBar) {
               child: SearchTextFieldWidget(
                 hintText: hintText,
                 onTab: () {
-                  Router.push(context, Router.searchPage, hintText);
+                  MyRouter.push(context, MyRouter.searchPage, hintText);
                 },
               ),
             ),

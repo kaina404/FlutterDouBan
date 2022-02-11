@@ -38,7 +38,7 @@ DefaultTabController getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: myapp.SliverAppBar(
+            sliver: myapp.SliverAppBar(
               pinned: true,
               expandedHeight: 120.0,
               primary: true,
@@ -52,7 +52,7 @@ DefaultTabController getWidget() {
                     hintText: '影视作品中你难忘的离别',
                     margin: const EdgeInsets.only(left: 15.0, right: 15.0),
                     onTab: () {
-                      Router.push(context, Router.searchPage, '影视作品中你难忘的离别');
+                      MyRouter.push(context, MyRouter.searchPage, '影视作品中你难忘的离别');
                     },
                   ),
                   alignment: Alignment(0.0, 0.0),
@@ -328,7 +328,7 @@ _loginContainer(BuildContext context) {
                 borderRadius: const BorderRadius.all(Radius.circular(6.0))),
           ),
           onTap: () {
-            Router.push(context, Router.searchPage, '搜索笨啦灯');
+            MyRouter.push(context, MyRouter.searchPage, '搜索笨啦灯');
           },
         )
       ],
