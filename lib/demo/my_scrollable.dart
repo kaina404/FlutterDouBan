@@ -196,7 +196,7 @@ class Scrollable extends StatefulWidget {
   /// ```
   static ScrollableState of(BuildContext context) {
     final _ScrollableScope widget =
-        context.inheritFromWidgetOfExactType(_ScrollableScope);
+        context.dependOnInheritedWidgetOfExactType<_ScrollableScope>();
     return widget?.scrollable;
   }
 
@@ -566,6 +566,11 @@ class ScrollableState extends State<Scrollable>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<ScrollPosition>('position', position));
+  }
+
+  @override
+  void saveOffset(double offset) {
+    // TODO: implement saveOffset
   }
 }
 

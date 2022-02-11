@@ -1,7 +1,7 @@
 import 'package:doubanapp/bean/celebrity_work_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 import 'package:doubanapp/http/API.dart';
 import 'package:doubanapp/bean/celebrity_entity.dart';
 import 'package:doubanapp/widgets/title_bar.dart';
@@ -227,7 +227,7 @@ class _PersonDetailPageState extends State<PersonDetailPage> {
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, bean.id);
+        _R.Router.push(context, _R.Router.detailPage, bean.id);
       },
     );
   }

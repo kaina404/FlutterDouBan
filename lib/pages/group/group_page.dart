@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:doubanapp/widgets/search_text_field_widget.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/http/API.dart';
 import 'package:doubanapp/http/http_request.dart';
@@ -21,7 +21,7 @@ class GroupPage extends StatelessWidget {
             margin: EdgeInsets.all(Constant.MARGIN_RIGHT),
             hintText: hintText,
             onTab: () {
-              Router.push(context, Router.searchPage, hintText);
+              _R.Router.push(context, _R.Router.searchPage, hintText);
             },
           ),
           Expanded(
@@ -133,7 +133,7 @@ class _GroupWidgetState extends State<_GroupWidget> {
         ],
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, bean.id);
+        _R.Router.push(context, _R.Router.detailPage, bean.id);
       },
     );
   }

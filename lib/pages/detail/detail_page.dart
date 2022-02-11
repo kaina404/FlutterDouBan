@@ -11,7 +11,7 @@ import 'package:doubanapp/pages/detail/score_start.dart';
 import 'package:doubanapp/pages/detail/look_confirm_button.dart';
 import 'dart:math' as math;
 //import 'package:doubanapp/widgets/image/cached_network_image.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 import 'package:doubanapp/widgets/item_count_title.dart';
 import 'package:doubanapp/bean/comments_entity.dart';
 import 'package:doubanapp/widgets/rating_bar.dart';
@@ -247,7 +247,7 @@ class _DetailPageState extends State<DetailPage> {
               ],
             ),
             onTap: () {
-              Router.push(context, Router.personDetailPage,
+              _R.Router.push(context, _R.Router.personDetailPage,
                   {'personImgUrl': imgUrl, 'id': id});
             },
           ),
@@ -327,7 +327,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     onTap: () {
-                      Router.push(context, Router.playListPage,
+                      _R.Router.push(context, _R.Router.playListPage,
                           _movieDetailBean.trailers);
                     },
                   );
@@ -493,7 +493,7 @@ class _DetailPageState extends State<DetailPage> {
               padding: EdgeInsets.all(12.0),
             ),
             onTap: () {
-              Router.push(context, bean.author.alt, {'title': '个人主页'});
+              _R.Router.push(context, bean.author.alt, {'title': '个人主页'});
             },
           );
         }
