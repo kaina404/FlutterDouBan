@@ -5,7 +5,23 @@
 [![GitHub forks](https://img.shields.io/github/forks/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/network)
 [![GitHub issues](https://img.shields.io/github/issues/kaina404/FlutterDouBan.svg)](https://github.com/kaina404/FlutterDouBan/issues) 
 
-> Flutter SDK (Channel stable, v1.5.4-hotfix.2, on Mac OS X 10.13.6 17G2112, locale zh-Hans-CN， Dart SDK : 2.5.0)
+> SDK Version
+```java
+kaina404 ~ % flutter --version
+Flutter 2.5.3 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 18116933e7 (4 months ago) • 2021-10-15 10:46:35 -0700
+Engine • revision d3ea636dc5
+Tools • Dart 2.14.4
+kaina404 ~ % flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel stable, 2.5.3, on macOS 11.4 20F71 darwin-arm, locale zh-Hans-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
+[✓] Xcode - develop for iOS and macOS
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 2020.3)
+[✓] VS Code (version 1.62.3)
+[✓] Connected device (3 available)
+```
 
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉，重新编译尝试。
 
