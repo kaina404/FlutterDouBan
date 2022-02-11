@@ -13,7 +13,7 @@ import 'dart:math' as math;
 import 'package:doubanapp/widgets/image/cache_img_radius.dart';
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/pages/movie/top_item_widget.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 import 'package:doubanapp/http/http_request.dart';
 //import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
@@ -314,7 +314,7 @@ class _HotComingSoonWidgetState extends State<_HotComingSoonWidget> {
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, comingSoonBean.id);
+        _R.Router.push(context, _R.Router.detailPage, comingSoonBean.id);
       },
     );
   }
@@ -359,7 +359,7 @@ class _HotComingSoonWidgetState extends State<_HotComingSoonWidget> {
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, hotMovieBean.id);
+        _R.Router.push(context, _R.Router.detailPage, hotMovieBean.id);
       },
     );
   }

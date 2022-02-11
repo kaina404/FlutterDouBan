@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 import 'package:doubanapp/widgets/my_tab_bar_widget.dart';
 import 'package:doubanapp/widgets/search_text_field_widget.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 
 var titleList = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
 
@@ -66,7 +66,7 @@ Widget _getNestedScrollView(Widget tabBar) {
               child: SearchTextFieldWidget(
                 hintText: hintText,
                 onTab: () {
-                  Router.push(context, Router.searchPage, hintText);
+                  _R.Router.push(context, _R.Router.searchPage, hintText);
                 },
               ),
             ),

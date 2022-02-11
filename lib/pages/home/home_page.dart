@@ -8,7 +8,7 @@ import 'package:doubanapp/bean/subject_entity.dart';
 import 'package:doubanapp/widgets/image/radius_img.dart';
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/widgets/video_widget.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 
 ///首页，TAB页面，显示动态和推荐TAB
 class HomePage extends StatelessWidget {
@@ -38,7 +38,7 @@ DefaultTabController getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: myapp.SliverAppBar(
+            sliver: myapp.SliverAppBar(
               pinned: true,
               expandedHeight: 120.0,
               primary: true,
@@ -52,7 +52,7 @@ DefaultTabController getWidget() {
                     hintText: '影视作品中你难忘的离别',
                     margin: const EdgeInsets.only(left: 15.0, right: 15.0),
                     onTab: () {
-                      Router.push(context, Router.searchPage, '影视作品中你难忘的离别');
+                      _R.Router.push(context, _R.Router.searchPage, '影视作品中你难忘的离别');
                     },
                   ),
                   alignment: Alignment(0.0, 0.0),
@@ -328,7 +328,7 @@ _loginContainer(BuildContext context) {
                 borderRadius: const BorderRadius.all(Radius.circular(6.0))),
           ),
           onTap: () {
-            Router.push(context, Router.searchPage, '搜索笨啦灯');
+            _R.Router.push(context, _R.Router.searchPage, '搜索笨啦灯');
           },
         )
       ],

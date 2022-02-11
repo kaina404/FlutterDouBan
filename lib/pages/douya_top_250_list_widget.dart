@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:doubanapp/http/API.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _Router;
 import 'package:doubanapp/bean/subject_entity.dart';
 
 class DouBanListView extends StatefulWidget {
@@ -68,7 +68,7 @@ class DouBanState extends State<DouBanListView>
             ),
             onTap: () {
               //监听点击事件
-              Router.push(context, Router.detailPage, bean.id);
+              _Router.Router.push(context, _Router.Router.detailPage, bean.id);
             },
           );
         });

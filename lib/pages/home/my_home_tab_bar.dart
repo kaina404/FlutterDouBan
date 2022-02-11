@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:doubanapp/widgets/search_text_field_widget.dart';
 import 'package:doubanapp/util/screen_utils.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 42.0;
@@ -68,7 +68,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
                       ),
                     ),
                     onTap: () {
-                      Router.push(context, Router.searchPage, '搜索流浪地球试一试');
+                      _R.Router.push(context, _R.Router.searchPage, '搜索流浪地球试一试');
                     },
                   ),
                 )

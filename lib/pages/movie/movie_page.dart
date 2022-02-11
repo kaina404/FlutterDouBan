@@ -13,7 +13,7 @@ import 'dart:math' as math;
 import 'package:doubanapp/widgets/image/cache_img_radius.dart';
 import 'package:doubanapp/constant/constant.dart';
 import 'package:doubanapp/pages/movie/top_item_widget.dart';
-import 'package:doubanapp/router.dart';
+import 'package:doubanapp/router.dart' as _R;
 import 'package:doubanapp/http/http_request.dart';
 //import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
@@ -160,7 +160,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, comingSoonBean.id);
+        _R.Router.push(context, _R.Router.detailPage, comingSoonBean.id);
       },
     );
   }
@@ -205,7 +205,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
         ),
       ),
       onTap: () {
-        Router.push(context, Router.detailPage, hotMovieBean.id);
+        _R.Router.push(context, _R.Router.detailPage, hotMovieBean.id);
       },
     );
   }
@@ -338,7 +338,7 @@ class _MoviePageState extends State<MoviePage>  with AutomaticKeepAliveClientMix
                   mainAxisSpacing: 0.0,
                   childAspectRatio: _getRadio())),
           getCommonImg(Constant.IMG_TMP1, (){
-            Router.pushNoParams(context, "http://www.flutterall.com");
+            _R.Router.pushNoParams(context, "http://www.flutterall.com");
           }),
           SliverToBoxAdapter(
             child: Padding(
