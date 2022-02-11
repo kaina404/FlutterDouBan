@@ -542,8 +542,8 @@ class _DetailPageState extends State<DetailPage> {
 
   void requestAPI() async {
     Future(() {
-      return _request.get(
-          '/v2/movie/subject/$subjectId?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      return _mockRequest.mock2("subject_26266893");
+      // return _request.get('/v2/movie/subject/$subjectId?apikey=0b2bdeda43b5688921839c8ecb20399b');
     }).then((result) {
       _movieDetailBean = MovieDetailBean.fromJson(result);
       return PaletteGenerator.fromImageProvider(
@@ -552,15 +552,16 @@ class _DetailPageState extends State<DetailPage> {
       if (paletteGenerator != null && paletteGenerator.colors.isNotEmpty) {
         pickColor = paletteGenerator.colors.toList()[0];
       }
-      return _request.get(
-          '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      // return _request.get(
+      //     '/v2/movie/subject/$subjectId/comments?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      return _mockRequest.mock2("comments");
     }).then((result2) {
       commentsEntity = CommentsEntity.fromJson(result2);
     }).then((_) {
-      return _request.get(
-          '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
+      // return _request.get(
+      //     '/v2/movie/subject/$subjectId/reviews?apikey=0b2bdeda43b5688921839c8ecb20399b');
       //使用模拟数据
-//      return _mockRequest.get(API.REIVIEWS);
+     return _mockRequest.get(API.REIVIEWS);
     }).then((result3) {
       movieLongCommentReviews = MovieLongCommentsEntity.fromJson(result3);
       setState(() {

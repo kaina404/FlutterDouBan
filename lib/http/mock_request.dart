@@ -7,14 +7,20 @@ import 'dart:convert';
 class MockRequest {
 
   Future<dynamic> get(String action, {Map params}) async {
-    return MockRequest.mock(action: getJsonName(action), params: params);
+    return mock(action: getJsonName(action), params: params);
   }
 
-  static Future<dynamic> post({String action, Map params}) async {
-    return MockRequest.mock(action: action, params: params);
+  Future<dynamic> post({String action, Map params}) async {
+    return mock(action: action, params: params);
   }
 
-  static Future<dynamic> mock({String action, Map params}) async {
+  Future<dynamic> mock({String action, Map params}) async {
+    var responseStr = await rootBundle.loadString('mock/$action.json');
+    var responseJson = json.decode(responseStr);
+    return responseJson;
+  }
+
+  Future<dynamic> mock2(String action) async {
     var responseStr = await rootBundle.loadString('mock/$action.json');
     var responseJson = json.decode(responseStr);
     return responseJson;
